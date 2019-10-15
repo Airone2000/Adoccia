@@ -30,14 +30,14 @@ class Envelope
     public $message;
 
     public function __construct(
-        string $fromName, string $fromEmail,
         string $toName, string $toEmail,
         string $subject,
-        string $message
+        string $message,
+        ?string $fromName = null, ?string $fromEmail = null
     )
     {
-        $this->fromName = $fromName;
-        $this->fromEmail = $fromEmail;
+        $this->fromName = $fromName ?? $_SERVER['EMAIL_SENDER_NAME'];
+        $this->fromEmail = $fromEmail ?? $_SERVER['EMAIL_SENDER_EMAIL'];
         $this->toName = $toName;
         $this->toEmail = $toEmail;
         $this->subject = $subject;
