@@ -1,0 +1,13 @@
+<nav>
+    <ul>
+        {% if app.user %}
+            <li>
+                <a href="{{ url('app.logout') }}">Déconnexion</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ url('app.login') }}">Connexion</a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
