@@ -1,5 +1,12 @@
 <nav>
     <ul>
+
+        {% if app.user and app.user.hasPermission('CATEGORY_LIST') %}
+            <li>
+                <a href="{{ url('category.index') }}">Catégories</a>
+            </li>
+        {% endif %}
+
         {% if app.user %}
             <li>
                 <a href="{{ url('app.logout') }}">Déconnexion</a>

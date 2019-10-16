@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Security\Permissions;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -41,6 +44,28 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="createdBy")
+     */
+    private $categories;
+
+    /**
+     * @var array
+     * @ORM\Column(type="json", nullable=false)
+     */
+    private $permissions = [];
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default":0})
+     */
+    private $isSuperAdmin = false;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -130,6 +155,66 @@ class User implements UserInterface
     public function setEmail(string $email): User
     {
         $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param $permission
+     * @return bool
+     */
+    public function hasPermission($permission): bool
+    {
+        if ($this->isSuperAdmin()) return true;
+        if (is_string($permission)) {
+            $permission = Permissions::getConstants()[strtoupper($permission)] ?? null;
+            if (is_null($permission)) return false;
+        }
+
+        $idx = array_search($permission, $this->getPermissions());
+        return $idx !== false;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPermissions(): array
+    {
+        return (array) $this->permissions;
+    }
+
+    /**
+     * @param array $permissions
+     * @return User
+     */
+    public function setPermissions(array $permissions): User
+    {
+        $this->permissions = $permissions;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuperAdmin(): bool
+    {
+        return $this->isSuperAdmin;
+    }
+
+    /**
+     * @param bool $isSuperAdmin
+     * @return User
+     */
+    public function setSuperAdmin(bool $isSuperAdmin): User
+    {
+        $this->isSuperAdmin = $isSuperAdmin;
         return $this;
     }
 

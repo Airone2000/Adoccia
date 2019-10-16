@@ -8,7 +8,6 @@ use App\Form\PasswordResetType;
 use App\Repository\UserRepository;
 use App\Services\SecurityHandler\SecurityHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
