@@ -2,108 +2,86 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/css/form/edit.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/form/edit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/uploads/pictures/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/.circleci/config.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/.jshintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/.testcaferc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/CONTRIBUTING.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/ISSUE_TEMPLATE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/Sortable.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/Sortable.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/babel.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/bower.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/entry/entry-complete.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/entry/entry-core.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/entry/entry-defaults.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/modular/sortable.complete.esm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/modular/sortable.core.esm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/modular/sortable.esm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/AutoScroll/AutoScroll.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/AutoScroll/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/AutoScroll/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/MultiDrag/MultiDrag.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/MultiDrag/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/MultiDrag/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/OnSpill/OnSpill.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/OnSpill/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/OnSpill/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/Swap/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/Swap/Swap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/plugins/Swap/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/scripts/banner.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/scripts/build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/scripts/esm-build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/scripts/minify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/scripts/test-compat.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/scripts/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/scripts/umd-build.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/src/Animation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/src/BrowserInfo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/src/EventDispatcher.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/src/PluginManager.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/src/Sortable.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/src/utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/st/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/st/iframe/frame.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/st/iframe/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/st/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/st/og-image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/st/prettify/prettify.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/st/prettify/prettify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/st/prettify/run_prettify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/st/saucelabs.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/st/theme.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/tests/Sortable.compat.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/tests/Sortable.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/tests/dual-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/tests/empty-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/tests/filter.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/tests/handles.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/tests/nested.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/tests/single-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/Sortable/tests/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/fichit/css/theme.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/jquery/jquery-ui.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/vendor/jquery/jquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/FormController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Picture.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/EntityListener/CategoryListener.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/EntityListener/FormAreaListener.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/EntityListener/PictureListener.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Enum/CategoryFormEntryTypeEnum.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Enum/PictureTargetEnum.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Enum/PictureTypeEnum.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/CategoryPictureType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/_area.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/fichit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fichit.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/erwan_account.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CategoryType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CategoryType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191016070747.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/form/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/form/edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/.circleci/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/.circleci/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/.jshintrc" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/.jshintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/.testcaferc.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/.testcaferc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/CONTRIBUTING.md" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/CONTRIBUTING.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/ISSUE_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/ISSUE_TEMPLATE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/Sortable.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/Sortable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/Sortable.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/Sortable.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/bower.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/bower.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/entry/entry-complete.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/entry/entry-complete.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/entry/entry-core.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/entry/entry-core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/entry/entry-defaults.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/entry/entry-defaults.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/modular/sortable.complete.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/modular/sortable.complete.esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/modular/sortable.core.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/modular/sortable.core.esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/modular/sortable.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/modular/sortable.esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/AutoScroll/AutoScroll.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/AutoScroll/AutoScroll.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/AutoScroll/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/AutoScroll/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/AutoScroll/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/AutoScroll/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/MultiDrag/MultiDrag.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/MultiDrag/MultiDrag.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/MultiDrag/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/MultiDrag/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/MultiDrag/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/MultiDrag/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/OnSpill/OnSpill.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/OnSpill/OnSpill.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/OnSpill/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/OnSpill/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/OnSpill/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/OnSpill/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/Swap/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/Swap/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/Swap/Swap.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/Swap/Swap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/plugins/Swap/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/plugins/Swap/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/scripts/banner.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/scripts/banner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/scripts/build.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/scripts/build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/scripts/esm-build.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/scripts/esm-build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/scripts/minify.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/scripts/minify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/scripts/test-compat.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/scripts/test-compat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/scripts/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/scripts/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/scripts/umd-build.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/scripts/umd-build.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/src/Animation.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/src/Animation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/src/BrowserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/src/BrowserInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/src/EventDispatcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/src/EventDispatcher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/src/PluginManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/src/PluginManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/src/Sortable.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/src/Sortable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/src/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/src/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/st/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/st/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/st/iframe/frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/st/iframe/frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/st/iframe/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/st/iframe/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/st/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/st/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/st/og-image.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/st/og-image.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/st/prettify/prettify.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/st/prettify/prettify.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/st/prettify/prettify.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/st/prettify/prettify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/st/prettify/run_prettify.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/st/prettify/run_prettify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/st/saucelabs.svg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/st/saucelabs.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/st/theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/st/theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/tests/Sortable.compat.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/tests/Sortable.compat.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/tests/Sortable.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/tests/Sortable.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/tests/dual-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/tests/dual-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/tests/empty-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/tests/empty-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/tests/filter.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/tests/filter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/tests/handles.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/tests/handles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/tests/nested.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/tests/nested.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/tests/single-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/tests/single-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/Sortable/tests/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/Sortable/tests/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/fichit/css/theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/theme.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/jquery/jquery-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/jquery/jquery-ui.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/jquery/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/jquery/jquery.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/category/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/category/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/form/_area.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/_area.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/form/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -116,46 +94,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webpack.config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/form/edit.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="80" column="66" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="66" />
+            <state relative-caret-position="75">
+              <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
               <folding>
                 <element signature="e#12#26#0#Twig" expanded="true" />
-                <element signature="e#2035#2055#0#Twig" expanded="true" />
-                <element signature="e#2463#2483#0#Twig" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/form/_area.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/form/edit.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/css/form/edit.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1440">
-              <caret line="96" column="1" selection-start-line="96" selection-start-column="1" selection-end-line="96" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -227,13 +182,13 @@
         <option value="$PROJECT_DIR$/src/EntityListener/FormAreaListener.php" />
         <option value="$PROJECT_DIR$/src/Entity/FormArea.php" />
         <option value="$PROJECT_DIR$/src/Entity/Form.php" />
-        <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/public/vendor/fichit/css/theme.css" />
-        <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/assets/css/form/edit.scss" />
-        <option value="$PROJECT_DIR$/assets/js/form/edit.js" />
-        <option value="$PROJECT_DIR$/templates/form/_area.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/FormController.php" />
+        <option value="$PROJECT_DIR$/templates/form/_area.html.twig" />
+        <option value="$PROJECT_DIR$/assets/js/form/edit.js" />
+        <option value="$PROJECT_DIR$/webpack.config.js" />
+        <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/templates/form/edit.html.twig" />
       </list>
     </option>
@@ -361,13 +316,37 @@
             <path>
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="form" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="jquery" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -389,6 +368,8 @@
       <recent name="$PROJECT_DIR$/src/Controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/css" />
+      <recent name="$PROJECT_DIR$/assets/vendor" />
       <recent name="$PROJECT_DIR$/public/vendor" />
       <recent name="$PROJECT_DIR$/public/js" />
       <recent name="$PROJECT_DIR$/src" />
@@ -417,18 +398,18 @@
       <option name="presentableId" value="Default" />
       <updated>1571153853898</updated>
       <workItem from="1571153855215" duration="50125000" />
-      <workItem from="1571324432822" duration="15111000" />
+      <workItem from="1571324432822" duration="16343000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65236000" />
+    <option name="totallyTimeSpent" value="66468000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25250357" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25250357" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -441,7 +422,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.46805897" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.46805897" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -454,34 +435,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_2.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="499" column="9" selection-start-line="499" selection-start-column="9" selection-end-line="499" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/liip/imagine-bundle/Imagine/Cache/CacheManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="120" column="7" lean-forward="true" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/twig.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="48" lean-forward="true" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/liip/imagine-bundle/Templating/FilterTrait.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/liip_imagine.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -725,13 +678,6 @@
     <entry file="file://$PROJECT_DIR$/public/vendor/fontello/css/fontello.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="57" column="23" lean-forward="true" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/vendor/fichit/css/theme.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -739,44 +685,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="79" selection-start-line="6" selection-start-column="79" selection-end-line="6" selection-end-column="79" />
-          <folding>
-            <element signature="e#248#265#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/FormArea.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-579">
           <caret line="7" column="56" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/css/form/edit.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="96" column="1" selection-start-line="96" selection-start-column="1" selection-end-line="96" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/form/edit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/form/_area.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="27" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="27" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -790,14 +702,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/vendor/Sortable/st/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/vendor/Sortable/Sortable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/form/_area.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/vendor/jquery/jquery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/theme.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/form/edit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+          <folding>
+            <element signature="e#39#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/form/edit.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="16" lean-forward="true" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="26" lean-forward="true" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/form/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="80" column="66" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="66" />
+        <state relative-caret-position="75">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#2035#2055#0#Twig" expanded="true" />
-            <element signature="e#2463#2483#0#Twig" expanded="true" />
           </folding>
         </state>
       </provider>

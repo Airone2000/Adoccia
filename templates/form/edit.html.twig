@@ -1,57 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('vendor/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('vendor/Sortable/Sortable.js') }}"></script>
-
-    {{ encore_entry_script_tags('form/edit') }}
-
-    <script>
-        var el = document.getElementById('form');
-        new Sortable(el, {
-            animation: 150,
-            chosenClass: "sortable-chosen",
-            dragClass: "sortable-drag",
-            easing: "cubic-bezier(1, 0, 0, 1)",
-            handle: '.handle',
-            draggable: '.area'
-        });
-
-        $(document).on('change', '.resizer', function(){
-            let size = $(this).val();
-            size = size < 15 ? 15 : size;
-            size = size > 100 ? 100 : size;
-            $(this).val(size);
-            $(this).parents('.area').css('width', 'calc('+size+'% - 20px)')
-        });
-
-        $('.add-formArea').on('click', function(){
-            let insertType = $(this).data('inserttype');
-            let $newElement = $($('#sampleFormArea').html());
-            if (insertType === 'prepend') {
-                $('#form').prepend($newElement);
-            }
-            else {
-                $('#form').append($newElement);
-            }
-
-        });
-
-        $(document).on('click', '.delete-formArea', function(){
-            let $parent = $(this).parents('.area');
-            $parent.css('opacity', 0);
-            setTimeout(function(){
-                $parent.remove();
-            }, 200);
-        });
-
-    </script>
-{% endblock %}
-
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('form/edit') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('form/edit') }}
 {% endblock %}
 
 {% block body %}
