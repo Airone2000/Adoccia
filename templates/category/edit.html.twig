@@ -5,6 +5,8 @@
 {% block body %}
     <h1>Edit Category</h1>
 
+    <p><a href="{{ url('form.show', {'id': category.form.id}) }}">See the form</a></p>
+
     {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('category.index') }}">back to list</a>

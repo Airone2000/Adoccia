@@ -30,14 +30,14 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/new", name="category.new", methods={"GET","POST"})
-     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED') and user.hasPermission('CATEGORY_CREATE')")
      * @inheritdoc
      */
     public function new(Request $request, CategoryHandlerInterface $categoryHandler): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category, [
-            'validation_groups' => ['Category:Post']
+            'validation_groups' => ['Category:Post', 'Category:Picture:Post']
         ]);
         $form->handleRequest($request);
 
@@ -71,7 +71,7 @@ class CategoryController extends AbstractController
     public function edit(Request $request, Category $category): Response
     {
         $form = $this->createForm(CategoryType::class, $category, [
-            'validation_groups' => ['Category:Put']
+            'validation_groups' => ['Category:Put', 'Category:Picture:Put']
         ]);
         $form->handleRequest($request);
 

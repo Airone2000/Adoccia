@@ -1,0 +1,37 @@
+.btn {
+    border-width: 1px;
+    border-style: solid;
+    border-bottom-width: 4px;
+    border-radius: 3px;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    outline: 0;
+    position: relative;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn:active {
+    top: 2px;
+}
+
+.btn.primary {
+    border-color: #677788;
+    color: #677788;
+}
+
+.btn.primary:hover {
+    color: #555;
+}
+
+.btn.secondary {
+    border-color: #ccc;
+    color: #999;
+}
+
+.btn.secondary:hover {
+    color: #555;
+}

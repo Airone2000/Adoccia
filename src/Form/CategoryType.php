@@ -12,6 +12,10 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('picture', CategoryPictureType::class, [
+                'validation_groups' => $options['validation_groups'],
+                'required' => false
+            ])
             ->add('name')
             ->add('description')
             ->add('published')

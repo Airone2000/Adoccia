@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\EntityListeners("\App\EntityListener\CategoryListener")
  */
 class Category
 {
@@ -44,10 +45,26 @@ class Category
      */
     private $createdBy;
 
+    /**
+     * @var Picture|null
+     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"}, mappedBy="category")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     *
+     * @Assert\Valid(groups={"Category:Post", "CategoryPut"})
+     */
+    private $picture;
+
+    /**
+     * @var Form
+     * @ORM\OneToOne(targetEntity="App\Entity\Form", cascade={"persist", "remove"}, mappedBy="category")
+     */
+    private $form;
+
 
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime());
+        $this->setForm(new Form());
     }
 
     public function getId(): ?int
@@ -114,4 +131,45 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @return Picture|null
+     */
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param Picture|null $picture
+     * @return Category
+     */
+    public function setPicture(?Picture $picture): Category
+    {
+        $this->picture = $picture;
+        $picture
+            ->setCategory($this)
+        ;
+        return $this;
+    }
+
+    /**
+     * @return Form
+     */
+    public function getForm(): Form
+    {
+        return $this->form;
+    }
+
+    /**
+     * @param Form $form
+     * @return Category
+     */
+    public function setForm(Form $form): Category
+    {
+        $this->form = $form;
+        $form->setCategory($this);
+        return $this;
+    }
+
 }

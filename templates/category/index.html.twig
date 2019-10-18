@@ -4,11 +4,12 @@
 
 {% block body %}
     <h1>Category index</h1>
-    
+
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Picture</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>CreatedAt</th>
@@ -20,6 +21,11 @@
         {% for category in categories %}
             <tr>
                 <td>{{ category.id }}</td>
+                <td>
+                    {% if category.picture %}
+                        <img src="{{ absolute_url(asset(picturesDir ~ category.picture.filename)) | imagine_filter('category_picture_thumbnail')  }}" alt="{{ category.picture.filename }}" width="100" height="100">
+                    {% endif %}
+                </td>
                 <td>{{ category.name }}</td>
                 <td>{{ category.description }}</td>
                 <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>

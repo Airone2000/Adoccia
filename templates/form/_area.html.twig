@@ -1,0 +1,20 @@
+<div
+        id="area-{{ area.id }}"
+        class="area"
+        style="width:calc({{ area.width }}% - 20px);"
+>
+    <div class="area-header">
+        <div class="handle">
+            <i class="fas fa-grip-vertical"></i>
+        </div>
+        <div><i class="delete-formArea fas fa-trash-alt"></i></div>
+    </div>
+
+    <div class="area-body">
+
+    </div>
+
+    <div class="area-footer">
+        <input class="resizer" type="number" min="15" max="100" step=".1" value="{{ area.width }}" size="2">
+    </div>
+</div>

@@ -3,13 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('vendor/fichit/css/theme.css') }}">
+        {% endblock %}
     </head>
     <body>
         {% block header %}
             {% include '_header.html.twig' %}
         {% endblock %}
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://kit.fontawesome.com/c6268521db.js" crossorigin="anonymous"></script>
+        {% endblock %}
     </body>
 </html>
