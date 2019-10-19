@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Form;
 use App\Entity\FormArea;
+use App\Services\FormHandler\FormHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -99,29 +99,22 @@ final class FormController extends AbstractController
      * @Entity(name="formArea", expr="repository.find(formAreaId)")
      * @inheritdoc
      */
-    function setFormAreaSize(Form $form, FormArea $formArea, Request $request, ParameterBagInterface $parameterBag): Response
+    function setFormAreaSize(Form $form, FormArea $formArea, Request $request, FormHandlerInterface $formHandler): Response
     {
         if (!$this->getUser()) {
             # Must be connected
             return new Response('', Response::HTTP_UNAUTHORIZED);
         }
 
-        $body = json_decode($request->getContent(), true);
-        $areaMinSize = +$parameterBag->get('areaMinSize');
-        $areaMaxSize = +$parameterBag->get('areaMaxSize');
-
-        if ($size = ($body['size'] ?? null)) {
-            $size = +$size;
-            if (is_numeric($size)) {
-                if ($size >= $areaMinSize && $size <= $areaMaxSize) {
-                    $formArea->setWidth($size);
-                    $this->getDoctrine()->getManager()->flush();
-                    return new Response('', Response::HTTP_NO_CONTENT);
-                }
-            }
+        try {
+            $body = json_decode($request->getContent(), true);
+            $size = +($body['size'] ?? null);
+            $formHandler->setFormAreaSize($formArea, $size);
+            return new Response('', Response::HTTP_NO_CONTENT);
         }
-
-        return new Response('', Response::HTTP_BAD_REQUEST);
+        catch (\Exception $e) {
+            return new Response('', Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**
@@ -132,32 +125,20 @@ final class FormController extends AbstractController
      * )
      * @inheritdoc
      */
-    function sortFormArea(Form $form, Request $request): Response
+    function sortFormArea(Form $form, Request $request, FormHandlerInterface $formHandler): Response
     {
         if (!$this->getUser()) {
             # Must be connected
             return new Response('', Response::HTTP_UNAUTHORIZED);
         }
 
-        $mapPositionToAreaId = json_decode($request->getContent(), true);
-
-        $sizesToConsume = range(1, $form->getAreas()->count());
-        $sizesToConsume = array_flip($sizesToConsume);
-
-        /** @var FormArea $area */
-        foreach ($form->getAreas() as $area) {
-            # Position is given for this area is this position is not already used
-            if (isset($mapPositionToAreaId[$area->getId()]) && isset($sizesToConsume[$mapPositionToAreaId[$area->getId()]])) {
-                $position = $mapPositionToAreaId[$area->getId()];
-                $area->setPosition($position);
-                unset($sizesToConsume[$position]);
-            }
-            else {
-                return new Response('', Response::HTTP_BAD_REQUEST);
-            }
+        try {
+            $mapPositionToAreaId = json_decode($request->getContent(), true);
+            $formHandler->sortForm($form, $mapPositionToAreaId);
+            return new Response('', Response::HTTP_NO_CONTENT);
         }
-
-        $this->getDoctrine()->getManager()->flush();
-        return new Response('', Response::HTTP_NO_CONTENT);
+        catch (\Exception $e) {
+            return new Response('', Response::HTTP_BAD_REQUEST);
+        }
     }
 }
