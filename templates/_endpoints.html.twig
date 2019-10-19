@@ -1,0 +1,9 @@
+<script>
+    const endpoints = {
+        'addFormAreaToForm': "{{ absolute_url('/forms/:id/form-areas') }}",
+        'deleteFormArea': "{{ absolute_url('/forms/:formId/form-areas/:formAreaId') }}",
+        'setFormAreaSize': "{{ absolute_url('/forms/:formId/form-areas/:formAreaId/set-size') }}",
+        'sortFormAreas': "{{ absolute_url('/forms/:id/form-areas/sort') }}",
+        'login': "{{ url('app.login') }}"
+    };
+</script>

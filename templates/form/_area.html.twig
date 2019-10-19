@@ -1,6 +1,8 @@
 <div
         id="area-{{ area.id }}"
         class="area"
+        data-id="{{ area.id }}"
+        data-size="{{ area.width }}"
         style="width:calc({{ area.width }}% - 20px);"
 >
     <div class="area-header">
@@ -15,6 +17,6 @@
     </div>
 
     <div class="area-footer">
-        <input class="resizer" type="number" min="10" max="100" step=".5" value="{{ area.width }}" size="2">
+        <input class="resizer" type="number" min="{{ areaMinSize }}" max="{{ areaMaxSize }}" step=".5" value="{{ area.width }}" size="2">
     </div>
 </div>

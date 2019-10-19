@@ -88,10 +88,13 @@ class Form
 
     /**
      * @return Collection
+     * By default, it's returned, ordered by position ASC
      */
     public function getAreas(): Collection
     {
-        return $this->areas;
+        $criteria = Criteria::create();
+        $criteria->orderBy(['position' => 'ASC']);
+        return $this->areas->matching($criteria);
     }
 
     /**

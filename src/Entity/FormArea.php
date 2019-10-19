@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FormAreaRepository")
+ * @ORM\EntityListeners("\App\EntityListener\FormAreaListener")
  */
 class FormArea
 {
@@ -78,9 +79,9 @@ class FormArea
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPosition(): int
+    public function getPosition(): ?int
     {
         return $this->position;
     }

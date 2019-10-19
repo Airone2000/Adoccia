@@ -7,6 +7,10 @@ parameters:
     picturePublicUploadDir: 'uploads/pictures'
     pictureUploadDir: '%kernel.project_dir%/public/%picturePublicUploadDir%'
 
+    # For reuse
+    areaMinSize: 10
+    areaMaxSize: 100
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -38,6 +42,6 @@ services:
         class: App\EntityListener\CategoryListener
         tags: ['doctrine.orm.entity_listener']
 
-    form_listener:
+    formArea_listener:
         class: App\EntityListener\FormAreaListener
         tags: ['doctrine.orm.entity_listener']

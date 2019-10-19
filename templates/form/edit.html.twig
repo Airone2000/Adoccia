@@ -16,18 +16,18 @@
     <div id="formWrapper">
 
         <div class="form-buttons">
-            <button class="btn secondary add-formArea" data-insertType="prepend">Ajouter une zone</button>
+            <button class="btn secondary add-formArea">Ajouter une zone</button>
             <button class="btn primary">Enregistrer</button>
         </div>
 
-        <div id="form">
+        <div id="form" data-id="{{ form.id }}">
             {% for area in form.areas %}
                 {% include 'form/_area.html.twig' with {'area': area} %}
             {% endfor %}
         </div>
 
         <div class="form-buttons">
-            <button class="btn secondary add-formArea" data-insertType="append">Ajouter une zone</button>
+            <button class="btn secondary add-formArea">Ajouter une zone</button>
             <button class="btn primary">Enregistrer</button>
         </div>
     </div>
