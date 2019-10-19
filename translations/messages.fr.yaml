@@ -1,0 +1,6 @@
+WidgetType.empty: "Zone vide"
+WidgetType.label: Label
+WidgetType.Group.textual: "Widgets textuels"
+WidgetType.string: "Ligne de texte"
+WidgetType.text: "Grande zone de texte"
+

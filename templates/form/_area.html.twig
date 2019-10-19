@@ -10,6 +10,8 @@
     <div class="area-grip handle">
         <i class="fas fa-grip-vertical"></i> <br>
         <i class="fas fa-grip-vertical"></i> <br>
+        <i class="fas fa-grip-vertical"></i> <br>
+        <i class="fas fa-grip-vertical"></i> <br>
         <i class="fas fa-grip-vertical"></i>
     </div>
     <div class="area-inner">
@@ -18,7 +20,8 @@
         </div>
 
         <div class="area-body">
-
+            {% include 'form/_widget_type_picker.html.twig' %}
+            {% include 'form/builder/_widget_'~ area.widget.type ~'.html.twig' ignore missing %}
         </div>
 
         <div class="area-footer">

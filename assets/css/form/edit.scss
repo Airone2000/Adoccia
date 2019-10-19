@@ -1,6 +1,33 @@
 #formWrapper {
   width: 1000px;
   margin: auto;
+  position: relative;
+  padding: 15px;
+
+  &.loading > #form_loadingOverlay {
+    display: flex;
+  }
+
+  > #form_loadingOverlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.8);
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+
+    .text-loading {
+      text-transform: uppercase;
+    }
+
+    .icon {
+      font-size: 50px;
+    }
+  }
 
   #form {
     display: flex;
@@ -22,6 +49,9 @@
       border-radius: 5px;
 
       .area-grip.handle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         cursor: move;
         line-height: 0em;
         color: rgba(0,0,0,.1);
@@ -39,12 +69,27 @@
       }
 
       .area-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
         padding: 10px;
+        align-items: center;
+        justify-content: center;
+
+        .widgetTypePicker {
+          width:130px;
+          max-width: 50%;
+          border: 1px solid #999;
+          background: #fff;
+        }
       }
 
       .area-inner {
+        display: flex;
+        flex-direction: column;
         flex-grow: 1;
         flex-shrink: 1;
+        width: calc(100% - 10px);
       }
 
       input.resizer {
@@ -84,6 +129,26 @@
         color: #c60800;
       }
     }
+
+    .widget {
+      margin-top: 15px;
+    }
+
+    .modalSetWidgetOptions {
+      display: none;
+    }
+
+    /* Styling widgetLabel (formBuilder) */
+    .widgetLabel {
+      width: 65%;
+      textarea {
+        width: 100%;
+        resize: vertical;
+        padding: 5px;
+        border: 1px solid #ccc;
+        outline: 0;
+      }
+    }
   }
 
   .form-buttons {
@@ -93,6 +158,30 @@
     button {
       margin-left: 5px;
     }
+  }
+}
+
+#wrapperModalSetWidgetOptions {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,.8);
+  overflow: auto;
+
+  > .content {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    background: #fff;
+  }
+
+  &.hidden {
+    display: none;
   }
 }
 

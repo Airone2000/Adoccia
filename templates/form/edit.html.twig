@@ -20,7 +20,7 @@
             <button class="btn primary">Enregistrer</button>
         </div>
 
-        <div id="form" data-id="{{ form.id }}">
+        <div id="form" data-id="{{ form.id }}" class="loading">
             {% for area in form.areas %}
                 {% include 'form/_area.html.twig' with {'area': area} %}
             {% endfor %}
@@ -30,6 +30,18 @@
             <button class="btn secondary add-formArea">Ajouter une zone</button>
             <button class="btn primary">Enregistrer</button>
         </div>
+
+        <div id="form_loadingOverlay">
+            <div style="text-align: center;">
+                <i class="icon far fa-snowflake"></i>
+                <br>
+                <p class="text-loading">Chargement ...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrapperModalSetWidgetOptions" class="hidden">
+        <div class="content"></div>
     </div>
 
 {% endblock %}

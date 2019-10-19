@@ -9,4 +9,5 @@ interface FormHandlerInterface
 {
     public function setFormAreaSize(FormArea $formArea, $size): void;
     public function sortForm(Form $form, array $mapPositionToAreaId): void;
+    public function changeFormAreaWidgetType(FormArea $formArea, ?string $newType): void;
 }

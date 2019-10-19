@@ -1,0 +1,19 @@
+<select class="widgetTypePicker">
+    {% set mapTypeToGroup = ''|mapWidgetTypeToGroup %}
+    {% for group, widgetTypesGroup in mapTypeToGroup %}
+
+        {% if group is not same as('nonClassed') %}
+            <optgroup label="{{ ('WidgetType.Group.' ~ group)|trans }}">
+        {% endif %}
+
+        {% for type in widgetTypesGroup %}
+            {% set selected = area.widget.type == type ? 'selected' : '' %}
+            <option value="{{ type }}" {{ selected }}>{{ ('WidgetType.' ~ type)|trans }}</option>
+        {% endfor %}
+
+        {% if group is not same as('nonClassed') %}
+            </optgroup>
+        {% endif %}
+
+    {% endfor %}
+</select>

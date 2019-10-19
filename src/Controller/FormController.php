@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Form;
 use App\Entity\FormArea;
+use App\Enum\WidgetTypeEnum;
 use App\Services\FormHandler\FormHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -139,6 +140,65 @@ final class FormController extends AbstractController
         }
         catch (\Exception $e) {
             return new Response('', Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    /**
+     * @Route(
+     *     path="/{formId}/form-areas/{formAreaId}/change-type",
+     *     methods={"put"},
+     *     condition="request.isXmlHttpRequest() and request.headers.get('Content-Type') == 'application/json'"
+     * )
+     * @Entity(name="form", expr="repository.find(formId)")
+     * @Entity(name="formArea", expr="repository.find(formAreaId)")
+     * @inheritdoc
+     */
+    function changeFormAreaWidgetType(Form $form, FormArea $formArea, Request $request, FormHandlerInterface $formHandler): Response
+    {
+        if (!$this->getUser()) {
+            # Must be connected
+            return new Response('', Response::HTTP_UNAUTHORIZED);
+        }
+
+        try {
+            $newType = json_decode($request->getContent(), true)['type'] ?? null;
+            $formHandler->changeFormAreaWidgetType($formArea, $newType);
+            return new JsonResponse([
+                'view' => $this->renderView('form/_area.html.twig', ['area' => $formArea])
+            ]);
+        }
+        catch (\Exception $e) {
+            return new Response('', Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    /**
+     * @Route(
+     *     path="/{formId}/form-areas/{formAreaId}/get-settings-view",
+     *     methods={"get"},
+     *     condition="request.isXmlHttpRequest()"
+     * )
+     * @Entity(name="form", expr="repository.find(formId)")
+     * @Entity(name="formArea", expr="repository.find(formAreaId)")
+     * @inheritdoc
+     */
+    function getFormAreaWidgetSettingsView(Form $form, FormArea $formArea): Response
+    {
+        if (!$this->getUser()) {
+            # Must be connected
+            return new Response('', Response::HTTP_UNAUTHORIZED);
+        }
+
+        try {
+            $view = $this->renderView("form/builder/_settings_{$formArea->getWidget()->getType()}.html.twig", [
+                'area' => $formArea
+            ]);
+            return new JsonResponse([
+                'view' => $view
+            ]);
+        }
+        catch (\Exception $e) {
+            return new Response('', Response::HTTP_NOT_FOUND);
         }
     }
 }

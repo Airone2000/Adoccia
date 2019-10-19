@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FormRepository")
- * @ORM\EntityListeners("App\EntityListener\FormAreaListener")
  */
 class Form
 {

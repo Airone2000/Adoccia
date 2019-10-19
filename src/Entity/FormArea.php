@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\WidgetTypeEnum;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,18 @@ class FormArea
      */
     private $position;
 
+    /**
+     * @var Widget
+     * @ORM\OneToOne(targetEntity="App\Entity\Widget", cascade={"persist", "remove"}, mappedBy="formArea")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $widget;
+
+
+    public function __construct()
+    {
+        $this->setWidget(new Widget());
+    }
 
     public function getId(): ?int
     {
@@ -93,6 +106,28 @@ class FormArea
     public function setPosition(int $position): FormArea
     {
         $this->position = $position;
+        return $this;
+    }
+
+    /**
+     * @return Widget
+     */
+    public function getWidget(): Widget
+    {
+        return $this->widget;
+    }
+
+    /**
+     * @param Widget $widget
+     * @return FormArea
+     */
+    public function setWidget(Widget $widget): FormArea
+    {
+        $this->widget = $widget;
+        $widget
+            ->setFormArea($this)
+            ->setType(WidgetTypeEnum::DEFAULT_TYPE)
+        ;
         return $this;
     }
 

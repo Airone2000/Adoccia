@@ -4,6 +4,7 @@ namespace App\Services\FormHandler;
 
 use App\Entity\Form;
 use App\Entity\FormArea;
+use App\Enum\WidgetTypeEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -58,5 +59,21 @@ final class FormHandler implements FormHandlerInterface
             }
         }
         $this->entityManager->flush();
+    }
+
+    /**
+     * @param FormArea $formArea
+     * @param string|null $newType
+     * @throws \Exception
+     */
+    public function changeFormAreaWidgetType(FormArea $formArea, ?string $newType): void
+    {
+        if (WidgetTypeEnum::isset($newType)) {
+            $formArea->getWidget()->setType($newType);
+            $this->entityManager->flush();
+            return;
+        }
+
+        throw new \Exception('Something wrong happen when trying to set new type on widget.');
     }
 }

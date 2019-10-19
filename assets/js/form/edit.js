@@ -9,11 +9,24 @@ class Edit
 
         this.timeoutResize = null;
         this.timeoutSort = null;
+        this.loading = false;
 
         this._makeItSortable();
         this._listenForResizeArea();
         this._listenForAddArea();
         this._listenForDeleteArea();
+        this._listenForWidgetTypePicked();
+        this._listenForOpenModalSetWidgetOptions();
+    }
+
+    _makeFormLoading() {
+        this.loading = true;
+        $('#formWrapper').addClass('loading');
+    }
+
+    _stopFormLoading() {
+        this.loading = false;
+        $('#formWrapper').removeClass('loading');
     }
 
     _makeItSortable() {
@@ -40,6 +53,8 @@ class Edit
                 const formId = $form.data('id') || 0;
                 let url = endpoints.sortFormAreas;
                 url = url.replace(':id', formId);
+
+                this._makeFormLoading();
 
                 let body = JSON.stringify(map);
                 let headers = {
@@ -151,7 +166,7 @@ class Edit
             let $form = $('#form');
             const formId = $form.data('id') || 0;
             let $area = $(this).parents('.area');
-            let areaId = $area.prop('id').split('-').pop() || 0;
+            let areaId = $area.data('id') || 0;
             let url = endpoints.deleteFormArea;
             url = url.replace(':formId', formId);
             url = url.replace(':formAreaId', areaId);
@@ -174,6 +189,93 @@ class Edit
                     }
                 })
             ;
+        });
+    }
+
+    _listenForWidgetTypePicked() {
+        $(document).on('change', '.widgetTypePicker', (e) => {
+            let $picker = $(e.target);
+            let pickedWidget = $picker.val();
+
+            let $form = $('#form');
+            const formId = $form.data('id') || 0;
+            let $area = $picker.parents('.area');
+            let areaId = $area.data('id');
+            let url = endpoints.changeFormAreaWidgetType;
+            url = url.replace(':formId', formId);
+            url = url.replace(':formAreaId', areaId);
+
+            let headers = {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json'
+            };
+            let body = JSON.stringify({type: pickedWidget});
+
+            this.timeoutResize = setTimeout(() => {
+                aFetch(url, {method: 'put', headers, body})
+                    .then(response => {
+                        switch (response.status) {
+                            case 200:
+                                return response.json();
+                                break;
+                            case 401:
+                                window.location.href = endpoints.login;
+                                break;
+                            default:
+                                alert('ERROR');
+                        }
+                    })
+                    .then(response => {
+                        $area.replaceWith($(response.view));
+                    })
+                ;
+            }, 250);
+        });
+    }
+
+    _listenForOpenModalSetWidgetOptions() {
+
+        let $wrapperModal = $('#wrapperModalSetWidgetOptions');
+        let $wrapperModalContent = $wrapperModal.find('.content');
+
+        $wrapperModal.on('click', function(){
+            $wrapperModalContent.empty();
+            $wrapperModal.addClass('hidden');
+        });
+
+        $wrapperModalContent.on('click', function(e) {
+            e.stopPropagation();
+        });
+
+        $(document).on('click', '.openModalSetWidgetOptions', (e) => {
+            let $button = $(e.target);
+            let $form = $('#form');
+            const formId = $form.data('id') || 0;
+            let $area = $button.parents('.area');
+            let areaId = $area.data('id');
+            let url = endpoints.getFormAreaWidgetSettingsView;
+            url = url.replace(':formId', formId);
+            url = url.replace(':formAreaId', areaId);
+
+            let headers = {'X-Requested-With': 'XMLHttpRequest'};
+            aFetch(url, {'method': 'get', headers})
+                .then(response => {
+                    switch (response.status) {
+                        case 200:
+                            return response.json();
+                        case 401:
+                            window.location.href = endpoints.login;
+                            break;
+                        default:
+                            alert('ERROR');
+                    }
+                })
+                .then(response => {
+                    $wrapperModalContent.html(response.view);
+                    $wrapperModal.removeClass('hidden');
+                })
+            ;
+
         });
     }
 }
