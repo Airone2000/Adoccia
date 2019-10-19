@@ -1,97 +1,100 @@
 #formWrapper {
   width: 1000px;
   margin: auto;
+
+  #form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: #F1F1F1;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+
+    > .area {
+      display: flex;
+      position: relative;
+      padding: 8px;
+      background-color: #fff;
+      margin: 10px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+
+      .area-grip.handle {
+        cursor: move;
+        line-height: 0em;
+        color: rgba(0,0,0,.1);
+        flex-shrink: 0;
+        flex-grow: 0;
+
+        > i:not(:first-child) {
+          margin-top: -1px;
+        }
+      }
+
+      .area-footer, .area-header {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .area-body {
+        padding: 10px;
+      }
+
+      .area-inner {
+        flex-grow: 1;
+        flex-shrink: 1;
+      }
+
+      input.resizer {
+        width: 25px;
+        text-align: center;
+        border: 1px solid #ccc;
+        color: #999;
+        font-size: 10px;
+
+        &:focus {
+          color: #555;
+          outline: 0;
+        }
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
+    .sortable-chosen {
+      border-style: dashed !important;
+    }
+
+    .sortable-drag {
+      border-style: solid !important;
+    }
+
+    .delete-formArea {
+      color: rgba(0,0,0,.2);
+      cursor: pointer;
+      font-size: 14px;
+
+      &:hover {
+        color: #c60800;
+      }
+    }
+  }
+
+  .form-buttons {
+    margin: 15px 0;
+    text-align: right;
+
+    button {
+      margin-left: 5px;
+    }
+  }
 }
 
-#form {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  background-color: #F1F1F1;
-  padding: 20px;
-  box-sizing: border-box;
-  position: relative;
-}
 
-#form > .area {
-  position: relative;
-  padding: 8px;
-  background-color: #fff;
-  margin: 10px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-}
 
-#form > .area > .handle {
-  cursor: move;
-}
-
-.sortable-chosen {
-  border-style: dashed !important;
-}
-
-.sortable-drag {
-  border-style: solid !important;
-}
-
-input.resizer {
-  width: 25px;
-  text-align: center;
-  border: 1px solid #ccc;
-  color: #999;
-  font-size: 10px;
-}
-
-input.resizer:focus {
-  color: #555;
-  outline: 0;
-}
-
-.handle > i {
-  color: rgba(0,0,0,.2);
-  cursor: move;
-}
-
-.delete-formArea {
-  color: rgba(0,0,0,.2);
-  cursor: pointer;
-}
-
-.delete-formArea:hover {
-  color: #c60800;
-}
-
-.area-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#sampleFormArea {
-  display: none;
-}
-
-.form-buttons {
-  margin: 15px 0;
-  text-align: right;
-}
-
-.form-buttons button {
-  margin-left: 5px;
-}
-
-.area-body {
-  padding: 10px;
-}
-
-.area-footer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}

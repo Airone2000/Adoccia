@@ -86,7 +86,7 @@ class Edit
             let $form = $('#form');
             const formId = $form.data('id') || 0;
             let $area = $resizer.parents('.area');
-            let areaId = $area.prop('id').split('-').pop() || 0;
+            let areaId = $area.data('id');
             let url = endpoints.setFormAreaSize;
             url = url.replace(':formId', formId);
             url = url.replace(':formAreaId', areaId);

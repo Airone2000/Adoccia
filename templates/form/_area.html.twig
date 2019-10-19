@@ -5,18 +5,26 @@
         data-size="{{ area.width }}"
         style="width:calc({{ area.width }}% - 20px);"
 >
-    <div class="area-header">
-        <div class="handle">
-            <i class="fas fa-grip-vertical"></i>
+
+
+    <div class="area-grip handle">
+        <i class="fas fa-grip-vertical"></i> <br>
+        <i class="fas fa-grip-vertical"></i> <br>
+        <i class="fas fa-grip-vertical"></i>
+    </div>
+    <div class="area-inner">
+        <div class="area-header">
+            <input class="resizer" type="number" min="{{ areaMinSize }}" max="{{ areaMaxSize }}" step=".5" value="{{ area.width }}" size="2">
         </div>
-        <div><i class="delete-formArea fas fa-trash-alt"></i></div>
+
+        <div class="area-body">
+
+        </div>
+
+        <div class="area-footer">
+            <i class="delete-formArea fas fa-trash-alt"></i>
+        </div>
     </div>
 
-    <div class="area-body">
 
-    </div>
-
-    <div class="area-footer">
-        <input class="resizer" type="number" min="{{ areaMinSize }}" max="{{ areaMaxSize }}" step=".5" value="{{ area.width }}" size="2">
-    </div>
 </div>
