@@ -56,9 +56,15 @@ class Category
 
     /**
      * @var Form
-     * @ORM\OneToOne(targetEntity="App\Entity\Form", cascade={"persist", "remove"}, mappedBy="category")
+     * @ORM\OneToOne(targetEntity="App\Entity\Form", cascade={"persist", "remove"}, inversedBy="category")
      */
     private $form;
+
+    /**
+     * @var Form|null
+     * @ORM\OneToOne(targetEntity="App\Entity\Form", cascade={"persist", "remove"}, inversedBy="originalCategory")
+     */
+    private $draftForm;
 
 
     public function __construct()
@@ -169,6 +175,24 @@ class Category
     {
         $this->form = $form;
         $form->setCategory($this);
+        return $this;
+    }
+
+    /**
+     * @return Form|null
+     */
+    public function getDraftForm(): ?Form
+    {
+        return $this->draftForm;
+    }
+
+    /**
+     * @param Form|null $draftForm
+     * @return Category
+     */
+    public function setDraftForm(?Form $draftForm): Category
+    {
+        $this->draftForm = $draftForm;
         return $this;
     }
 

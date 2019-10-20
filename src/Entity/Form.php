@@ -27,10 +27,17 @@ class Form
 
     /**
      * @var Category
-     * @ORM\OneToOne(targetEntity="App\Entity\Category", inversedBy="form")
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * @ORM\OneToOne(targetEntity="App\Entity\Category", mappedBy="form")
      */
     private $category;
+
+    /**
+     * Exists only because doctrine considers relation as inconsistent else
+     * And I don't want to set up 1n relation
+     * @var Category
+     * @ORM\OneToOne(targetEntity="App\Entity\Category", mappedBy="draftForm")
+     */
+    private $originalCategory;
 
     /**
      * @var Collection
@@ -114,6 +121,24 @@ class Form
     {
         $area->setForm($this);
         $this->areas->add($area);
+        return $this;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getOriginalCategory(): Category
+    {
+        return $this->originalCategory;
+    }
+
+    /**
+     * @param Category $originalCategory
+     * @return Form
+     */
+    public function setOriginalCategory(Category $originalCategory): Form
+    {
+        $this->originalCategory = $originalCategory;
         return $this;
     }
 

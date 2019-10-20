@@ -2,11 +2,15 @@
 
 namespace App\Services\FormHandler;
 
+use App\Annotation\WidgetSettable;
 use App\Entity\Form;
 use App\Entity\FormArea;
+use App\Entity\Widget;
 use App\Enum\WidgetTypeEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 final class FormHandler implements FormHandlerInterface
 {
@@ -18,11 +22,16 @@ final class FormHandler implements FormHandlerInterface
      * @var EntityManagerInterface
      */
     private $entityManager;
+    /**
+     * @var PropertyAccess
+     */
+    private $propertyAccess;
 
-    public function __construct(ParameterBagInterface $parameterBag, EntityManagerInterface $entityManager)
+    public function __construct(ParameterBagInterface $parameterBag, EntityManagerInterface $entityManager, PropertyAccessorInterface $propertyAccess)
     {
         $this->parameterBag = $parameterBag;
         $this->entityManager = $entityManager;
+        $this->propertyAccess = $propertyAccess;
     }
 
     public function setFormAreaSize(FormArea $formArea, $size): void
@@ -62,18 +71,42 @@ final class FormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param FormArea $formArea
+     * @param Widget $widget
      * @param string|null $newType
      * @throws \Exception
      */
-    public function changeFormAreaWidgetType(FormArea $formArea, ?string $newType): void
+    public function changeFormAreaWidgetType(Widget $widget, ?string $newType): void
     {
         if (WidgetTypeEnum::isset($newType)) {
-            $formArea->getWidget()->setType($newType);
+            $widget->setType($newType);
             $this->entityManager->flush();
             return;
         }
 
         throw new \Exception('Something wrong happen when trying to set new type on widget.');
+    }
+
+    /**
+     * @param Widget $widget
+     * @param string|null $attribute
+     * @param $value
+     * @throws \Exception
+     */
+    public function setWidgetSetting(Widget $widget, ?string $attribute, $value): void
+    {
+        $attribute = "{$attribute}Setting";
+        if ($this->propertyAccess->isWritable($widget, $attribute)) {
+            try {
+                $this->propertyAccess->setValue($widget, $attribute, $value);
+                $this->entityManager->flush();
+            }
+            catch (\Exception $e) {
+                throw new \Exception('Error while setting value for ' . $attribute);
+            }
+        }
+        else {
+            throw new \Exception('Non settable setting');
+        }
+
     }
 }

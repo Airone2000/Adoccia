@@ -3,6 +3,7 @@
         class="area"
         data-id="{{ area.id }}"
         data-size="{{ area.width }}"
+        data-widgetid="{{ area.widget.id }}"
         style="width:calc({{ area.width }}% - 20px);"
 >
 
@@ -21,7 +22,7 @@
 
         <div class="area-body">
             {% include 'form/_widget_type_picker.html.twig' %}
-            {% include 'form/builder/_widget_'~ area.widget.type ~'.html.twig' ignore missing %}
+            {% include 'form/builder/_widget_'~ area.widget.type ~'.html.twig' ignore missing with {'widget': area.widget} %}
         </div>
 
         <div class="area-footer">

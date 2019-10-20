@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Widget
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -28,6 +29,30 @@ class Widget
      * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
      */
     private $formArea;
+
+    /**
+     * @var null|string
+     * @ORM\Column(name="inner_text", type="text", nullable=true)
+     */
+    private $innerTextSetting;
+
+    /**
+     * @var int|null
+     * @ORM\Column(name="min_length", type="bigint", nullable=true)
+     */
+    private $minLengthSetting;
+
+    /**
+     * @var int|null
+     * @ORM\Column(name="max_length", type="bigint", nullable=true)
+     */
+    private $maxLengthSetting;
+
+    /**
+     * @var bool
+     * @ORM\Column(name="required", type="boolean", options={"default":0})
+     */
+    private $requiredSetting = false;
 
 
     public function getId(): ?int
@@ -68,6 +93,78 @@ class Widget
     public function setFormArea(FormArea $formArea): Widget
     {
         $this->formArea = $formArea;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getInnerTextSetting(): ?string
+    {
+        return $this->innerTextSetting;
+    }
+
+    /**
+     * @param string|null $innerTextSetting
+     * @return Widget
+     */
+    public function setInnerTextSetting(?string $innerTextSetting): Widget
+    {
+        $this->innerTextSetting = $innerTextSetting;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMinLengthSetting(): ?int
+    {
+        return $this->minLengthSetting;
+    }
+
+    /**
+     * @param int|null $minLengthSetting
+     * @return Widget
+     */
+    public function setMinLengthSetting(?int $minLengthSetting): Widget
+    {
+        $this->minLengthSetting = $minLengthSetting;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMaxLengthSetting(): ?int
+    {
+        return $this->maxLengthSetting;
+    }
+
+    /**
+     * @param int|null $maxLengthSetting
+     * @return Widget
+     */
+    public function setMaxLengthSetting(?int $maxLengthSetting): Widget
+    {
+        $this->maxLengthSetting = $maxLengthSetting;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRequiredSetting(): bool
+    {
+        return $this->requiredSetting;
+    }
+
+    /**
+     * @param bool $requiredSetting
+     * @return Widget
+     */
+    public function setRequiredSetting(bool $requiredSetting): Widget
+    {
+        $this->requiredSetting = $requiredSetting;
         return $this;
     }
 

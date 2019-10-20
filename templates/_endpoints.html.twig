@@ -1,11 +1,13 @@
 <script>
-    const endpoints = {
-        'addFormAreaToForm': "{{ absolute_url('/forms/:id/form-areas') }}",
-        'deleteFormArea': "{{ absolute_url('/forms/:formId/form-areas/:formAreaId') }}",
-        'setFormAreaSize': "{{ absolute_url('/forms/:formId/form-areas/:formAreaId/set-size') }}",
-        'sortFormAreas': "{{ absolute_url('/forms/:id/form-areas/sort') }}",
-        'changeFormAreaWidgetType': "{{ absolute_url('/forms/:formId/form-areas/:formAreaId/change-type') }}",
-        'getFormAreaWidgetSettingsView': "{{ absolute_url('/forms/:formId/form-areas/:formAreaId/get-settings-view') }}",
-        'login': "{{ url('app.login') }}"
+    const endpoints =
+    {
+        'login'                 : "{{ url('app.login') }}",
+        'addFormAreaToForm'     : "{{ url('form.addArea', {'id': ':id'}) }}",
+        'sortFormAreas'         : "{{ url('form.sortAreas', {'id': ':id'}) }}",
+        'deleteFormArea'        : "{{ url('formArea.delete', {'id': ':id'}) }}",
+        'setFormAreaWidth'      : "{{ url('formArea.setWidth', {'id': ':id'}) }}",
+        'widgetChangeType'      : "{{ url('widget.changeType', {'id': ':id'}) }}",
+        'widgetSettingsView'    : "{{ url('widget.getSettingsView', {'id': ':id'}) }}",
+        'widgetSetSetting'      : "{{ url('widget.setSetting', {'id': ':id'}) }}"
     };
 </script>

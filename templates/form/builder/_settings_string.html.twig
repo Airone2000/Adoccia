@@ -1,3 +1,19 @@
-<div>
-    SETTINGS STRING {{ area.id }}
+<div class="settings" data-widgetid="{{ widget.id }}">
+
+    <div>
+        <label for="ssmal">Longueur minimum</label>
+        <input id="ssmal" class="saveOnChange" data-attribute="minLength" type="number" value="{{ widget.minLengthSetting }}">
+    </div>
+
+    <div>
+        <label for="ssmil">Longueur maximum</label>
+        <input id="ssmil" class="saveOnChange" data-attribute="maxLength" type="number" value="{{ widget.maxLengthSetting }}">
+    </div>
+
+    <div>
+        <label for="ssmr">Requis</label>
+        {% set checked = widget.requiredSetting ? 'checked' : '' %}
+        <input id="ssmr" class="saveOnChange" data-attribute="required" type="checkbox" {{ checked }}>
+    </div>
+    
 </div>

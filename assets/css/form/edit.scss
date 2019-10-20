@@ -4,29 +4,20 @@
   position: relative;
   padding: 15px;
 
-  &.loading > #form_loadingOverlay {
-    display: flex;
+  &.loading {
+    .autoSaveIndicator {
+      display: flex;
+      color: #555;
+      align-items: center;
+
+      .icon {
+        font-size: 30px;
+      }
+    }
   }
 
-  > #form_loadingOverlay {
+  .autoSaveIndicator {
     display: none;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0,0,0,.8);
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-
-    .text-loading {
-      text-transform: uppercase;
-    }
-
-    .icon {
-      font-size: 50px;
-    }
   }
 
   #form {
@@ -152,6 +143,9 @@
   }
 
   .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 15px 0;
     text-align: right;
 
@@ -170,7 +164,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0,0,0,.8);
+  background-color: rgba(0,0,0,.5);
   overflow: auto;
 
   > .content {
@@ -178,6 +172,7 @@
     max-width: 500px;
     padding: 15px;
     background: #fff;
+    box-shadow: #555 0px 0px 15px;
   }
 
   &.hidden {

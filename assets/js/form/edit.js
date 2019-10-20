@@ -17,16 +17,19 @@ class Edit
         this._listenForDeleteArea();
         this._listenForWidgetTypePicked();
         this._listenForOpenModalSetWidgetOptions();
+        this._listenForSaveOnChange();
     }
 
-    _makeFormLoading() {
+    _makeFormSyncing() {
         this.loading = true;
         $('#formWrapper').addClass('loading');
     }
 
-    _stopFormLoading() {
+    _stopFormSyncing() {
         this.loading = false;
-        $('#formWrapper').removeClass('loading');
+        setTimeout(() => {
+            $('#formWrapper').removeClass('loading');
+        }, 650)
     }
 
     _makeItSortable() {
@@ -54,7 +57,7 @@ class Edit
                 let url = endpoints.sortFormAreas;
                 url = url.replace(':id', formId);
 
-                this._makeFormLoading();
+                this._makeFormSyncing();
 
                 let body = JSON.stringify(map);
                 let headers = {
@@ -63,6 +66,7 @@ class Edit
                 };
 
                 this.timeoutSort = setTimeout(() => {
+                    this._makeFormSyncing();
                     aFetch(url, {method: 'post', headers, body})
                         .then(response => {
                             switch (response.status) {
@@ -74,6 +78,9 @@ class Edit
                                 default:
                                     alert('ERROR');
                             }
+                        })
+                        .finally(() => {
+                            this._stopFormSyncing();
                         })
                     ;
                 }, 250);
@@ -98,13 +105,11 @@ class Edit
             $resizer.val(size);
             $parentArea.css('width', 'calc('+size+'% - 20px)');
 
-            let $form = $('#form');
-            const formId = $form.data('id') || 0;
+
             let $area = $resizer.parents('.area');
             let areaId = $area.data('id');
-            let url = endpoints.setFormAreaSize;
-            url = url.replace(':formId', formId);
-            url = url.replace(':formAreaId', areaId);
+            let url = endpoints.setFormAreaWidth;
+            url = url.replace(':id', areaId);
 
             let headers = {
                 'X-Requested-With': 'XMLHttpRequest',
@@ -113,6 +118,7 @@ class Edit
             let body = JSON.stringify({size});
 
             this.timeoutResize = setTimeout(() => {
+                this._makeFormSyncing();
                 aFetch(url, {method: 'put', headers, body})
                     .then(response => {
                         switch (response.status) {
@@ -126,13 +132,16 @@ class Edit
                                 $resizer.val(originalSize);
                         }
                     })
+                    .finally(() => {
+                        this._stopFormSyncing();
+                    })
                 ;
             }, 250);
         });
     }
 
     _listenForAddArea() {
-        $('.add-formArea').on('click', function(){
+        $('.add-formArea').on('click', () => {
 
             let url = endpoints.addFormAreaToForm;
             let $form = $('#form');
@@ -140,6 +149,7 @@ class Edit
             url = url.replace(':id', formId);
 
             let headers = {'X-Requested-With': 'XMLHttpRequest'};
+            this._makeFormSyncing();
             aFetch(url, {'method': 'post', headers})
                 .then(response => {
                     switch (response.status) {
@@ -155,23 +165,25 @@ class Edit
                 .then(response => {
                     $form.append(response.view);
                 })
+                .finally(() => {
+                    this._stopFormSyncing();
+                })
             ;
 
         });
     }
 
     _listenForDeleteArea() {
-        $(document).on('click', '.delete-formArea', function(){
+        $(document).on('click', '.delete-formArea', (e) => {
 
-            let $form = $('#form');
-            const formId = $form.data('id') || 0;
-            let $area = $(this).parents('.area');
+            let $trashBtn = $(e.target);
+            let $area = $trashBtn.parents('.area');
             let areaId = $area.data('id') || 0;
             let url = endpoints.deleteFormArea;
-            url = url.replace(':formId', formId);
-            url = url.replace(':formAreaId', areaId);
+            url = url.replace(':id', areaId);
 
             let headers = {'X-Requested-With': 'XMLHttpRequest'};
+            this._makeFormSyncing();
             aFetch(url, {method: 'delete', headers})
                 .then(response => {
                     switch (response.status) {
@@ -188,6 +200,9 @@ class Edit
                             alert('ERROR');
                     }
                 })
+                .finally(() => {
+                    this._stopFormSyncing();
+                })
             ;
         });
     }
@@ -197,13 +212,10 @@ class Edit
             let $picker = $(e.target);
             let pickedWidget = $picker.val();
 
-            let $form = $('#form');
-            const formId = $form.data('id') || 0;
             let $area = $picker.parents('.area');
-            let areaId = $area.data('id');
-            let url = endpoints.changeFormAreaWidgetType;
-            url = url.replace(':formId', formId);
-            url = url.replace(':formAreaId', areaId);
+            let widgetId = $picker.data('widgetid');
+            let url = endpoints.widgetChangeType;
+            url = url.replace(':id', widgetId);
 
             let headers = {
                 'X-Requested-With': 'XMLHttpRequest',
@@ -211,25 +223,27 @@ class Edit
             };
             let body = JSON.stringify({type: pickedWidget});
 
-            this.timeoutResize = setTimeout(() => {
-                aFetch(url, {method: 'put', headers, body})
-                    .then(response => {
-                        switch (response.status) {
-                            case 200:
-                                return response.json();
-                                break;
-                            case 401:
-                                window.location.href = endpoints.login;
-                                break;
-                            default:
-                                alert('ERROR');
-                        }
-                    })
-                    .then(response => {
-                        $area.replaceWith($(response.view));
-                    })
-                ;
-            }, 250);
+            this._makeFormSyncing();
+            aFetch(url, {method: 'put', headers, body})
+                .then(response => {
+                    switch (response.status) {
+                        case 200:
+                            return response.json();
+                            break;
+                        case 401:
+                            window.location.href = endpoints.login;
+                            break;
+                        default:
+                            alert('ERROR');
+                    }
+                })
+                .then(response => {
+                    $area.replaceWith($(response.view));
+                })
+                .finally(() => {
+                    this._stopFormSyncing();
+                })
+            ;
         });
     }
 
@@ -249,15 +263,12 @@ class Edit
 
         $(document).on('click', '.openModalSetWidgetOptions', (e) => {
             let $button = $(e.target);
-            let $form = $('#form');
-            const formId = $form.data('id') || 0;
-            let $area = $button.parents('.area');
-            let areaId = $area.data('id');
-            let url = endpoints.getFormAreaWidgetSettingsView;
-            url = url.replace(':formId', formId);
-            url = url.replace(':formAreaId', areaId);
+            let widgetId = $button.parents('.area').data('widgetid');
+            let url = endpoints.widgetSettingsView;
+            url = url.replace(':id', widgetId);
 
             let headers = {'X-Requested-With': 'XMLHttpRequest'};
+            this._makeFormSyncing();
             aFetch(url, {'method': 'get', headers})
                 .then(response => {
                     switch (response.status) {
@@ -274,9 +285,72 @@ class Edit
                     $wrapperModalContent.html(response.view);
                     $wrapperModal.removeClass('hidden');
                 })
+                .finally(() => {
+                    this._stopFormSyncing();
+                })
             ;
 
         });
+    }
+
+    _listenForSaveOnChange() {
+
+        this.autoSaveTimeouts = {};
+
+        let handler = (e) => {
+            let $input = $(e.target);
+            let attribute = $input.data('attribute') || null;
+            let value = $input.val().trim();
+            value = value.length === 0 ? null : value;
+
+            let widgetId;
+
+            let $parentArea = $input.parents('.area');
+            if ($parentArea.length === 1) {
+                widgetId = $parentArea.data('widgetid')
+            }
+            else {
+                let $parentSettings = $input.parents('.settings');
+                if ($parentSettings.length === 1) {
+                    widgetId = $parentSettings.data('widgetid');
+                }
+            }
+
+            if (widgetId && attribute) {
+                let uniqKeyTimeout = `${widgetId}-${attribute}`;
+                clearTimeout(this.autoSaveTimeouts[uniqKeyTimeout]);
+                this.autoSaveTimeouts[uniqKeyTimeout] = setTimeout(() => {
+
+                    let url = endpoints.widgetSetSetting;
+                    url = url.replace(':id', widgetId);
+
+                    let headers = {'X-Requested-With': 'XMLHttpRequest', 'Content-Type': 'application/json'};
+                    let body = JSON.stringify({attribute, value});
+
+                    this._makeFormSyncing();
+                    aFetch(url, {method: 'post', headers, body})
+                        .then(response => {
+                            switch (response.status) {
+                                case 204:
+                                    console.log('OK');
+                                    break;
+                                case 401:
+                                    window.location.href = endpoints.login;
+                                    break;
+                                default:
+                                    alert('ERROR');
+                            }
+                        })
+                        .finally(() => {
+                            this._stopFormSyncing();
+                        })
+                    ;
+                }, 300);
+            }
+        };
+
+        $(document).on('change', '.saveOnChange', handler);
+        $(document).on('input', '.saveOnInput', handler)
     }
 }
 

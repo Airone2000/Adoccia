@@ -16,8 +16,16 @@
     <div id="formWrapper">
 
         <div class="form-buttons">
-            <button class="btn secondary add-formArea">Ajouter une zone</button>
-            <button class="btn primary">Enregistrer</button>
+            <div>
+                <div class="autoSaveIndicator">
+                    <i class="icon fas fa-compact-disc fa-spin"></i>
+                </div>
+            </div>
+            <div>
+                <button class="btn secondary add-formArea">Ajouter une zone</button>
+                <button class="btn danger">Annuler</button>
+                <button class="btn primary">Publier</button>
+            </div>
         </div>
 
         <div id="form" data-id="{{ form.id }}" class="loading">
@@ -27,17 +35,18 @@
         </div>
 
         <div class="form-buttons">
-            <button class="btn secondary add-formArea">Ajouter une zone</button>
-            <button class="btn primary">Enregistrer</button>
-        </div>
-
-        <div id="form_loadingOverlay">
-            <div style="text-align: center;">
-                <i class="icon far fa-snowflake"></i>
-                <br>
-                <p class="text-loading">Chargement ...</p>
+            <div>
+                <div class="autoSaveIndicator">
+                    <i class="icon fas fa-compact-disc fa-spin"></i>
+                </div>
+            </div>
+            <div>
+                <button class="btn secondary add-formArea">Ajouter une zone</button>
+                <button class="btn danger">Annuler</button>
+                <button class="btn primary">Publier</button>
             </div>
         </div>
+
     </div>
 
     <div id="wrapperModalSetWidgetOptions" class="hidden">
