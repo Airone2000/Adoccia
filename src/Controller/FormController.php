@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Form;
 use App\Entity\FormArea;
 use App\Services\FormHandler\FormHandlerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +20,7 @@ final class FormController extends AbstractController
 {
     /**
      * @Route(path="/{id}", methods={"get"}, name="form.show")
+     * @IsGranted("SEE_FORM", subject="form")
      * @inheritdoc
      */
     function show(Form $form): Response

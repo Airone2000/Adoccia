@@ -2,27 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/FormAreaController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/WidgetController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/form/edit.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/form/edit.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/theme.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/theme.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/form/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/form/edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/fichit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fichit.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/FormController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FormController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Form.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Widget.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Widget.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EntityListener/CategoryListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntityListener/CategoryListener.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/FormHandler/FormHandlerInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/FormHandler/FormHandlerInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/_endpoints.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/_endpoints.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/category/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/_area.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/_area.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/_widget_type_picker.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/_widget_type_picker.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/builder/_settings_string.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_settings_string.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/builder/_widget_label.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_widget_label.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/builder/_widget_string.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_widget_string.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/edit.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,22 +17,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Category.php">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Security/Voter/FormVoter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="91" selection-start-line="91" selection-end-line="91" />
+            <state relative-caret-position="210">
+              <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Form.php">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/FormController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+            <state relative-caret-position="258">
+              <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
               <folding>
-                <element signature="e#30#78#0#PHP" expanded="true" />
+                <element signature="e#34#54#0#PHP" expanded="true" />
+                <element signature="e#659#680#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -101,7 +84,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/form/_form.html.twig" />
         <option value="$PROJECT_DIR$/src/Repository/FormRepository.php" />
         <option value="$PROJECT_DIR$/public/js/jquery.js" />
         <option value="$PROJECT_DIR$/public/js/area.js" />
@@ -148,10 +130,11 @@
         <option value="$PROJECT_DIR$/src/Controller/WidgetController.php" />
         <option value="$PROJECT_DIR$/assets/js/form/edit.js" />
         <option value="$PROJECT_DIR$/templates/form/builder/_settings_string.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/FormController.php" />
         <option value="$PROJECT_DIR$/templates/_endpoints.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Category.php" />
         <option value="$PROJECT_DIR$/src/Entity/Form.php" />
+        <option value="$PROJECT_DIR$/src/Controller/FormController.php" />
+        <option value="$PROJECT_DIR$/src/Security/Voter/FormVoter.php" />
       </list>
     </option>
   </component>
@@ -252,9 +235,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/asset" />
       <path value="$PROJECT_DIR$/vendor/symfony/templating" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation" />
-      <path value="$PROJECT_DIR$/vendor/gedmo/doctrine-extensions" />
-      <path value="$PROJECT_DIR$/vendor/behat/transliterator" />
-      <path value="$PROJECT_DIR$/vendor/stof/doctrine-extensions-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
     </include_path>
   </component>
@@ -275,6 +255,24 @@
             <path>
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Security" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Security" type="462c0819:PsiDirectoryNode" />
+              <item name="Voter" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -326,18 +324,18 @@
       <updated>1571153853898</updated>
       <workItem from="1571153855215" duration="50125000" />
       <workItem from="1571324432822" duration="16510000" />
-      <workItem from="1571432217658" duration="42283000" />
+      <workItem from="1571432217658" duration="42820000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108918000" />
+    <option name="totallyTimeSpent" value="109455000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25608012" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25608012" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -363,27 +361,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/http-foundation/Request.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="1703" column="72" lean-forward="true" selection-start-line="1703" selection-start-column="56" selection-end-line="1703" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/AbstractQuery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="765" column="40" lean-forward="true" selection-start-line="765" selection-start-column="40" selection-end-line="765" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/QueryBuilder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="654" column="7" lean-forward="true" selection-start-line="654" selection-start-column="7" selection-end-line="654" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/FormAreaRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -763,13 +740,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/FormController.php">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="64" column="10" lean-forward="true" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
+        <state relative-caret-position="316">
+          <caret line="29" column="23" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
           <folding>
-            <element signature="e#34#54#0#PHP" expanded="true" />
-            <element signature="e#659#680#0#PHP" expanded="true" />
+            <element signature="e#30#78#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -781,13 +757,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Form.php">
+    <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+        <state relative-caret-position="285">
+          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/sensio/framework-extra-bundle/Configuration/IsGranted.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/FormController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
           <folding>
-            <element signature="e#30#78#0#PHP" expanded="true" />
+            <element signature="e#34#54#0#PHP" expanded="true" />
+            <element signature="e#659#680#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Security/Voter/FormVoter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
         </state>
       </provider>
     </entry>
