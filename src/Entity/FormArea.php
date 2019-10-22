@@ -48,6 +48,16 @@ class FormArea
     public function __construct()
     {
         $this->setWidget(new Widget());
+        $this->widget->setType(WidgetTypeEnum::DEFAULT_TYPE);
+    }
+
+    /**
+     * Clone for draftForm generation
+     */
+    public function __clone()
+    {
+        $this->id = null;
+        $this->setWidget(clone $this->getWidget());
     }
 
     public function getId(): ?int
@@ -126,7 +136,6 @@ class FormArea
         $this->widget = $widget;
         $widget
             ->setFormArea($this)
-            ->setType(WidgetTypeEnum::DEFAULT_TYPE)
         ;
         return $this;
     }

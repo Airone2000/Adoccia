@@ -55,6 +55,14 @@ class Widget
     private $requiredSetting = false;
 
 
+    /**
+     * Clone for draftForm generation
+     */
+    public function __clone()
+    {
+        $this->id = null;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

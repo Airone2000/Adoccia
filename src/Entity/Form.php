@@ -20,26 +20,6 @@ class Form
     private $id;
 
     /**
-     * @var bool
-     * @ORM\Column(type="boolean")
-     */
-    private $isInMaintenanceMode = false;
-
-    /**
-     * @var Category
-     * @ORM\OneToOne(targetEntity="App\Entity\Category", mappedBy="form")
-     */
-    private $category;
-
-    /**
-     * Exists only because doctrine considers relation as inconsistent else
-     * And I don't want to set up 1n relation
-     * @var Category
-     * @ORM\OneToOne(targetEntity="App\Entity\Category", mappedBy="draftForm")
-     */
-    private $originalCategory;
-
-    /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="App\Entity\FormArea", mappedBy="form", cascade={"persist"})
      */
@@ -51,45 +31,21 @@ class Form
         $this->areas = new ArrayCollection();
     }
 
+    /**
+     * Clone for draftForm generation
+     */
+    public function __clone()
+    {
+        $this->id = null;
+        foreach ($this->areas as $area) {
+            $this->getAreas()->removeElement($area);
+            $this->addArea(clone $area);
+        }
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isInMaintenanceMode(): bool
-    {
-        return $this->isInMaintenanceMode;
-    }
-
-    /**
-     * @param bool $isInMaintenanceMode
-     * @return Form
-     */
-    public function setIsInMaintenanceMode(bool $isInMaintenanceMode): Form
-    {
-        $this->isInMaintenanceMode = $isInMaintenanceMode;
-        return $this;
-    }
-
-    /**
-     * @return Category
-     */
-    public function getCategory(): Category
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param Category $category
-     * @return Form
-     */
-    public function setCategory(Category $category): Form
-    {
-        $this->category = $category;
-        return $this;
     }
 
     /**
@@ -121,24 +77,6 @@ class Form
     {
         $area->setForm($this);
         $this->areas->add($area);
-        return $this;
-    }
-
-    /**
-     * @return Category
-     */
-    public function getOriginalCategory(): Category
-    {
-        return $this->originalCategory;
-    }
-
-    /**
-     * @param Category $originalCategory
-     * @return Form
-     */
-    public function setOriginalCategory(Category $originalCategory): Form
-    {
-        $this->originalCategory = $originalCategory;
         return $this;
     }
 

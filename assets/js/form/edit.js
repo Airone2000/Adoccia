@@ -18,6 +18,8 @@ class Edit
         this._listenForWidgetTypePicked();
         this._listenForOpenModalSetWidgetOptions();
         this._listenForSaveOnChange();
+        this._listenForPublish();
+        this._listenForDeleteDraftForm();
     }
 
     _makeFormSyncing() {
@@ -351,6 +353,70 @@ class Edit
 
         $(document).on('change', '.saveOnChange', handler);
         $(document).on('input', '.saveOnInput', handler)
+    }
+
+    _listenForPublish() {
+        $(document).on('click', '.publishDraftForm', (e) => {
+            let $buttonPublish = $(e.target);
+            let formId = $('#form').data('id');
+            let url = endpoints.publishDraftForm;
+            url = url.replace(':id', formId);
+            let headers = {'X-Requested-With': 'XMLHttpRequest'};
+
+            this._makeFormSyncing();
+            $buttonPublish.prop('disabled', true);
+
+            aFetch(url, {method: 'post', headers})
+                .then(response => {
+                    switch (response.status) {
+                        case 204:
+                            window.location.href = endpoints.editCategory.replace(':id', categoryId);
+                            return;
+                        case 401:
+                            window.location.href = endpoints.login;
+                            break;
+                        default:
+                            alert('ERROR');
+                    }
+                })
+                .finally(() => {
+                    this._stopFormSyncing();
+                    $buttonPublish.prop('disabled', false);
+                })
+            ;
+        });
+    }
+
+    _listenForDeleteDraftForm() {
+        $(document).on('click', '.deleteDraftForm', (e) => {
+
+            let $buttonDelete = $(e.target);
+            let url = endpoints.deleteDraftForm.replace(':id', formId);
+            let headers = {'X-Requested-With': 'XMLHttpRequest'};
+
+            this._makeFormSyncing();
+            $buttonDelete.prop('disabled', true);
+
+            aFetch(url, {method: 'delete', headers})
+                .then(response => {
+                    switch (response.status) {
+                        case 204:
+                            window.location.href = endpoints.editCategory.replace(':id', categoryId);
+                            return;
+                        case 401:
+                            window.location.href = endpoints.login;
+                            break;
+                        default:
+                            alert('ERROR');
+                    }
+                })
+                .finally(() => {
+                    this._stopFormSyncing();
+                    $buttonDelete.prop('disabled', false);
+                })
+            ;
+
+        });
     }
 }
 

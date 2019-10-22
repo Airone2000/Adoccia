@@ -2,6 +2,10 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Category;
+use App\Entity\Form;
+use App\Entity\User;
+use App\Repository\CategoryRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -9,34 +13,97 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class FormVoter extends Voter
 {
     const
-        SEE_FORM = 'SEE_FORM'
+        SEE_DRAFT_FORM = 'SEE_DRAFT_FORM',
+        EDIT_DRAFT_FORM = 'EDIT_DRAFT_FORM',
+        ADD_FORM_AREA_TO_DRAFT_FORM = 'ADD_FORM_AREA_TO_DRAFT_FORM',
+        SORT_DRAFT_FORM_AREAS = 'SORT_DRAFT_FORM_AREAS',
+        PUBLISH_DRAFT_FORM = 'PUBLISH_DRAFT_FORM',
+        DELETE_DRAFT_FORM = 'DELETE_DRAFT_FORM'
     ;
+    /**
+     * @var CategoryRepository
+     */
+    private $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     protected function supports($attribute, $subject)
     {
-        dd($attribute, $subject);
+        if ($attribute === self::SEE_DRAFT_FORM && $subject instanceof Form) return true;
+        if ($attribute === self::EDIT_DRAFT_FORM && $subject instanceof Form) return true;
+        if ($attribute === self::ADD_FORM_AREA_TO_DRAFT_FORM && $subject instanceof Form) return true;
+        if ($attribute === self::SORT_DRAFT_FORM_AREAS && $subject instanceof Form) return true;
+        if ($attribute === self::PUBLISH_DRAFT_FORM && $subject instanceof Form) return true;
+        if ($attribute === self::DELETE_DRAFT_FORM && $subject instanceof Form) return true;
+        return false;
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
+        /** @var User $user */
         $user = $token->getUser();
-        // if the user is anonymous, do not grant access
         if (!$user instanceof UserInterface) {
             return false;
         }
 
-        // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
-            case 'POST_EDIT':
-                // logic to determine if the user can EDIT
-                // return true or false
-                break;
-            case 'POST_VIEW':
-                // logic to determine if the user can VIEW
-                // return true or false
-                break;
+            case self::SEE_DRAFT_FORM:
+                return $this->canSeeDraftForm($user, $subject);
+            case self::EDIT_DRAFT_FORM:
+                return $this->canEditDraftForm($user, $subject);
+            case self::ADD_FORM_AREA_TO_DRAFT_FORM:
+                return $this->canAddFormAreaToDraftForm($user, $subject);
+            case self::SORT_DRAFT_FORM_AREAS:
+                return $this->canSortDraftFormAreas($user, $subject);
+            case self::PUBLISH_DRAFT_FORM:
+                return $this->canPublishDraftForm($user, $subject);
+            case self::DELETE_DRAFT_FORM:
+                return $this->canDeleteDraftForm($user, $subject);
         }
 
         return false;
+    }
+
+    private function canEditDraftForm(User $user, Form $form): bool
+    {
+        /** @var Category|null $category */
+        $category = $this->categoryRepository->findOneBy(['draftForm' => $form]);
+
+        if (($category instanceof Category) && ($category->getCreatedBy() instanceof User)) {
+            # SuperAdmin can edit everything
+            if ($user->isSuperAdmin()) return true;
+            # Creator of category can edit his form
+            if ($category->getCreatedBy()->getId() === $user->getId()) return true;
+        }
+
+        return false;
+    }
+
+    private function canDeleteDraftForm(User $user, Form $form): bool
+    {
+        return $this->canEditDraftForm($user, $form);
+    }
+
+    private function canPublishDraftForm(User $user, Form $form): bool
+    {
+        return $this->canEditDraftForm($user, $form);
+    }
+
+    private function canSeeDraftForm(User $user, Form $form): bool
+    {
+        return $this->canEditDraftForm($user, $form);
+    }
+
+    private function canAddFormAreaToDraftForm(User $user, Form $form): bool
+    {
+        return $this->canEditDraftForm($user, $form);
+    }
+
+    private function canSortDraftFormAreas(User $user, Form $form): bool
+    {
+        return $this->canEditDraftForm($user, $form);
     }
 }

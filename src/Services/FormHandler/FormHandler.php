@@ -2,7 +2,7 @@
 
 namespace App\Services\FormHandler;
 
-use App\Annotation\WidgetSettable;
+use App\Entity\Category;
 use App\Entity\Form;
 use App\Entity\FormArea;
 use App\Entity\Widget;
@@ -109,4 +109,44 @@ final class FormHandler implements FormHandlerInterface
         }
 
     }
+
+    /**
+     * @param Category $category
+     * @param bool $overwrite
+     */
+    public function setDraftForm(Category $category, bool $overwrite = false): void
+    {
+        if ($category->getDraftForm() !== null) {
+            if (!$overwrite) return;
+        }
+
+        $draftForm = clone $category->getForm();
+        $category->setDraftForm($draftForm);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @param Category $category
+     * @throws \Exception
+     */
+    public function publishDraftForm(Category $category): void
+    {
+        try {
+            if (($draftForm = $category->getDraftForm()) instanceof Form) {
+                if ($form = $category->getForm()) {
+                    $this->entityManager->remove($form);
+                }
+
+                $category
+                    ->setForm($draftForm)
+                    ->setDraftForm(null);
+
+                $this->entityManager->flush();
+            }
+        }
+        catch (\Exception $e) {
+            throw new \Exception('An error occurred when trying to publish the draft form.');
+        }
+    }
+
 }

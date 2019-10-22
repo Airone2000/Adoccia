@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use App\Services\CategoryHandler\CategoryHandlerInterface;
+use App\Services\FormHandler\FormHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,6 +86,16 @@ class CategoryController extends AbstractController
             'category' => $category,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/{id}/edit-form", name="category.setAndEditDraftForm", methods={"get"})
+     * @inheritdoc
+     */
+    public function editDraftForm(Category $category, FormHandlerInterface $formHandler): Response
+    {
+        $formHandler->setDraftForm($category);
+        return $this->redirectToRoute('draftForm.edit', ['id' => $category->getDraftForm()->getId()]);
     }
 
     /**

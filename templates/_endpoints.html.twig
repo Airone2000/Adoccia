@@ -2,12 +2,15 @@
     const endpoints =
     {
         'login'                 : "{{ url('app.login') }}",
-        'addFormAreaToForm'     : "{{ url('form.addArea', {'id': ':id'}) }}",
-        'sortFormAreas'         : "{{ url('form.sortAreas', {'id': ':id'}) }}",
+        'addFormAreaToForm'     : "{{ url('draftForm.addArea', {'id': ':id'}) }}",
+        'sortFormAreas'         : "{{ url('draftForm.sortAreas', {'id': ':id'}) }}",
         'deleteFormArea'        : "{{ url('formArea.delete', {'id': ':id'}) }}",
         'setFormAreaWidth'      : "{{ url('formArea.setWidth', {'id': ':id'}) }}",
         'widgetChangeType'      : "{{ url('widget.changeType', {'id': ':id'}) }}",
         'widgetSettingsView'    : "{{ url('widget.getSettingsView', {'id': ':id'}) }}",
-        'widgetSetSetting'      : "{{ url('widget.setSetting', {'id': ':id'}) }}"
+        'widgetSetSetting'      : "{{ url('widget.setSetting', {'id': ':id'}) }}",
+        'publishDraftForm'      : "{{ url('draftForm.publish', {'id': ':id'}) }}",
+        'editCategory'          : "{{ url('category.edit', {'id': ':id'}) }}",
+        'deleteDraftForm'       : "{{ url('draftForm.delete', {'id': ':id'}) }}"
     };
 </script>

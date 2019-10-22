@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Widget;
 use App\Services\FormHandler\FormHandlerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/widgets")
+ * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
  */
 final class WidgetController extends AbstractController
 {
@@ -21,15 +23,11 @@ final class WidgetController extends AbstractController
      *     name="widget.changeType",
      *     condition="request.isXmlHttpRequest() and request.headers.get('Content-Type') == 'application/json'"
      * )
+     * @IsGranted("CHANGE_WIDGET_TYPE", subject="widget")
      * @inheritdoc
      */
     function changeType(Widget $widget, Request $request, FormHandlerInterface $formHandler): Response
     {
-        if (!$this->getUser()) {
-            # Must be connected
-            return new Response('', Response::HTTP_UNAUTHORIZED);
-        }
-
         try {
             $newType = json_decode($request->getContent(), true)['type'] ?? null;
             $formHandler->changeFormAreaWidgetType($widget, $newType);
@@ -49,15 +47,11 @@ final class WidgetController extends AbstractController
      *     condition="request.isXmlHttpRequest()",
      *     name="widget.getSettingsView"
      * )
+     * @IsGranted("GET_WIDGET_SETTING_VIEW", subject="widget")
      * @inheritdoc
      */
     function getSettingsView(Widget $widget): Response
     {
-        if (!$this->getUser()) {
-            # Must be connected
-            return new Response('', Response::HTTP_UNAUTHORIZED);
-        }
-
         try {
             $view = $this->renderView("form/builder/_settings_{$widget->getType()}.html.twig", [
                 'form' => $widget->getFormArea()->getForm(),
@@ -80,15 +74,11 @@ final class WidgetController extends AbstractController
      *     condition="request.isXmlHttpRequest() and request.headers.get('Content-Type') == 'application/json'",
      *     name="widget.setSetting"
      * )
+     * @IsGranted("SET_WIDGET_SETTING", subject="widget")
      * @inheritdoc
      */
     function setSetting(Widget $widget, Request $request, FormHandlerInterface $formHandler): Response
     {
-        if (!$this->getUser()) {
-            # Must be connected
-            return new Response('', Response::HTTP_UNAUTHORIZED);
-        }
-
         try {
             $body = json_decode($request->getContent(), true) ?? [];
             $attribute = $body['attribute'] ?? null;

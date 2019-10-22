@@ -6,8 +6,10 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
@@ -91,5 +93,17 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator
     protected function getLoginUrl()
     {
         return $this->urlGenerator->generate('app.login');
+    }
+
+
+    public function start(Request $request, AuthenticationException $authException = null)
+    {
+        $url = $this->getLoginUrl();
+
+        if ($request->isXmlHttpRequest()) {
+            return new Response('Protected action : yon need to be connected', Response::HTTP_UNAUTHORIZED);
+        }
+
+        return new RedirectResponse($url);
     }
 }

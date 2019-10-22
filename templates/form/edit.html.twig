@@ -7,6 +7,11 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        /* For use in edit.js */
+        const categoryId = "{{ category.id }}";
+        const formId = "{{ form.id }}";
+    </script>
     {{ encore_entry_script_tags('form/edit') }}
 {% endblock %}
 
@@ -23,8 +28,8 @@
             </div>
             <div>
                 <button class="btn secondary add-formArea">Ajouter une zone</button>
-                <button class="btn danger">Annuler</button>
-                <button class="btn primary">Publier</button>
+                <button class="btn danger deleteDraftForm">Annuler</button>
+                <button class="btn primary publishDraftForm">Publier</button>
             </div>
         </div>
 
@@ -42,8 +47,8 @@
             </div>
             <div>
                 <button class="btn secondary add-formArea">Ajouter une zone</button>
-                <button class="btn danger">Annuler</button>
-                <button class="btn primary">Publier</button>
+                <button class="btn danger deleteDraftForm">Annuler</button>
+                <button class="btn primary publishDraftForm">Publier</button>
             </div>
         </div>
 

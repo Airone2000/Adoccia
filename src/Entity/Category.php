@@ -56,13 +56,15 @@ class Category
 
     /**
      * @var Form
-     * @ORM\OneToOne(targetEntity="App\Entity\Form", cascade={"persist", "remove"}, inversedBy="category")
+     * @ORM\OneToOne(targetEntity="App\Entity\Form", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $form;
 
     /**
      * @var Form|null
-     * @ORM\OneToOne(targetEntity="App\Entity\Form", cascade={"persist", "remove"}, inversedBy="originalCategory")
+     * @ORM\OneToOne(targetEntity="App\Entity\Form", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $draftForm;
 
@@ -174,7 +176,6 @@ class Category
     public function setForm(Form $form): Category
     {
         $this->form = $form;
-        $form->setCategory($this);
         return $this;
     }
 
