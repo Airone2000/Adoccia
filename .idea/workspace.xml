@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EntityListener/CategoryListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntityListener/CategoryListener.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,11 +14,20 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/EntityListener/CategoryListener.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>widgetTypes</find>
       <find>sortForm</find>
       <find>area-body</find>
       <find>area-inner</find>
@@ -48,6 +57,7 @@
       <find>setDrafForm</find>
       <find>setEmailAt</find>
       <find>setMailA</find>
+      <find>setDraftForm</find>
     </findStrings>
     <replaceStrings>
       <replace>_makeFormSyncing</replace>
@@ -84,7 +94,6 @@
         <option value="$PROJECT_DIR$/templates/form/builder/_widget_label.html.twig" />
         <option value="$PROJECT_DIR$/assets/css/theme.scss" />
         <option value="$PROJECT_DIR$/templates/form/builder/_widget_string.html.twig" />
-        <option value="$PROJECT_DIR$/src/EntityListener/CategoryListener.php" />
         <option value="$PROJECT_DIR$/templates/form/_area.html.twig" />
         <option value="$PROJECT_DIR$/templates/form/builder/_settings_string.html.twig" />
         <option value="$PROJECT_DIR$/src/Security/FormAuthenticator.php" />
@@ -110,6 +119,7 @@
         <option value="$PROJECT_DIR$/assets/css/form/edit.scss" />
         <option value="$PROJECT_DIR$/templates/_endpoints.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/form/edit.js" />
+        <option value="$PROJECT_DIR$/src/EntityListener/CategoryListener.php" />
       </list>
     </option>
   </component>
@@ -223,7 +233,28 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope" />
     </panes>
   </component>
@@ -273,18 +304,18 @@
       <workItem from="1571324432822" duration="16510000" />
       <workItem from="1571432217658" duration="43944000" />
       <workItem from="1571682493603" duration="15217000" />
-      <workItem from="1571744030367" duration="352000" />
+      <workItem from="1571744030367" duration="719000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126148000" />
+    <option name="totallyTimeSpent" value="126515000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25444266" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25444266" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -392,13 +423,6 @@
           <folding>
             <element signature="n#style#0;n#button#0;n#div#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EntityListener/CategoryListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -715,6 +739,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EntityListener/CategoryListener.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
         </state>
       </provider>
     </entry>

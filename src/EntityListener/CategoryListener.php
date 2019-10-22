@@ -27,10 +27,4 @@ final class CategoryListener
     {
         $category->setCreatedBy($this->tokenStorage->getToken()->getUser());
     }
-
-    function postPersist(Category $category): void
-    {
-        $category->setDraftForm($category->getForm());
-        $this->entityManager->flush();
-    }
 }
