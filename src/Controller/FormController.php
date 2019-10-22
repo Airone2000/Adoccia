@@ -94,6 +94,7 @@ final class FormController extends AbstractController
             $category = $categoryRepository->findOneBy(['draftForm' => $form]);
             if ($category === null) throw new \Exception('Not a draft form or deleted category.');
             $formHandler->publishDraftForm($category);
+            $this->addFlash('draftFormPublished', '');
             return new Response('', Response::HTTP_NO_CONTENT);
         }
         catch (\Exception $e) {
@@ -113,6 +114,7 @@ final class FormController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->remove($form);
             $em->flush();
+            $this->addFlash('draftFormDeleted', '');
             return new Response('', Response::HTTP_NO_CONTENT);
         }
         catch (\Exception $e) {

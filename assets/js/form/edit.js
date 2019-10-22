@@ -22,6 +22,16 @@ class Edit
         this._listenForDeleteDraftForm();
     }
 
+    _redirect(url) {
+        window.location.replace(url);
+    }
+
+    _displayError(error) {
+        let $errorDisplay = $('#formErrorDisplay');
+        $errorDisplay.find('p').text(error);
+        $errorDisplay.addClass('visible');
+    }
+
     _makeFormSyncing() {
         this.loading = true;
         $('#formWrapper').addClass('loading');
@@ -75,10 +85,10 @@ class Edit
                                 case 204:
                                     break;
                                 case 401:
-                                    window.location.href = endpoints.login;
+                                    this._redirect(endpoints.login);
                                     break;
                                 default:
-                                    alert('ERROR');
+                                    this._displayError('sortError');
                             }
                         })
                         .finally(() => {
@@ -127,11 +137,12 @@ class Edit
                             case 204:
                                 break;
                             case 401:
-                                window.location.href = endpoints.login;
+                                this._redirect(endpoints.login);
                                 break;
                             default:
                                 $parentArea.css('width', 'calc('+originalSize+'% - 20px)');
                                 $resizer.val(originalSize);
+                                this._displayError('resizeError');
                         }
                     })
                     .finally(() => {
@@ -158,10 +169,10 @@ class Edit
                         case 200:
                             return response.json();
                         case 401:
-                            window.location.href = endpoints.login;
+                            this._redirect(endpoints.login);
                             break;
                         default:
-                            alert('ERROR');
+                            this._displayError('addAreaError');
                     }
                 })
                 .then(response => {
@@ -196,10 +207,10 @@ class Edit
                             }, 200);
                             break;
                         case 401:
-                            window.location.href = endpoints.login;
+                            this._redirect(endpoints.login);
                             break;
                         default:
-                            alert('ERROR');
+                            this._displayError('deleteAreaError');
                     }
                 })
                 .finally(() => {
@@ -233,10 +244,10 @@ class Edit
                             return response.json();
                             break;
                         case 401:
-                            window.location.href = endpoints.login;
+                            this._redirect(endpoints.login);
                             break;
                         default:
-                            alert('ERROR');
+                            this._displayError('setWidgetTypeError');
                     }
                 })
                 .then(response => {
@@ -277,10 +288,10 @@ class Edit
                         case 200:
                             return response.json();
                         case 401:
-                            window.location.href = endpoints.login;
+                            this._redirect(endpoints.login);
                             break;
                         default:
-                            alert('ERROR');
+                            this._displayError('openWidgetModalOptionsError');
                     }
                 })
                 .then(response => {
@@ -337,10 +348,10 @@ class Edit
                                     console.log('OK');
                                     break;
                                 case 401:
-                                    window.location.href = endpoints.login;
+                                    this._redirect(endpoints.login);
                                     break;
                                 default:
-                                    alert('ERROR');
+                                    this._displayError('saveError');
                             }
                         })
                         .finally(() => {
@@ -370,13 +381,13 @@ class Edit
                 .then(response => {
                     switch (response.status) {
                         case 204:
-                            window.location.href = endpoints.editCategory.replace(':id', categoryId);
+                            this._redirect(endpoints.editCategory.replace(':id', categoryId));
                             return;
                         case 401:
-                            window.location.href = endpoints.login;
+                            this._redirect(endpoints.login);
                             break;
                         default:
-                            alert('ERROR');
+                            this._displayError('publishError');
                     }
                 })
                 .finally(() => {
@@ -401,13 +412,13 @@ class Edit
                 .then(response => {
                     switch (response.status) {
                         case 204:
-                            window.location.href = endpoints.editCategory.replace(':id', categoryId);
+                            this._redirect(endpoints.editCategory.replace(':id', categoryId));
                             return;
                         case 401:
-                            window.location.href = endpoints.login;
+                            this._redirect(endpoints.login);
                             break;
                         default:
-                            alert('ERROR');
+                            this._displayError('deleteFormError');
                     }
                 })
                 .finally(() => {

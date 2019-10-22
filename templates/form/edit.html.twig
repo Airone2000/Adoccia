@@ -16,7 +16,16 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Edit form (draft)</h1>
+    <h1>
+        Edit form (draft)
+        <a href="{{ url('category.edit', {'id': category.id}) }}">
+            <button>Back</button>
+        </a>
+    </h1>
+
+    <div id="formErrorDisplay">
+        <p></p>
+    </div>
 
     <div id="formWrapper">
 

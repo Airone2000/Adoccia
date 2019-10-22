@@ -5,6 +5,14 @@
 {% block body %}
     <h1>Edit Category</h1>
 
+    {% for label, messages in app.flashes(['draftFormPublished', 'draftFormDeleted']) %}
+        <div>
+            {% for message in messages %}
+                <p>{{ label }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    
     <p>
         {% if category.draftForm is not null %}
             <a href="{{ url('category.setAndEditDraftForm', {'id': category.id}) }}">
