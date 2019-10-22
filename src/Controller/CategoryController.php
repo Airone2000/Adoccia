@@ -89,12 +89,12 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit-form", name="category.setAndEditDraftForm", methods={"get"})
+     * @Route("/{id}/edit-form/{new}", name="category.setAndEditDraftForm", methods={"get"})
      * @inheritdoc
      */
-    public function editDraftForm(Category $category, FormHandlerInterface $formHandler): Response
+    public function editDraftForm(Category $category, FormHandlerInterface $formHandler, bool $new = false): Response
     {
-        $formHandler->setDraftForm($category);
+        $formHandler->setDraftForm($category, $new);
         return $this->redirectToRoute('draftForm.edit', ['id' => $category->getDraftForm()->getId()]);
     }
 

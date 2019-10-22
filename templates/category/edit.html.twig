@@ -5,7 +5,19 @@
 {% block body %}
     <h1>Edit Category</h1>
 
-    <p><a href="{{ url('category.setAndEditDraftForm', {'id': category.id}) }}">See the form</a></p>
+    <p>
+        {% if category.draftForm is not null %}
+            <a href="{{ url('category.setAndEditDraftForm', {'id': category.id}) }}">
+                Modify the form (existing draft)
+            </a>
+        {% endif %}
+
+        <br>
+
+        <a href="{{ url('category.setAndEditDraftForm', {'id': category.id, 'new': true}) }}">
+            Modify the form (new draft)
+        </a>
+    </p>
 
     {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
 
