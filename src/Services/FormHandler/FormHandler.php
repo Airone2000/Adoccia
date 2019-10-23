@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class FormHandler implements FormHandlerInterface
 {
@@ -26,12 +27,20 @@ final class FormHandler implements FormHandlerInterface
      * @var PropertyAccess
      */
     private $propertyAccess;
+    /**
+     * @var ValidatorInterface
+     */
+    private $validator;
 
-    public function __construct(ParameterBagInterface $parameterBag, EntityManagerInterface $entityManager, PropertyAccessorInterface $propertyAccess)
+    public function __construct(ParameterBagInterface $parameterBag,
+                                EntityManagerInterface $entityManager,
+                                PropertyAccessorInterface $propertyAccess,
+                                ValidatorInterface $validator)
     {
         $this->parameterBag = $parameterBag;
         $this->entityManager = $entityManager;
         $this->propertyAccess = $propertyAccess;
+        $this->validator = $validator;
     }
 
     public function setFormAreaSize(FormArea $formArea, $size): void
@@ -78,6 +87,21 @@ final class FormHandler implements FormHandlerInterface
     public function changeFormAreaWidgetType(Widget $widget, ?string $newType): void
     {
         if (WidgetTypeEnum::isset($newType)) {
+
+            $reflectionClass = new \ReflectionClass($widget);
+            $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PRIVATE);
+            /** @var \ReflectionProperty $property */
+            foreach ($properties as $property) {
+                $propertyName = ucfirst($property->name);
+                $endWithSetting = (substr($propertyName, - 7) === 'Setting');
+                if ($endWithSetting) {
+                    $setter = "set{$propertyName}";
+                    if (method_exists($widget, $setter)) {
+                        call_user_func([$widget, $setter], null); // falsy
+                    }
+                }
+            }
+
             $widget->setType($newType);
             $this->entityManager->flush();
             return;
@@ -98,6 +122,12 @@ final class FormHandler implements FormHandlerInterface
         if ($this->propertyAccess->isWritable($widget, $attribute)) {
             try {
                 $this->propertyAccess->setValue($widget, $attribute, $value);
+
+                $violations = $this->validator->validate($widget, null, ['Widget:SetSetting']);
+                if (count($violations) > 0) {
+                    throw new \Exception('Wrong value for setting ' . $attribute);
+                }
+
                 $this->entityManager->flush();
             }
             catch (\Exception $e) {

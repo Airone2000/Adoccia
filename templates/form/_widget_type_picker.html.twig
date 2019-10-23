@@ -1,5 +1,5 @@
 <select class="widgetTypePicker" data-widgetid="{{ area.widget.id }}">
-    {% set mapTypeToGroup = ''|mapWidgetTypeToGroup %}
+    {% set mapTypeToGroup = widgetTypes.getGroupedWidgetTypes() %}
     {% for group, widgetTypesGroup in mapTypeToGroup %}
 
         {% if group is not same as('nonClassed') %}

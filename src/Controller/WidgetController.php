@@ -31,6 +31,7 @@ final class WidgetController extends AbstractController
         try {
             $newType = json_decode($request->getContent(), true)['type'] ?? null;
             $formHandler->changeFormAreaWidgetType($widget, $newType);
+
             return new JsonResponse([
                 'view' => $this->renderView('form/_area.html.twig', ['area' => $widget->getFormArea()])
             ]);

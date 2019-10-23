@@ -6,7 +6,6 @@ use App\Entity\Category;
 use App\Entity\FormArea;
 use App\Entity\Widget;
 use App\Enum\WidgetTypeEnum;
-use App\Form\WidgetType\LabelType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;

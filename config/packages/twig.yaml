@@ -8,6 +8,7 @@ twig:
         areaMaxSize: '%areaMaxSize%'
 
         textAlignPositions: '@App\Enum\TextAlignPositionEnum'
+        widgetTypes: '@App\Enum\WidgetTypeEnum'
 
     form_themes:
         - 'form/TWIG_widget_types.html.twig'

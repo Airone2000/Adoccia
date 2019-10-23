@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Enum\TextAlignPositionEnum;
+use App\Validator\Enum;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WidgetRepository")
@@ -40,24 +42,40 @@ class Widget
     /**
      * @var int|null
      * @ORM\Column(name="min_length", type="bigint", nullable=true)
+     * @Assert\Type(
+     *     type="int",
+     *     groups={"Widget:SetSetting"}
+     * )
      */
     private $minLengthSetting;
 
     /**
      * @var int|null
      * @ORM\Column(name="max_length", type="bigint", nullable=true)
+     * @Assert\Type(
+     *     type="int",
+     *     groups={"Widget:SetSetting"}
+     * )
      */
     private $maxLengthSetting;
 
     /**
      * @var bool
      * @ORM\Column(name="required", type="boolean", options={"default":0})
+     * @Assert\Type(
+     *     type="bool",
+     *     groups={"Widget:SetSetting"}
+     * )
      */
     private $requiredSetting = false;
 
     /**
      * @var string|null
      * @ORM\Column(name="text_align", type="string", length=20, nullable=true)
+     * @Enum(
+     *     enumClass="App\Enum\TextAlignPositionEnum",
+     *     groups={"Widget:SetSetting"}
+     * )
      */
     private $textAlignSetting;
 
@@ -170,16 +188,18 @@ class Widget
      */
     public function isRequiredSetting(): bool
     {
-        return $this->requiredSetting;
+        return (bool) $this->requiredSetting;
     }
 
     /**
-     * @param bool $requiredSetting
+     * @param bool|int $requiredSetting
      * @return Widget
      */
-    public function setRequiredSetting(bool $requiredSetting): Widget
+    public function setRequiredSetting($requiredSetting): Widget
     {
-        $this->requiredSetting = $requiredSetting;
+        // NULL is allowed because it's falsy
+        // See \App\Services\FormHandler\FormHandler::changeFormAreaWidgetType
+        $this->requiredSetting = (bool)$requiredSetting;
         return $this;
     }
 
