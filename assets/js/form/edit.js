@@ -316,6 +316,13 @@ class Edit
             let value = $input.val().trim();
             value = value.length === 0 ? null : value;
 
+            // Transform value is necessary
+            switch ($input.prop('type')) {
+                case 'checkbox':
+                    value = $input.prop('checked');
+                    break;
+            }
+            
             let widgetId;
 
             let $parentArea = $input.parents('.area');

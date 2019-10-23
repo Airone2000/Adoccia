@@ -1,20 +1,32 @@
-{% block fichit_label_row -%}
-
+{%- block fichit_label_row -%}
     {% set textAlign = widget.textAlignSetting|default( textAlignPositions.toArray()|first ) %}
-
     <div style="width:{{ widget.formArea.width }}%; text-align:{{ textAlign }};">
         <label>{{ widget.innerTextSetting }}</label>
     </div>
-{%- endblock %}
+{%- endblock -%}
 
-{% block fichit_string_row -%}
+{%- block fichit_string_row -%}
     <div style="width:{{ widget.formArea.width }}%;">
         {{ form_widget(form) }}
+        {{ form_errors(form) }}
     </div>
-{%- endblock %}
+{%- endblock -%}
 
-{% block fichit_text_row -%}
+{%- block fichit_text_row -%}
     <div style="width:{{ widget.formArea.width }}%;">
         {{ form_widget(form) }}
+        {{ form_errors(form) }}
     </div>
-{%- endblock %}
+{%- endblock -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        <ul>
+            {%- for error in errors -%}
+                <li>
+                    <small>{{ error.message }}</small>
+                </li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}

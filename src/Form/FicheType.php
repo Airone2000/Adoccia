@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class FicheType extends AbstractType
 {
@@ -67,13 +68,25 @@ final class FicheType extends AbstractType
         if (class_exists($typeClass)) {
             $builder
                 ->add($name, $typeClass, [
-                    'widget' => $widget
+                    'widget' => $widget,
+                    'constraints' => $this->getDynamicFieldConstraints($widget)
                 ])
             ;
         }
         else {
          throw new \LogicException("WidgetType of type \"{$type}\" does not exist. Let's create the class \"{$typeClass}\"");
         }
+    }
+
+    private function getDynamicFieldConstraints(Widget $widget): array
+    {
+        $constraints = [];
+
+        if ($widget->isRequiredSetting()) {
+            $constraints[] = new NotBlank();
+        }
+
+        return $constraints;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
@@ -86,5 +99,6 @@ final class FicheType extends AbstractType
         $resolver->setDefault('category', null);
         $resolver->setRequired('category');
         $resolver->setAllowedTypes('category', Category::class);
+        $resolver->setDefault('error_bubbling', false);
     }
 }

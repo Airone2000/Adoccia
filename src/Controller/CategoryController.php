@@ -121,11 +121,16 @@ class CategoryController extends AbstractController
      * @IsGranted("ADD_FICHE_TO_CATEGORY", subject="category")
      * @inheritdoc
      */
-    public function addFiche(Category $category): Response
+    public function addFiche(Category $category, Request $request): Response
     {
         $form = $this->createForm(FicheType::class, null, [
             'category' => $category
         ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            dd($form->getData());
+        }
 
         return $this->render('category/add_fiche.html.twig', [
             'form' => $form->createView(),

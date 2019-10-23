@@ -8,13 +8,20 @@
 {% block body %}
     <h1>Add fiche to {{ category.name }}</h1>
 
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
         <div>
             {{ form_row(form.title) }}
         </div>
 
-        {{ form_row(form) }}
+        <hr>
+
+        <div>
+            {{ form_widget(form) }}
+        </div>
+
+        <hr>
+
         <button>Submit</button>
     {{ form_end(form) }}
 
