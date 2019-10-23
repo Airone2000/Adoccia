@@ -5,6 +5,11 @@
 {% block body %}
     <h1>Category</h1>
 
+    {% if is_granted('ADD_FICHE_TO_CATEGORY', category) %}
+        <a href="{{ url('category.addFiche', {'id': category.id}) }}">+ Fiche</a>
+        <hr>
+    {% endif %}
+
     <table class="table">
         <tbody>
             <tr>

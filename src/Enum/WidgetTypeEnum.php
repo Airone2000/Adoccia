@@ -6,6 +6,7 @@ final class WidgetTypeEnum extends AbstractEnum
 {
     const
         DEFAULT_TYPE = 'empty',
+
         EMPTY = 'empty',
         LABEL = 'label',
         STRING = 'string',

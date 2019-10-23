@@ -1,0 +1,20 @@
+{% block fichit_label_row -%}
+
+    {% set textAlign = widget.textAlignSetting|default( textAlignPositions.toArray()|first ) %}
+
+    <div style="width:{{ widget.formArea.width }}%; text-align:{{ textAlign }};">
+        <label>{{ widget.innerTextSetting }}</label>
+    </div>
+{%- endblock %}
+
+{% block fichit_string_row -%}
+    <div style="width:{{ widget.formArea.width }}%;">
+        {{ form_widget(form) }}
+    </div>
+{%- endblock %}
+
+{% block fichit_text_row -%}
+    <div style="width:{{ widget.formArea.width }}%;">
+        {{ form_widget(form) }}
+    </div>
+{%- endblock %}

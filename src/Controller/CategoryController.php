@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Form\FicheType;
 use App\Repository\CategoryRepository;
 use App\Services\CategoryHandler\CategoryHandlerInterface;
 use App\Services\FormHandler\FormHandlerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -112,5 +114,22 @@ class CategoryController extends AbstractController
         }
 
         return $this->redirectToRoute('category.index');
+    }
+
+    /**
+     * @Route("/{id}/add-fiche", methods={"get", "post"}, name="category.addFiche")
+     * @IsGranted("ADD_FICHE_TO_CATEGORY", subject="category")
+     * @inheritdoc
+     */
+    public function addFiche(Category $category): Response
+    {
+        $form = $this->createForm(FicheType::class, null, [
+            'category' => $category
+        ]);
+
+        return $this->render('category/add_fiche.html.twig', [
+            'form' => $form->createView(),
+            'category' => $category
+        ]);
     }
 }

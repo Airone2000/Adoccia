@@ -1,0 +1,18 @@
+<div class="settings" data-widgetid="{{ widget.id }}">
+
+    <div>
+        <label for="stextalign">Alignement du texte</label>
+        <select class="saveOnChange" id="stextalign" data-attribute="textAlign">
+            {% for position in textAlignPositions.toArray() %}
+                <option
+                        value="{{ position }}"
+                        {{ widget.textAlignSetting == position ? 'selected' : '' }}
+                >
+                    {{ position }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    
+</div>

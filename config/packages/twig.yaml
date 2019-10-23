@@ -6,3 +6,8 @@ twig:
         picturesDir: '%picturePublicUploadDir%/'
         areaMinSize: '%areaMinSize%'
         areaMaxSize: '%areaMaxSize%'
+
+        textAlignPositions: '@App\Enum\TextAlignPositionEnum'
+
+    form_themes:
+        - 'form/TWIG_widget_types.html.twig'

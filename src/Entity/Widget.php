@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\TextAlignPositionEnum;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,6 +54,12 @@ class Widget
      * @ORM\Column(name="required", type="boolean", options={"default":0})
      */
     private $requiredSetting = false;
+
+    /**
+     * @var string|null
+     * @ORM\Column(name="text_align", type="string", length=20, nullable=true)
+     */
+    private $textAlignSetting;
 
 
     /**
@@ -176,5 +183,22 @@ class Widget
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getTextAlignSetting(): ?string
+    {
+        return $this->textAlignSetting;
+    }
+
+    /**
+     * @param string|null $textAlignSetting
+     * @return Widget
+     */
+    public function setTextAlignSetting(?string $textAlignSetting): Widget
+    {
+        $this->textAlignSetting = $textAlignSetting;
+        return $this;
+    }
 
 }

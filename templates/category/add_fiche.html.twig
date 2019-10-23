@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('add_fiche') }}
+{% endblock %}
+
+{% block body %}
+    <h1>Add fiche to {{ category.name }}</h1>
+
+    {{ form_start(form) }}
+
+        <div>
+            {{ form_row(form.title) }}
+        </div>
+
+        {{ form_row(form) }}
+        <button>Submit</button>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+
