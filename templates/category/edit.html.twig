@@ -18,9 +18,8 @@
             <a href="{{ url('category.setAndEditDraftForm', {'id': category.id}) }}">
                 Modify the form (existing draft)
             </a>
+            <br>
         {% endif %}
-
-        <br>
 
         <a href="{{ url('category.setAndEditDraftForm', {'id': category.id, 'new': true}) }}">
             Modify the form (new draft)
