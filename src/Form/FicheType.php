@@ -69,7 +69,8 @@ final class FicheType extends AbstractType
             $builder
                 ->add($name, $typeClass, [
                     'widget' => $widget,
-                    'constraints' => $this->getDynamicFieldConstraints($widget)
+                    'constraints' => $this->getDynamicFieldConstraints($widget),
+                    'empty_data' => null
                 ])
             ;
         }

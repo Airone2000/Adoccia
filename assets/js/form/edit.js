@@ -322,7 +322,7 @@ class Edit
                     value = $input.prop('checked');
                     break;
             }
-            
+
             let widgetId;
 
             let $parentArea = $input.parents('.area');
