@@ -12,10 +12,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class FicheType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->addImmutableFields($builder);
@@ -29,7 +31,12 @@ final class FicheType extends AbstractType
     private function addImmutableFields(FormBuilderInterface $builder)
     {
         $builder
-            ->add('title', TextType::class)
+            ->add('title', TextType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['max' => 255])
+                ]
+            ])
         ;
     }
 
@@ -60,7 +67,7 @@ final class FicheType extends AbstractType
 
     private function addDynamicField(FormBuilderInterface $builder, Widget $widget)
     {
-        $name = 'widget_'.$widget->getId();
+        $name = $widget->getId();
         $type = ucfirst(strtolower($widget->getType()));
         $typeClass = "App\Form\WidgetType\\{$type}Type";
 
@@ -83,7 +90,7 @@ final class FicheType extends AbstractType
         $constraints = [];
 
         if ($widget->isRequiredSetting()) {
-            $constraints[] = new NotBlank();
+            $constraints[] = new NotBlank(['allowNull' => false]);
         }
 
         return $constraints;

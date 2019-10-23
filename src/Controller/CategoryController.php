@@ -7,6 +7,7 @@ use App\Form\CategoryType;
 use App\Form\FicheType;
 use App\Repository\CategoryRepository;
 use App\Services\CategoryHandler\CategoryHandlerInterface;
+use App\Services\FicheHandler\FicheHandlerInterface;
 use App\Services\FormHandler\FormHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -121,7 +122,7 @@ class CategoryController extends AbstractController
      * @IsGranted("ADD_FICHE_TO_CATEGORY", subject="category")
      * @inheritdoc
      */
-    public function addFiche(Category $category, Request $request): Response
+    public function addFiche(Category $category, Request $request, FicheHandlerInterface $ficheHandler): Response
     {
         $form = $this->createForm(FicheType::class, null, [
             'category' => $category
@@ -129,7 +130,15 @@ class CategoryController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($form->getData());
+            try {
+                $data = $form->getData();
+                $data['category'] = $category;
+                $fiche = $ficheHandler->createFicheFromFicheTypeData($data);
+                dd($fiche, 'OK');
+            }
+            catch (\Exception $e) {
+                dd('ERROR', $e->getMessage());
+            }
         }
 
         return $this->render('category/add_fiche.html.twig', [
