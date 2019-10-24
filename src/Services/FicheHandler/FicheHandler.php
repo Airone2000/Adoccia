@@ -92,7 +92,10 @@ final class FicheHandler implements FicheHandlerInterface
             $datum = $data[$widget->getId()];
             $setter = "setValueOfType{$widget->getType()}";
 
-            if ($datum !== null && method_exists(Value::class, $setter)) {
+            # On create, value cannot be null to be inserted
+            # On update, it can be set to null
+            # That's not a real problem finally
+            if (($fiche->getId() !== null || $datum !== null) && method_exists(Value::class, $setter)) {
                 $value = new Value();
                 if(call_user_func([$value, $setter], $datum) === false) {
                     throw new \Exception("Unable to set value \"{$datum}\" of type \"{$widget->getType()}\".");
