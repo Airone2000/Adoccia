@@ -153,4 +153,36 @@ final class FicheHandler implements FicheHandlerInterface
 
         return $template;
     }
+
+    /**
+     * This method is time consuming depending on how many fiches the Category contains.
+     * It's better to run it asynchronously (RabbitMQ).
+     *
+     * It's role is to check each fiche of the Category and give an unPublish / invalid status.
+     *
+     * @param Category $category
+     */
+    public function unPublishInvalidFiches(Category $category): void
+    {
+        /** @var Fiche $fiche */
+        foreach ($category->getFiches() as $fiche) {
+
+            $ficheData = $this->mapValueToWidgetId($fiche);
+            $ficheData['title'] = $fiche->getTitle();
+
+            $form = $this->formFactory->create(FicheType::class, null, [
+                'category' => $category,
+                'csrf_protection' => false
+            ]);
+            $form->submit($ficheData);
+
+            if (!$form->isValid()) {
+                $fiche
+                    ->setPublished(false)
+                    ->setValid(false)
+                ;
+                $this->entityManager->flush();
+            }
+        }
+    }
 }

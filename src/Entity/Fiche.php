@@ -48,6 +48,12 @@ class Fiche
      */
     private $published = false;
 
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default":1})
+     */
+    private $valid = true;
+
     public function __construct()
     {
         $this->values = new ArrayCollection();
@@ -138,6 +144,24 @@ class Fiche
     public function setPublished(bool $published): Fiche
     {
         $this->published = $published;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValid(): bool
+    {
+        return $this->valid;
+    }
+
+    /**
+     * @param bool $valid
+     * @return Fiche
+     */
+    public function setValid(bool $valid): Fiche
+    {
+        $this->valid = $valid;
         return $this;
     }
 

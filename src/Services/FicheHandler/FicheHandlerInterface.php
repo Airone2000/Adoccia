@@ -2,6 +2,7 @@
 
 namespace App\Services\FicheHandler;
 
+use App\Entity\Category;
 use App\Entity\Fiche;
 
 interface FicheHandlerInterface
@@ -10,4 +11,5 @@ interface FicheHandlerInterface
     public function editFicheFromFicheTypeData(Fiche $fiche, array $data): Fiche;
     public function getFicheView(Fiche $fiche): string;
     public function mapValueToWidgetId(Fiche $fiche): array;
+    public function unPublishInvalidFiches(Category $category): void;
 }
