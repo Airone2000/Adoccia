@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Liste des fiches</h1>
+    
+    {% if fiches is not empty %}
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for fiche in fiches %}
+                    <tr>
+                        <td>{{ fiche.title }}</td>
+                        <td>
+                            <a href="{{ url('fiche.show', {'id': fiche.id}) }}">Voir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Pas de fiches</p>
+    {% endif %}
+    
+{% endblock %}

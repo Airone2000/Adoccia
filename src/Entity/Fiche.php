@@ -21,7 +21,7 @@ class Fiche
 
     /**
      * @var Category
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="fiches")
      * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
      */
     private $category;

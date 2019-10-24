@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Form;
+use App\Entity\Value;
 use App\Entity\Widget;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Widget|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +22,16 @@ class WidgetRepository extends ServiceEntityRepository
         parent::__construct($registry, Widget::class);
     }
 
-    // /**
-    //  * @return Widget[] Returns an array of Widget objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getArrayOfWidgetsIdForForm(Form $form)
     {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('w.id', 'ASC')
-            ->setMaxResults(10)
+        $qb = $this->createQueryBuilder('w');
+        return $qb
+            ->select('w.id, w.immutableId')
+            ->leftJoin('w.formArea', 'fa')
+            ->where('fa.form = :form')
+            ->setParameter('form', $form)
             ->getQuery()
-            ->getResult()
+            ->getArrayResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Widget
-    {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

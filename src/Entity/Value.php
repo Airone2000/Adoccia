@@ -34,6 +34,12 @@ class Value
     private $widget;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=50)
+     */
+    private $widgetImmutableId;
+
+    /**
      * @var null|string
      * @ORM\Column(type="text", nullable=true)
      */
@@ -83,7 +89,16 @@ class Value
     public function setWidget(Widget $widget): Value
     {
         $this->widget = $widget;
+        $this->widgetImmutableId = $widget->getImmutableId();
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWidgetImmutableId(): string
+    {
+        return $this->widgetImmutableId;
     }
 
     /**

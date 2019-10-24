@@ -1,8 +1,12 @@
 {% extends 'form_div_layout.html.twig' %}
 
+{%- block fichit_empty_row -%}
+    <div class="widget-empty" style="width:{{ widget.formArea.width }}%;"></div>
+{% endblock %}
+
 {%- block fichit_label_row -%}
     {% set textAlign = widget.textAlignSetting|default( textAlignPositions.toArray()|first ) %}
-    <div style="width:{{ widget.formArea.width }}%; text-align:{{ textAlign }};">
+    <div class="widget-label" style="width:{{ widget.formArea.width }}%; text-align:{{ textAlign }};">
         {% if form.parent.vars.mode is same as('DISPLAY') %}
             <div>{{ widget.innerTextSetting }}</div>
         {% else %}
@@ -12,7 +16,7 @@
 {%- endblock -%}
 
 {%- block fichit_string_row -%}
-    <div style="width:{{ widget.formArea.width }}%;">
+    <div class="widget-string" style="width:{{ widget.formArea.width }}%;">
         {% if form.parent.vars.mode is same as('DISPLAY') %}
             <div>{{ form.vars.value }}</div>
         {% else %}
@@ -23,7 +27,7 @@
 {%- endblock -%}
 
 {%- block fichit_text_row -%}
-    <div style="width:{{ widget.formArea.width }}%;">
+    <div class="widget-text" style="width:{{ widget.formArea.width }}%;">
         {% if form.parent.vars.mode is same as('DISPLAY') %}
             <div>{{ form.vars.value }}</div>
         {% else %}

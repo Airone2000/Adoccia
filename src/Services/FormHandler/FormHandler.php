@@ -5,6 +5,7 @@ namespace App\Services\FormHandler;
 use App\Entity\Category;
 use App\Entity\Form;
 use App\Entity\FormArea;
+use App\Entity\Value;
 use App\Entity\Widget;
 use App\Enum\WidgetTypeEnum;
 use Doctrine\ORM\EntityManagerInterface;
@@ -163,10 +164,17 @@ final class FormHandler implements FormHandlerInterface
     {
         try {
             if (($draftForm = $category->getDraftForm()) instanceof Form) {
+
+                # First, reAffect value to the good widget
+                $valueRepository = $this->entityManager->getRepository(Value::class);
+                $valueRepository->reAffectValueToWidget($draftForm);
+
+                # Remove the old form
                 if ($form = $category->getForm()) {
                     $this->entityManager->remove($form);
                 }
 
+                # Replace the old by the new and set draft as null
                 $category
                     ->setForm($draftForm)
                     ->setDraftForm(null);

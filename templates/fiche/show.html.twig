@@ -8,6 +8,8 @@
 {% block body %}
     <h1>{{ fiche.title }}</h1>
 
+    <a href="{{ url('fiche.edit', {'id': fiche.id}) }}">Edit</a>
+
     {{ ficheView|raw }}
 
 {% endblock %}

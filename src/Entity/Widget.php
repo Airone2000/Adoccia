@@ -21,6 +21,12 @@ class Widget
     private $id;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=50)
+     */
+    private $immutableId;
+
+    /**
      * @var string|null
      * @ORM\Column(type="string", length=30)
      */
@@ -80,6 +86,11 @@ class Widget
     private $textAlignSetting;
 
 
+    public function __construct()
+    {
+        $this->immutableId = uniqid('e');
+    }
+
     /**
      * Clone for draftForm generation
      */
@@ -91,6 +102,14 @@ class Widget
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImmutableId(): string
+    {
+        return $this->immutableId;
     }
 
     /**

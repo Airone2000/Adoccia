@@ -148,4 +148,19 @@ class CategoryController extends AbstractController
             'category' => $category
         ]);
     }
+
+    /**
+     * @Route(
+     *     path="/{id}/fiches",
+     *     methods={"get"},
+     *     name="category.listFiches"
+     * )
+     * @inheritdoc
+     */
+    public function listFiches(Category $category): Response
+    {
+        return $this->render('category/list_fiches.html.twig', [
+            'fiches' => $category->getFiches()
+        ]);
+    }
 }

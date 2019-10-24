@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -68,9 +70,16 @@ class Category
      */
     private $draftForm;
 
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Entity\Fiche", mappedBy="category", cascade={"remove"})
+     */
+    private $fiches;
+
 
     public function __construct()
     {
+        $this->fiches = new ArrayCollection();
         $this->setCreatedAt(new \DateTime());
         $this->setForm(new Form());
     }
@@ -195,6 +204,14 @@ class Category
     {
         $this->draftForm = $draftForm;
         return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getFiches(): Collection
+    {
+        return $this->fiches;
     }
 
 }

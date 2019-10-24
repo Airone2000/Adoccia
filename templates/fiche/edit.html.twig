@@ -1,25 +1,19 @@
-
-
 {% extends 'base.html.twig' %}
 {% form_theme form 'form/TWIG_widget_types.html.twig' %}
-
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('fiche') }}
-    {{ encore_entry_link_tags('add_fiche') }}
 {% endblock %}
 
 {% block body %}
-    <h1>Add fiche to {{ category.name }}</h1>
+    <h1>Modifier la fiche "{{ fiche.title }}"</h1>
 
-    {% for label, messages in app.flashes(['addFicheError']) %}
+    {% for label, messages in app.flashes(['editFicheError']) %}
         {% for message in messages %}
             <p>{{ label }}</p>
         {% endfor %}
     {% endfor %}
 
     {% include 'fiche/_fiche.html.twig' with {'form': form} %}
-
 {% endblock %}
-
 

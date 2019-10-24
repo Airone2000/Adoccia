@@ -4,7 +4,6 @@ namespace App\Services\FicheHandler;
 
 use App\Entity\Category;
 use App\Entity\Fiche;
-use App\Entity\FormArea;
 use App\Entity\Value;
 use App\Enum\FicheModeEnum;
 use App\Form\FicheType;
@@ -51,11 +50,23 @@ final class FicheHandler implements FicheHandlerInterface
     }
 
     /**
+     * @param Fiche $fiche
      * @param array $data
      * @return Fiche
      * @throws \Exception
      */
-    public function createFicheFromFicheTypeData(array $data): Fiche
+    public function editFicheFromFicheTypeData(Fiche $fiche, array $data): Fiche
+    {
+        return $this->createFicheFromFicheTypeData($data, $fiche);
+    }
+
+    /**
+     * @param array $data
+     * @param Fiche|null $fiche
+     * @return Fiche
+     * @throws \Exception
+     */
+    public function createFicheFromFicheTypeData(array $data, ?Fiche $fiche = null): Fiche
     {
         /**
          * We assume are incoming data is the result of FicheType submission.
@@ -63,7 +74,7 @@ final class FicheHandler implements FicheHandlerInterface
          * is trustable.
          */
 
-        $fiche = new Fiche();
+        $fiche = $fiche ?? new Fiche();
 
         $fiche
             ->setTitle($data['title'])
@@ -99,13 +110,15 @@ final class FicheHandler implements FicheHandlerInterface
             throw new \LogicException("Fiche is not valid according to the validator in \App\Services\FicheHandler\FicheHandler.");
         }
 
-        $this->entityManager->persist($fiche);
+        if ($fiche->getId() === null) {
+            $this->entityManager->persist($fiche);
+        }
         $this->entityManager->flush();
 
         return $fiche;
     }
 
-    public function getFicheView(Fiche $fiche): string
+    public function mapValueToWidgetId(Fiche $fiche): array
     {
         $formData = [];
 
@@ -116,6 +129,13 @@ final class FicheHandler implements FicheHandlerInterface
                 $formData[$value->getWidget()->getId()] = call_user_func([$value, $getter]);
             }
         }
+
+        return $formData;
+    }
+
+    public function getFicheView(Fiche $fiche): string
+    {
+        $formData = $this->mapValueToWidgetId($fiche);
 
         $form = $this->formFactory->create(FicheType::class, $formData, [
             'category' => $fiche->getCategory(),

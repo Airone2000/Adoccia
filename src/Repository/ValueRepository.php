@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Form;
 use App\Entity\Value;
+use App\Entity\Widget;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -19,32 +21,21 @@ class ValueRepository extends ServiceEntityRepository
         parent::__construct($registry, Value::class);
     }
 
-    // /**
-    //  * @return Value[] Returns an array of Value objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function reAffectValueToWidget(Form $form): void
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('v.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $widgetRepository = $this->getEntityManager()->getRepository(Widget::class);
+        $mapImmutableIdToId = $widgetRepository->getArrayOfWidgetsIdForForm($form);
 
-    /*
-    public function findOneBySomeField($value): ?Value
-    {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if (!empty($mapImmutableIdToId)) {
+            $sets = ''; $ids = '';
+            foreach ($mapImmutableIdToId as $item) {
+                $sets .= " WHEN v.widget_immutable_id = \"{$item['immutableId']}\" THEN {$item['id']}";
+                $ids .= ',"' . $item['immutableId'] . '"';
+            }
+
+            $ids = ltrim($ids, ','); $sets = trim($sets);
+            $sql = 'UPDATE `value` v SET v.widget_id = (CASE ' . $sets . ' ELSE v.widget_id END) WHERE v.widget_immutable_id IN (' . $ids . ')';
+            $this->getEntityManager()->getConnection()->exec($sql);
+        }
     }
-    */
 }
