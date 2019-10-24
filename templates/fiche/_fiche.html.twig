@@ -2,6 +2,8 @@
 
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
+    {# The field setPublished is automatically set at the end of the form #}
+    {% do form.published.setRendered %}
     {% if form.vars.mode is same as('EDITION') %}
         <div>
             {{ form_label(form.title) }}
@@ -19,6 +21,20 @@
 
     {% if form.vars.mode is same as('EDITION') %}
         <hr>
+
+        <div>
+            <label>
+                {% if fiche.id is not null %}
+                    <span>En ligne</span>
+                {% else %}
+                    <span>Publier la fiche immédiatement</span>
+                {% endif %}
+                <input type="checkbox" name="fiche[published]" value="1" {{ fiche.published ? 'checked' : '' }}>
+            </label>
+        </div>
+
+        <br><br>
+
         <button>Submit</button>
     {% endif %}
 {{ form_end(form) }}

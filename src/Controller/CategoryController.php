@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Fiche;
 use App\Enum\FicheModeEnum;
 use App\Form\CategoryType;
 use App\Form\FicheType;
@@ -145,7 +146,8 @@ class CategoryController extends AbstractController
 
         return $this->render('category/add_fiche.html.twig', [
             'form' => $form->createView(),
-            'category' => $category
+            'category' => $category,
+            'fiche' => new Fiche()
         ]);
     }
 

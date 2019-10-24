@@ -78,6 +78,7 @@ final class FicheHandler implements FicheHandlerInterface
 
         $fiche
             ->setTitle($data['title'])
+            ->setPublished((bool)($data['published'] ?? null))
         ;
 
         # Link category

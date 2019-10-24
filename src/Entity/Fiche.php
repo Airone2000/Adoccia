@@ -42,6 +42,12 @@ class Fiche
      */
     private $values;
 
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default":0})
+     */
+    private $published = false;
+
     public function __construct()
     {
         $this->values = new ArrayCollection();
@@ -114,6 +120,24 @@ class Fiche
     public function setCategory(Category $category): Fiche
     {
         $this->category = $category;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished(): bool
+    {
+        return $this->published;
+    }
+
+    /**
+     * @param bool $published
+     * @return Fiche
+     */
+    public function setPublished(bool $published): Fiche
+    {
+        $this->published = $published;
         return $this;
     }
 

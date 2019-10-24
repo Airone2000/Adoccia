@@ -8,6 +8,7 @@ use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
 use App\Enum\WidgetTypeEnum;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -38,6 +39,7 @@ final class FicheType extends AbstractType
                     new Length(['max' => 255])
                 ]
             ])
+            ->add('published', CheckboxType::class)
         ;
     }
 
