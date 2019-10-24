@@ -124,8 +124,7 @@ final class FicheHandler implements FicheHandlerInterface
         ]);
 
         $template = $this->twig->render('fiche/_fiche.html.twig', [
-            'form' => $form->createView(),
-            'modeEditable' => true
+            'form' => $form->createView()
         ]);
 
         return $template;

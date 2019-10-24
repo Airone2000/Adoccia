@@ -1,3 +1,5 @@
+{% extends 'form_div_layout.html.twig' %}
+
 {%- block fichit_label_row -%}
     {% set textAlign = widget.textAlignSetting|default( textAlignPositions.toArray()|first ) %}
     <div style="width:{{ widget.formArea.width }}%; text-align:{{ textAlign }};">
@@ -42,3 +44,19 @@
         </ul>
     {%- endif -%}
 {%- endblock form_errors -%}
+
+{%- block form_start -%}
+    {% if form.vars.mode is same as('DISPLAY') %}
+        <div id="fiche">
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{%- endblock form_start -%}
+
+{%- block form_end -%}
+    {% if form.vars.mode is same as('DISPLAY') %}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{%- endblock -%}
