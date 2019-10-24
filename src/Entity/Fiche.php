@@ -20,9 +20,9 @@ class Fiche
     private $id;
 
     /**
-     * @var Category|null
+     * @var Category
      * @ORM\ManyToOne(targetEntity="App\Entity\Category")
-     * @ORM\JoinColumn(onDelete="SET NULL", nullable=true)
+     * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
      */
     private $category;
 
@@ -100,18 +100,18 @@ class Fiche
     }
 
     /**
-     * @return Category|null
+     * @return Category
      */
-    public function getCategory(): ?Category
+    public function getCategory(): Category
     {
         return $this->category;
     }
 
     /**
-     * @param Category|null $category
+     * @param Category $category
      * @return Fiche
      */
-    public function setCategory(?Category $category): Fiche
+    public function setCategory(Category $category): Fiche
     {
         $this->category = $category;
         return $this;

@@ -25,6 +25,7 @@ Encore
      */
     .addStyleEntry('theme', './assets/css/theme.scss')
     .addStyleEntry('add_fiche', './assets/css/category/add_fiche.scss')
+    .addStyleEntry('fiche', './assets/css/fiche/fiche.scss')
     .addEntry('form/edit', './assets/js/form/edit.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')

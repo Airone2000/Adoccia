@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\FormArea;
 use App\Entity\Widget;
+use App\Enum\FicheModeEnum;
 use App\Enum\WidgetTypeEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -99,6 +100,7 @@ final class FicheType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['id'] = 'AddFiche_InnerForm_RowsWrapper';
+        $view->vars['mode'] = $options['mode'];
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -107,5 +109,6 @@ final class FicheType extends AbstractType
         $resolver->setRequired('category');
         $resolver->setAllowedTypes('category', Category::class);
         $resolver->setDefault('error_bubbling', false);
+        $resolver->setDefault('mode', FicheModeEnum::DISPLAY);
     }
 }

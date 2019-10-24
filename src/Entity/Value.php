@@ -33,6 +33,18 @@ class Value
      */
     private $widget;
 
+    /**
+     * @var null|string
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $valueOfTypeText;
+
+    /**
+     * @var null|string
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $valueOfTypeString;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,4 +85,41 @@ class Value
         $this->widget = $widget;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getValueOfTypeText(): ?string
+    {
+        return $this->valueOfTypeText;
+    }
+
+    /**
+     * @param string|null $valueOfTypeText
+     * @return Value
+     */
+    public function setValueOfTypeText(?string $valueOfTypeText): Value
+    {
+        $this->valueOfTypeText = $valueOfTypeText;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getValueOfTypeString(): ?string
+    {
+        return $this->valueOfTypeString;
+    }
+
+    /**
+     * @param string|null $valueOfTypeString
+     * @return Value
+     */
+    public function setValueOfTypeString(?string $valueOfTypeString): Value
+    {
+        $this->valueOfTypeString = $valueOfTypeString;
+        return $this;
+    }
+
 }

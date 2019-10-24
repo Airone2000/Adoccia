@@ -1,21 +1,33 @@
 {%- block fichit_label_row -%}
     {% set textAlign = widget.textAlignSetting|default( textAlignPositions.toArray()|first ) %}
     <div style="width:{{ widget.formArea.width }}%; text-align:{{ textAlign }};">
-        <label>{{ widget.innerTextSetting }}</label>
+        {% if form.parent.vars.mode is same as('DISPLAY') %}
+            <div>{{ widget.innerTextSetting }}</div>
+        {% else %}
+            <label>{{ widget.innerTextSetting }}</label>
+        {% endif %}
     </div>
 {%- endblock -%}
 
 {%- block fichit_string_row -%}
     <div style="width:{{ widget.formArea.width }}%;">
-        {{ form_widget(form) }}
-        {{ form_errors(form) }}
+        {% if form.parent.vars.mode is same as('DISPLAY') %}
+            <div>{{ form.vars.value }}</div>
+        {% else %}
+            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+        {% endif %}
     </div>
 {%- endblock -%}
 
 {%- block fichit_text_row -%}
     <div style="width:{{ widget.formArea.width }}%;">
-        {{ form_widget(form) }}
-        {{ form_errors(form) }}
+        {% if form.parent.vars.mode is same as('DISPLAY') %}
+            <div>{{ form.vars.value }}</div>
+        {% else %}
+            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+        {% endif %}
     </div>
 {%- endblock -%}
 

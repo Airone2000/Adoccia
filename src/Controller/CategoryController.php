@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Enum\FicheModeEnum;
 use App\Form\CategoryType;
 use App\Form\FicheType;
 use App\Repository\CategoryRepository;
@@ -125,7 +126,8 @@ class CategoryController extends AbstractController
     public function addFiche(Category $category, Request $request, FicheHandlerInterface $ficheHandler): Response
     {
         $form = $this->createForm(FicheType::class, null, [
-            'category' => $category
+            'category' => $category,
+            'mode' => FicheModeEnum::EDITION
         ]);
 
         $form->handleRequest($request);
@@ -134,10 +136,10 @@ class CategoryController extends AbstractController
                 $data = $form->getData();
                 $data['category'] = $category;
                 $fiche = $ficheHandler->createFicheFromFicheTypeData($data);
-                dd($fiche, 'OK');
+                return $this->redirectToRoute('fiche.show', ['id' => $fiche->getId()]);
             }
             catch (\Exception $e) {
-                dd('ERROR', $e->getMessage());
+                $this->addFlash('addFicheError', '');
             }
         }
 

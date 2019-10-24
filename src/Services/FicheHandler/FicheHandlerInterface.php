@@ -7,4 +7,5 @@ use App\Entity\Fiche;
 interface FicheHandlerInterface
 {
     public function createFicheFromFicheTypeData(array $data): Fiche;
+    public function getFicheView(Fiche $fiche): string;
 }

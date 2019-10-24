@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('fiche') }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ fiche.title }}</h1>
+
+    {{ ficheView|raw }}
+
+{% endblock %}

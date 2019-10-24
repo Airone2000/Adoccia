@@ -1,31 +1,24 @@
+
+
 {% extends 'base.html.twig' %}
+{% form_theme form 'form/TWIG_widget_types.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
+    {{ encore_entry_link_tags('fiche') }}
     {{ encore_entry_link_tags('add_fiche') }}
 {% endblock %}
 
 {% block body %}
     <h1>Add fiche to {{ category.name }}</h1>
 
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {% for lqbel, messages in app.flashes(['addFicheError']) %}
+        {% for message in messages %}
+            <p>{{ label }}</p>
+        {% endfor %}
+    {% endfor %}
 
-        <div>
-            {{ form_label(form.title) }}
-            {{ form_widget(form.title) }}
-            {{ form_errors(form.title) }}
-        </div>
-
-        <hr>
-
-        <div>
-            {{ form_widget(form) }}
-        </div>
-
-        <hr>
-
-        <button>Submit</button>
-    {{ form_end(form) }}
+    {% include 'fiche/_fiche.html.twig' with {'form': form, 'modeEditable': true} %}
 
 {% endblock %}
 

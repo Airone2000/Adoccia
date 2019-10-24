@@ -1,0 +1,27 @@
+{% set modeEditable = modeEditable|default(false) %}
+{% form_theme form 'form/TWIG_widget_types.html.twig' %}
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {% if not modeEditable %}
+        <div>
+            {{ form_label(form.title) }}
+            {{ form_widget(form.title) }}
+            {{ form_errors(form.title) }}
+        </div>
+        <hr>
+    {% else %}
+        {% do form.title.setRendered %}
+    {% endif %}
+
+
+    {# When not in modeEditable, we juste display the following part #}
+        <div>
+            {{ form_widget(form) }}
+        </div>
+
+    {% if not modeEditable %}
+        <hr>
+        <button>Submit</button>
+    {% endif %}
+{{ form_end(form) }}
