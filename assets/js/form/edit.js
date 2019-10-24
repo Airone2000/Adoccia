@@ -20,6 +20,7 @@ class Edit
         this._listenForSaveOnChange();
         this._listenForPublish();
         this._listenForDeleteDraftForm();
+        this._listenForConfigureArea();
     }
 
     _redirect(url) {
@@ -434,6 +435,12 @@ class Edit
                 })
             ;
 
+        });
+    }
+
+    _listenForConfigureArea() {
+        $(document).on('click', '.configure-formArea', () => {
+            console.log('configure');
         });
     }
 }

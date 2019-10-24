@@ -3,10 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/category/add_fiche.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/add_fiche.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/fiche/_fiche.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/fiche/_fiche.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/form/edit.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/form/edit.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/form/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/form/edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Value.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Value.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Widget.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Widget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191023200347.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/FormAreaRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/FormAreaRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/form/_area.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/_area.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/form/builder/_widget_label.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_widget_label.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/form/builder/_widget_string.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_widget_string.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,254 +26,25 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/CategoryController.php">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Widget.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="120" column="7" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Form/FicheType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="68" column="82" selection-start-line="68" selection-start-column="82" selection-end-line="68" selection-end-column="82" />
+            <state relative-caret-position="323">
+              <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="44" />
               <folding>
-                <element signature="e#28#52#0#PHP" expanded="true" />
+                <element signature="e#30#53#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/fiche/_fiche.html.twig">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Value.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="10" lean-forward="true" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+            <state relative-caret-position="408">
+              <caret line="29" column="55" lean-forward="true" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
               <folding>
-                <element signature="e#68#100#0#Twig" expanded="true" />
+                <element signature="e#30#62#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
-              <folding>
-                <element signature="e#12#37#0#Twig" expanded="true" />
-                <element signature="e#332#375#0#HTML" expanded="true" />
-                <element signature="e#509#552#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="496">
-              <caret line="126" column="41" selection-start-line="126" selection-start-column="41" selection-end-line="126" selection-end-column="41" />
-              <folding>
-                <element signature="e#45#69#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/packages/twig.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/symfony/twig-bridge/Resources/views/Form/form_div_layout.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="353" column="20" selection-start-line="353" selection-start-column="10" selection-end-line="353" selection-end-column="20" />
-              <folding>
-                <element signature="e#15#212#0#Twig" />
-                <element signature="e#45#183#0#Twig" />
-                <element signature="e#214#606#0#Twig" />
-                <element signature="e#251#290#0#Twig" />
-                <element signature="e#295#447#0#Twig" />
-                <element signature="e#401#429#0#Twig" />
-                <element signature="e#510#568#0#Twig" />
-                <element signature="e#608#905#0#Twig" />
-                <element signature="e#704#789#0#Twig" />
-                <element signature="e#907#1163#0#Twig" />
-                <element signature="e#943#1095#0#Twig" />
-                <element signature="e#1008#1079#0#Twig" />
-                <element signature="e#1165#1297#0#Twig" />
-                <element signature="e#1299#1507#0#Twig" />
-                <element signature="e#1331#1476#0#Twig" />
-                <element signature="e#1509#1820#0#Twig" />
-                <element signature="e#1603#1769#0#Twig" />
-                <element signature="e#1822#2918#0#Twig" />
-                <element signature="e#1864#2057#0#Twig" />
-                <element signature="e#2013#2039#0#Twig" />
-                <element signature="e#2102#2150#0#Twig" />
-                <element signature="e#2160#2444#0#Twig" />
-                <element signature="e#2223#2290#0#Twig" />
-                <element signature="e#2453#2778#0#Twig" />
-                <element signature="e#2505#2542#0#Twig" />
-                <element signature="e#2606#2756#0#Twig" />
-                <element signature="e#2787#2816#0#Twig" />
-                <element signature="e#2920#3750#0#Twig" />
-                <element signature="e#2960#3711#0#Twig" />
-                <element signature="e#3009#3694#0#Twig" />
-                <element signature="e#3201#3227#0#Twig" />
-                <element signature="e#3374#3475#0#Twig" />
-                <element signature="e#3394#3464#0#Twig" />
-                <element signature="e#3475#3546#0#Twig" />
-                <element signature="e#3752#3978#0#Twig" />
-                <element signature="e#3841#3897#0#Twig" />
-                <element signature="e#3897#3942#0#Twig" />
-                <element signature="e#3980#4197#0#Twig" />
-                <element signature="e#4063#4119#0#Twig" />
-                <element signature="e#4119#4164#0#Twig" />
-                <element signature="e#4199#4621#0#Twig" />
-                <element signature="e#4233#4588#0#Twig" />
-                <element signature="e#4623#5092#0#Twig" />
-                <element signature="e#4653#5063#0#Twig" />
-                <element signature="e#5094#5597#0#Twig" />
-                <element signature="e#5124#5568#0#Twig" />
-                <element signature="e#5226#5293#0#Twig" />
-                <element signature="e#5397#5466#0#Twig" />
-                <element signature="e#5466#5535#0#Twig" />
-                <element signature="e#5599#7611#0#Twig" />
-                <element signature="e#5637#7574#0#Twig" />
-                <element signature="e#5979#6048#0#Twig" />
-                <element signature="e#6073#6144#0#Twig" />
-                <element signature="e#6169#6238#0#Twig" />
-                <element signature="e#6263#6330#0#Twig" />
-                <element signature="e#6355#6424#0#Twig" />
-                <element signature="e#6449#6522#0#Twig" />
-                <element signature="e#6547#6620#0#Twig" />
-                <element signature="e#6745#6815#0#Twig" />
-                <element signature="e#6840#6912#0#Twig" />
-                <element signature="e#6937#7007#0#Twig" />
-                <element signature="e#7032#7100#0#Twig" />
-                <element signature="e#7125#7195#0#Twig" />
-                <element signature="e#7220#7294#0#Twig" />
-                <element signature="e#7319#7393#0#Twig" />
-                <element signature="e#7478#7541#0#Twig" />
-                <element signature="e#7613#7823#0#Twig" />
-                <element signature="e#7715#7754#0#Twig" />
-                <element signature="e#7825#7969#0#Twig" />
-                <element signature="e#7858#7899#0#Twig" />
-                <element signature="e#7971#8101#0#Twig" />
-                <element signature="e#8103#8236#0#Twig" />
-                <element signature="e#8132#8170#0#Twig" />
-                <element signature="e#8238#8380#0#Twig" />
-                <element signature="e#8270#8311#0#Twig" />
-                <element signature="e#8382#8576#0#Twig" />
-                <element signature="e#8415#8454#0#Twig" />
-                <element signature="e#8492#8544#0#Twig" />
-                <element signature="e#8578#8726#0#Twig" />
-                <element signature="e#8612#8655#0#Twig" />
-                <element signature="e#8728#8870#0#Twig" />
-                <element signature="e#8760#8801#0#Twig" />
-                <element signature="e#8872#9011#0#Twig" />
-                <element signature="e#8903#8943#0#Twig" />
-                <element signature="e#9013#9151#0#Twig" />
-                <element signature="e#9044#9082#0#Twig" />
-                <element signature="e#9153#9820#0#Twig" />
-                <element signature="e#9185#9584#0#Twig" />
-                <element signature="e#9219#9566#0#Twig" />
-                <element signature="e#9268#9383#0#Twig" />
-                <element signature="e#9443#9479#0#Twig" />
-                <element signature="e#9513#9544#0#Twig" />
-                <element signature="e#9822#9959#0#Twig" />
-                <element signature="e#9854#9895#0#Twig" />
-                <element signature="e#9961#10095#0#Twig" />
-                <element signature="e#9992#10032#0#Twig" />
-                <element signature="e#10097#10230#0#Twig" />
-                <element signature="e#10126#10164#0#Twig" />
-                <element signature="e#10232#10371#0#Twig" />
-                <element signature="e#10263#10303#0#Twig" />
-                <element signature="e#10387#11536#0#Twig" />
-                <element signature="e#10416#11508#0#Twig" />
-                <element signature="e#10462#10571#0#Twig" />
-                <element signature="e#10497#10549#0#Twig" />
-                <element signature="e#10580#10734#0#Twig" />
-                <element signature="e#10611#10712#0#Twig" />
-                <element signature="e#10743#11081#0#Twig" />
-                <element signature="e#10780#11059#0#Twig" />
-                <element signature="e#10833#10960#0#Twig" />
-                <element signature="e#11002#11033#0#Twig" />
-                <element signature="e#11121#11220#0#Twig" />
-                <element signature="e#11140#11209#0#Twig" />
-                <element signature="e#11234#11448#0#Twig" />
-                <element signature="e#11538#11580#0#Twig" />
-                <element signature="e#11594#12502#0#Twig" />
-                <element signature="e#11621#12476#0#Twig" />
-                <element signature="e#11658#11757#0#Twig" />
-                <element signature="e#11787#11855#0#Twig" />
-                <element signature="e#11869#12445#0#Twig" />
-                <element signature="e#11933#12100#0#Twig" />
-                <element signature="e#12142#12419#0#Twig" />
-                <element signature="e#12516#12742#0#Twig" />
-                <element signature="e#12547#12681#0#Twig" />
-                <element signature="e#12744#13197#0#Twig" />
-                <element signature="e#12771#12799#0#Twig" />
-                <element signature="e#12804#12926#0#Twig" />
-                <element signature="e#12841#12908#0#Twig" />
-                <element signature="e#12936#13013#0#Twig" />
-                <element signature="e#13199#13384#0#Twig" />
-                <element signature="e#13233#13310#0#Twig" />
-                <element signature="e#13386#13466#0#Twig" />
-                <element signature="e#13677#13708#0#Twig" />
-                <element signature="e#13713#13862#0#Twig" />
-                <element signature="e#13758#13788#0#Twig" />
-                <element signature="e#13814#13844#0#Twig" />
-                <element signature="e#13872#13920#0#Twig" />
-                <element signature="e#13953#14007#0#Twig" />
-                <element signature="e#14032#14091#0#Twig" />
-                <element signature="e#14097#14215#0#Twig" />
-                <element signature="e#14245#14410#0#Twig" />
-                <element signature="e#14272#14372#0#Twig" />
-                <element signature="e#14412#14636#0#Twig" />
-                <element signature="e#14442#14607#0#Twig" />
-                <element signature="e#14488#14579#0#Twig" />
-                <element signature="e#14638#15296#0#Twig" />
-                <element signature="e#14666#14801#0#Twig" />
-                <element signature="e#14699#14782#0#Twig" />
-                <element signature="e#14807#15271#0#Twig" />
-                <element signature="e#14913#14944#0#Twig" />
-                <element signature="e#14953#15118#0#Twig" />
-                <element signature="e#15002#15032#0#Twig" />
-                <element signature="e#15066#15096#0#Twig" />
-                <element signature="e#15128#15254#0#Twig" />
-                <element signature="e#15313#15476#0#Twig" />
-                <element signature="e#15341#15449#0#Twig" />
-                <element signature="e#15478#15725#0#Twig" />
-                <element signature="e#15555#15605#0#Twig" />
-                <element signature="e#15610#15660#0#Twig" />
-                <element signature="e#15727#15898#0#Twig" />
-                <element signature="e#15773#15823#0#Twig" />
-                <element signature="e#15900#16086#0#Twig" />
-                <element signature="e#15972#16021#0#Twig" />
-                <element signature="e#16088#16648#0#Twig" />
-                <element signature="e#16116#16620#0#Twig" />
-                <element signature="e#16184#16601#0#Twig" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Enum/FicheModeEnum.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -276,11 +53,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>changeFormAreaWidgetType</find>
-      <find>getFormAreaWidgetSettingsView</find>
-      <find>setFormAreaWidgetSetting</find>
-      <find>form.addArea</find>
-      <find>form.show</find>
       <find>form.edit</find>
       <find>xml</find>
       <find>draftForm.sho</find>
@@ -306,6 +78,11 @@
       <find>form_widget</find>
       <find>form_widget</find>
       <find>modeEditable</find>
+      <find>.area-header</find>
+      <find>delete-formArea</find>
+      <find>configure</find>
+      <find>n publishDr</find>
+      <find>te $innerTe</find>
     </findStrings>
     <replaceStrings>
       <replace>_makeFormSyncing</replace>
@@ -320,9 +97,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Security/Voter/WidgetVoter.php" />
-        <option value="$PROJECT_DIR$/templates/form/show.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/AbstractController.php" />
         <option value="$PROJECT_DIR$/src/Controller/AppController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Form.php" />
         <option value="$PROJECT_DIR$/src/Controller/FormAreaController.php" />
@@ -332,7 +106,6 @@
         <option value="$PROJECT_DIR$/src/Services/FormHandler/FormHandlerInterface.php" />
         <option value="$PROJECT_DIR$/src/Controller/FormController.php" />
         <option value="$PROJECT_DIR$/templates/form/edit.html.twig" />
-        <option value="$PROJECT_DIR$/assets/css/form/edit.scss" />
         <option value="$PROJECT_DIR$/templates/_endpoints.html.twig" />
         <option value="$PROJECT_DIR$/src/EntityListener/CategoryListener.php" />
         <option value="$PROJECT_DIR$/templates/category/edit.html.twig" />
@@ -344,17 +117,12 @@
         <option value="$PROJECT_DIR$/src/Form/WidgetType/TextType.php" />
         <option value="$PROJECT_DIR$/src/Form/WidgetType/StringType.php" />
         <option value="$PROJECT_DIR$/src/Enum/TextAlignPositionEnum.php" />
-        <option value="$PROJECT_DIR$/templates/form/builder/_widget_label.html.twig" />
         <option value="$PROJECT_DIR$/templates/form/builder/_settings_label.html.twig" />
         <option value="$PROJECT_DIR$/templates/form/builder/_settings_string.html.twig" />
-        <option value="$PROJECT_DIR$/assets/js/form/edit.js" />
         <option value="$PROJECT_DIR$/src/Form/WidgetType/LabelType.php" />
         <option value="$PROJECT_DIR$/src/Validator/EnumValidator.php" />
         <option value="$PROJECT_DIR$/templates/form/_widget_type_picker.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/WidgetController.php" />
-        <option value="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Widget.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Value.php" />
         <option value="$PROJECT_DIR$/src/Entity/Fiche.php" />
         <option value="$PROJECT_DIR$/src/Security/Voter/FicheVoter.php" />
         <option value="$PROJECT_DIR$/src/Services/FicheHandler/FicheHandlerInterface.php" />
@@ -371,6 +139,15 @@
         <option value="$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php" />
         <option value="$PROJECT_DIR$/templates/category/add_fiche.html.twig" />
         <option value="$PROJECT_DIR$/templates/fiche/_fiche.html.twig" />
+        <option value="$PROJECT_DIR$/templates/form/builder/_widget_label.html.twig" />
+        <option value="$PROJECT_DIR$/templates/form/builder/_widget_string.html.twig" />
+        <option value="$PROJECT_DIR$/templates/form/_area.html.twig" />
+        <option value="$PROJECT_DIR$/assets/css/form/edit.scss" />
+        <option value="$PROJECT_DIR$/assets/js/form/edit.js" />
+        <option value="$PROJECT_DIR$/src/Repository/FormAreaRepository.php" />
+        <option value="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Widget.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Value.php" />
       </list>
     </option>
   </component>
@@ -474,9 +251,9 @@
       <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -500,52 +277,7 @@
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Enum" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="symfony" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="symfony" type="462c0819:PsiDirectoryNode" />
-              <item name="twig-bridge" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="symfony" type="462c0819:PsiDirectoryNode" />
-              <item name="twig-bridge" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="symfony" type="462c0819:PsiDirectoryNode" />
-              <item name="twig-bridge" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="symfony" type="462c0819:PsiDirectoryNode" />
-              <item name="twig-bridge" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="Form" type="462c0819:PsiDirectoryNode" />
+              <item name="Migrations" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -604,18 +336,18 @@
       <workItem from="1571837839182" duration="920000" />
       <workItem from="1571839342772" duration="249000" />
       <workItem from="1571842215226" duration="11867000" />
-      <workItem from="1546304049367" duration="2769000" />
+      <workItem from="1546304049367" duration="8776000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="160365000" />
+    <option name="totallyTimeSpent" value="166372000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28836834" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28836834" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -628,7 +360,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4985694" weight="0.53194106" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4985694" weight="0.5308123" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50143063" side_tool="true" weight="0.46805897" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -641,61 +373,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/twig/twig/doc/advanced.rst">
-      <provider selected="true" editor-type-id="restructured-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/twig-bridge/Resources/views/Form/bootstrap_4_layout.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="302" column="16" selection-start-line="302" selection-start-column="16" selection-end-line="302" selection-end-column="16" />
-          <folding>
-            <element signature="e#8#39#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/StringType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
-          <folding>
-            <element signature="e#39#61#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/TextType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
-          <folding>
-            <element signature="e#39#61#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/form/builder/_widget_label.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#button#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/form/builder/_widget_string.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/css/theme.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-78" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/form/builder/_settings_label.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -714,16 +391,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="82" selection-start-line="15" selection-start-column="82" selection-end-line="15" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/form/edit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="326" lean-forward="true" selection-start-line="326" selection-end-line="326" />
-          <folding>
-            <element signature="e#39#84#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -756,26 +423,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Widget.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="200" column="78" lean-forward="true" selection-start-line="200" selection-start-column="78" selection-end-line="200" selection-end-column="78" />
-          <folding>
-            <element signature="e#30#65#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="89" selection-start-line="89" selection-end-line="89" />
-          <folding>
-            <element signature="e#44#68#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -848,33 +495,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Value.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="91" column="20" lean-forward="true" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="34" />
-          <folding>
-            <element signature="e#30#62#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/form/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
           <folding>
             <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/FormController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
-            <element signature="e#1004#1025#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -937,16 +563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/FicheType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="68" column="82" selection-start-line="68" selection-start-column="82" selection-end-line="68" selection-end-column="82" />
-          <folding>
-            <element signature="e#28#52#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/twig-bridge/Resources/views/Form/bootstrap_3_horizontal_layout.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
@@ -964,13 +580,6 @@
           <folding>
             <element signature="e#8#39#0#Twig" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Enum/FicheModeEnum.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1235,6 +844,67 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/category/add_fiche.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="e#53#85#0#Twig" expanded="true" />
+            <element signature="e#431#453#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/fiche/_fiche.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+          <folding>
+            <element signature="e#68#100#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/FicheType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="68" column="82" selection-start-line="68" selection-start-column="82" selection-end-line="68" selection-end-column="82" />
+          <folding>
+            <element signature="e#28#52#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+            <element signature="e#332#375#0#HTML" expanded="true" />
+            <element signature="e#509#552#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="126" column="41" selection-start-line="126" selection-start-column="41" selection-end-line="126" selection-end-column="41" />
+          <folding>
+            <element signature="e#45#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/twig.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/twig-bridge/Resources/views/Form/form_div_layout.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="395">
@@ -1409,60 +1079,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Enum/FicheModeEnum.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="32" column="10" selection-start-line="32" selection-start-column="10" selection-end-line="32" selection-end-column="10" />
-          <folding>
-            <element signature="e#12#37#0#Twig" expanded="true" />
-            <element signature="e#332#375#0#HTML" expanded="true" />
-            <element signature="e#509#552#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="135">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/form/builder/_widget_label.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/form/builder/_widget_string.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="6" lean-forward="true" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/form/edit.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="121" lean-forward="true" selection-start-line="121" selection-end-line="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/form/_area.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CategoryController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
+        <state relative-caret-position="1605">
           <caret line="120" column="7" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php">
+    <entry file="file://$PROJECT_DIR$/src/EntityListener/FormAreaListener.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="126" column="41" selection-start-line="126" selection-start-column="41" selection-end-line="126" selection-end-column="41" />
+        <state relative-caret-position="285">
+          <caret line="38" column="18" lean-forward="true" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="159" column="25" lean-forward="true" selection-start-line="159" selection-start-column="25" selection-end-line="159" selection-end-column="25" />
           <folding>
-            <element signature="e#45#69#0#PHP" expanded="true" />
+            <element signature="e#44#68#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/category/add_fiche.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Controller/FormController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+        <state relative-caret-position="337">
+          <caret line="104" column="7" lean-forward="true" selection-start-line="104" selection-start-column="7" selection-end-line="104" selection-end-column="7" />
           <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-            <element signature="e#53#85#0#Twig" expanded="true" />
-            <element signature="e#431#453#0#Twig" expanded="true" />
+            <element signature="e#34#58#0#PHP" expanded="true" />
+            <element signature="e#1004#1025#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/twig.yaml">
+    <entry file="file://$PROJECT_DIR$/assets/js/form/edit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+        <state relative-caret-position="519">
+          <caret line="442" column="37" selection-start-line="442" selection-start-column="37" selection-end-line="442" selection-end-column="37" />
+          <folding>
+            <element signature="e#39#84#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/fiche/_fiche.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Repository/FormAreaRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="10" lean-forward="true" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+        <state relative-caret-position="420">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Column.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-60">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Widget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="44" />
           <folding>
-            <element signature="e#68#100#0#Twig" expanded="true" />
+            <element signature="e#30#53#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Value.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="29" column="55" lean-forward="true" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
+          <folding>
+            <element signature="e#30#62#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -57,6 +57,10 @@
       .area-footer, .area-header {
         display: flex;
         justify-content: flex-end;
+
+        &.area-header {
+          align-items: center;
+        }
       }
 
       .area-body {
@@ -111,12 +115,19 @@
       border-style: solid !important;
     }
 
-    .delete-formArea {
+    .delete-formArea, .configure-formArea {
       color: rgba(0,0,0,.2);
       cursor: pointer;
       font-size: 14px;
 
-      &:hover {
+      &.configure-formArea {
+        margin-left: 5px;
+        &:hover {
+          color: #000;
+        }
+      }
+
+      &.delete-formArea:hover {
         color: #c60800;
       }
     }
