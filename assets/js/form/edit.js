@@ -21,6 +21,7 @@ class Edit
         this._listenForPublish();
         this._listenForDeleteDraftForm();
         this._listenForConfigureArea();
+        this._listenForFormAreaSettingsSubmit();
     }
 
     _redirect(url) {
@@ -263,7 +264,7 @@ class Edit
 
     _listenForOpenModalSetWidgetOptions() {
 
-        let $wrapperModal = $('#wrapperModalSetWidgetOptions');
+        let $wrapperModal = $('#wrapperModal');
         let $wrapperModalContent = $wrapperModal.find('.content');
 
         $wrapperModal.on('click', function(){
@@ -439,8 +440,81 @@ class Edit
     }
 
     _listenForConfigureArea() {
-        $(document).on('click', '.configure-formArea', () => {
-            console.log('configure');
+
+        let $wrapperModal = $('#wrapperModal');
+        let $wrapperModalContent = $wrapperModal.find('.content');
+
+        $wrapperModal.on('click', function(){
+            $wrapperModalContent.empty();
+            $wrapperModal.addClass('hidden');
+        });
+
+        $wrapperModalContent.on('click', function(e) {
+            e.stopPropagation();
+        });
+
+        $(document).on('click', '.configure-formArea', (e) => {
+            let $button = $(e.target);
+            let areaId = $button.parents('.area').data('id');
+            let url = endpoints.formAreasSettingsView.replace(':id', areaId);
+
+            let headers = {'X-Requested-With': 'XMLHttpRequest'};
+            this._makeFormSyncing();
+            aFetch(url, {'method': 'get', headers})
+                .then(response => {
+                    switch (response.status) {
+                        case 200:
+                            return response.json();
+                        case 401:
+                            this._redirect(endpoints.login);
+                            break;
+                        default:
+                            this._displayError('openModalFormAreaSettings');
+                    }
+                })
+                .then(response => {
+                    $wrapperModalContent.html(response.view);
+                    $wrapperModal.removeClass('hidden');
+                })
+                .finally(() => {
+                    this._stopFormSyncing();
+                })
+            ;
+
+        });
+    }
+
+    _listenForFormAreaSettingsSubmit() {
+        $(document).on('submit', '#FormArea_SettingsForm', (e) => {
+            e.preventDefault();
+            let $target = $(e.target);
+            let body = new FormData(e.target);
+            let url = $target.prop('action');
+            let method = $target.prop('method');
+
+            let headers = {'X-Requested-With': 'XMLHttpRequest'};
+            this._makeFormSyncing();
+            aFetch(url, {method, headers, body})
+                .then(response => {
+                    switch (response.status) {
+                        case 204:
+                            let $wrapperModal = $('#wrapperModal');
+                            let $wrapperModalContent = $wrapperModal.find('.content');
+                            $wrapperModalContent.empty();
+                            $wrapperModal.addClass('hidden');
+                            break;
+                        case 401:
+                            this._redirect(endpoints.login);
+                            break;
+                        default:
+                            this._displayError('openModalFormAreaSettings');
+                    }
+                })
+                .finally(() => {
+                    this._stopFormSyncing();
+                })
+            ;
+
         });
     }
 }

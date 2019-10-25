@@ -166,7 +166,7 @@
   }
 }
 
-#wrapperModalSetWidgetOptions {
+#wrapperModal {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -196,6 +196,31 @@
 
   &.visible {
     display: block;
+  }
+}
+
+#AreaSettings_Margins_Row, #AreaSettings_Paddings_Row, #AreaSettings_Borders_Row {
+  display: flex;
+  align-items: center;
+  > div {
+    flex: 1;
+  }
+}
+#AreaSettings_Margins_Widget, #AreaSettings_Paddings_Widget, #AreaSettings_Borders_Widget {
+  > div {
+    margin: auto;
+    padding: 3px;
+  }
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 }
 

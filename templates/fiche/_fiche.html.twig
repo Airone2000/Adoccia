@@ -29,7 +29,8 @@
                 {% else %}
                     <span>Publier la fiche immédiatement</span>
                 {% endif %}
-                <input type="checkbox" name="fiche[published]" value="1" {{ fiche.published ? 'checked' : '' }}>
+
+                <input type="checkbox" name="fiche[published]" value="1" {{ form.published.vars.checked ? 'checked' : '' }}>
             </label>
         </div>
 

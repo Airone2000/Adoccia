@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\FormArea;
+use App\Form\FormAreaSettingsType;
 use App\Services\FormHandler\FormHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -50,5 +52,40 @@ final class FormAreaController extends AbstractController
         catch (\Exception $e) {
             return new Response('', Response::HTTP_BAD_REQUEST);
         }
+    }
+
+    /**
+     * @Route(
+     *     path="/{id}/settings-view",
+     *     methods={"get", "put"},
+     *     condition="request.isXmlHttpRequest()",
+     *     name="formArea.getSettingsView"
+     * )
+     * @inheritdoc
+     */
+    function getSettingsView(FormArea $formArea, Request $request): Response
+    {
+        $form = $this->createForm(FormAreaSettingsType::class, $formArea, [
+            'method' => 'put',
+            'action' => $this->generateUrl('formArea.getSettingsView', ['id' => $formArea->getId()])
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+                return new Response('', Response::HTTP_NO_CONTENT);
+            }
+            else {
+                return new Response('', Response::HTTP_BAD_REQUEST);
+            }
+        }
+
+        $view = $this->renderView('form/_area_settings.html.twig', [
+            'area' => $formArea,
+            'form' => $form->createView()
+        ]);
+
+        return new JsonResponse(['view' => $view]);
     }
 }
