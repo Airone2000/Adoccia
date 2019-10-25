@@ -77,15 +77,16 @@ final class FormAreaController extends AbstractController
                 return new Response('', Response::HTTP_NO_CONTENT);
             }
             else {
-                return new Response('', Response::HTTP_BAD_REQUEST);
+                $status = Response::HTTP_BAD_REQUEST;
             }
         }
+        else $status = Response::HTTP_OK;
 
         $view = $this->renderView('form/_area_settings.html.twig', [
             'area' => $formArea,
             'form' => $form->createView()
         ]);
 
-        return new JsonResponse(['view' => $view]);
+        return new JsonResponse(['view' => $view], $status);
     }
 }

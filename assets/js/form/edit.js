@@ -7,10 +7,13 @@ class Edit
 {
     constructor() {
 
+        this.$wrapperModal = $('#wrapperModal');
+        this.$wrapperModalContent = this.$wrapperModal.find('.content');
         this.timeoutResize = null;
         this.timeoutSort = null;
         this.loading = false;
 
+        this._initializeModal();
         this._makeItSortable();
         this._listenForResizeArea();
         this._listenForAddArea();
@@ -24,8 +27,23 @@ class Edit
         this._listenForFormAreaSettingsSubmit();
     }
 
+    _initializeModal() {
+        this.$wrapperModal.on('click', () => {
+            this._hideModal();
+        });
+
+        this.$wrapperModalContent.on('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+
     _redirect(url) {
         window.location.replace(url);
+    }
+
+    _hideModal() {
+        this.$wrapperModalContent.empty();
+        this.$wrapperModal.addClass('hidden');
     }
 
     _displayError(error) {
@@ -263,19 +281,6 @@ class Edit
     }
 
     _listenForOpenModalSetWidgetOptions() {
-
-        let $wrapperModal = $('#wrapperModal');
-        let $wrapperModalContent = $wrapperModal.find('.content');
-
-        $wrapperModal.on('click', function(){
-            $wrapperModalContent.empty();
-            $wrapperModal.addClass('hidden');
-        });
-
-        $wrapperModalContent.on('click', function(e) {
-            e.stopPropagation();
-        });
-
         $(document).on('click', '.openModalSetWidgetOptions', (e) => {
             let $button = $(e.target);
             let widgetId = $button.parents('.area').data('widgetid');
@@ -297,14 +302,13 @@ class Edit
                     }
                 })
                 .then(response => {
-                    $wrapperModalContent.html(response.view);
-                    $wrapperModal.removeClass('hidden');
+                    this.$wrapperModalContent.html(response.view);
+                    this.$wrapperModal.removeClass('hidden');
                 })
                 .finally(() => {
                     this._stopFormSyncing();
                 })
             ;
-
         });
     }
 
@@ -441,18 +445,6 @@ class Edit
 
     _listenForConfigureArea() {
 
-        let $wrapperModal = $('#wrapperModal');
-        let $wrapperModalContent = $wrapperModal.find('.content');
-
-        $wrapperModal.on('click', function(){
-            $wrapperModalContent.empty();
-            $wrapperModal.addClass('hidden');
-        });
-
-        $wrapperModalContent.on('click', function(e) {
-            e.stopPropagation();
-        });
-
         $(document).on('click', '.configure-formArea', (e) => {
             let $button = $(e.target);
             let areaId = $button.parents('.area').data('id');
@@ -473,8 +465,8 @@ class Edit
                     }
                 })
                 .then(response => {
-                    $wrapperModalContent.html(response.view);
-                    $wrapperModal.removeClass('hidden');
+                    this.$wrapperModalContent.html(response.view);
+                    this.$wrapperModal.removeClass('hidden');
                 })
                 .finally(() => {
                     this._stopFormSyncing();
@@ -498,10 +490,12 @@ class Edit
                 .then(response => {
                     switch (response.status) {
                         case 204:
-                            let $wrapperModal = $('#wrapperModal');
-                            let $wrapperModalContent = $wrapperModal.find('.content');
-                            $wrapperModalContent.empty();
-                            $wrapperModal.addClass('hidden');
+                            this._hideModal();
+                            break;
+                        case 400:
+                            response.json().then((jsonResponse) => {
+                                this.$wrapperModalContent.html(jsonResponse.view);
+                            });
                             break;
                         case 401:
                             this._redirect(endpoints.login);

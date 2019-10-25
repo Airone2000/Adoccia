@@ -2,6 +2,10 @@
 
     {{ form_start(form) }}
 
+        {% for field in form %}
+                {{ form_errors(field) }}
+        {% endfor %}
+
         <div id="AreaSettings_Margins_Row">
                 <div>Marges externes</div>
                 <div id="AreaSettings_Margins_Widget">

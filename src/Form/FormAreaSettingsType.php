@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\FormArea;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -14,22 +13,27 @@ class FormAreaSettingsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        $marginConstraintsAttr = ['attr' => ['min' => 0, 'max' => FormArea::MAX_MARGIN]];
+        $paddingConstraintsAttr = ['attr' => ['min' => 0, 'max' => FormArea::MAX_PADDING]];
+        $borderConstraintsAttr = ['attr' => ['min' => 0, 'max' => FormArea::MAX_BORDER]];
+
         $builder
-            ->add('marginTop')
-            ->add('marginBottom')
-            ->add('marginLeft')
-            ->add('marginRight')
-            ->add('paddingTop')
-            ->add('paddingBottom')
-            ->add('paddingLeft')
-            ->add('paddingRight')
-            ->add('borderTopWidth')
+            ->add('marginTop', null, $marginConstraintsAttr)
+            ->add('marginBottom', null, $marginConstraintsAttr)
+            ->add('marginLeft', null, $marginConstraintsAttr)
+            ->add('marginRight', null, $marginConstraintsAttr)
+            ->add('paddingTop', null, $paddingConstraintsAttr)
+            ->add('paddingBottom', null, $paddingConstraintsAttr)
+            ->add('paddingLeft', null, $paddingConstraintsAttr)
+            ->add('paddingRight', null, $paddingConstraintsAttr)
+            ->add('borderTopWidth', null, $borderConstraintsAttr)
             ->add('borderTopColor')
-            ->add('borderBottomWidth')
+            ->add('borderBottomWidth', null, $borderConstraintsAttr)
             ->add('borderBottomColor')
-            ->add('borderLeftWidth')
+            ->add('borderLeftWidth', null, $borderConstraintsAttr)
             ->add('borderLeftColor')
-            ->add('borderRightWidth')
+            ->add('borderRightWidth', null, $borderConstraintsAttr)
             ->add('borderRightColor')
             ->add('backgroundColor')
         ;
@@ -43,7 +47,8 @@ class FormAreaSettingsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => FormArea::class
+            'data_class' => FormArea::class,
+            'validation_groups' => ['FormArea:SetSettings']
         ]);
     }
 }

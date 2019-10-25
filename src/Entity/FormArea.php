@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Enum\WidgetTypeEnum;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FormAreaRepository")
@@ -16,7 +17,11 @@ class FormArea
         DEFAULT_BORDER_WIDTH = 0,
         DEFAULT_MARGIN = 0,
         DEFAULT_PADDING = 0,
-        DEFAULT_BACKGROUND_COLOR = "#FFFFFF"
+        DEFAULT_BACKGROUND_COLOR = "#FFFFFF",
+
+        MAX_MARGIN = 50,
+        MAX_PADDING = 50,
+        MAX_BORDER = 15
     ;
 
     /**
@@ -55,54 +60,72 @@ class FormArea
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.marginTop.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_MARGIN, maxMessage="FormArea.marginTop.max", groups={"FormArea:SetSettings"})
      */
     private $marginTop;
 
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.marginBottom.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_MARGIN, maxMessage="FormArea.marginBottom.max", groups={"FormArea:SetSettings"})
      */
     private $marginBottom;
 
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.marginLeft.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_MARGIN, maxMessage="FormArea.marginLeft.max", groups={"FormArea:SetSettings"})
      */
     private $marginLeft;
 
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.marginRight.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_MARGIN, maxMessage="FormArea.marginRight.max", groups={"FormArea:SetSettings"})
      */
     private $marginRight;
 
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.paddingTop.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_PADDING, maxMessage="FormArea.paddingTop.max", groups={"FormArea:SetSettings"})
      */
     private $paddingTop;
 
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.paddingBottom.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_PADDING, maxMessage="FormArea.paddingBottom.max", groups={"FormArea:SetSettings"})
      */
     private $paddingBottom;
 
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.paddingLeft.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_PADDING, maxMessage="FormArea.paddingLeft.max", groups={"FormArea:SetSettings"})
      */
     private $paddingLeft;
 
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.paddingRight.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_PADDING, maxMessage="FormArea.paddingRight.max", groups={"FormArea:SetSettings"})
      */
     private $paddingRight;
 
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.borderTopWidth.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_BORDER, maxMessage="FormArea.borderTopWidth.max", groups={"FormArea:SetSettings"})
      */
     private $borderTopWidth;
 
@@ -115,6 +138,8 @@ class FormArea
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.borderBottomWidth.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_BORDER, maxMessage="FormArea.borderBottomWidth.max", groups={"FormArea:SetSettings"})
      */
     private $borderBottomWidth;
 
@@ -127,6 +152,8 @@ class FormArea
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.borderLeftWidth.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_BORDER, maxMessage="FormArea.borderLeftWidth.max", groups={"FormArea:SetSettings"})
      */
     private $borderLeftWidth;
 
@@ -139,6 +166,8 @@ class FormArea
     /**
      * @var int|null
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Type(type="int", message="FormArea.borderRightWidth.type.int", groups={"FormArea:SetSettings"})
+     * @Assert\Range(max=FormArea::MAX_BORDER, maxMessage="FormArea.borderRightWidth.max", groups={"FormArea:SetSettings"})
      */
     private $borderRightWidth;
 
@@ -262,7 +291,7 @@ class FormArea
      * @param int|null $marginTop
      * @return FormArea
      */
-    public function setMarginTop(?int $marginTop): FormArea
+    public function setMarginTop($marginTop): FormArea
     {
         $this->marginTop = $marginTop;
         return $this;
@@ -280,7 +309,7 @@ class FormArea
      * @param int|null $marginBottom
      * @return FormArea
      */
-    public function setMarginBottom(?int $marginBottom): FormArea
+    public function setMarginBottom($marginBottom): FormArea
     {
         $this->marginBottom = $marginBottom;
         return $this;
@@ -298,7 +327,7 @@ class FormArea
      * @param int|null $marginLeft
      * @return FormArea
      */
-    public function setMarginLeft(?int $marginLeft): FormArea
+    public function setMarginLeft($marginLeft): FormArea
     {
         $this->marginLeft = $marginLeft;
         return $this;
@@ -316,7 +345,7 @@ class FormArea
      * @param int|null $marginRight
      * @return FormArea
      */
-    public function setMarginRight(?int $marginRight): FormArea
+    public function setMarginRight($marginRight): FormArea
     {
         $this->marginRight = $marginRight;
         return $this;
@@ -334,7 +363,7 @@ class FormArea
      * @param int|null $borderTopWidth
      * @return FormArea
      */
-    public function setBorderTopWidth(?int $borderTopWidth): FormArea
+    public function setBorderTopWidth($borderTopWidth): FormArea
     {
         $this->borderTopWidth = $borderTopWidth;
         return $this;
@@ -370,7 +399,7 @@ class FormArea
      * @param int|null $borderBottomWidth
      * @return FormArea
      */
-    public function setBorderBottomWidth(?int $borderBottomWidth): FormArea
+    public function setBorderBottomWidth($borderBottomWidth): FormArea
     {
         $this->borderBottomWidth = $borderBottomWidth;
         return $this;
@@ -406,7 +435,7 @@ class FormArea
      * @param int|null $borderLeftWidth
      * @return FormArea
      */
-    public function setBorderLeftWidth(?int $borderLeftWidth): FormArea
+    public function setBorderLeftWidth($borderLeftWidth): FormArea
     {
         $this->borderLeftWidth = $borderLeftWidth;
         return $this;
@@ -442,7 +471,7 @@ class FormArea
      * @param int|null $borderRightWidth
      * @return FormArea
      */
-    public function setBorderRightWidth(?int $borderRightWidth): FormArea
+    public function setBorderRightWidth($borderRightWidth): FormArea
     {
         $this->borderRightWidth = $borderRightWidth;
         return $this;
@@ -496,7 +525,7 @@ class FormArea
      * @param int|null $paddingTop
      * @return FormArea
      */
-    public function setPaddingTop(?int $paddingTop): FormArea
+    public function setPaddingTop($paddingTop): FormArea
     {
         $this->paddingTop = $paddingTop;
         return $this;
@@ -514,7 +543,7 @@ class FormArea
      * @param int|null $paddingBottom
      * @return FormArea
      */
-    public function setPaddingBottom(?int $paddingBottom): FormArea
+    public function setPaddingBottom($paddingBottom): FormArea
     {
         $this->paddingBottom = $paddingBottom;
         return $this;
@@ -532,7 +561,7 @@ class FormArea
      * @param int|null $paddingLeft
      * @return FormArea
      */
-    public function setPaddingLeft(?int $paddingLeft): FormArea
+    public function setPaddingLeft($paddingLeft): FormArea
     {
         $this->paddingLeft = $paddingLeft;
         return $this;
@@ -550,7 +579,7 @@ class FormArea
      * @param int|null $paddingRight
      * @return FormArea
      */
-    public function setPaddingRight(?int $paddingRight): FormArea
+    public function setPaddingRight($paddingRight): FormArea
     {
         $this->paddingRight = $paddingRight;
         return $this;
