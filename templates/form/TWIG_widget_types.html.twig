@@ -8,9 +8,9 @@
     {% set textAlign = widget.textAlignSetting|default( textAlignPositions.toArray()|first ) %}
     <div class="widget-label" style="width:{{ widget.formArea.width }}%; text-align:{{ textAlign }};">
         {% if form.parent.vars.mode is same as('DISPLAY') %}
-            <div>{{ widget.innerTextSetting }}</div>
+            <div>{{ widget.innerText }}</div>
         {% else %}
-            <label>{{ widget.innerTextSetting }}</label>
+            <label>{{ widget.innerText }}</label>
         {% endif %}
     </div>
 {%- endblock -%}

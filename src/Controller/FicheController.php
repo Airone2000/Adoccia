@@ -34,7 +34,7 @@ final class FicheController extends AbstractController
     function editFiche(Fiche $fiche, Request $request, FicheHandlerInterface $ficheHandler): Response
     {
 
-        $data = ['title' => $fiche->getTitle()];
+        $data = ['title' => $fiche->getTitle(), 'published' => $fiche->isPublished()];
         $data = $data + $ficheHandler->mapValueToWidgetId($fiche);
 
         $form = $this->createForm(FicheType::class, $data, [

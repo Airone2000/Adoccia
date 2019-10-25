@@ -3,18 +3,17 @@
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
     {# The field setPublished is automatically set at the end of the form #}
-    {% do form.published.setRendered %}
     {% if form.vars.mode is same as('EDITION') %}
+        {% set publishedWidget = form_widget(form.published) %}
         <div>
             {{ form_label(form.title) }}
             {{ form_widget(form.title) }}
             {{ form_errors(form.title) }}
         </div>
         <hr>
-    {% else %}
-        {% do form.title.setRendered %}
     {% endif %}
 
+    {# for both display and edition #}
     <div>
         {{ form_widget(form) }}
     </div>
@@ -30,7 +29,7 @@
                     <span>Publier la fiche immédiatement</span>
                 {% endif %}
 
-                <input type="checkbox" name="fiche[published]" value="1" {{ form.published.vars.checked ? 'checked' : '' }}>
+                {{ publishedWidget|raw }}
             </label>
         </div>
 

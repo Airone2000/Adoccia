@@ -22,7 +22,7 @@ final class FicheType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->addImmutableFields($builder);
+        $this->addImmutableFields($builder, $options);
         $this->addDynamicFields($builder, $options);
     }
 
@@ -30,17 +30,18 @@ final class FicheType extends AbstractType
      * This method adds fields that are the same independently the fiche we are on.
      * @inheritdoc
      */
-    private function addImmutableFields(FormBuilderInterface $builder)
+    private function addImmutableFields(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('title', TextType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Length(['max' => 255])
-                ]
-            ])
-            ->add('published', CheckboxType::class)
-        ;
+        if ($options['mode'] === FicheModeEnum::EDITION) {
+            $builder
+                ->add('title', TextType::class, [
+                    'constraints' => [
+                        new NotBlank(),
+                        new Length(['max' => 255])
+                    ]
+                ])
+                ->add('published', CheckboxType::class);
+        }
     }
 
     /**
@@ -92,7 +93,7 @@ final class FicheType extends AbstractType
     {
         $constraints = [];
 
-        if ($widget->isRequiredSetting()) {
+        if ($widget->isRequired()) {
             $constraints[] = new NotBlank(['allowNull' => false]);
         }
 

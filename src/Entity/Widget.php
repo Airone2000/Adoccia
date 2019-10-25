@@ -43,7 +43,7 @@ class Widget
      * @var null|string
      * @ORM\Column(name="inner_text", type="text", nullable=true)
      */
-    private $innerTextSetting;
+    private $innerText;
 
     /**
      * @var int|null
@@ -53,7 +53,7 @@ class Widget
      *     groups={"StringWidget:SetSetting"}
      * )
      */
-    private $minLengthSetting;
+    private $minLength;
 
     /**
      * @var int|null
@@ -63,7 +63,7 @@ class Widget
      *     groups={"StringWidget:SetSetting"}
      * )
      */
-    private $maxLengthSetting;
+    private $maxLength;
 
     /**
      * @var bool
@@ -73,7 +73,7 @@ class Widget
      *     groups={"StringWidget:SetSetting"}
      * )
      */
-    private $requiredSetting = false;
+    private $required = false;
 
     /**
      * @var string|null
@@ -83,7 +83,7 @@ class Widget
      *     groups={"LabelWidget:SetSettings"}
      * )
      */
-    private $textAlignSetting;
+    private $textAlign;
 
 
     public function __construct()
@@ -151,92 +151,90 @@ class Widget
     /**
      * @return string|null
      */
-    public function getInnerTextSetting(): ?string
+    public function getInnerText(): ?string
     {
-        return $this->innerTextSetting;
+        return $this->innerText;
     }
 
     /**
-     * @param string|null $innerTextSetting
+     * @param string|null $innerText
      * @return Widget
      */
-    public function setInnerTextSetting(?string $innerTextSetting): Widget
+    public function setInnerText(?string $innerText): Widget
     {
-        $this->innerTextSetting = $innerTextSetting;
+        $this->innerText = $innerText;
         return $this;
     }
 
     /**
      * @return int|null
      */
-    public function getMinLengthSetting(): ?int
+    public function getMinLength(): ?int
     {
-        return $this->minLengthSetting;
+        return $this->minLength;
     }
 
     /**
-     * @param int|null $minLengthSetting
+     * @param int|null $minLength
      * @return Widget
      */
-    public function setMinLengthSetting(?int $minLengthSetting): Widget
+    public function setMinLength(?int $minLength): Widget
     {
-        $this->minLengthSetting = $minLengthSetting;
+        $this->minLength = $minLength;
         return $this;
     }
 
     /**
      * @return int|null
      */
-    public function getMaxLengthSetting(): ?int
+    public function getMaxLength(): ?int
     {
-        return $this->maxLengthSetting;
+        return $this->maxLength;
     }
 
     /**
-     * @param int|null $maxLengthSetting
+     * @param int|null $maxLength
      * @return Widget
      */
-    public function setMaxLengthSetting(?int $maxLengthSetting): Widget
+    public function setMaxLength(?int $maxLength): Widget
     {
-        $this->maxLengthSetting = $maxLengthSetting;
+        $this->maxLength = $maxLength;
         return $this;
     }
 
     /**
      * @return bool
      */
-    public function isRequiredSetting(): bool
+    public function isRequired(): bool
     {
-        return (bool) $this->requiredSetting;
+        return (bool)$this->required;
     }
 
     /**
-     * @param bool|int $requiredSetting
+     * @param bool $required
      * @return Widget
      */
-    public function setRequiredSetting($requiredSetting): Widget
+    public function setRequired(bool $required): Widget
     {
-        // NULL is allowed because it's falsy
-        // See \App\Services\FormHandler\FormHandler::changeFormAreaWidgetType
-        $this->requiredSetting = (bool)$requiredSetting;
+        $this->required = $required;
         return $this;
     }
 
     /**
      * @return string|null
      */
-    public function getTextAlignSetting(): ?string
+    public function getTextAlign(): ?string
     {
-        return $this->textAlignSetting;
+        return $this->textAlign;
     }
 
     /**
-     * @param string|null $textAlignSetting
+     * @param string|null $textAlign
      * @return Widget
      */
-    public function setTextAlignSetting(?string $textAlignSetting): Widget
+    public function setTextAlign(?string $textAlign): Widget
     {
-        $this->textAlignSetting = $textAlignSetting;
+        $this->textAlign = $textAlign;
         return $this;
     }
 

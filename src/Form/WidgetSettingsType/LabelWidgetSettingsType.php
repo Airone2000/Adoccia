@@ -13,7 +13,7 @@ final class LabelWidgetSettingsType extends AbstractWidgetSettingsType
     protected function buildInModalForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('textAlignSetting', ChoiceType::class, [
+            ->add('textAlign', ChoiceType::class, [
                 'choices' => TextAlignPositionEnum::toArray(),
                 'choice_label' => function(string $value){
                     return "translate.{$value}";
@@ -29,7 +29,7 @@ final class LabelWidgetSettingsType extends AbstractWidgetSettingsType
     protected function buildOffModalForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('innerTextSetting', TextareaType::class)
+            ->add('innerText', TextareaType::class)
         ;
     }
 }

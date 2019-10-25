@@ -10,9 +10,9 @@ final class StringWidgetSettingsType extends AbstractWidgetSettingsType
     public function buildInModalForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('minLengthSetting')
-            ->add('maxLengthSetting')
-            ->add('requiredSetting')
+            ->add('minLength')
+            ->add('maxLength')
+            ->add('required')
         ;
     }
 }

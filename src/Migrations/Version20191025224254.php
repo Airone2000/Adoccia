@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191024205512 extends AbstractMigration
+final class Version20191025224254 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -30,7 +30,7 @@ final class Version20191024205512 extends AbstractMigration
         $this->addSql('CREATE TABLE fiche (id INT AUTO_INCREMENT NOT NULL, category_id INT NOT NULL, title VARCHAR(255) NOT NULL, published TINYINT(1) DEFAULT \'0\' NOT NULL, valid TINYINT(1) DEFAULT \'1\' NOT NULL, INDEX IDX_4C13CC7812469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE widget (id INT AUTO_INCREMENT NOT NULL, form_area_id INT NOT NULL, immutable_id VARCHAR(50) NOT NULL, type VARCHAR(30) NOT NULL, inner_text LONGTEXT DEFAULT NULL, min_length BIGINT DEFAULT NULL, max_length BIGINT DEFAULT NULL, required TINYINT(1) DEFAULT \'0\' NOT NULL, text_align VARCHAR(20) DEFAULT NULL, UNIQUE INDEX UNIQ_85F91ED08C6320A7 (form_area_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE picture (id INT AUTO_INCREMENT NOT NULL, category_id INT DEFAULT NULL, user_id INT DEFAULT NULL, filename VARCHAR(255) NOT NULL, public SMALLINT NOT NULL, updated_at DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_16DB4F8912469DE2 (category_id), INDEX IDX_16DB4F89A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE form_area (id INT AUTO_INCREMENT NOT NULL, form_id INT NOT NULL, widget_id INT DEFAULT NULL, width DOUBLE PRECISION DEFAULT \'100\' NOT NULL, position INT NOT NULL, INDEX IDX_43B5397F5FF69B7D (form_id), UNIQUE INDEX UNIQ_43B5397FFBE885E2 (widget_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE form_area (id INT AUTO_INCREMENT NOT NULL, form_id INT NOT NULL, widget_id INT DEFAULT NULL, width DOUBLE PRECISION DEFAULT \'100\' NOT NULL, position INT NOT NULL, margin_top SMALLINT DEFAULT NULL, margin_bottom SMALLINT DEFAULT NULL, margin_left SMALLINT DEFAULT NULL, margin_right SMALLINT DEFAULT NULL, padding_top SMALLINT DEFAULT NULL, padding_bottom SMALLINT DEFAULT NULL, padding_left SMALLINT DEFAULT NULL, padding_right SMALLINT DEFAULT NULL, border_top_width SMALLINT DEFAULT NULL, border_top_color VARCHAR(15) DEFAULT NULL, border_bottom_width SMALLINT DEFAULT NULL, border_bottom_color VARCHAR(15) DEFAULT NULL, border_left_width SMALLINT DEFAULT NULL, border_left_color VARCHAR(15) DEFAULT NULL, border_right_width SMALLINT DEFAULT NULL, border_right_color VARCHAR(15) DEFAULT NULL, background_color VARCHAR(15) DEFAULT NULL, INDEX IDX_43B5397F5FF69B7D (form_id), UNIQUE INDEX UNIQ_43B5397FFBE885E2 (widget_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE category ADD CONSTRAINT FK_64C19C1B03A8386 FOREIGN KEY (created_by_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE category ADD CONSTRAINT FK_64C19C1EE45BDBF FOREIGN KEY (picture_id) REFERENCES picture (id) ON DELETE SET NULL');
         $this->addSql('ALTER TABLE category ADD CONSTRAINT FK_64C19C15FF69B7D FOREIGN KEY (form_id) REFERENCES form (id) ON DELETE SET NULL');
