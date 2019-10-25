@@ -1,18 +1,21 @@
-<div class="settings" data-widgetid="{{ widget.id }}">
+<div>
+    {{ form_start(form) }}
 
-    <div>
-        <label for="stextalign">Alignement horizontal du texte</label>
-        <select class="saveOnChange" id="stextalign" data-attribute="textAlign">
-            {% for position in textAlignPositions.toArray() %}
-                <option
-                        value="{{ position }}"
-                        {{ widget.textAlignSetting == position ? 'selected' : '' }}
-                >
-                    {{ position }}
-                </option>
-            {% endfor %}
-        </select>
-    </div>
+        {% for field in form %}
+                {{ form_errors(field) }}
+        {% endfor %}
 
-    
+
+        <div>
+                {{ form_row(form.innerTextSetting) }}
+        </div>
+
+        <div>
+                {{ form_row(form.textAlignSetting) }}
+        </div>
+
+        <hr>
+        <button>Appliquer</button>
+
+    {{ form_end(form) }}
 </div>

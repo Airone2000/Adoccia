@@ -1,19 +1,14 @@
-<div class="settings" data-widgetid="{{ widget.id }}">
+<div>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
 
-    <div>
-        <label for="ssmal">Longueur minimum</label>
-        <input id="ssmal" class="saveOnChange" data-attribute="minLength" type="number" value="{{ widget.minLengthSetting }}">
-    </div>
 
-    <div>
-        <label for="ssmil">Longueur maximum</label>
-        <input id="ssmil" class="saveOnChange" data-attribute="maxLength" type="number" value="{{ widget.maxLengthSetting }}">
-    </div>
+    {% for field in form %}
+        {{ form_errors(field) }}
+    {% endfor %}
 
-    <div>
-        <label for="ssmr">Requis</label>
-        {% set checked = widget.requiredSetting ? 'checked' : '' %}
-        <input id="ssmr" class="saveOnChange" data-attribute="required" type="checkbox" value="1" {{ checked }}>
-    </div>
-    
+    <hr>
+    <button>Appliquer</button>
+
+    {{ form_end(form) }}
 </div>

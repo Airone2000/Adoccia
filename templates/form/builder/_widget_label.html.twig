@@ -1,9 +1,8 @@
 <div class="widget widgetLabel">
-    <textarea class="saveOnInput" data-attribute="innerText" rows="2" placeholder="Tapez votre label ...">
-        {{- widget.innerTextSetting -}}
-    </textarea>
 
-    <br>
+    <p>
+    {{ widget.innerTextSetting|default('Label vide') }}
+    </p>
 
     <button class="openModalSetWidgetOptions btn secondary" style="padding: 5px;">
         Paramétrer le label

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Widget;
+use App\Form\WidgetSettingsType\AbstractWidgetSettingsType;
 use App\Services\FormHandler\FormHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -43,55 +44,56 @@ final class WidgetController extends AbstractController
 
     /**
      * @Route(
-     *     path="/{id}/settings-view",
-     *     methods={"get"},
+     *     path="/{id}/put-inmodal-settings",
+     *     methods={"get", "put"},
      *     condition="request.isXmlHttpRequest()",
      *     name="widget.getSettingsView"
      * )
      * @IsGranted("GET_WIDGET_SETTING_VIEW", subject="widget")
      * @inheritdoc
      */
-    function getSettingsView(Widget $widget): Response
+    function putInModalSettingsView(Widget $widget, Request $request): Response
     {
         try {
-            $view = $this->renderView("form/builder/_settings_{$widget->getType()}.html.twig", [
-                'form' => $widget->getFormArea()->getForm(),
-                'area' => $widget->getFormArea(),
-                'widget' => $widget
-            ]);
-            return new JsonResponse([
-                'view' => $view
-            ]);
+
+            $type = ucfirst(strtolower($widget->getType()));
+            $typeClass = "\App\Form\WidgetSettingsType\\{$type}WidgetSettingsType";
+
+            if (class_exists($typeClass)) {
+                $form = $this->createForm($typeClass, $widget, [
+                    'action' => $this->generateUrl('widget.getSettingsView', ['id' => $widget->getId()]),
+                    'method' => 'put',
+                    'validation_groups' => ["{$type}Widget:SetSettings"],
+                    'mode' => AbstractWidgetSettingsType::MODE_COMPLETE
+                ]);
+
+                $form->handleRequest($request);
+                if ($form->isSubmitted()) {
+                    if ($form->isValid()) {
+                        $this->getDoctrine()->getManager()->flush();
+
+                        # Widget is definitely modified
+                        # Returns the complete view so that client can update its display
+                        return new JsonResponse([
+                            'area' => $widget->getFormArea()->getId(),
+                            'formAreaView' => $this->renderView('form/_area.html.twig', ['area' => $widget->getFormArea()])
+                        ], Response::HTTP_OK);
+                    }
+                    else $status = Response::HTTP_BAD_REQUEST;
+                }
+                else $status = Response::HTTP_OK;
+
+                $view = $this->renderView("form/builder/_settings_{$widget->getType()}.html.twig", [
+                    'form' => $form->createView()
+                ]);
+                return new JsonResponse([
+                    'view' => $view
+                ], $status);
+            }
+            else throw new \LogicException("Class {$typeClass} must exist.");
         }
         catch (\Exception $e) {
             return new Response('', Response::HTTP_NOT_FOUND);
-        }
-    }
-
-    /**
-     * @Route(
-     *     path="/{id}/set-setting",
-     *     methods={"post"},
-     *     condition="request.isXmlHttpRequest() and request.headers.get('Content-Type') == 'application/json'",
-     *     name="widget.setSetting"
-     * )
-     * @IsGranted("SET_WIDGET_SETTING", subject="widget")
-     * @inheritdoc
-     */
-    function setSetting(Widget $widget, Request $request, FormHandlerInterface $formHandler): Response
-    {
-        try {
-            $body = json_decode($request->getContent(), true) ?? [];
-            $attribute = $body['attribute'] ?? null;
-            $value = $body['value'] ?? null;
-
-            if ($attribute === null) throw new \Exception('Attribute name cannot be null');
-
-            $formHandler->setWidgetSetting($widget, $attribute, $value);
-            return new Response('', Response::HTTP_NO_CONTENT);
-        }
-        catch (\Exception $e) {
-            return new Response('', Response::HTTP_BAD_REQUEST);
         }
     }
 }

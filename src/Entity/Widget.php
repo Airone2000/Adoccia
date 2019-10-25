@@ -50,7 +50,7 @@ class Widget
      * @ORM\Column(name="min_length", type="bigint", nullable=true)
      * @Assert\Type(
      *     type="int",
-     *     groups={"Widget:SetSetting"}
+     *     groups={"StringWidget:SetSetting"}
      * )
      */
     private $minLengthSetting;
@@ -60,7 +60,7 @@ class Widget
      * @ORM\Column(name="max_length", type="bigint", nullable=true)
      * @Assert\Type(
      *     type="int",
-     *     groups={"Widget:SetSetting"}
+     *     groups={"StringWidget:SetSetting"}
      * )
      */
     private $maxLengthSetting;
@@ -70,7 +70,7 @@ class Widget
      * @ORM\Column(name="required", type="boolean", options={"default":0})
      * @Assert\Type(
      *     type="bool",
-     *     groups={"Widget:SetSetting"}
+     *     groups={"StringWidget:SetSetting"}
      * )
      */
     private $requiredSetting = false;
@@ -80,7 +80,7 @@ class Widget
      * @ORM\Column(name="text_align", type="string", length=20, nullable=true)
      * @Enum(
      *     enumClass="App\Enum\TextAlignPositionEnum",
-     *     groups={"Widget:SetSetting"}
+     *     groups={"LabelWidget:SetSettings"}
      * )
      */
     private $textAlignSetting;

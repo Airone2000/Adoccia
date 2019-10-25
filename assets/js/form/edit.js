@@ -20,11 +20,11 @@ class Edit
         this._listenForDeleteArea();
         this._listenForWidgetTypePicked();
         this._listenForOpenModalSetWidgetOptions();
-        this._listenForSaveOnChange();
         this._listenForPublish();
         this._listenForDeleteDraftForm();
         this._listenForConfigureArea();
         this._listenForFormAreaSettingsSubmit();
+        this._listenForWidgetSettingsSubmit();
     }
 
     _initializeModal() {
@@ -312,73 +312,6 @@ class Edit
         });
     }
 
-    _listenForSaveOnChange() {
-
-        this.autoSaveTimeouts = {};
-
-        let handler = (e) => {
-            let $input = $(e.target);
-            let attribute = $input.data('attribute') || null;
-            let value = $input.val().trim();
-            value = value.length === 0 ? null : value;
-
-            // Transform value is necessary
-            switch ($input.prop('type')) {
-                case 'checkbox':
-                    value = $input.prop('checked');
-                    break;
-            }
-
-            let widgetId;
-
-            let $parentArea = $input.parents('.area');
-            if ($parentArea.length === 1) {
-                widgetId = $parentArea.data('widgetid')
-            }
-            else {
-                let $parentSettings = $input.parents('.settings');
-                if ($parentSettings.length === 1) {
-                    widgetId = $parentSettings.data('widgetid');
-                }
-            }
-
-            if (widgetId && attribute) {
-                let uniqKeyTimeout = `${widgetId}-${attribute}`;
-                clearTimeout(this.autoSaveTimeouts[uniqKeyTimeout]);
-                this.autoSaveTimeouts[uniqKeyTimeout] = setTimeout(() => {
-
-                    let url = endpoints.widgetSetSetting;
-                    url = url.replace(':id', widgetId);
-
-                    let headers = {'X-Requested-With': 'XMLHttpRequest', 'Content-Type': 'application/json'};
-                    let body = JSON.stringify({attribute, value});
-
-                    this._makeFormSyncing();
-                    aFetch(url, {method: 'post', headers, body})
-                        .then(response => {
-                            switch (response.status) {
-                                case 204:
-                                    console.log('OK');
-                                    break;
-                                case 401:
-                                    this._redirect(endpoints.login);
-                                    break;
-                                default:
-                                    this._displayError('saveError');
-                            }
-                        })
-                        .finally(() => {
-                            this._stopFormSyncing();
-                        })
-                    ;
-                }, 300);
-            }
-        };
-
-        $(document).on('change', '.saveOnChange', handler);
-        $(document).on('input', '.saveOnInput', handler)
-    }
-
     _listenForPublish() {
         $(document).on('click', '.publishDraftForm', (e) => {
             let $buttonPublish = $(e.target);
@@ -509,6 +442,46 @@ class Edit
                 })
             ;
 
+        });
+    }
+
+    _listenForWidgetSettingsSubmit() {
+        $(document).on('submit', '#Widget_SettingsForm', (e) => {
+            e.preventDefault();
+            let $target = $(e.target);
+            let body = new FormData(e.target);
+            let url = $target.prop('action');
+            let method = $target.prop('method');
+
+            let headers = {'X-Requested-With': 'XMLHttpRequest'};
+            this._makeFormSyncing();
+            aFetch(url, {method, headers, body})
+                .then(response => {
+                    switch (response.status) {
+                        case 200:
+                            response.json().then((responseJSON) => {
+                                let areaId = responseJSON['area'];
+                                let newFormAreaView = $(responseJSON['formAreaView']);
+                                $(document).find(`#area-${areaId}`).replaceWith(newFormAreaView);
+                                this._hideModal();
+                            });
+                            break;
+                        case 400:
+                            response.json().then((jsonResponse) => {
+                                this.$wrapperModalContent.html(jsonResponse.view);
+                            });
+                            break;
+                        case 401:
+                            this._redirect(endpoints.login);
+                            break;
+                        default:
+                            this._displayError('errorWhileWidgetSetting');
+                    }
+                })
+                .finally(() => {
+                    this._stopFormSyncing();
+                })
+            ;
         });
     }
 }
