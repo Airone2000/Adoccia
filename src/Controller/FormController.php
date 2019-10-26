@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Fiche;
 use App\Entity\Form;
 use App\Entity\FormArea;
+use App\Enum\FicheModeEnum;
+use App\Form\FicheType;
 use App\Repository\CategoryRepository;
 use App\Services\FormHandler\FormHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -120,5 +123,29 @@ final class FormController extends AbstractController
         catch (\Exception $e) {
             return new Response('Unable to remove this draft form. Retry later.', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+    }
+
+    /**
+     * @Route("/{id}/preview", methods={"get"}, name="draftForm.preview", condition="request.isXmlHttpRequest()")
+     * @inheritdoc
+     */
+    function preview(Form $form, CategoryRepository $categoryRepository): Response
+    {
+        $category = $categoryRepository->findOneBy(['draftForm' => $form]);
+        $form = $this->createForm(FicheType::class, null, [
+            'category' => $category,
+            'mode' => FicheModeEnum::EDITION,
+            'disabled' => true,
+            'is_form_preview' => true
+        ]);
+
+        $view = $this->renderView('form/_preview.html.twig', [
+            'form' => $form->createView(),
+            'fiche' => new Fiche()
+        ]);
+
+        return new JsonResponse([
+            'view' => $view
+        ]);
     }
 }

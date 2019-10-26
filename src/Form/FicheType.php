@@ -32,6 +32,8 @@ final class FicheType extends AbstractType
      */
     private function addImmutableFields(FormBuilderInterface $builder, array $options)
     {
+        if ($options['is_form_preview'] === true) return;
+
         if ($options['mode'] === FicheModeEnum::EDITION) {
             $builder
                 ->add('title', TextType::class, [
@@ -53,8 +55,10 @@ final class FicheType extends AbstractType
         /** @var Category $category */
         $category = $options['category'];
 
+        $form = $options['is_form_preview'] === true ? $category->getDraftForm() : $category->getForm();
+
         /** @var FormArea $formArea */
-        foreach ($category->getForm()->getAreas() as $formArea)
+        foreach ($form->getAreas() as $formArea)
         {
             /** @var Widget $widget */
             $widget = $formArea->getWidget();
@@ -102,7 +106,7 @@ final class FicheType extends AbstractType
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['id'] = 'AddFiche_InnerForm_RowsWrapper';
+        $view->vars['id'] = 'InnerFiche_RowsWrapper';
         $view->vars['mode'] = $options['mode'];
     }
 
@@ -113,5 +117,6 @@ final class FicheType extends AbstractType
         $resolver->setAllowedTypes('category', Category::class);
         $resolver->setDefault('error_bubbling', false);
         $resolver->setDefault('mode', FicheModeEnum::DISPLAY);
+        $resolver->setDefault('is_form_preview', false);
     }
 }

@@ -18,7 +18,9 @@
         {% endfor %}
     {% endfor %}
 
-    {% include 'fiche/_fiche.html.twig' with {'form': form, 'fiche': fiche} %}
+    <div class="formWrapper">
+        {% include 'fiche/_fiche.html.twig' with {'form': form, 'fiche': fiche} %}
+    </div>
 
 {% endblock %}
 

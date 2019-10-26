@@ -6,7 +6,7 @@
 
 {%- block fichit_label_row -%}
     {{ form_area_start(widget.formArea) }}
-        {% set textAlign = widget.textAlignSetting|default( textAlignPositions.toArray()|first ) %}
+        {% set textAlign = widget.textAlign|default( textAlignPositions.toArray()|first ) %}
         <div style="text-align:{{ textAlign }}; color:{{ widget.textColor }};">
             {% if form.parent.vars.mode is same as('DISPLAY') %}
                 <div>{{ widget.innerText }}</div>

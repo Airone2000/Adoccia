@@ -1,16 +1,20 @@
 {% form_theme form 'form/TWIG_widget_types.html.twig' %}
+{% set isFormPreview = isFormPreview|default(false) %}
+
 
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-    {# The field setPublished is automatically set at the end of the form #}
-    {% if form.vars.mode is same as('EDITION') %}
-        {% set publishedWidget = form_widget(form.published) %}
-        <div>
-            {{ form_label(form.title) }}
-            {{ form_widget(form.title) }}
-            {{ form_errors(form.title) }}
-        </div>
-        <hr>
+    {% if not isFormPreview %}
+        {# The field setPublished is automatically set at the end of the form #}
+        {% if form.vars.mode is same as('EDITION') %}
+            {% set publishedWidget = form_widget(form.published) %}
+            <div>
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title) }}
+                {{ form_errors(form.title) }}
+            </div>
+            <hr>
+        {% endif %}
     {% endif %}
 
     {# for both display and edition #}
@@ -18,23 +22,25 @@
         {{ form_widget(form) }}
     </div>
 
-    {% if form.vars.mode is same as('EDITION') %}
-        <hr>
+    {% if not isFormPreview %}
+        {% if form.vars.mode is same as('EDITION') %}
+            <hr>
 
-        <div>
-            <label>
-                {% if fiche.id is not null %}
-                    <span>En ligne</span>
-                {% else %}
-                    <span>Publier la fiche immédiatement</span>
-                {% endif %}
+            <div>
+                <label>
+                    {% if fiche.id is not null %}
+                        <span>En ligne</span>
+                    {% else %}
+                        <span>Publier la fiche immédiatement</span>
+                    {% endif %}
 
-                {{ publishedWidget|raw }}
-            </label>
-        </div>
+                    {{ publishedWidget|raw }}
+                </label>
+            </div>
 
-        <br><br>
+            <br><br>
 
-        <button>Submit</button>
+            <button>Submit</button>
+        {% endif %}
     {% endif %}
 {{ form_end(form) }}

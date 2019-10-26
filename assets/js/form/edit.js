@@ -25,6 +25,7 @@ class Edit
         this._listenForConfigureArea();
         this._listenForFormAreaSettingsSubmit();
         this._listenForWidgetSettingsSubmit();
+        this._listenForPreview();
     }
 
     _initializeModal() {
@@ -482,6 +483,39 @@ class Edit
                     this._stopFormSyncing();
                 })
             ;
+        });
+    }
+
+    _listenForPreview() {
+        $(document).on('click', '.preview-draftForm', (e) => {
+            e.preventDefault();
+            let $btn = $(e.currentTarget);
+            let url = $btn.prop('href');
+
+            let headers = {'X-Requested-With': 'XMLHttpRequest'};
+            this._makeFormSyncing();
+
+            aFetch(url, {'method': 'get', headers})
+                .then(response => {
+                    switch (response.status) {
+                        case 200:
+                            return response.json();
+                        case 401:
+                            this._redirect(endpoints.login);
+                            break;
+                        default:
+                            this._displayError('openModalPreview');
+                    }
+                })
+                .then(response => {
+                    this.$wrapperModalContent.html(response.view);
+                    this.$wrapperModal.removeClass('hidden');
+                })
+                .finally(() => {
+                    this._stopFormSyncing();
+                })
+            ;
+
         });
     }
 }

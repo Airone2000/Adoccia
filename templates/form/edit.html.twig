@@ -3,6 +3,7 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('form/edit') }}
+    {{ encore_entry_link_tags('fiche') }}
 {% endblock %}
 
 {% block javascripts %}
@@ -36,6 +37,9 @@
                 </div>
             </div>
             <div>
+                <a href="{{ url('draftForm.preview', {'id': form.id}) }}" class="preview-draftForm">
+                    <button class="btn secondary">Prévisualiser</button>
+                </a>
                 <button class="btn secondary add-formArea">Ajouter une zone</button>
                 <button class="btn danger deleteDraftForm">Annuler</button>
                 <button class="btn primary publishDraftForm">Publier</button>

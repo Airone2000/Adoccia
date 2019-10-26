@@ -1,15 +1,4 @@
-#AddFiche_InnerForm_RowsWrapper {
-  input {
-    width:100%;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-
-  textarea {
-    width: 100%;
-    resize: vertical;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-
+.formWrapper {
+  width: 100%;
+  max-width: 600px;
 }
