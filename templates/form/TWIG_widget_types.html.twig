@@ -5,36 +5,38 @@
 {% endblock %}
 
 {%- block fichit_label_row -%}
-    {% set textAlign = widget.textAlignSetting|default( textAlignPositions.toArray()|first ) %}
-    <div class="widget-label" style="width:{{ widget.formArea.width }}%; text-align:{{ textAlign }};">
-        {% if form.parent.vars.mode is same as('DISPLAY') %}
-            <div>{{ widget.innerText }}</div>
-        {% else %}
-            <label>{{ widget.innerText }}</label>
-        {% endif %}
-    </div>
+    {{ form_area_start(widget.formArea) }}
+        {% set textAlign = widget.textAlignSetting|default( textAlignPositions.toArray()|first ) %}
+        <div style="text-align:{{ textAlign }}; color:{{ widget.textColor }};">
+            {% if form.parent.vars.mode is same as('DISPLAY') %}
+                <div>{{ widget.innerText }}</div>
+            {% else %}
+                <label>{{ widget.innerText }}</label>
+            {% endif %}
+        </div>
+    {{ form_area_end(widget.formArea) }}
 {%- endblock -%}
 
 {%- block fichit_string_row -%}
-    <div class="widget-string" style="width:{{ widget.formArea.width }}%;">
+    {{ form_area_start(widget.formArea) }}
         {% if form.parent.vars.mode is same as('DISPLAY') %}
             <div>{{ form.vars.value }}</div>
         {% else %}
             {{ form_widget(form) }}
             {{ form_errors(form) }}
         {% endif %}
-    </div>
+    {{ form_area_end(widget.formArea) }}
 {%- endblock -%}
 
 {%- block fichit_text_row -%}
-    <div class="widget-text" style="width:{{ widget.formArea.width }}%;">
+    {{ form_area_start(widget.formArea) }}
         {% if form.parent.vars.mode is same as('DISPLAY') %}
             <div>{{ form.vars.value }}</div>
         {% else %}
             {{ form_widget(form) }}
             {{ form_errors(form) }}
         {% endif %}
-    </div>
+    {{ form_area_end(widget.formArea) }}
 {%- endblock -%}
 
 {%- block form_errors -%}

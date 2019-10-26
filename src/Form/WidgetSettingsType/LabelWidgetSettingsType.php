@@ -19,6 +19,7 @@ final class LabelWidgetSettingsType extends AbstractWidgetSettingsType
                     return "translate.{$value}";
                 }
             ])
+            ->add('textColor')
         ;
     }
 

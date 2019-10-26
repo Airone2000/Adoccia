@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Enum\WidgetTypeEnum;
+use App\Validator\Color;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -132,6 +133,7 @@ class FormArea
     /**
      * @var string|null
      * @ORM\Column(type="string", length=15, nullable=true)
+     * @Color(message="FormArea.borderTopcolor.color", groups={"FormArea:SetSettings"})
      */
     private $borderTopColor;
 
@@ -146,6 +148,7 @@ class FormArea
     /**
      * @var string|null
      * @ORM\Column(type="string", length=15, nullable=true)
+     * @Color(message="FormArea.borderBottomcolor.color", groups={"FormArea:SetSettings"})
      */
     private $borderBottomColor;
 
@@ -160,6 +163,7 @@ class FormArea
     /**
      * @var string|null
      * @ORM\Column(type="string", length=15, nullable=true)
+     * @Color(message="FormArea.borderLeftcolor.color", groups={"FormArea:SetSettings"})
      */
     private $borderLeftColor;
 
@@ -174,12 +178,14 @@ class FormArea
     /**
      * @var string|null
      * @ORM\Column(type="string", length=15, nullable=true)
+     * @Color(message="FormArea.borderRightcolor.color", groups={"FormArea:SetSettings"})
      */
     private $borderRightColor;
 
     /**
      * @var string|null
      * @ORM\Column(type="string", length=15, nullable=true)
+     * @Color(message="FormArea.backgroundColor.color", groups={"FormArea:SetSettings"})
      */
     private $backgroundColor;
 

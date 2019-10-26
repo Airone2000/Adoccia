@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Enum\TextAlignPositionEnum;
+use App\Validator\Color;
 use App\Validator\Enum;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -12,6 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Widget
 {
+
+    const
+        DEFAULT_TEXT_COLOR = "#000000"
+    ;
 
     /**
      * @ORM\Id()
@@ -84,6 +89,16 @@ class Widget
      * )
      */
     private $textAlign;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=15, nullable=true)
+     * @Color(
+     *     groups={"LabelWidget:SetSettings"},
+     *     message="Widget.textColor.color"
+     * )
+     */
+    private $textColor;
 
 
     public function __construct()
@@ -235,6 +250,24 @@ class Widget
     public function setTextAlign(?string $textAlign): Widget
     {
         $this->textAlign = $textAlign;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTextColor(): ?string
+    {
+        return $this->textColor ?? self::DEFAULT_TEXT_COLOR;
+    }
+
+    /**
+     * @param string|null $textColor
+     * @return Widget
+     */
+    public function setTextColor(?string $textColor): Widget
+    {
+        $this->textColor = $textColor;
         return $this;
     }
 
