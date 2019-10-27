@@ -100,6 +100,16 @@ class Widget
      */
     private $textColor;
 
+    /**
+     * @var null|string
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Length(
+     *     max="250",
+     *     maxMessage="Widget.inputPlaceholder.length.max"
+     * )
+     */
+    private $inputPlaceholder;
+
 
     public function __construct()
     {
@@ -268,6 +278,24 @@ class Widget
     public function setTextColor(?string $textColor): Widget
     {
         $this->textColor = $textColor;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getInputPlaceholder(): ?string
+    {
+        return $this->inputPlaceholder;
+    }
+
+    /**
+     * @param string|null $inputPlaceholder
+     * @return Widget
+     */
+    public function setInputPlaceholder(?string $inputPlaceholder): Widget
+    {
+        $this->inputPlaceholder = $inputPlaceholder;
         return $this;
     }
 

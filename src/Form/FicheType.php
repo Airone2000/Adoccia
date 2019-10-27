@@ -84,7 +84,8 @@ final class FicheType extends AbstractType
                 ->add($name, $typeClass, [
                     'widget' => $widget,
                     'constraints' => $this->getDynamicFieldConstraints($widget),
-                    'empty_data' => null
+                    'empty_data' => null,
+                    'attr' => $this->getDynamicFieldAttrs($widget)
                 ])
             ;
         }
@@ -93,9 +94,40 @@ final class FicheType extends AbstractType
         }
     }
 
+    private function getDynamicFieldAttrs(Widget $widget): array
+    {
+        $attr = [];
+
+        if ($widget->getInputPlaceholder()) {
+            $attr['placeholder'] = $widget->getInputPlaceholder();
+        }
+
+        if ($widget->getMinLength()) {
+            $attr['minlength'] = $widget->getMinLength();
+        }
+
+        if ($widget->getMaxLength()) {
+            $attr['maxlength'] = $widget->getMaxLength();
+        }
+
+        if ($widget->isRequired()) {
+            $attr['required'] = true;
+        }
+
+        return $attr;
+    }
+
     private function getDynamicFieldConstraints(Widget $widget): array
     {
         $constraints = [];
+
+        if ($widget->getMinLength()) {
+            $constraints[] = new Length(['min' => $widget->getMinLength()]);
+        }
+
+        if ($widget->getMaxLength()) {
+            $constraints[] = new Length(['max' => $widget->getMaxLength()]);
+        }
 
         if ($widget->isRequired()) {
             $constraints[] = new NotBlank(['allowNull' => false]);

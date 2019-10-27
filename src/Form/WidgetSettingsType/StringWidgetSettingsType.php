@@ -13,6 +13,7 @@ final class StringWidgetSettingsType extends AbstractWidgetSettingsType
             ->add('minLength')
             ->add('maxLength')
             ->add('required')
+            ->add('inputPlaceholder')
         ;
     }
 }
