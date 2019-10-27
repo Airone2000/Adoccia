@@ -1,21 +1,25 @@
 #InnerFiche_RowsWrapper {
   display: flex;
   flex-wrap: wrap;
-  align-items:center;
   width: 100%;
 
-  input {
-    width:100%;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    padding: 4px;
-  }
+  .formArea {
 
-  textarea {
-    width: 100%;
-    resize: vertical;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    padding: 4px;
+    display: flex;
+
+    input {
+      width: 100%;
+      border: 1px solid #000;
+      box-sizing: border-box;
+      padding: 4px;
+    }
+
+    textarea {
+      width: 100%;
+      resize: vertical;
+      border: 1px solid #000;
+      box-sizing: border-box;
+      padding: 4px;
+    }
   }
 }

@@ -1,7 +1,8 @@
 {% extends 'form_div_layout.html.twig' %}
 
 {%- block fichit_empty_row -%}
-    <div class="widget-empty" style="width:{{ widget.formArea.width }}%;"></div>
+    {{ form_area_start(widget.formArea) }}
+    {{ form_area_end(widget.formArea) }}
 {% endblock %}
 
 {%- block fichit_label_row -%}
@@ -9,9 +10,9 @@
         {% set textAlign = widget.textAlign|default( textAlignPositions.toArray()|first ) %}
         <div style="text-align:{{ textAlign }}; color:{{ widget.textColor }};">
             {% if form.parent.vars.mode is same as('DISPLAY') %}
-                <div>{{ widget.innerText }}</div>
+                <div>{{ widget.innerText|nl2br }}</div>
             {% else %}
-                <label>{{ widget.innerText }}</label>
+                <label>{{ widget.innerText|nl2br }}</label>
             {% endif %}
         </div>
     {{ form_area_end(widget.formArea) }}

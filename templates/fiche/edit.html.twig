@@ -3,6 +3,12 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('fiche') }}
+    <style>
+        input {
+            border: 0 !important;
+            outline: 0 !important;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}

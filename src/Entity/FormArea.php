@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Enum\WidgetTypeEnum;
+use App\Enum\WidgetVerticalAlignmentEnum;
 use App\Validator\Color;
+use App\Validator\Enum;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -188,6 +190,16 @@ class FormArea
      * @Color(message="FormArea.backgroundColor.color", groups={"FormArea:SetSettings"})
      */
     private $backgroundColor;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=15, nullable=true)
+     * @Enum(
+     *     enumClass="\App\Enum\WidgetVerticalAlignmentEnum",
+     *     message="FormArea.widgetVerticalAlignment.enum"
+     * )
+     */
+    private $widgetVerticalAlignment;
 
 
     public function __construct()
@@ -588,6 +600,24 @@ class FormArea
     public function setPaddingRight($paddingRight): FormArea
     {
         $this->paddingRight = $paddingRight;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getWidgetVerticalAlignment(): ?string
+    {
+        return $this->widgetVerticalAlignment ?? WidgetVerticalAlignmentEnum::START;
+    }
+
+    /**
+     * @param string|null $widgetVerticalAlignment
+     * @return FormArea
+     */
+    public function setWidgetVerticalAlignment(?string $widgetVerticalAlignment): FormArea
+    {
+        $this->widgetVerticalAlignment = $widgetVerticalAlignment;
         return $this;
     }
 
