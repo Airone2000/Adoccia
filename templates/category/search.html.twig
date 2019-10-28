@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form/TWIG_widget_types.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('fiche') }}
+{% endblock %}
+
+{% block body %}
+        <h2>Rechercher dans {{ category.name }}</h2>
+
+        <div style="width:600px;">
+                {{ form_start(form) }}
+
+                <div>
+                    {{ form_label(form.title) }}
+                    {{ form_widget(form.title) }}
+                    {{ form_errors(form.title) }}
+                </div>
+
+                    {{ form_widget(form) }}
+                    <button>Rechercher</button>
+                {{ form_end(form) }}
+        </div>
+{% endblock %}
+
+

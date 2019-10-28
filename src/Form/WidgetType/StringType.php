@@ -2,37 +2,54 @@
 
 namespace App\Form\WidgetType;
 
-use App\Entity\Widget;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Enum\FicheModeEnum;
+use App\Enum\SearchCriteriaEnum;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType as SfTextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Length;
 
-class StringType extends AbstractType
+class StringType extends AbstractWidgetType
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $resolver
-            ->setRequired('widget')
-            ->setAllowedTypes('widget', Widget::class)
-        ;
-    }
-
-    public function finishView(FormView $view, FormInterface $form, array $options)
-    {
-        /** @var \App\Entity\Widget $widget */
-        $widget = $options['widget'];
-        $view->vars['widget'] = $widget;
-    }
-
-    public function getParent()
-    {
-        return TextType::class;
+        if ($options['mode'] === FicheModeEnum::SEARCH) {
+            $this->buildSearchForm($builder, $options);
+        }
     }
 
     public function getBlockPrefix()
     {
         return 'fichit_string';
+    }
+
+    private function buildSearchForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('criteria', ChoiceType::class, [
+                'choices' => $this->getSearchCriterias(),
+                'choice_label' => function(string $label) {
+                    return $label;
+                }
+            ])
+            ->add('value', SfTextType::class, [
+                'required' => false,
+                'constraints' => [
+                    new Length(['max' => 250])
+                ]
+            ])
+        ;
+    }
+
+    protected function getSearchCriterias(): array
+    {
+        return [
+            SearchCriteriaEnum::IS_NULL,
+            SearchCriteriaEnum::IS_BLANK,
+            SearchCriteriaEnum::EXACT,
+            SearchCriteriaEnum::CONTAINS,
+            SearchCriteriaEnum::STARTS_WITH,
+            SearchCriteriaEnum::ENDS_WITH
+        ];
     }
 }

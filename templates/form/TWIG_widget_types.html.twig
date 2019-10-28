@@ -22,8 +22,11 @@
     {{ form_area_start(widget.formArea) }}
         {% if form.parent.vars.mode is same as('DISPLAY') %}
             <div>{{ form.vars.value }}</div>
+        {% elseif form.parent.vars.mode is same as('SEARCH') %}
+            {{ form_widget(form.criteria) }}
+            {{ form_widget(form.value) }}
         {% else %}
-            {{ form_widget(form) }}
+            {{- block('form_widget_simple') -}}
             {{ form_errors(form) }}
         {% endif %}
     {{ form_area_end(widget.formArea) }}

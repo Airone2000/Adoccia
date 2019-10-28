@@ -7,6 +7,7 @@ use App\Entity\Fiche;
 use App\Enum\FicheModeEnum;
 use App\Form\CategoryType;
 use App\Form\FicheType;
+use App\Form\SearchInCategoryType;
 use App\Repository\CategoryRepository;
 use App\Services\CategoryHandler\CategoryHandlerInterface;
 use App\Services\FicheHandler\FicheHandlerInterface;
@@ -163,6 +164,31 @@ class CategoryController extends AbstractController
     {
         return $this->render('category/list_fiches.html.twig', [
             'fiches' => $category->getFiches()
+        ]);
+    }
+
+    /**
+     * @Route(
+     *     path="/{id}/fiches/search",
+     *     methods={"get", "post"},
+     *     name="category.searchFiches"
+     * )
+     * @inheritdoc
+     */
+    public function advancedSearch(Category $category, Request $request): Response
+    {
+        $form = $this->createForm(SearchInCategoryType::class, null, [
+            'category' => $category
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            dd($form->getData());
+        }
+
+        return $this->render('category/search.html.twig', [
+            'category' => $category,
+            'form' => $form->createView()
         ]);
     }
 }

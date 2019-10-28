@@ -2,10 +2,11 @@
 
 namespace App\Enum;
 
-final class FicheModeEnum
+final class FicheModeEnum extends AbstractEnum
 {
     const
         DISPLAY = 'DISPLAY',
-        EDITION = 'EDITION'
+        EDITION = 'EDITION',
+        SEARCH = 'SEARCH'
     ;
 }
