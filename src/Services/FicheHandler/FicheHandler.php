@@ -76,6 +76,14 @@ final class FicheHandler implements FicheHandlerInterface
 
         $fiche = $fiche ?? new Fiche();
 
+        /**
+         * Delete all value for this fiche is already existing
+         * since dataFromForm gives use all once again
+         */
+        if ($fiche->getId()) {
+            $this->entityManager->getRepository(Value::class)->deleteByFiche($fiche);
+        }
+
         $fiche
             ->setTitle($data['title'])
             ->setPublished((bool)($data['published'] ?? null))

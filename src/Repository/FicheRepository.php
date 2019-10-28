@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Fiche;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -14,37 +15,21 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class FicheRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var WidgetRepository
+     */
+    private $widgetRepository;
+
+    public function __construct(ManagerRegistry $registry, WidgetRepository $widgetRepository)
     {
         parent::__construct($registry, Fiche::class);
+        $this->widgetRepository = $widgetRepository;
     }
 
-    // /**
-    //  * @return Fiche[] Returns an array of Fiche objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getCategoryFiches(Category $category, array $moreCriterias = [])
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('f');
 
-    /*
-    public function findOneBySomeField($value): ?Fiche
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $qb->getQuery()->getResult();
     }
-    */
 }

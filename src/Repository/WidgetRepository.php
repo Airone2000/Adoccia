@@ -34,4 +34,16 @@ class WidgetRepository extends ServiceEntityRepository
             ->getArrayResult()
         ;
     }
+
+    public function findByForm(Form $form): array
+    {
+        $qb = $this->createQueryBuilder('w');
+        return $qb
+            ->leftJoin('w.formArea', 'form_area')
+            ->where('form_area.form = :form')
+            ->setParameter('form', $form)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

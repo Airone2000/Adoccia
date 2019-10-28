@@ -9,6 +9,7 @@ use App\Form\CategoryType;
 use App\Form\FicheType;
 use App\Form\SearchInCategoryType;
 use App\Repository\CategoryRepository;
+use App\Services\CategoryFinder\CategoryFinderInterface;
 use App\Services\CategoryHandler\CategoryHandlerInterface;
 use App\Services\FicheHandler\FicheHandlerInterface;
 use App\Services\FormHandler\FormHandlerInterface;
@@ -175,7 +176,7 @@ class CategoryController extends AbstractController
      * )
      * @inheritdoc
      */
-    public function advancedSearch(Category $category, Request $request): Response
+    public function advancedSearch(Category $category, Request $request, CategoryFinderInterface $categoryFinder): Response
     {
         $form = $this->createForm(SearchInCategoryType::class, null, [
             'category' => $category
@@ -183,7 +184,8 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($form->getData());
+            $results = $categoryFinder->search($category, $form->getData());
+            dd($results);
         }
 
         return $this->render('category/search.html.twig', [

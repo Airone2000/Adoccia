@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Fiche;
 use App\Entity\Form;
 use App\Entity\Value;
 use App\Entity\Widget;
@@ -37,5 +38,17 @@ class ValueRepository extends ServiceEntityRepository
             $sql = 'UPDATE `value` v SET v.widget_id = (CASE ' . $sets . ' ELSE v.widget_id END) WHERE v.widget_immutable_id IN (' . $ids . ')';
             $this->getEntityManager()->getConnection()->exec($sql);
         }
+    }
+
+    public function deleteByFiche(Fiche $fiche): void
+    {
+        $qb = $this->createQueryBuilder('v');
+        $qb
+            ->delete()
+            ->where('v.fiche = :fiche')
+            ->setParameter('fiche', $fiche)
+            ->getQuery()
+            ->execute()
+        ;
     }
 }

@@ -65,7 +65,7 @@ final class FicheType extends AbstractType
             $widgetType = $widget->getType();
 
             if (WidgetTypeEnum::isset($widgetType)) {
-                $this->addDynamicField($builder, $widget);
+                $this->addDynamicField($builder, $widget, $options);
             }
             else {
                 throw new \LogicException("Unhandled widget of type \"{$widgetType}\".");
@@ -73,7 +73,7 @@ final class FicheType extends AbstractType
         }
     }
 
-    private function addDynamicField(FormBuilderInterface $builder, Widget $widget)
+    private function addDynamicField(FormBuilderInterface $builder, Widget $widget, array $options)
     {
         $name = $widget->getId();
         $type = ucfirst(strtolower($widget->getType()));
@@ -85,7 +85,8 @@ final class FicheType extends AbstractType
                     'widget' => $widget,
                     'constraints' => $this->getDynamicFieldConstraints($widget),
                     'empty_data' => null,
-                    'attr' => $this->getDynamicFieldAttrs($widget)
+                    'attr' => $this->getDynamicFieldAttrs($widget),
+                    'mode' => $options['mode']
                 ])
             ;
         }

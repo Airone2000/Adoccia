@@ -19,6 +19,7 @@ class AbstractWidgetType extends AbstractType
             ->setAllowedTypes('widget', Widget::class)
             ->setDefault('mode', null)
             ->setAllowedValues('mode', FicheModeEnum::toArray())
+            ->setDefault('compound', false);
         ;
     }
 

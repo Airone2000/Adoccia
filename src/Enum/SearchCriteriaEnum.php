@@ -6,7 +6,7 @@ final class SearchCriteriaEnum extends AbstractEnum
 {
     const
         IS_NULL             = 'IS_NULL',
-        IS_BLANK            = 'IS_BLANK',
+        IS_NOT_NULL         = 'IS_NOT_NULL',
 
         EXACT               = 'EXACT',
 

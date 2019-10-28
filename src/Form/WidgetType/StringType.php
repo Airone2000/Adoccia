@@ -45,7 +45,7 @@ class StringType extends AbstractWidgetType
     {
         return [
             SearchCriteriaEnum::IS_NULL,
-            SearchCriteriaEnum::IS_BLANK,
+            SearchCriteriaEnum::IS_NOT_NULL,
             SearchCriteriaEnum::EXACT,
             SearchCriteriaEnum::CONTAINS,
             SearchCriteriaEnum::STARTS_WITH,

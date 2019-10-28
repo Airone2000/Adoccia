@@ -64,7 +64,8 @@ class SearchInCategoryType extends AbstractType
             if (class_exists($typeClass)) {
                 $builder->add($widget->getId(), $typeClass, [
                     'widget' => $widget,
-                    'mode' => $options['mode']
+                    'mode' => $options['mode'],
+                    'compound' => $options['compound']
                 ]);
             }
         }
@@ -77,5 +78,7 @@ class SearchInCategoryType extends AbstractType
 
         $resolver->setDefault('mode', FicheModeEnum::SEARCH);
         $resolver->setAllowedValues('mode', FicheModeEnum::SEARCH);
+
+        $resolver->setDefault('compound', true);
     }
 }
