@@ -15,4 +15,5 @@ interface FormHandlerInterface
     public function setWidgetSetting(Widget $widget, ?string $attribute, $value): void;
     public function setDraftForm(Category $category, bool $overwrite = false): void;
     public function publishDraftForm(Category $category): void;
+    public function addFormAreaToDraftForm(Form $form): FormArea;
 }

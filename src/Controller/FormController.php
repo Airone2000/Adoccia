@@ -52,11 +52,9 @@ final class FormController extends AbstractController
      * @IsGranted("ADD_FORM_AREA_TO_DRAFT_FORM", subject="form")
      * @inheritdoc
      */
-    function addFormAreaToDraftForm(Form $form): Response
+    function addFormAreaToDraftForm(Form $form, FormHandlerInterface $formHandler): Response
     {
-        $form->addArea($formArea = new FormArea());
-        $this->getDoctrine()->getManager()->flush();
-
+        $formArea = $formHandler->addFormAreaToDraftForm($form);
         $body = [
             'view' => $this->renderView('form/_area.html.twig', ['area' => $formArea])
         ];

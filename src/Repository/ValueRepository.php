@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Fiche;
 use App\Entity\Form;
 use App\Entity\Value;
@@ -50,5 +51,21 @@ class ValueRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute()
         ;
+    }
+
+    public function addWidgetValueToCategoryFiches(Category $category, Widget $widget)
+    {
+
+        $q = <<<SQL
+                      INSERT INTO `value` (fiche_id, widget_id, widget_immutable_id)
+                      SELECT id, {$widget->getId()}, "{$widget->getImmutableId()}"
+                      FROM fiche
+                      WHERE category_id = {$category->getId()}
+SQL;
+
+
+        /** @var \PDO $pdo */
+        $pdo = $this->getEntityManager()->getConnection();
+        $pdo->exec($q);
     }
 }

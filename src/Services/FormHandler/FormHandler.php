@@ -89,6 +89,8 @@ final class FormHandler implements FormHandlerInterface
     {
         if (WidgetTypeEnum::isset($newType)) {
 
+            $oldType = $widget->getType();
+
             $reflectionClass = new \ReflectionClass($widget);
             $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PRIVATE);
             /** @var \ReflectionProperty $property */
@@ -105,6 +107,7 @@ final class FormHandler implements FormHandlerInterface
 
             $widget->setType($newType);
             $this->entityManager->flush();
+
             return;
         }
 
@@ -185,6 +188,32 @@ final class FormHandler implements FormHandlerInterface
         catch (\Exception $e) {
             throw new \Exception('An error occurred when trying to publish the draft form.');
         }
+    }
+
+    /**
+     * @param Form $form
+     * @return FormArea
+     */
+    public function addFormAreaToDraftForm(Form $form): FormArea
+    {
+        $form->addArea($formArea = new FormArea());
+        $this->entityManager->flush();
+
+        /**
+         * Nous ajoutons une area au formulaire.
+         * Cette area contient par défaut un widget.
+         * Toutes les fiches de la catégorie doivent recevoir une nouvelle valeur associée
+         * à ce nouveau widget.
+         *
+         * De cette manière, la recherche avancée permet de les retrouver.
+         */
+
+        $widget = $formArea->getWidget();
+        $category = $this->entityManager->getRepository(Category::class)->findOneBy(['draftForm' => $form]);
+        $valueRepository = $this->entityManager->getRepository(Value::class);
+        $valueRepository->addWidgetValueToCategoryFiches($category, $widget);
+
+        return $formArea;
     }
 
 }

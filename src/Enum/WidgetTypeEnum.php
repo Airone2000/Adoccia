@@ -22,4 +22,12 @@ final class WidgetTypeEnum extends AbstractEnum
             'number' => [self::INT]
         ];
     }
+
+    public static function nonWritableType(): array
+    {
+        return [
+            self::EMPTY,
+            self::LABEL
+        ];
+    }
 }
