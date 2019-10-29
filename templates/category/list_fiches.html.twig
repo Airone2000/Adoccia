@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <h1>Liste des fiches</h1>
-    
+
+    <a href="{{ url('category.searchFiches', {'id': category.id}) }}">Rechercher</a>
+
     {% if fiches is not empty %}
         <table border="1">
             <thead>

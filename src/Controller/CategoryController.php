@@ -164,6 +164,7 @@ class CategoryController extends AbstractController
     public function listFiches(Category $category): Response
     {
         return $this->render('category/list_fiches.html.twig', [
+            'category' => $category,
             'fiches' => $category->getFiches()
         ]);
     }

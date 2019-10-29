@@ -69,8 +69,9 @@ final class CategoryFinder implements CategoryFinderInterface
         # Matching widgets
         $matchingValues = $this->qb->getQuery()->getArrayResult();
 
-        # Query for fiches
+        # Query for fiches in this category
         $fichesQ = $this->ficheRepository->createQueryBuilder('f');
+        $fichesQ->andWhere('f.category = :category')->setParameter('category', $category);
 
         # Search fiches by matching widgets
         if ($this->searchCriteriaCount > 0) {
@@ -152,11 +153,6 @@ final class CategoryFinder implements CategoryFinderInterface
         }
     }
 
-    private function appendToQueryBySwitchCriteria(string $valueColumn, string $parameterKey, $searchValue)
-    {
-
-    }
-    
     private function setWhereCategory(Category $category)
     {
         $this->qb
