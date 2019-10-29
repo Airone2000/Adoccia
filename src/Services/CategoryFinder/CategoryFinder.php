@@ -63,6 +63,9 @@ final class CategoryFinder implements CategoryFinderInterface
         # Filter on category
         $this->setWhereCategory($category);
 
+        # Apply search on title
+        $this->applySearchOnTitle($category, $criterias);
+
         # Apply criterias
         $this->applyCriterias($category, $criterias);
 
@@ -73,6 +76,14 @@ final class CategoryFinder implements CategoryFinderInterface
         $fiches = $this->ficheRepository->getFicheByValues($matchingValues, $this->searchCriteriaCount);
 
         return $fiches;
+    }
+
+    private function applySearchOnTitle(Category $category, array $criterias)
+    {
+        if (array_key_exists('title', $criterias)) {
+            
+        }
+        dd($criterias);
     }
 
 
@@ -142,6 +153,11 @@ final class CategoryFinder implements CategoryFinderInterface
         }
     }
 
+    private function appendToQueryBySwitch(string $valueColumn, string $parameterKey, $searchValue)
+    {
+        
+    }
+    
     private function setWhereCategory(Category $category)
     {
         $this->qb

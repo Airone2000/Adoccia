@@ -7,6 +7,7 @@ use App\Entity\Form;
 use App\Entity\FormArea;
 use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
+use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -36,7 +37,16 @@ class SearchInCategoryType extends AbstractType
             ->add(
                 $builder->create('title', FormType::class)
                     ->add('criteria', ChoiceType::class, [
-                        'choices' => []
+                        'choices' => [
+                            SearchCriteriaEnum::DISABLED,
+                            SearchCriteriaEnum::CONTAINS,
+                            SearchCriteriaEnum::EXACT,
+                            SearchCriteriaEnum::STARTS_WITH,
+                            SearchCriteriaEnum::ENDS_WITH
+                        ],
+                        'choice_label' => function(string $value) {
+                            return "trans.{$value}";
+                        }
                     ])
                     ->add('value', TextType::class, [
                         'required' => false
