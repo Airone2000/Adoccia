@@ -4,18 +4,22 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Fiche;
+use App\Entity\Search;
 use App\Enum\FicheModeEnum;
 use App\Form\CategoryType;
 use App\Form\FicheType;
+use App\Form\SaveSearchType;
 use App\Form\SearchInCategoryType;
 use App\Repository\CategoryRepository;
 use App\Services\CategoryFinder\CategoryFinderInterface;
 use App\Services\CategoryHandler\CategoryHandlerInterface;
 use App\Services\FicheHandler\FicheHandlerInterface;
 use App\Services\FormHandler\FormHandlerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -171,29 +175,91 @@ class CategoryController extends AbstractController
 
     /**
      * @Route(
-     *     path="/{id}/fiches/search",
+     *     path="/{categoryId}/fiches/search/{searchId}",
      *     methods={"get", "post"},
-     *     name="category.searchFiches"
+     *     name="category.searchFiches",
+     *     defaults={"searchId" = 0}
      * )
+     * @Entity(name="category", expr="repository.find(categoryId)")
+     * @Entity(name="search", expr="repository.findOneByIdAndCategory(searchId, categoryId)")
      * @inheritdoc
      */
-    public function advancedSearch(Category $category, Request $request, CategoryFinderInterface $categoryFinder): Response
+    public function advancedSearch(Category $category, Search $search = null, Request $request, CategoryFinderInterface $categoryFinder): Response
     {
-        $form = $this->createForm(SearchInCategoryType::class, null, [
-            'category' => $category
-        ]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $results = $categoryFinder->search($category, $form->getData());
+        if ($search instanceof Search) {
+            $results = $categoryFinder->search($category, $search->getCriterias());
             return $this->render('category/search_results.html.twig', [
                 'results' => $results
             ]);
         }
+        else {
+            $form = $this->createForm(SearchInCategoryType::class, null, [
+                'category' => $category
+            ]);
+            $form->handleRequest($request);
 
-        return $this->render('category/search.html.twig', [
-            'category' => $category,
-            'form' => $form->createView()
-        ]);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $results = $categoryFinder->search($category, $form->getData());
+                $formData = ['criterias' => json_encode($categoryFinder->getLastSearchCriterias())];
+                $saveSearchForm = $this->createSaveSearchForm($category, $formData);
+
+                return $this->render('category/search_results.html.twig', [
+                    'results' => $results,
+                    'saveSearchForm' => $saveSearchForm->createView()
+                ]);
+            }
+
+            return $this->render('category/search.html.twig', [
+                'category' => $category,
+                'form' => $form->createView()
+            ]);
+        }
     }
+
+    /**
+     * @Route(
+     *     path="/{id}/save-search",
+     *     methods={"post"},
+     *     name="category.saveSearch"
+     * )
+     * @inheritdoc
+     */
+    public function saveSearch(Category $category, Request $request): Response
+    {
+        if ($request->isMethod('POST')) {
+            $form = $this->createSaveSearchForm($category);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $search = new Search();
+                $search
+                    ->setCriterias(json_decode($form->get('criterias')->getData(), true))
+                    ->setCategory($category)
+                    ->setUser($this->getUser())
+                ;
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($search);
+                $em->flush();
+
+                # Redirect to the search page
+                return $this->redirectToRoute('category.searchFiches', [
+                    'categoryId' => $category->getId(),
+                    'searchId' => $search->getId()
+                ]);
+            }
+        }
+
+        return $this->redirectToRoute('category.show', ['id' => $category->getId()]);
+    }
+
+    private function createSaveSearchForm(Category $category, array $data = []): FormInterface
+    {
+        $saveSearchForm = $this->createForm(SaveSearchType::class, $data, [
+            'action' => $this->generateUrl('category.saveSearch', ['id' => $category->getId()]),
+            'method' => 'POST'
+        ]);
+        return $saveSearchForm;
+    }
+
 }

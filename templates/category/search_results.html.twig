@@ -2,6 +2,14 @@
 
 {% block body %}
     <h1>Résultats de votre recherche</h1>
+
+    {% if saveSearchForm|default(false) %}
+        {{ form_start(saveSearchForm) }}
+            {{ form_widget(saveSearchForm) }}
+            <button>Sauvegarder la recherche</button>
+        {{ form_end(saveSearchForm) }}
+    {% endif %}
+
     {% if results is not empty %}
         <ul>
             {% for result in results %}

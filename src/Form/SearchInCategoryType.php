@@ -72,7 +72,7 @@ class SearchInCategoryType extends AbstractType
             $typeClass = "App\Form\WidgetType\\{$type}Type";
 
             if (class_exists($typeClass)) {
-                $builder->add($widget->getId(), $typeClass, [
+                $builder->add($widget->getImmutableId(), $typeClass, [
                     'widget' => $widget,
                     'mode' => $options['mode'],
                     'compound' => $options['compound']

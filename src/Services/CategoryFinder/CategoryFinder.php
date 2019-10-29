@@ -43,6 +43,11 @@ final class CategoryFinder implements CategoryFinderInterface
      */
     private $searchCriteriaCount;
 
+    /**
+     * @var array
+     */
+    private $lastSearchCriterias;
+
     public function __construct(EntityManagerInterface $entityManager,
                                 ValueRepository $valueRepository,
                                 WidgetRepository $widgetRepository,
@@ -57,6 +62,7 @@ final class CategoryFinder implements CategoryFinderInterface
     public function search(Category $category, array $criterias): array
     {
         $this->searchCriteriaCount = 0;
+        $this->lastSearchCriterias = $criterias;
 
         $this->qb = $this->valueRepository->createQueryBuilder('v');
 
@@ -81,10 +87,19 @@ final class CategoryFinder implements CategoryFinderInterface
         # Filter on title
         if (array_key_exists('title', $criterias)) {
             $criteriaTitle = $criterias['title'];
-            $this->ficheRepository->filterByTitle($fichesQ, $criteriaTitle['criteria'], $criteriaTitle['value']);
+            if ($criteriaTitle['criteria'] !== SearchCriteriaEnum::DISABLED && !empty($criteriaTitle['value'])) {
+                $this->searchCriteriaCount++;
+                $this->ficheRepository->filterByTitle($fichesQ, $criteriaTitle['criteria'], $criteriaTitle['value']);
+            }
         }
 
-        return $fichesQ->getQuery()->getResult();
+        if ($this->searchCriteriaCount > 0) {
+            return $fichesQ->getQuery()->getResult();
+        }
+
+        # No filtering -> empty
+        # That avoids to have too many data in the output
+        return [];
     }
 
     private function applyCriterias(Category $category, array $criteria)
@@ -99,37 +114,37 @@ final class CategoryFinder implements CategoryFinderInterface
         foreach ($widgets as $widget) {
 
             if (
-                !empty($criteria[$widget->getId()]) &&
-                ($criteria[$widget->getId()]['criteria'] ?? SearchCriteriaEnum::DISABLED) !== SearchCriteriaEnum::DISABLED)
+                !empty($criteria[$widget->getImmutableId()]) &&
+                ($criteria[$widget->getImmutableId()]['criteria'] ?? SearchCriteriaEnum::DISABLED) !== SearchCriteriaEnum::DISABLED)
             {
 
                 $type = ucfirst($widget->getType());
                 $valueColumn = "valueOfType{$type}";
-                $parameterKey = "value{$widget->getId()}";
-                $searchCriteria = $criteria[$widget->getId()]['criteria'];
-                $searchValue = $criteria[$widget->getId()]['value'];
+                $parameterKey = "value{$widget->getImmutableId()}";
+                $searchCriteria = $criteria[$widget->getImmutableId()]['criteria'];
+                $searchValue = $criteria[$widget->getImmutableId()]['value'];
 
                 switch ($searchCriteria) {
                     case SearchCriteriaEnum::IS_NULL:
-                        $subOrWheres[] = "v.{$valueColumn} IS NULL";
+                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} IS NULL)";
                         break;
                     case SearchCriteriaEnum::IS_NOT_NULL:
-                        $subOrWheres[] = "v.{$valueColumn} IS NOT NULL";
+                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} IS NOT NULL)";
                         break;
                     case SearchCriteriaEnum::EXACT:
-                        $subOrWheres[] = "v.{$valueColumn} = :{$parameterKey}";
+                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} = :{$parameterKey})";
                         $subOrWhereParameters[$parameterKey] = $searchValue;
                         break;
                     case SearchCriteriaEnum::CONTAINS:
-                        $subOrWheres[] = "v.{$valueColumn} LIKE :{$parameterKey}";
+                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
                         $subOrWhereParameters[$parameterKey] = "%{$searchValue}%";
                         break;
                     case SearchCriteriaEnum::STARTS_WITH:
-                        $subOrWheres[] = "v.{$valueColumn} LIKE :{$parameterKey}";
+                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
                         $subOrWhereParameters[$parameterKey] = "{$searchValue}%";
                         break;
                     case SearchCriteriaEnum::ENDS_WITH:
-                        $subOrWheres[] = "v.{$valueColumn} LIKE :{$parameterKey}";
+                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
                         $subOrWhereParameters[$parameterKey] = "%{$searchValue}";
                         break;
                 }
@@ -160,5 +175,10 @@ final class CategoryFinder implements CategoryFinderInterface
             ->andWhere('f.category = :category')
             ->setParameter('category', $category)
         ;
+    }
+
+    public function getLastSearchCriterias(): array
+    {
+        return $this->lastSearchCriterias ?? [];
     }
 }

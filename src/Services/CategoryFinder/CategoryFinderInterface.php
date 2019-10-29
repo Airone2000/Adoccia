@@ -7,4 +7,5 @@ use App\Entity\Category;
 interface CategoryFinderInterface
 {
     public function search(Category $category, array $criterias): array;
+    public function getLastSearchCriterias(): array;
 }

@@ -50,7 +50,7 @@ class FicheRepository extends ServiceEntityRepository
             ->setParameter('values', $values)
             ->having('COUNT(v) = :nOfMatchingValues')
             ->setParameter('nOfMatchingValues', $havingCount)
-            ->groupBy('f.id')
+            ->groupBy('v')
         ;
     }
 
