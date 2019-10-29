@@ -4,8 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use App\Entity\Fiche;
+use App\Enum\SearchCriteriaEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Fiche|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,22 +37,56 @@ class FicheRepository extends ServiceEntityRepository
 
     /**
      * Used by the CategoryFinder to retrieve fiches having values that match user criterias
+     * @param QueryBuilder $queryBuilder
      * @param array $values
-     * @return array
+     * @param int $havingCount
+     * @return QueryBuilder
      */
-    public function getFicheByValues(array $values, int $havingCount): array
+    public function getFicheByValues(QueryBuilder $queryBuilder, array $values, int $havingCount): QueryBuilder
     {
-        $qb = $this->createQueryBuilder('f');
-        return $qb
+        return $queryBuilder
             ->leftJoin('f.values', 'v')
             ->andWhere('v.id IN (:values)')
             ->setParameter('values', $values)
             ->having('COUNT(v) = :nOfMatchingValues')
             ->setParameter('nOfMatchingValues', $havingCount)
             ->groupBy('f.id')
-            ->getQuery()
-            ->getResult()
         ;
+    }
 
+    public function filterByTitle(QueryBuilder $queryBuilder, string $criteria, ?string $value)
+    {
+        if (empty($value)) return;
+        if (!SearchCriteriaEnum::isset($criteria)) return;
+
+        switch ($criteria) {
+            case SearchCriteriaEnum::DISABLED:
+                // Nothing
+                return;
+            case SearchCriteriaEnum::CONTAINS:
+                $queryBuilder
+                    ->andWhere('f.title LIKE :title')
+                    ->setParameter('title', "%{$value}%")
+                ;
+                return;
+            case SearchCriteriaEnum::EXACT:
+                $queryBuilder
+                    ->andWhere('f.title = :title')
+                    ->setParameter('title', $value)
+                ;
+                return;
+            case SearchCriteriaEnum::STARTS_WITH:
+                $queryBuilder
+                    ->andWhere('f.title LIKE :title')
+                    ->setParameter('title', "{$value}%")
+                ;
+                return;
+            case SearchCriteriaEnum::ENDS_WITH:
+                $queryBuilder
+                    ->andWhere('f.title LIKE :title')
+                    ->setParameter('title', "%{$value}")
+                ;
+                return;
+        }
     }
 }

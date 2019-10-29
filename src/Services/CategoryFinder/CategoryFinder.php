@@ -63,29 +63,28 @@ final class CategoryFinder implements CategoryFinderInterface
         # Filter on category
         $this->setWhereCategory($category);
 
-        # Apply search on title
-        $this->applySearchOnTitle($category, $criterias);
-
         # Apply criterias
         $this->applyCriterias($category, $criterias);
 
         # Matching widgets
         $matchingValues = $this->qb->getQuery()->getArrayResult();
 
+        # Query for fiches
+        $fichesQ = $this->ficheRepository->createQueryBuilder('f');
+
         # Search fiches by matching widgets
-        $fiches = $this->ficheRepository->getFicheByValues($matchingValues, $this->searchCriteriaCount);
-
-        return $fiches;
-    }
-
-    private function applySearchOnTitle(Category $category, array $criterias)
-    {
-        if (array_key_exists('title', $criterias)) {
-            
+        if ($this->searchCriteriaCount > 0) {
+            $this->ficheRepository->getFicheByValues($fichesQ, $matchingValues, $this->searchCriteriaCount);
         }
-        dd($criterias);
-    }
 
+        # Filter on title
+        if (array_key_exists('title', $criterias)) {
+            $criteriaTitle = $criterias['title'];
+            $this->ficheRepository->filterByTitle($fichesQ, $criteriaTitle['criteria'], $criteriaTitle['value']);
+        }
+
+        return $fichesQ->getQuery()->getResult();
+    }
 
     private function applyCriterias(Category $category, array $criteria)
     {
@@ -153,9 +152,9 @@ final class CategoryFinder implements CategoryFinderInterface
         }
     }
 
-    private function appendToQueryBySwitch(string $valueColumn, string $parameterKey, $searchValue)
+    private function appendToQueryBySwitchCriteria(string $valueColumn, string $parameterKey, $searchValue)
     {
-        
+
     }
     
     private function setWhereCategory(Category $category)
