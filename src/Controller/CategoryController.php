@@ -185,7 +185,9 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $results = $categoryFinder->search($category, $form->getData());
-            dd($results);
+            return $this->render('category/search_results.html.twig', [
+                'results' => $results
+            ]);
         }
 
         return $this->render('category/search.html.twig', [

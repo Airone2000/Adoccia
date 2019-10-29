@@ -44,6 +44,7 @@ class StringType extends AbstractWidgetType
     protected function getSearchCriterias(): array
     {
         return [
+            SearchCriteriaEnum::DISABLED,
             SearchCriteriaEnum::IS_NULL,
             SearchCriteriaEnum::IS_NOT_NULL,
             SearchCriteriaEnum::EXACT,

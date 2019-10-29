@@ -32,4 +32,25 @@ class FicheRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * Used by the CategoryFinder to retrieve fiches having values that match user criterias
+     * @param array $values
+     * @return array
+     */
+    public function getFicheByValues(array $values, int $havingCount): array
+    {
+        $qb = $this->createQueryBuilder('f');
+        return $qb
+            ->leftJoin('f.values', 'v')
+            ->andWhere('v.id IN (:values)')
+            ->setParameter('values', $values)
+            ->having('COUNT(v) = :nOfMatchingValues')
+            ->setParameter('nOfMatchingValues', $havingCount)
+            ->groupBy('f.id')
+            ->getQuery()
+            ->getResult()
+        ;
+
+    }
 }

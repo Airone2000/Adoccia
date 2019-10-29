@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Résultats de votre recherche</h1>
+    {% if results is not empty %}
+        <ul>
+            {% for result in results %}
+                <li>
+                    <a href="{{ url('fiche.show', {'id': result.id}) }}">{{ result.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        Aucun résultat
+    {% endif %}
+{% endblock %}
+
+

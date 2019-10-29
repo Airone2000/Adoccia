@@ -5,6 +5,9 @@ namespace App\Enum;
 final class SearchCriteriaEnum extends AbstractEnum
 {
     const
+
+        DISABLED            = 'DISABLED',
+
         IS_NULL             = 'IS_NULL',
         IS_NOT_NULL         = 'IS_NOT_NULL',
 
