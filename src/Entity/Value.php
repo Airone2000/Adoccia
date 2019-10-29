@@ -51,6 +51,12 @@ class Value
      */
     private $valueOfTypeString;
 
+    /**
+     * @var null|int
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $valueOfTypeInt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +140,28 @@ class Value
     public function setValueOfTypeString(?string $valueOfTypeString): Value
     {
         $this->valueOfTypeString = $valueOfTypeString;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getValueOfTypeInt(): ?int
+    {
+        if ($this->valueOfTypeInt !== null) {
+            return (int)$this->valueOfTypeInt;
+        }
+
+        return null;
+    }
+
+    /**
+     * @param int|null $valueOfTypeInt
+     * @return Value
+     */
+    public function setValueOfTypeInt(?int $valueOfTypeInt): Value
+    {
+        $this->valueOfTypeInt = $valueOfTypeInt;
         return $this;
     }
 

@@ -1,6 +1,8 @@
 WidgetType.empty: "Zone vide"
 WidgetType.label: Label
-WidgetType.Group.textual: "Widgets textuels"
+WidgetType.Group.textual: "Lettres et textes"
 WidgetType.string: "Ligne de texte"
 WidgetType.text: "Grande zone de texte"
+WidgetType.Group.number: "Chiffres et nombres"
+WidgetType.int: "Nombre"
 
