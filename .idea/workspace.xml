@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/FormController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FormController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enum/WidgetTypeEnum.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enum/WidgetTypeEnum.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191025224254.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191026222426.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191026222821.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191026223026.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191027152038.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191027200819.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191029134112.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191029170537.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ValueRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ValueRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/FormHandler/FormHandlerInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/FormHandler/FormHandlerInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/FicheRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/FicheRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,11 +17,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="109" column="37" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
+            <state relative-caret-position="440">
+              <caret line="135" column="54" selection-start-line="135" selection-start-column="54" selection-end-line="135" selection-end-column="54" />
+              <folding>
+                <element signature="e#47#71#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Repository/FicheRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="278">
+              <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+              <folding>
+                <element signature="e#34#58#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -123,7 +125,6 @@
         <option value="$PROJECT_DIR$/templates/category/search_results.html.twig" />
         <option value="$PROJECT_DIR$/templates/category/list_fiches.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/SearchInCategoryType.php" />
-        <option value="$PROJECT_DIR$/src/Repository/FicheRepository.php" />
         <option value="$PROJECT_DIR$/src/Form/WidgetType/UintType.php" />
         <option value="$PROJECT_DIR$/translations/messages.fr.yaml" />
         <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
@@ -132,13 +133,14 @@
         <option value="$PROJECT_DIR$/src/Entity/Value.php" />
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/src/Form/WidgetType/IntType.php" />
-        <option value="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" />
         <option value="$PROJECT_DIR$/src/Controller/FormController.php" />
         <option value="$PROJECT_DIR$/src/Services/FormHandler/FormHandlerInterface.php" />
         <option value="$PROJECT_DIR$/src/Enum/WidgetTypeEnum.php" />
         <option value="$PROJECT_DIR$/src/Repository/ValueRepository.php" />
         <option value="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" />
         <option value="$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php" />
+        <option value="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" />
+        <option value="$PROJECT_DIR$/src/Repository/FicheRepository.php" />
       </list>
     </option>
   </component>
@@ -261,23 +263,6 @@
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Services" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -338,12 +323,12 @@
       <workItem from="1546304049367" duration="31963000" />
       <workItem from="1572020367400" duration="22354000" />
       <workItem from="1572278941637" duration="10823000" />
-      <workItem from="1572341913575" duration="17440000" />
+      <workItem from="1572341913575" duration="18299000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="245271000" />
+    <option name="totallyTimeSpent" value="246130000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -557,16 +542,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/FicheRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/WidgetRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
@@ -629,16 +604,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/StringType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="11" column="30" lean-forward="true" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding>
-            <element signature="e#39#66#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/twig-bridge/Resources/views/Form/foundation_5_layout.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-705">
@@ -696,16 +661,6 @@
             <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="143" column="37" selection-start-line="143" selection-start-column="37" selection-end-line="143" selection-end-column="37" />
-          <folding>
-            <element signature="e#47#71#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -867,8 +822,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="109" column="37" selection-start-line="109" selection-start-column="37" selection-end-line="109" selection-end-column="37" />
+        <state relative-caret-position="240">
+          <caret line="92" column="36" lean-forward="true" selection-start-line="92" selection-start-column="36" selection-end-line="92" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/StringType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding>
+            <element signature="e#39#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="135" column="54" selection-start-line="135" selection-start-column="54" selection-end-line="135" selection-end-column="54" />
+          <folding>
+            <element signature="e#47#71#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/FicheRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+          <folding>
+            <element signature="e#34#58#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

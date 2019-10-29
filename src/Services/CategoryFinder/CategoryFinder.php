@@ -132,28 +132,40 @@ final class CategoryFinder implements CategoryFinderInterface
                         $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} IS NOT NULL)";
                         break;
                     case SearchCriteriaEnum::EXACT:
-                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} = :{$parameterKey})";
-                        $subOrWhereParameters[$parameterKey] = $searchValue;
+                        if ($searchValue !== null) {
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} = :{$parameterKey})";
+                            $subOrWhereParameters[$parameterKey] = $searchValue;
+                        }
                         break;
                     case SearchCriteriaEnum::CONTAINS:
-                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
-                        $subOrWhereParameters[$parameterKey] = "%{$searchValue}%";
+                        if ($searchValue !== null) {
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
+                            $subOrWhereParameters[$parameterKey] = "%{$searchValue}%";
+                        }
                         break;
                     case SearchCriteriaEnum::STARTS_WITH:
-                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
-                        $subOrWhereParameters[$parameterKey] = "{$searchValue}%";
+                        if ($searchValue !== null) {
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
+                            $subOrWhereParameters[$parameterKey] = "{$searchValue}%";
+                        }
                         break;
                     case SearchCriteriaEnum::ENDS_WITH:
-                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
-                        $subOrWhereParameters[$parameterKey] = "%{$searchValue}";
+                        if ($searchValue !== null) {
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
+                            $subOrWhereParameters[$parameterKey] = "%{$searchValue}";
+                        }
                         break;
                     case SearchCriteriaEnum::GREATER_THAN:
-                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} > :{$parameterKey})";
-                        $subOrWhereParameters[$parameterKey] = $searchValue;
+                        if ($searchValue !== null) {
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} > :{$parameterKey})";
+                            $subOrWhereParameters[$parameterKey] = $searchValue;
+                        }
                         break;
                     case SearchCriteriaEnum::LOWER_THAN:
-                        $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} < :{$parameterKey})";
-                        $subOrWhereParameters[$parameterKey] = $searchValue;
+                        if ($searchValue !== null) {
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} < :{$parameterKey})";
+                            $subOrWhereParameters[$parameterKey] = $searchValue;
+                        }
                         break;
                 }
             }

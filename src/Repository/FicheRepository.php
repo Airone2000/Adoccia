@@ -56,7 +56,7 @@ class FicheRepository extends ServiceEntityRepository
 
     public function filterByTitle(QueryBuilder $queryBuilder, string $criteria, ?string $value)
     {
-        if (empty($value)) return;
+        if (is_null($value)) return;
         if (!SearchCriteriaEnum::isset($criteria)) return;
 
         switch ($criteria) {
