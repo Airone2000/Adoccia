@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/FicheController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FicheController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/SearchInCategoryType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/SearchInCategoryType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/WidgetType/StringType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/WidgetType/StringType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/FicheRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/FicheRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/category/list_fiches.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/list_fiches.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/category/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/fiche/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/fiche/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Widget.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Widget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,13 +17,56 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/CategoryController.php">
+        <entry file="file://$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="128" column="38" lean-forward="true" selection-start-line="128" selection-start-column="38" selection-end-line="128" selection-end-column="38" />
+            <state relative-caret-position="370">
+              <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Widget.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="498">
+              <caret line="257" column="33" selection-start-line="257" selection-start-column="33" selection-end-line="257" selection-end-column="33" />
               <folding>
-                <element signature="e#34#58#0#PHP" expanded="true" />
-                <element signature="e#6546#6581#0#PHP" expanded="true" />
+                <element signature="e#2663#2730#0#PHP" />
+                <element signature="e#2736#2769#0#PHP" />
+                <element signature="e#2774#2861#0#PHP" />
+                <element signature="e#2867#2905#0#PHP" />
+                <element signature="e#2910#2984#0#PHP" />
+                <element signature="e#2990#3050#0#PHP" />
+                <element signature="e#3055#3163#0#PHP" />
+                <element signature="e#3169#3204#0#PHP" />
+                <element signature="e#3209#3292#0#PHP" />
+                <element signature="e#3298#3364#0#PHP" />
+                <element signature="e#3369#3495#0#PHP" />
+                <element signature="e#3501#3539#0#PHP" />
+                <element signature="e#3544#3628#0#PHP" />
+                <element signature="e#3634#3704#0#PHP" />
+                <element signature="e#3709#3838#0#PHP" />
+                <element signature="e#3844#3879#0#PHP" />
+                <element signature="e#3884#3965#0#PHP" />
+                <element signature="e#3971#4038#0#PHP" />
+                <element signature="e#4043#4169#0#PHP" />
+                <element signature="e#4175#4210#0#PHP" />
+                <element signature="e#4215#4296#0#PHP" />
+                <element signature="e#4302#4369#0#PHP" />
+                <element signature="e#4374#4500#0#PHP" />
+                <element signature="e#4506#4537#0#PHP" />
+                <element signature="e#4827#4865#0#PHP" />
+                <element signature="e#4870#4954#0#PHP" />
+                <element signature="e#4960#5030#0#PHP" />
+                <element signature="e#5035#5164#0#PHP" />
+                <element signature="e#5170#5208#0#PHP" />
+                <element signature="e#5213#5325#0#PHP" />
+                <element signature="e#5331#5401#0#PHP" />
+                <element signature="e#5406#5535#0#PHP" />
+                <element signature="e#5541#5579#0#PHP" />
+                <element signature="e#5584#5682#0#PHP" />
+                <element signature="e#5688#5765#0#PHP" />
+                <element signature="e#5770#5927#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -40,8 +76,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getInn</find>
-      <find>getShortWidgetForm</find>
       <find>_listenForWidgetSettingsSubmit</find>
       <find>formAreasSettingsView</find>
       <find>DEFAULT_BACKGROUND_COLOR</find>
@@ -70,6 +104,8 @@
       <find>addWidgetValueToCategoryFiches</find>
       <find>addFormAreaToDraftForm</find>
       <find>deleteByFiche</find>
+      <find>n addFi</find>
+      <find>n setRequi</find>
     </findStrings>
     <replaceStrings>
       <replace>_makeFormSyncing</replace>
@@ -91,7 +127,6 @@
         <option value="$PROJECT_DIR$/templates/category/add_fiche.html.twig" />
         <option value="$PROJECT_DIR$/assets/css/category/add_fiche.scss" />
         <option value="$PROJECT_DIR$/assets/css/form/edit.scss" />
-        <option value="$PROJECT_DIR$/src/Entity/Widget.php" />
         <option value="$PROJECT_DIR$/src/Form/WidgetSettingsType/StringWidgetSettingsType.php" />
         <option value="$PROJECT_DIR$/src/Form/FormAreaSettingsType.php" />
         <option value="$PROJECT_DIR$/templates/extensions/FormAreaWrapper/start.html.twig" />
@@ -125,7 +160,6 @@
         <option value="$PROJECT_DIR$/src/Services/FormHandler/FormHandlerInterface.php" />
         <option value="$PROJECT_DIR$/src/Enum/WidgetTypeEnum.php" />
         <option value="$PROJECT_DIR$/src/Repository/ValueRepository.php" />
-        <option value="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" />
         <option value="$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php" />
         <option value="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" />
         <option value="$PROJECT_DIR$/templates/category/show.html.twig" />
@@ -136,6 +170,8 @@
         <option value="$PROJECT_DIR$/src/Controller/FicheController.php" />
         <option value="$PROJECT_DIR$/templates/fiche/show.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/CategoryController.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Widget.php" />
+        <option value="$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php" />
       </list>
     </option>
   </component>
@@ -336,12 +372,12 @@
       <workItem from="1546304049367" duration="31963000" />
       <workItem from="1572020367400" duration="22354000" />
       <workItem from="1572278941637" duration="10823000" />
-      <workItem from="1572341913575" duration="19281000" />
+      <workItem from="1572341913575" duration="20421000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="247112000" />
+    <option name="totallyTimeSpent" value="248252000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -395,13 +431,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Services/CategoryHandler/CategoryHandler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Services/FicheHandler/FicheHandlerInterface.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -637,68 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Widget.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="113" column="33" lean-forward="true" selection-start-line="113" selection-start-column="33" selection-end-line="113" selection-end-column="33" />
-          <folding>
-            <element signature="e#204#277#0#PHP" />
-            <element signature="e#354#446#0#PHP" />
-            <element signature="e#469#544#0#PHP" />
-            <element signature="e#576#656#0#PHP" />
-            <element signature="e#681#850#0#PHP" />
-            <element signature="e#879#980#0#PHP" />
-            <element signature="e#1010#1209#0#PHP" />
-            <element signature="e#1239#1438#0#PHP" />
-            <element signature="e#1468#1671#0#PHP" />
-            <element signature="e#1708#1946#0#PHP" />
-            <element signature="e#1976#2186#0#PHP" />
-            <element signature="e#2216#2413#0#PHP" />
-            <element signature="e#2540#2589#0#PHP" />
-            <element signature="e#2594#2657#0#PHP" />
-            <element signature="e#2663#2730#0#PHP" />
-            <element signature="e#2736#2769#0#PHP" />
-            <element signature="e#2774#2861#0#PHP" />
-            <element signature="e#2867#2905#0#PHP" />
-            <element signature="e#2910#2984#0#PHP" />
-            <element signature="e#2990#3050#0#PHP" />
-            <element signature="e#3055#3163#0#PHP" />
-            <element signature="e#3169#3204#0#PHP" />
-            <element signature="e#3209#3292#0#PHP" />
-            <element signature="e#3298#3364#0#PHP" />
-            <element signature="e#3369#3495#0#PHP" />
-            <element signature="e#3501#3539#0#PHP" />
-            <element signature="e#3544#3628#0#PHP" />
-            <element signature="e#3634#3704#0#PHP" />
-            <element signature="e#3709#3838#0#PHP" />
-            <element signature="e#3844#3879#0#PHP" />
-            <element signature="e#3884#3965#0#PHP" />
-            <element signature="e#3971#4038#0#PHP" />
-            <element signature="e#4043#4169#0#PHP" />
-            <element signature="e#4175#4210#0#PHP" />
-            <element signature="e#4215#4296#0#PHP" />
-            <element signature="e#4302#4369#0#PHP" />
-            <element signature="e#4374#4500#0#PHP" />
-            <element signature="e#4506#4537#0#PHP" />
-            <element signature="e#4542#4626#0#PHP" />
-            <element signature="e#4632#4694#0#PHP" />
-            <element signature="e#4699#4821#0#PHP" />
-            <element signature="e#4827#4865#0#PHP" />
-            <element signature="e#4870#4954#0#PHP" />
-            <element signature="e#4960#5030#0#PHP" />
-            <element signature="e#5035#5164#0#PHP" />
-            <element signature="e#5170#5208#0#PHP" />
-            <element signature="e#5213#5325#0#PHP" />
-            <element signature="e#5331#5401#0#PHP" />
-            <element signature="e#5406#5535#0#PHP" />
-            <element signature="e#5541#5579#0#PHP" />
-            <element signature="e#5584#5682#0#PHP" />
-            <element signature="e#5688#5765#0#PHP" />
-            <element signature="e#5770#5927#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EntityListener/FormAreaListener.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -758,13 +725,6 @@
           <folding>
             <element signature="e#34#58#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1509">
-          <caret line="205" column="31" selection-start-line="205" selection-start-column="31" selection-end-line="205" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -867,12 +827,71 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CategoryController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="128" column="38" lean-forward="true" selection-start-line="128" selection-start-column="38" selection-end-line="128" selection-end-column="38" />
+        <state relative-caret-position="362">
+          <caret line="140" column="46" selection-start-line="140" selection-start-column="46" selection-end-line="140" selection-end-column="46" />
           <folding>
             <element signature="e#34#58#0#PHP" expanded="true" />
             <element signature="e#6546#6581#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/Reflection/Reflection.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="902" lean-forward="true" selection-start-line="902" selection-end-line="902" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Widget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="257" column="33" selection-start-line="257" selection-start-column="33" selection-end-line="257" selection-end-column="33" />
+          <folding>
+            <element signature="e#2663#2730#0#PHP" />
+            <element signature="e#2736#2769#0#PHP" />
+            <element signature="e#2774#2861#0#PHP" />
+            <element signature="e#2867#2905#0#PHP" />
+            <element signature="e#2910#2984#0#PHP" />
+            <element signature="e#2990#3050#0#PHP" />
+            <element signature="e#3055#3163#0#PHP" />
+            <element signature="e#3169#3204#0#PHP" />
+            <element signature="e#3209#3292#0#PHP" />
+            <element signature="e#3298#3364#0#PHP" />
+            <element signature="e#3369#3495#0#PHP" />
+            <element signature="e#3501#3539#0#PHP" />
+            <element signature="e#3544#3628#0#PHP" />
+            <element signature="e#3634#3704#0#PHP" />
+            <element signature="e#3709#3838#0#PHP" />
+            <element signature="e#3844#3879#0#PHP" />
+            <element signature="e#3884#3965#0#PHP" />
+            <element signature="e#3971#4038#0#PHP" />
+            <element signature="e#4043#4169#0#PHP" />
+            <element signature="e#4175#4210#0#PHP" />
+            <element signature="e#4215#4296#0#PHP" />
+            <element signature="e#4302#4369#0#PHP" />
+            <element signature="e#4374#4500#0#PHP" />
+            <element signature="e#4506#4537#0#PHP" />
+            <element signature="e#4827#4865#0#PHP" />
+            <element signature="e#4870#4954#0#PHP" />
+            <element signature="e#4960#5030#0#PHP" />
+            <element signature="e#5035#5164#0#PHP" />
+            <element signature="e#5170#5208#0#PHP" />
+            <element signature="e#5213#5325#0#PHP" />
+            <element signature="e#5331#5401#0#PHP" />
+            <element signature="e#5406#5535#0#PHP" />
+            <element signature="e#5541#5579#0#PHP" />
+            <element signature="e#5584#5682#0#PHP" />
+            <element signature="e#5688#5765#0#PHP" />
+            <element signature="e#5770#5927#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/FormHandler/FormHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
         </state>
       </provider>
     </entry>

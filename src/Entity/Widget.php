@@ -6,6 +6,7 @@ use App\Enum\TextAlignPositionEnum;
 use App\Validator\Color;
 use App\Validator\Enum;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -124,6 +125,24 @@ class Widget
         $this->id = null;
     }
 
+    public function resetSettings()
+    {
+        try {
+            $immutableProperties = ['id', 'immutableId', 'type', 'formArea'];
+            $reflection = new \ReflectionClass($this);
+            foreach ($reflection->getProperties(\ReflectionProperty::IS_PRIVATE) as $property) {
+                $propertyName = $property->getName();
+                if (!in_array($propertyName, $immutableProperties)) {
+                    $setter = "set{$propertyName}";
+                    if (method_exists($this, $setter)) {
+                        call_user_func([$this, $setter], null); // falsy -> cast internally based on type hint
+                    }
+                }
+            }
+        }
+        catch (\ReflectionException $e) { /* The class exists because we are in ! */ }
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -236,12 +255,12 @@ class Widget
     }
 
     /**
-     * @param bool $required
+     * @param bool|null $required
      * @return Widget
      */
-    public function setRequired(bool $required): Widget
+    public function setRequired(?bool $required): Widget
     {
-        $this->required = $required;
+        $this->required = (bool)$required;
         return $this;
     }
 

@@ -89,21 +89,8 @@ final class FormHandler implements FormHandlerInterface
     {
         if (WidgetTypeEnum::isset($newType)) {
 
-            $oldType = $widget->getType();
-
-            $reflectionClass = new \ReflectionClass($widget);
-            $properties = $reflectionClass->getProperties(\ReflectionProperty::IS_PRIVATE);
-            /** @var \ReflectionProperty $property */
-            foreach ($properties as $property) {
-                $propertyName = ucfirst($property->name);
-                $endWithSetting = (substr($propertyName, - 7) === 'Setting');
-                if ($endWithSetting) {
-                    $setter = "set{$propertyName}";
-                    if (method_exists($widget, $setter)) {
-                        call_user_func([$widget, $setter], null); // falsy
-                    }
-                }
-            }
+            # Reset all settings for this widget
+            $widget->resetSettings();
 
             $widget->setType($newType);
             $this->entityManager->flush();
