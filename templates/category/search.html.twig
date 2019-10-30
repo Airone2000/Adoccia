@@ -25,6 +25,15 @@
                 </div>
 
                     {{ form_widget(form) }}
+
+                    {% if search.id %}
+                        <a href="{{ url('category.searchFiches', {'categoryId': category.id}) }}">
+                            <button type="button">Reset</button>
+                        </a>
+                    {% else %}
+                        <button type="reset">Reset</button>
+                    {% endif %}
+
                     <button>Rechercher</button>
                 {{ form_end(form) }}
         </div>

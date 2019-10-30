@@ -11,7 +11,7 @@ class Search {
         $(document).on('change', 'select[name$="[criteria]"]', (e) => {
             let $picker = $(e.target);
             let $itemSelected = $($picker.children(':selected')[0]);
-            let $value2 = $picker.siblings('.value2.hidden');
+            let $value2 = $picker.siblings('.value2');
             if ($itemSelected.hasClass('display-value2')) {
                 $value2.removeClass('hidden').addClass('visible');
             }

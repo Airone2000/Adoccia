@@ -21,6 +21,10 @@
     {% else %}
         Aucun résultat
     {% endif %}
+
+    <a href="{{ url('category.searchFiches', {'categoryId': category.id, 'searchId': search.id}) }}">
+        Modifier la rechercher
+    </a>
 {% endblock %}
 
 

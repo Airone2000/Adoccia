@@ -143,7 +143,7 @@ class CategoryController extends AbstractController
                 $data = $form->getData();
                 $data['category'] = $category;
                 $fiche = $ficheHandler->createFicheFromFicheTypeData($data);
-                return $this->redirectToRoute('fiche.show', ['id' => $fiche->getId()]);
+                return $this->redirectToRoute('fiche.show', ['categoryId' => $category->getId(), 'ficheId' => $fiche->getId()]);
             }
             catch (\Exception $e) {
                 $this->addFlash('addFicheError', '');
@@ -216,7 +216,8 @@ class CategoryController extends AbstractController
 
         return $this->render('category/search.html.twig', [
             'category' => $category,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'search' => $search
         ]);
     }
 
@@ -235,7 +236,8 @@ class CategoryController extends AbstractController
         $results = $categoryFinder->search($category, $search->getCriterias());
         return $this->render('category/search_results.html.twig', [
             'results' => $results,
-            'category' => $category
+            'category' => $category,
+            'search' => $search
         ]);
     }
 

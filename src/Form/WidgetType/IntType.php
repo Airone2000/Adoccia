@@ -6,8 +6,10 @@ use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
 use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\Type;
 
 class IntType extends AbstractWidgetType
@@ -29,28 +31,58 @@ class IntType extends AbstractWidgetType
         /* @var Widget $widget */
         $widget = $options['widget'];
 
+        $valueOptions = [
+            'required' => false,
+            'attr' => [
+                'placeholder' => $widget->getInputPlaceholder(),
+                'min' => $widget->getMin() ?? '',
+                'max' => $widget->getMax() ?? '',
+                'step' => 'any'
+            ],
+            'html5' => true,
+            'constraints' => [
+                new Type(['type' => 'numeric'])
+            ]
+        ];
+
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
                 'choice_label' => function(string $label) {
-                    return $label;
+                    return 'trans.'.$label;
+                },
+                'choice_attr' => function(string $value) {
+                    $attr = [];
+                    if ($value === SearchCriteriaEnum::BETWEEN) {
+                        $attr['class'] = 'display-value2';
+                    }
+                    return $attr;
                 }
             ])
+            ->add('value', NumberType::class, $valueOptions)
         ;
 
-        $builder
-            ->add('value', IntegerType::class, [
-                'required' => false,
-                'constraints' => [
-                    new Type(['type' => 'int'])
-                ],
-                'attr' => [
-                    'placeholder' => $widget->getInputPlaceholder(),
-                    'min' => $widget->getMin() ?? '',
-                    'max' => $widget->getMax() ?? ''
-                ]
-            ])
-        ;
+        /**
+         * Get the value of criteria.
+         * If it's equal to BETWEEN, let's display the Value2 input
+         */
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $formEvent) use ($widget, $valueOptions) {
+            $data = $formEvent->getData();
+            $criteria = is_array($data) ? $data['criteria'] : null;
+
+            $form = $formEvent->getForm();
+
+            # Second input, useful in some case (for instance with SearchCriteria BETWEEN)
+            $value2Class = 'value2';
+            $value2Class .= $criteria !== SearchCriteriaEnum::BETWEEN ? ' hidden' : '';
+
+            $form
+                ->add('value2', NumberType::class,[
+                        'attr' => ['class' => $value2Class] + $valueOptions['attr']
+                    ] + $valueOptions
+                )
+            ;
+        });
     }
 
     protected function getSearchCriterias(): array
@@ -59,12 +91,10 @@ class IntType extends AbstractWidgetType
             SearchCriteriaEnum::DISABLED,
             SearchCriteriaEnum::IS_NULL,
             SearchCriteriaEnum::IS_NOT_NULL,
-            SearchCriteriaEnum::EXACT,
-            SearchCriteriaEnum::CONTAINS,
-            SearchCriteriaEnum::STARTS_WITH,
-            SearchCriteriaEnum::ENDS_WITH,
+            SearchCriteriaEnum::EQUAL_TO,
             SearchCriteriaEnum::GREATER_THAN,
-            SearchCriteriaEnum::LOWER_THAN
+            SearchCriteriaEnum::LOWER_THAN,
+            SearchCriteriaEnum::BETWEEN
         ];
     }
 }
