@@ -8,6 +8,8 @@ use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\Type;
 
 class FloatType extends AbstractWidgetType
@@ -29,22 +31,6 @@ class FloatType extends AbstractWidgetType
         /* @var Widget $widget */
         $widget = $options['widget'];
 
-        $builder
-            ->add('criteria', ChoiceType::class, [
-                'choices' => $this->getSearchCriterias(),
-                'choice_label' => function(string $label) {
-                    return 'trans.'.$label;
-                },
-                'choice_attr' => function(string $value) {
-                    $attr = [];
-                    if ($value === SearchCriteriaEnum::BETWEEN) {
-                        $attr['class'] = 'display-value2';
-                    }
-                    return $attr;
-                }
-            ])
-        ;
-
         $valueOptions = [
             'required' => false,
             'attr' => [
@@ -60,14 +46,43 @@ class FloatType extends AbstractWidgetType
         ];
 
         $builder
+            ->add('criteria', ChoiceType::class, [
+                'choices' => $this->getSearchCriterias(),
+                'choice_label' => function(string $label) {
+                    return 'trans.'.$label;
+                },
+                'choice_attr' => function(string $value) {
+                    $attr = [];
+                    if ($value === SearchCriteriaEnum::BETWEEN) {
+                        $attr['class'] = 'display-value2';
+                    }
+                    return $attr;
+                }
+            ])
             ->add('value', NumberType::class, $valueOptions)
+        ;
+
+        /**
+         * Get the value of criteria.
+         * If it's equal to BETWEEN, let's display the Value2 input
+         */
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $formEvent) use ($widget, $valueOptions) {
+            $data = $formEvent->getData();
+            $criteria = is_array($data) ? $data['criteria'] : null;
+
+            $form = $formEvent->getForm();
 
             # Second input, useful in some case (for instance with SearchCriteria BETWEEN)
-            ->add('value2', NumberType::class,[
-                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
-                ] + $valueOptions
-            )
-        ;
+            $value2Class = 'value2';
+            $value2Class .= $criteria !== SearchCriteriaEnum::BETWEEN ? ' hidden' : '';
+
+            $form
+                ->add('value2', NumberType::class,[
+                        'attr' => ['class' => $value2Class] + $valueOptions['attr']
+                    ] + $valueOptions
+                )
+            ;
+        });
     }
 
     protected function getSearchCriterias(): array

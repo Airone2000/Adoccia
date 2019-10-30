@@ -58,7 +58,7 @@ class Search
      */
     public function getCriterias(): array
     {
-        return $this->criterias;
+        return (array) $this->criterias;
     }
 
     /**

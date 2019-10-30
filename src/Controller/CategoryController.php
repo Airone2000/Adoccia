@@ -186,82 +186,57 @@ class CategoryController extends AbstractController
      */
     public function advancedSearch(Category $category, Search $search = null, Request $request, CategoryFinderInterface $categoryFinder): Response
     {
-        if ($search instanceof Search) {
-            $results = $categoryFinder->search($category, $search->getCriterias());
-            return $this->render('category/search_results.html.twig', [
-                'results' => $results,
-                'category' => $category
+        # Fill the form with existing data from Search
+        $search = $search ?? new Search();
+
+        $form = $this->createForm(SearchInCategoryType::class, $search->getCriterias(), [
+            'category' => $category
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            # AutoSave the search
+            $search = new Search();
+            $search
+                ->setCriterias($form->getData())
+                ->setCategory($category)
+                ->setUser($this->getUser())
+            ;
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($search);
+            $em->flush();
+
+            # And then, redirect to results
+            return $this->redirectToRoute('category.searchResults', [
+                'categoryId' => $category->getId(),
+                'searchId' => $search->getId()
             ]);
         }
-        else {
-            $form = $this->createForm(SearchInCategoryType::class, null, [
-                'category' => $category
-            ]);
-            $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $results = $categoryFinder->search($category, $form->getData());
-                $formData = ['criterias' => json_encode($categoryFinder->getLastSearchCriterias())];
-                $saveSearchForm = $this->createSaveSearchForm($category, $formData);
-
-                return $this->render('category/search_results.html.twig', [
-                    'results' => $results,
-                    'saveSearchForm' => $saveSearchForm->createView(),
-                    'category' => $category
-                ]);
-            }
-
-            return $this->render('category/search.html.twig', [
-                'category' => $category,
-                'form' => $form->createView()
-            ]);
-        }
+        return $this->render('category/search.html.twig', [
+            'category' => $category,
+            'form' => $form->createView()
+        ]);
     }
 
     /**
      * @Route(
-     *     path="/{id}/save-search",
-     *     methods={"post"},
-     *     name="category.saveSearch"
+     *     path="/{categoryId}/fiches/search/{searchId}/results",
+     *     methods={"get"},
+     *     name="category.searchResults"
      * )
+     * @Entity(name="category", expr="repository.find(categoryId)")
+     * @Entity(name="search", expr="repository.findOneByIdAndCategory(searchId, categoryId)")
      * @inheritdoc
      */
-    public function saveSearch(Category $category, Request $request): Response
+    public function searchResults(Category $category, Search $search, CategoryFinderInterface $categoryFinder): Response
     {
-        if ($request->isMethod('POST')) {
-            $form = $this->createSaveSearchForm($category);
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                $search = new Search();
-                $search
-                    ->setCriterias(json_decode($form->get('criterias')->getData(), true))
-                    ->setCategory($category)
-                    ->setUser($this->getUser())
-                ;
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($search);
-                $em->flush();
-
-                # Redirect to the search page
-                return $this->redirectToRoute('category.searchFiches', [
-                    'categoryId' => $category->getId(),
-                    'searchId' => $search->getId()
-                ]);
-            }
-        }
-
-        return $this->redirectToRoute('category.show', ['id' => $category->getId()]);
-    }
-
-    private function createSaveSearchForm(Category $category, array $data = []): FormInterface
-    {
-        $saveSearchForm = $this->createForm(SaveSearchType::class, $data, [
-            'action' => $this->generateUrl('category.saveSearch', ['id' => $category->getId()]),
-            'method' => 'POST'
+        $results = $categoryFinder->search($category, $search->getCriterias());
+        return $this->render('category/search_results.html.twig', [
+            'results' => $results,
+            'category' => $category
         ]);
-        return $saveSearchForm;
     }
 
 }
