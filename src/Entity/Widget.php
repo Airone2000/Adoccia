@@ -128,11 +128,11 @@ class Widget
     public function resetSettings()
     {
         try {
-            $immutableProperties = ['id', 'immutableId', 'type', 'formArea'];
+            $omittedProperties = ['id', 'immutableId', 'type', 'formArea'];
             $reflection = new \ReflectionClass($this);
             foreach ($reflection->getProperties(\ReflectionProperty::IS_PRIVATE) as $property) {
                 $propertyName = $property->getName();
-                if (!in_array($propertyName, $immutableProperties)) {
+                if (!in_array($propertyName, $omittedProperties)) {
                     $setter = "set{$propertyName}";
                     if (method_exists($this, $setter)) {
                         call_user_func([$this, $setter], null); // falsy -> cast internally based on type hint

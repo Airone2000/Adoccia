@@ -54,11 +54,11 @@ final class FicheController extends AbstractController
             try {
                 $ficheHandler->editFicheFromFicheTypeData($fiche, $form->getData());
                 $this->addFlash('editFicheSuccess', '');
-                return $this->redirectToRoute('fiche.show', ['id' => $fiche->getId()]);
+                return $this->redirectToRoute('fiche.show', ['categoryId' => $category->getId(), 'ficheId' => $fiche->getId()]);
             }
             catch (\Exception $e) {
                 $this->addFlash('editFicheError', '');
-                return $this->redirectToRoute('fiche.edit', ['id' => $fiche->getId()]);
+                return $this->redirectToRoute('fiche.edit', ['categoryId' => $category->getId(), 'ficheId' => $fiche->getId()]);
             }
         }
 

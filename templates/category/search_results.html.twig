@@ -14,7 +14,7 @@
         <ul>
             {% for result in results %}
                 <li>
-                    <a href="{{ url('fiche.show', {'id': result.id}) }}">{{ result.title }}</a>
+                    <a href="{{ url('fiche.show', {'categoryId': category.id, 'ficheId': result.id}) }}">{{ result.title }}</a>
                 </li>
             {% endfor %}
         </ul>

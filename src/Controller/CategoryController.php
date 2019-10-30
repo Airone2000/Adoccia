@@ -205,7 +205,8 @@ class CategoryController extends AbstractController
 
                 return $this->render('category/search_results.html.twig', [
                     'results' => $results,
-                    'saveSearchForm' => $saveSearchForm->createView()
+                    'saveSearchForm' => $saveSearchForm->createView(),
+                    'category' => $category
                 ]);
             }
 
