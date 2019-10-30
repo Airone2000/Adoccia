@@ -17,6 +17,7 @@ final class SearchCriteriaEnum extends AbstractEnum
         STARTS_WITH         = 'STARTS_WITH',
         ENDS_WITH           = 'ENDS_WITH',
 
+        EQUAL_TO            = 'EQUAL_TO',
         GREATER_THAN        = 'GREATER_THAN',
         LOWER_THAN          = 'LOWER_THAN',
         IS_POSITIVE         = 'IS_POSITIVE',

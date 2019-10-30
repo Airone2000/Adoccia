@@ -189,7 +189,8 @@ class CategoryController extends AbstractController
         if ($search instanceof Search) {
             $results = $categoryFinder->search($category, $search->getCriterias());
             return $this->render('category/search_results.html.twig', [
-                'results' => $results
+                'results' => $results,
+                'category' => $category
             ]);
         }
         else {

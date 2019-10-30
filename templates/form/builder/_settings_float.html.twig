@@ -1,0 +1,14 @@
+<div>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+
+    {% for field in form %}
+        {{ form_errors(field) }}
+    {% endfor %}
+
+    <hr>
+    <button>Appliquer</button>
+
+    {{ form_end(form) }}
+</div>

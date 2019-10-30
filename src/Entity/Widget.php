@@ -16,7 +16,8 @@ class Widget
 {
 
     const
-        DEFAULT_TEXT_COLOR = "#000000"
+        DEFAULT_TEXT_COLOR = "#000000",
+        DEFAULT_DECIMAL_COUNT = 2
     ;
 
     /**
@@ -110,6 +111,36 @@ class Widget
      * )
      */
     private $inputPlaceholder;
+
+    /**
+     * @var null|int
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(
+     *     max="100",
+     *     maxMessage="Widget.min.length.max"
+     * )
+     */
+    private $min;
+
+    /**
+     * @var null|int
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(
+     *     max="100",
+     *     maxMessage="Widget.max.length.max"
+     * )
+     */
+    private $max;
+
+    /**
+     * @var null|int
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(
+     *     max="100",
+     *     maxMessage="Widget.decimalCount.length.max"
+     * )
+     */
+    private $decimalCount;
 
 
     public function __construct()
@@ -315,6 +346,60 @@ class Widget
     public function setInputPlaceholder(?string $inputPlaceholder): Widget
     {
         $this->inputPlaceholder = $inputPlaceholder;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMin(): ?int
+    {
+        return $this->min;
+    }
+
+    /**
+     * @param int|null $min
+     * @return Widget
+     */
+    public function setMin(?int $min): Widget
+    {
+        $this->min = $min;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMax(): ?int
+    {
+        return $this->max;
+    }
+
+    /**
+     * @param int|null $max
+     * @return Widget
+     */
+    public function setMax(?int $max): Widget
+    {
+        $this->max = $max;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getDecimalCount(): ?int
+    {
+        return $this->decimalCount;
+    }
+
+    /**
+     * @param int|null $decimalCount
+     * @return Widget
+     */
+    public function setDecimalCount(?int $decimalCount): Widget
+    {
+        $this->decimalCount = $decimalCount;
         return $this;
     }
 

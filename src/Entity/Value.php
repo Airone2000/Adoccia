@@ -57,6 +57,12 @@ class Value
      */
     private $valueOfTypeInt;
 
+    /**
+     * @var null|int|float
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $valueOfTypeFloat;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,5 +170,33 @@ class Value
         $this->valueOfTypeInt = $valueOfTypeInt;
         return $this;
     }
+
+    /**
+     * @return float|int|null
+     */
+    public function getValueOfTypeFloat()
+    {
+        if ($this->valueOfTypeFloat !== null) {
+            return (float)$this->valueOfTypeFloat;
+        }
+
+        return $this->valueOfTypeFloat;
+    }
+
+    /**
+     * @param float|int|null $valueOfTypeFloat
+     * @return Value
+     */
+    public function setValueOfTypeFloat($valueOfTypeFloat)
+    {
+        if ($valueOfTypeFloat !== null) {
+            $valueOfTypeFloat = (float)$valueOfTypeFloat;
+        }
+
+        $this->valueOfTypeFloat = $valueOfTypeFloat;
+        return $this;
+    }
+
+
 
 }

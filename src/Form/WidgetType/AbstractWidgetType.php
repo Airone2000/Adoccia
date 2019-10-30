@@ -37,4 +37,26 @@ class AbstractWidgetType extends AbstractType
             SearchCriteriaEnum::EXACT
         ];
     }
+
+    /**
+     * This method allows to transform the value before inserting it in the widget
+     * @param Widget $widget
+     * @param mixed $value
+     * @return mixed The value transformed
+     */
+    public static function transformTo(Widget $widget, $value)
+    {
+        return $value;
+    }
+
+    /**
+     * This method allows to transform the value from the form
+     * @param Widget $widget
+     * @param mixed $value
+     * @return mixed The value transformed
+     */
+    public static function transformFrom(Widget $widget, $value)
+    {
+        return $value;
+    }
 }

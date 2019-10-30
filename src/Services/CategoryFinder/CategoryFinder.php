@@ -167,6 +167,12 @@ final class CategoryFinder implements CategoryFinderInterface
                             $subOrWhereParameters[$parameterKey] = $searchValue;
                         }
                         break;
+                    case SearchCriteriaEnum::EQUAL_TO:
+                        if ($searchValue !== null) {
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} = :{$parameterKey})";
+                            $subOrWhereParameters[$parameterKey] = $searchValue;
+                        }
+                        break;
                 }
             }
         }
