@@ -4,6 +4,12 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('fiche') }}
+    {{ encore_entry_link_tags('category/search') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('category/search') }}
 {% endblock %}
 
 {% block body %}

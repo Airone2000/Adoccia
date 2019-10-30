@@ -2,26 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Form/WidgetSettingsType/FloatWidgetSettingsType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/WidgetSettingsType/IntWidgetSettingsType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/WidgetType/FloatType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/builder/_settings_float.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/builder/_settings_int.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/builder/_widget_float.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/builder/_widget_int.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/category/search.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/category/search.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Value.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Value.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Widget.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Widget.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Enum/SearchCriteriaEnum.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enum/SearchCriteriaEnum.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enum/WidgetTypeEnum.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enum/WidgetTypeEnum.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/FicheType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FicheType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/WidgetType/AbstractWidgetType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/WidgetType/AbstractWidgetType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/WidgetType/IntType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/WidgetType/IntType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/WidgetType/FloatType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/WidgetType/FloatType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/category/search.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/search.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/messages.fr.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages.fr.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,31 +23,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/FloatType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
-              <caret line="8" column="58" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="52" column="39" lean-forward="true" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="758">
-              <caret line="170" column="52" lean-forward="true" selection-start-line="170" selection-start-column="52" selection-end-line="170" selection-end-column="52" />
+            <state relative-caret-position="564">
+              <caret line="176" column="88" lean-forward="true" selection-start-line="176" selection-start-column="88" selection-end-line="176" selection-end-column="88" />
               <folding>
                 <element signature="e#47#71#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/FloatType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="419">
+              <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
+              <folding>
+                <element signature="e#39#61#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,17 +96,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Entity/FormArea.php" />
-        <option value="$PROJECT_DIR$/assets/css/fiche/fiche.scss" />
-        <option value="$PROJECT_DIR$/src/Enum/WidgetVerticalAlignmentEnum.php" />
-        <option value="$PROJECT_DIR$/src/Form/WidgetType/EmptyType.php" />
         <option value="$PROJECT_DIR$/src/Form/WidgetType/LabelType.php" />
         <option value="$PROJECT_DIR$/src/Enum/FicheModeEnum.php" />
         <option value="$PROJECT_DIR$/src/Services/CategoryHandler/CategoryHandler.php" />
         <option value="$PROJECT_DIR$/src/Repository/WidgetRepository.php" />
         <option value="$PROJECT_DIR$/templates/fiche/edit.html.twig" />
         <option value="$PROJECT_DIR$/templates/fiche/_fiche.html.twig" />
-        <option value="$PROJECT_DIR$/templates/category/search.html.twig" />
         <option value="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinderInterface.php" />
         <option value="$PROJECT_DIR$/src/Form/SaveSearchType.php" />
         <option value="$PROJECT_DIR$/src/Entity/Search.php" />
@@ -159,10 +137,15 @@
         <option value="$PROJECT_DIR$/src/Form/FicheType.php" />
         <option value="$PROJECT_DIR$/src/Form/WidgetType/AbstractWidgetType.php" />
         <option value="$PROJECT_DIR$/src/Form/WidgetSettingsType/FloatWidgetSettingsType.php" />
-        <option value="$PROJECT_DIR$/src/Enum/SearchCriteriaEnum.php" />
         <option value="$PROJECT_DIR$/src/Controller/CategoryController.php" />
-        <option value="$PROJECT_DIR$/src/Form/WidgetType/FloatType.php" />
         <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
+        <option value="$PROJECT_DIR$/assets/css/form/search.scss" />
+        <option value="$PROJECT_DIR$/webpack.config.js" />
+        <option value="$PROJECT_DIR$/templates/category/search.html.twig" />
+        <option value="$PROJECT_DIR$/src/Enum/SearchCriteriaEnum.php" />
+        <option value="$PROJECT_DIR$/assets/css/category/search.scss" />
+        <option value="$PROJECT_DIR$/assets/js/category/search.js" />
+        <option value="$PROJECT_DIR$/src/Form/WidgetType/FloatType.php" />
         <option value="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" />
       </list>
     </option>
@@ -290,6 +273,37 @@
             <path>
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -321,6 +335,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RecentsManager">
@@ -332,6 +347,7 @@
       <recent name="$PROJECT_DIR$/assets/vendor" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/css/category" />
       <recent name="$PROJECT_DIR$/tests/Services" />
       <recent name="$PROJECT_DIR$/templates/user" />
       <recent name="$PROJECT_DIR$/src/Controller" />
@@ -370,12 +386,12 @@
       <workItem from="1546304049367" duration="31963000" />
       <workItem from="1572020367400" duration="22354000" />
       <workItem from="1572278941637" duration="10823000" />
-      <workItem from="1572341913575" duration="30739000" />
+      <workItem from="1572341913575" duration="34277000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="258570000" />
+    <option name="totallyTimeSpent" value="262108000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1920" y="0" width="1920" height="1080" extended-state="0" />
@@ -429,43 +445,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/twig-bridge/Resources/views/Form/foundation_5_layout.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-705">
-          <folding>
-            <element signature="e#12#37#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/EntityListener/FormAreaListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="44" column="49" lean-forward="true" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="65" column="53" lean-forward="true" selection-start-line="65" selection-start-column="53" selection-end-line="65" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/FormArea.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="206" column="39" lean-forward="true" selection-start-line="206" selection-start-column="39" selection-end-line="206" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/PDO/PDO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="958" column="20" selection-start-line="958" selection-start-column="20" selection-end-line="958" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Services/FormHandler/FormHandlerInterface.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -815,13 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Enum/SearchCriteriaEnum.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/FicheController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="446">
@@ -833,24 +805,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/FloatType.php">
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="8" column="58" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
+        <state relative-caret-position="394">
+          <caret line="28" column="54" lean-forward="true" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/form/edit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="45" />
+          <folding>
+            <element signature="e#39#84#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Enum/SearchCriteriaEnum.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/category/search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="93" selection-start-line="8" selection-start-column="93" selection-end-line="8" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/category/search.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="16" lean-forward="true" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/category/search.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="52" column="39" lean-forward="true" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
+        <state relative-caret-position="106">
+          <caret line="37" column="14" lean-forward="true" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/FloatType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
+          <folding>
+            <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="758">
-          <caret line="170" column="52" lean-forward="true" selection-start-line="170" selection-start-column="52" selection-end-line="170" selection-end-column="52" />
+        <state relative-caret-position="564">
+          <caret line="176" column="88" lean-forward="true" selection-start-line="176" selection-start-column="88" selection-end-line="176" selection-end-column="88" />
           <folding>
             <element signature="e#47#71#0#PHP" expanded="true" />
           </folding>

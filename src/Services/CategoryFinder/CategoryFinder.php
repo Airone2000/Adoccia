@@ -173,6 +173,13 @@ final class CategoryFinder implements CategoryFinderInterface
                             $subOrWhereParameters[$parameterKey] = $searchValue;
                         }
                         break;
+                    case SearchCriteriaEnum::BETWEEN:
+                        $searchValue2 = isset($criteria[$widget->getImmutableId()]['value2']) ? $criteria[$widget->getImmutableId()]['value2'] : null;
+                        if ($searchValue !== null && $searchValue2 !== null) {
+                            # Cannot bind as parameter because doctrine casts it to string and then filtering is wrong
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} BETWEEN {$searchValue} AND {$searchValue2})";
+                        }
+                        break;
                 }
             }
         }

@@ -21,6 +21,7 @@ final class SearchCriteriaEnum extends AbstractEnum
         GREATER_THAN        = 'GREATER_THAN',
         LOWER_THAN          = 'LOWER_THAN',
         IS_POSITIVE         = 'IS_POSITIVE',
-        IS_NEGATIVE         = 'IS_NEGATIVE'
+        IS_NEGATIVE         = 'IS_NEGATIVE',
+        BETWEEN             = 'BETWEEN'
     ;
 }
