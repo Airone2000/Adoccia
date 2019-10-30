@@ -2,6 +2,7 @@
 
 namespace App\Form\WidgetType;
 
+use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
 use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -25,6 +26,9 @@ class StringType extends AbstractWidgetType
 
     private function buildSearchForm(FormBuilderInterface $builder, array $options)
     {
+        /* @var Widget $widget */
+        $widget = $options['widget'];
+
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
@@ -36,6 +40,9 @@ class StringType extends AbstractWidgetType
                 'required' => false,
                 'constraints' => [
                     new Length(['max' => 250])
+                ],
+                'attr' => [
+                    'placeholder' => $widget->getInputPlaceholder()
                 ]
             ])
         ;

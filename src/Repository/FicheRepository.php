@@ -89,4 +89,17 @@ class FicheRepository extends ServiceEntityRepository
                 return;
         }
     }
+
+    public function findFicheByCategoryAndId($categoryId, $ficheId)
+    {
+        $qb = $this->createQueryBuilder('f');
+        return $qb
+            ->where('f.category = :category')
+            ->setParameter('category', $categoryId)
+            ->andWhere('f.id = :id')
+            ->setParameter('id', $ficheId)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

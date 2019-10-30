@@ -5,11 +5,6 @@
 {% block body %}
     <h1>Category</h1>
 
-    {% if is_granted('ADD_FICHE_TO_CATEGORY', category) %}
-        <a href="{{ url('category.addFiche', {'id': category.id}) }}">+ Fiche</a>
-        <hr>
-    {% endif %}
-
     <a href="{{ url('category.listFiches', {'id': category.id}) }}">
         Liste des fiches
     </a>

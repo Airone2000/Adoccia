@@ -2,7 +2,12 @@
 {% block body %}
     <h1>Liste des fiches</h1>
 
+    {% if is_granted('ADD_FICHE_TO_CATEGORY', category) %}
+        <a href="{{ url('category.addFiche', {'id': category.id}) }}">+ Fiche</a> |
+    {% endif %}
     <a href="{{ url('category.searchFiches', {'categoryId': category.id}) }}">Rechercher</a>
+
+    <hr>
 
     {% if fiches is not empty %}
         <table border="1">
@@ -17,7 +22,7 @@
                     <tr>
                         <td>{{ fiche.title }}</td>
                         <td>
-                            <a href="{{ url('fiche.show', {'id': fiche.id}) }}">Voir</a>
+                            <a href="{{ url('fiche.show', {'categoryId': category.id, 'ficheId': fiche.id}) }}">Voir</a>
                         </td>
                     </tr>
                 {% endfor %}

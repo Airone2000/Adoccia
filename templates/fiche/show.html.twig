@@ -8,7 +8,7 @@
 {% block body %}
     <h1>{{ fiche.title }}</h1>
 
-    <a href="{{ url('fiche.edit', {'id': fiche.id}) }}">Edit</a>
+    <a href="{{ url('fiche.edit', {'categoryId': category.id, 'ficheId': fiche.id}) }}">Edit</a>
 
     <div id="fiche" style="width:600px;">
     {{ ficheView|raw }}

@@ -49,7 +49,10 @@ class SearchInCategoryType extends AbstractType
                         }
                     ])
                     ->add('value', TextType::class, [
-                        'required' => false
+                        'required' => false,
+                        'attr' => [
+                            'placeholder' => 'Rechercher dans le titre'
+                        ]
                     ])
             )
         ;

@@ -126,7 +126,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/add-fiche", methods={"get", "post"}, name="category.addFiche")
+     * @Route("/{id}/fiches/add-single", methods={"get", "post"}, name="category.addFiche")
      * @IsGranted("ADD_FICHE_TO_CATEGORY", subject="category")
      * @inheritdoc
      */
