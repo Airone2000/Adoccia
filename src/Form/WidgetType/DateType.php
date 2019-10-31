@@ -6,7 +6,6 @@ use App\Entity\Widget;
 use App\Enum\DateFormatEnum;
 use App\Enum\FicheModeEnum;
 use App\Enum\SearchCriteriaEnum;
-use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType as SfTextType;
@@ -15,6 +14,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class DateType extends AbstractWidgetType
 {
@@ -72,7 +72,10 @@ class DateType extends AbstractWidgetType
             'required' => false,
             'attr' => [
                     'placeholder' => self::getDateTypePlaceholder($widget)
-                ] + $this->getHTMLInputAttributes($widget, [])
+                ] + $this->getHTMLInputAttributes($widget, []),
+            'constraints' => [
+                new DateTime()
+            ]
         ];
 
         $builder
@@ -99,29 +102,16 @@ class DateType extends AbstractWidgetType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $formEvent) use ($widget, $valueOptions) {
             $data = $formEvent->getData();
 
+
             /**
-             * There, we transform searched date from Y-m-d to the date format defined at the widget level.
-             * This way, the search form is properly rerendered
+             * Entity Search stores date like Y-m-d.
+             * To render this value back in the form, we must convert it based on the widget->dateFormat()
              */
-
             if ($data !== null) {
-
                 $value = !empty($data['value']) ? $data['value'] : null;
-                if ($value !== null) {
-                    $value = \DateTime::createFromFormat('Y-m-d', $value) ?? null;
-                    if ($value instanceof \DateTime) {
-                        $value = $value->format(DateFormatEnum::getPHPFormatForJsFormat($widget->getDateFormat()));
-                    }
-                }
-                $data['value'] = $value;
-
+                $data['value'] = self::transformTo($widget, $value);
                 $value2 = !empty($data['value2']) ? $data['value2'] : null;
-                if ($value2 !== null) {
-                    $value2 = \DateTime::createFromFormat('Y-m-d', $value2) ?? null;
-                    $value2 = $value2->format(DateFormatEnum::getPHPFormatForJsFormat($widget->getDateFormat()));
-                }
-                $data['value2'] = $value2;
-
+                $data['value2'] = self::transformTo($widget, $value2);
                 $formEvent->setData($data);
             }
 
@@ -196,6 +186,11 @@ class DateType extends AbstractWidgetType
 
     public static function transformTo(Widget $widget, $value)
     {
+        if (preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $value)) {
+            // Let's assume it can be a value like Y-m-d (default value)
+            $value = \DateTime::createFromFormat('Y-m-d', $value);
+        }
+
         if ($value instanceof \DateTime) {
             $dateFormat = DateFormatEnum::getPHPFormatForJsFormat($widget->getDateFormat());
             return $value->format($dateFormat);

@@ -122,7 +122,7 @@ final class CategoryFinder implements CategoryFinderInterface
                 $parameterKey = "value{$widget->getImmutableId()}";
                 $searchCriteria = $criteria[$widget->getImmutableId()]['criteria'];
                 $searchValue = $criteria[$widget->getImmutableId()]['value'];
-
+                
                 switch ($searchCriteria) {
                     case SearchCriteriaEnum::IS_NULL:
                         $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} IS NULL)";
