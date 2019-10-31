@@ -2,24 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/js/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Enum/DateFormatEnum.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/WidgetSettingsType/DateWidgetSettingsType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/WidgetType/DateType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/builder/_settings_date.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/builder/_widget_date.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/form/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/form/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Value.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Value.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Widget.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Widget.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enum/WidgetTypeEnum.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enum/WidgetTypeEnum.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/WidgetType/DateType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/WidgetType/DateType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/translations/messages.fr.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages.fr.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,22 +19,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Form/WidgetSettingsType/DateWidgetSettingsType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-              <folding>
-                <element signature="e#47#75#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/DateType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="49" column="83" selection-start-line="49" selection-start-column="83" selection-end-line="49" selection-end-column="83" />
+            <state relative-caret-position="477">
+              <caret line="124" column="13" selection-start-line="124" selection-start-column="13" selection-end-line="124" selection-end-column="13" />
               <folding>
                 <element signature="e#39#61#0#PHP" expanded="true" />
               </folding>
@@ -56,23 +30,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Widget.php">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="398" column="7" selection-start-line="398" selection-start-column="7" selection-end-line="398" selection-end-column="7" />
+            <state relative-caret-position="567">
+              <caret line="178" column="129" selection-start-line="178" selection-start-column="129" selection-end-line="178" selection-end-column="129" />
               <folding>
-                <element signature="e#30#58#0#PHP" expanded="true" />
+                <element signature="e#47#71#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Enum/DateFormatEnum.php">
+        <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/IntType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+            <state relative-caret-position="710">
+              <caret line="64" selection-start-line="64" selection-end-line="84" selection-end-column="11" />
+              <folding>
+                <element signature="e#39#61#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -81,8 +58,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>f.</find>
-      <find>getFiches</find>
       <find>-&gt;getId</find>
       <find>searchCriteriaCount</find>
       <find>placeholder</find>
@@ -111,6 +86,8 @@
       <find>widget</find>
       <find>configureO</find>
       <find>date</find>
+      <find>dd</find>
+      <find>dd(</find>
     </findStrings>
     <replaceStrings>
       <replace>_makeFormSyncing</replace>
@@ -156,7 +133,6 @@
         <option value="$PROJECT_DIR$/assets/css/category/search.scss" />
         <option value="$PROJECT_DIR$/src/Entity/Search.php" />
         <option value="$PROJECT_DIR$/src/Form/WidgetType/FloatType.php" />
-        <option value="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" />
         <option value="$PROJECT_DIR$/src/Repository/FicheRepository.php" />
         <option value="$PROJECT_DIR$/templates/category/search.html.twig" />
         <option value="$PROJECT_DIR$/templates/category/search_results.html.twig" />
@@ -171,12 +147,13 @@
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/assets/js/form/edit.js" />
         <option value="$PROJECT_DIR$/assets/js/app.js" />
-        <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
         <option value="$PROJECT_DIR$/templates/form/builder/_widget_date.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/WidgetSettingsType/DateWidgetSettingsType.php" />
         <option value="$PROJECT_DIR$/src/Entity/Widget.php" />
         <option value="$PROJECT_DIR$/src/Enum/DateFormatEnum.php" />
+        <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/WidgetType/DateType.php" />
+        <option value="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" />
       </list>
     </option>
   </component>
@@ -392,12 +369,12 @@
       <workItem from="1572278941637" duration="10823000" />
       <workItem from="1572341913575" duration="38593000" />
       <workItem from="1572529865188" duration="1693000" />
-      <workItem from="1572540666405" duration="4980000" />
+      <workItem from="1572540666405" duration="8916000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="279060000" />
+    <option name="totallyTimeSpent" value="282996000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -527,16 +504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/AbstractWidgetType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="49" selection-end-column="5" />
-          <folding>
-            <element signature="e#39#61#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/FicheController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="446">
@@ -596,16 +563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="108" column="51" selection-start-line="108" selection-start-column="51" selection-end-line="108" selection-end-column="51" />
-          <folding>
-            <element signature="e#47#71#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/category/search.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -633,16 +590,6 @@
           <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
           <folding>
             <element signature="e#47#106#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/IntType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="55" column="65" selection-start-line="55" selection-start-column="65" selection-end-line="55" selection-end-column="65" />
-          <folding>
-            <element signature="e#39#61#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -783,16 +730,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/FicheType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="100" column="18" lean-forward="true" selection-start-line="100" selection-start-column="18" selection-end-line="100" selection-end-column="18" />
-          <folding>
-            <element signature="e#28#52#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/FloatType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
@@ -807,13 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="40" column="15" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -838,16 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/WidgetSettingsType/DateWidgetSettingsType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-          <folding>
-            <element signature="e#47#75#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/form/Extension/Core/Type/DateType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-536">
@@ -855,6 +775,13 @@
           <folding>
             <element signature="e#293#333#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="35" column="40" lean-forward="true" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -867,20 +794,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Widget.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="398" column="7" selection-start-line="398" selection-start-column="7" selection-end-line="398" selection-end-column="7" />
+        <state relative-caret-position="154">
+          <caret line="401" column="43" lean-forward="true" selection-start-line="401" selection-start-column="43" selection-end-line="401" selection-end-column="43" />
           <folding>
             <element signature="e#30#58#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/DateType.php">
+    <entry file="file://$PROJECT_DIR$/src/Form/WidgetSettingsType/DateWidgetSettingsType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="49" column="83" selection-start-line="49" selection-start-column="83" selection-end-line="49" selection-end-column="83" />
+        <state relative-caret-position="165">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+          <folding>
+            <element signature="e#47#75#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/AbstractWidgetType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
           <folding>
             <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/FicheType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="99" column="21" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
+          <folding>
+            <element signature="e#28#52#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/DateType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="124" column="13" selection-start-line="124" selection-start-column="13" selection-end-line="124" selection-end-column="13" />
+          <folding>
+            <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/WidgetType/IntType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="710">
+          <caret line="64" selection-start-line="64" selection-end-line="84" selection-end-column="11" />
+          <folding>
+            <element signature="e#39#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="178" column="129" selection-start-line="178" selection-start-column="129" selection-end-line="178" selection-end-column="129" />
+          <folding>
+            <element signature="e#47#71#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

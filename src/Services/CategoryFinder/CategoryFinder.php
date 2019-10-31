@@ -3,7 +3,6 @@
 namespace App\Services\CategoryFinder;
 
 use App\Entity\Category;
-use App\Entity\Value;
 use App\Entity\Widget;
 use App\Enum\SearchCriteriaEnum;
 use App\Repository\FicheRepository;
@@ -177,7 +176,7 @@ final class CategoryFinder implements CategoryFinderInterface
                         $searchValue2 = isset($criteria[$widget->getImmutableId()]['value2']) ? $criteria[$widget->getImmutableId()]['value2'] : null;
                         if ($searchValue !== null && $searchValue2 !== null) {
                             # Cannot bind as parameter because doctrine casts it to string and then filtering is wrong
-                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} BETWEEN {$searchValue} AND {$searchValue2})";
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} BETWEEN '{$searchValue}' AND '{$searchValue2}')";
                         }
                         break;
                 }
