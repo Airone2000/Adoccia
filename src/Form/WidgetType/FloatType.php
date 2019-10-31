@@ -100,8 +100,10 @@ class FloatType extends AbstractWidgetType
 
     public static function transformToFloat(Widget $widget, $value)
     {
-        $decimalCount = $widget->getDecimalCount();
-        $value = number_format($value, $decimalCount, '.', '');
+        if ($value !== null) {
+            $decimalCount = $widget->getDecimalCount();
+            $value = number_format($value, $decimalCount, '.', '');
+        }
         return $value;
     }
 
