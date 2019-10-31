@@ -6,4 +6,6 @@ WidgetType.text: "Grande zone de texte"
 WidgetType.Group.number: "Chiffres et nombres"
 WidgetType.int: "Nombre entier"
 WidgetType.float: "Nombre à virgule"
+WidgetType.Group.time: "Temps"
+WidgetType.date: "Date"
 

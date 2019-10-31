@@ -28,6 +28,7 @@ Encore
     .addStyleEntry('fiche', './assets/css/fiche/fiche.scss')
     .addEntry('form/edit', './assets/js/form/edit.js')
     .addEntry('category/search', './assets/js/category/search.js')
+    .addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -68,7 +69,7 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()

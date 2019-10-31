@@ -1,5 +1,4 @@
 require('./../../css/form/edit.scss');
-import $ from './../../vendor/jquery/jquery';
 import Sortable from './../../vendor/Sortable/Sortable';
 import {fetch as aFetch} from 'whatwg-fetch';
 

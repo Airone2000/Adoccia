@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\DateFormatEnum;
 use App\Enum\TextAlignPositionEnum;
 use App\Validator\Color;
 use App\Validator\Enum;
@@ -141,6 +142,16 @@ class Widget
      * )
      */
     private $decimalCount;
+
+    /**
+     * @var null|string
+     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Enum(
+     *     enumClass="App\Enum\DateFormatEnum",
+     *     message="Widget.dateFormat.enum"
+     * )
+     */
+    private $dateFormat;
 
 
     public function __construct()
@@ -400,6 +411,24 @@ class Widget
     public function setDecimalCount(?int $decimalCount): Widget
     {
         $this->decimalCount = $decimalCount;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDateFormat(): ?string
+    {
+        return $this->dateFormat ?? DateFormatEnum::DEFAULT_DATE_FORMAT;
+    }
+
+    /**
+     * @param string|null $dateFormat
+     * @return Widget
+     */
+    public function setDateFormat(?string $dateFormat): Widget
+    {
+        $this->dateFormat = $dateFormat;
         return $this;
     }
 

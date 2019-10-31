@@ -63,6 +63,12 @@ class Value
      */
     private $valueOfTypeFloat;
 
+    /**
+     * @var \DateTime|null
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $valueOfTypeDate;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -194,6 +200,24 @@ class Value
         }
 
         $this->valueOfTypeFloat = $valueOfTypeFloat;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getValueOfTypeDate(): ?\DateTime
+    {
+        return $this->valueOfTypeDate;
+    }
+
+    /**
+     * @param \DateTime|null $valueOfTypeDate
+     * @return Value
+     */
+    public function setValueOfTypeDate(?\DateTime $valueOfTypeDate): Value
+    {
+        $this->valueOfTypeDate = $valueOfTypeDate;
         return $this;
     }
 
