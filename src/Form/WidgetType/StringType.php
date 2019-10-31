@@ -34,6 +34,18 @@ class StringType extends AbstractWidgetType
                 'choices' => $this->getSearchCriterias(),
                 'choice_label' => function(string $label) {
                     return $label;
+                },
+                'choice_attr' => function(string $value) {
+                    $attr = [];
+                    switch ($value) {
+                        case SearchCriteriaEnum::EXACT:
+                        case SearchCriteriaEnum::CONTAINS:
+                        case SearchCriteriaEnum::STARTS_WITH:
+                        case SearchCriteriaEnum::ENDS_WITH:
+                            $attr['data-inputs'] = '.value';
+                            break;
+                    }
+                    return $attr;
                 }
             ])
             ->add('value', SfTextType::class, [
@@ -42,7 +54,8 @@ class StringType extends AbstractWidgetType
                     new Length(['max' => 250])
                 ],
                 'attr' => [
-                    'placeholder' => $widget->getInputPlaceholder()
+                    'placeholder' => $widget->getInputPlaceholder(),
+                    'class' => 'value hidden'
                 ]
             ])
         ;

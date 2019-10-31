@@ -13,7 +13,8 @@ final class WidgetTypeEnum extends AbstractEnum
         TEXT = 'text',
         INT = 'int',
         FLOAT = 'float',
-        DATE = 'date'
+        DATE = 'date',
+        TIME = 'time'
     ;
 
     public static function getGroupedWidgetTypes(): array
@@ -22,7 +23,7 @@ final class WidgetTypeEnum extends AbstractEnum
             'nonClassed' => [self::EMPTY, self::LABEL],
             'textual' => [self::STRING, self::TEXT],
             'number' => [self::INT, self::FLOAT],
-            'time' => [self::DATE]
+            'time' => [self::DATE, self::TIME]
         ];
     }
 

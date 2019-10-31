@@ -6,19 +6,21 @@ class Search {
         this._listenForCriteriaPicked();
     }
 
-    // Display value2 field to allow the user to insert a second value in the advanced search
+    // Display inputs associated to criteria
     _listenForCriteriaPicked() {
         $(document).on('change', 'select[name$="[criteria]"]', (e) => {
             let $picker = $(e.target);
             let $itemSelected = $($picker.children(':selected')[0]);
-            let $value2 = $picker.siblings('.value2');
-            if ($itemSelected.hasClass('display-value2')) {
-                $value2.removeClass('hidden').addClass('visible');
-            }
-            else {
-                $value2.removeClass('visible').addClass('hidden');
+            let inputsToDisplaySelector = $itemSelected.data('inputs');
+
+            $picker.siblings('*').addClass('hidden');
+            if (inputsToDisplaySelector) {
+                $picker.siblings(inputsToDisplaySelector).removeClass('hidden');
             }
         });
+
+        // Make inputs appear by triggering a first change on criteriaPicker
+        $(document).find('select[name$="[criteria]"]').trigger('change');
     }
 }
 

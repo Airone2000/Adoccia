@@ -22,6 +22,12 @@ final class SearchCriteriaEnum extends AbstractEnum
         LOWER_THAN          = 'LOWER_THAN',
         IS_POSITIVE         = 'IS_POSITIVE',
         IS_NEGATIVE         = 'IS_NEGATIVE',
-        BETWEEN             = 'BETWEEN'
+        BETWEEN             = 'BETWEEN',
+
+        # Specific to date
+        YEAR_EQUAL_TO       = 'YEAR_EQUAL_TO',
+        YEAR_GREATER_THAN   = 'YEAR_GREATER_THAN',
+        YEAR_LESS_THAN      = 'YEAR_LESS_THAN',
+        YEAR_BETWEEN        = 'YEAR_BETWEEN'
     ;
 }

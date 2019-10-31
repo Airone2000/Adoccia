@@ -8,6 +8,7 @@ use App\Enum\FicheModeEnum;
 use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType as SfTextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -86,13 +87,34 @@ class DateType extends AbstractWidgetType
                 },
                 'choice_attr' => function(string $value) {
                     $attr = [];
-                    if ($value === SearchCriteriaEnum::BETWEEN) {
-                        $attr['class'] = 'display-value2';
+                    switch ($value) {
+                        case SearchCriteriaEnum::BETWEEN:
+                            $attr['data-inputs'] = '.value,.value2';
+                            break;
+                        case SearchCriteriaEnum::EXACT:
+                        case SearchCriteriaEnum::LOWER_THAN:
+                        case SearchCriteriaEnum::GREATER_THAN:
+                            $attr['data-inputs'] = '.value';
+                            break;
+                        case SearchCriteriaEnum::YEAR_EQUAL_TO:
+                        case SearchCriteriaEnum::YEAR_LESS_THAN:
+                        case SearchCriteriaEnum::YEAR_GREATER_THAN:
+                        case SearchCriteriaEnum::YEAR_BETWEEN:
+                            $attr['data-inputs'] = '.valueYear';
+                            break;
                     }
                     return $attr;
                 }
             ])
-            ->add('value', SfTextType::class, $valueOptions)
+            ->add('value', SfTextType::class, [
+                    'attr' => ['class' => 'value hidden'] + $valueOptions['attr']
+                ] + $valueOptions)
+            ->add('value2', SfTextType::class, [
+                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
+                ] + $valueOptions)
+            ->add('valueYear', IntegerType::class, [
+                'attr' => ['class' => 'valueYear hidden']
+            ])
         ;
 
         /**
@@ -100,13 +122,11 @@ class DateType extends AbstractWidgetType
          * If it's equal to BETWEEN, let's display the Value2 input
          */
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $formEvent) use ($widget, $valueOptions) {
-            $data = $formEvent->getData();
-
-
             /**
              * Entity Search stores date like Y-m-d.
              * To render this value back in the form, we must convert it based on the widget->dateFormat()
              */
+            $data = $formEvent->getData();
             if ($data !== null) {
                 $value = !empty($data['value']) ? $data['value'] : null;
                 $data['value'] = self::transformTo($widget, $value);
@@ -114,26 +134,6 @@ class DateType extends AbstractWidgetType
                 $data['value2'] = self::transformTo($widget, $value2);
                 $formEvent->setData($data);
             }
-
-
-            /**
-             * Then, we display or not the value2 field
-             */
-
-            $criteria = is_array($data) ? $data['criteria'] : null;
-
-            $form = $formEvent->getForm();
-
-            # Second input, useful in some case (for instance with SearchCriteria BETWEEN)
-            $value2Class = 'value2';
-            $value2Class .= $criteria !== SearchCriteriaEnum::BETWEEN ? ' hidden' : '';
-
-            $form
-                ->add('value2', SfTextType::class,[
-                        'attr' => ['class' => $value2Class] + $valueOptions['attr']
-                    ] + $valueOptions
-                )
-            ;
         });
 
         # We cannot add modelTransformer in eventListenerHandler
@@ -167,7 +167,12 @@ class DateType extends AbstractWidgetType
             SearchCriteriaEnum::EXACT,
             SearchCriteriaEnum::LOWER_THAN,
             SearchCriteriaEnum::GREATER_THAN,
-            SearchCriteriaEnum::BETWEEN
+            SearchCriteriaEnum::BETWEEN,
+
+            SearchCriteriaEnum::YEAR_EQUAL_TO,
+            SearchCriteriaEnum::YEAR_LESS_THAN,
+            SearchCriteriaEnum::YEAR_GREATER_THAN,
+            SearchCriteriaEnum::YEAR_BETWEEN
         ];
     }
 
@@ -186,7 +191,7 @@ class DateType extends AbstractWidgetType
 
     public static function transformTo(Widget $widget, $value)
     {
-        if (preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $value)) {
+        if (is_string($value) && preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $value)) {
             // Let's assume it can be a value like Y-m-d (default value)
             $value = \DateTime::createFromFormat('Y-m-d', $value);
         }

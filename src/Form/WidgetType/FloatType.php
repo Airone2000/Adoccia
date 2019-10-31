@@ -53,36 +53,27 @@ class FloatType extends AbstractWidgetType
                 },
                 'choice_attr' => function(string $value) {
                     $attr = [];
-                    if ($value === SearchCriteriaEnum::BETWEEN) {
-                        $attr['class'] = 'display-value2';
+                    switch ($value) {
+                        case SearchCriteriaEnum::EQUAL_TO:
+                        case SearchCriteriaEnum::GREATER_THAN:
+                        case SearchCriteriaEnum::LOWER_THAN:
+                            $attr['data-inputs'] = '.value';
+                            break;
+                        case SearchCriteriaEnum::BETWEEN:
+                            $attr['data-inputs'] = '.value,.value2';
+                            break;
                     }
                     return $attr;
                 }
             ])
-            ->add('value', NumberType::class, $valueOptions)
+            ->add('value', NumberType::class, [
+                    'attr' => ['class' => 'value hidden'] + $valueOptions['attr']
+                ] + $valueOptions)
+            ->add('value2', NumberType::class,[
+                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
+                ] + $valueOptions
+            )
         ;
-
-        /**
-         * Get the value of criteria.
-         * If it's equal to BETWEEN, let's display the Value2 input
-         */
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $formEvent) use ($widget, $valueOptions) {
-            $data = $formEvent->getData();
-            $criteria = is_array($data) ? $data['criteria'] : null;
-
-            $form = $formEvent->getForm();
-
-            # Second input, useful in some case (for instance with SearchCriteria BETWEEN)
-            $value2Class = 'value2';
-            $value2Class .= $criteria !== SearchCriteriaEnum::BETWEEN ? ' hidden' : '';
-
-            $form
-                ->add('value2', NumberType::class,[
-                        'attr' => ['class' => $value2Class] + $valueOptions['attr']
-                    ] + $valueOptions
-                )
-            ;
-        });
     }
 
     protected function getSearchCriterias(): array
