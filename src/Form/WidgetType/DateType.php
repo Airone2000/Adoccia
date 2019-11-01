@@ -99,8 +99,26 @@ class DateType extends AbstractWidgetType
                         case SearchCriteriaEnum::YEAR_EQUAL_TO:
                         case SearchCriteriaEnum::YEAR_LESS_THAN:
                         case SearchCriteriaEnum::YEAR_GREATER_THAN:
-                        case SearchCriteriaEnum::YEAR_BETWEEN:
                             $attr['data-inputs'] = '.valueYear';
+                            break;
+                        case SearchCriteriaEnum::YEAR_BETWEEN:
+                            $attr['data-inputs'] = '.valueYearFrom,.valueYearTo';
+                            break;
+                        case SearchCriteriaEnum::MONTH_EQUAL_TO:
+                        case SearchCriteriaEnum::MONTH_LESS_THAN:
+                        case SearchCriteriaEnum::MONTH_GREATER_THAN:
+                            $attr['data-inputs'] = '.valueMonth';
+                            break;
+                        case SearchCriteriaEnum::MONTH_BETWEEN:
+                            $attr['data-inputs'] = '.valueMonthFrom,.valueMonthTo';
+                            break;
+                        case SearchCriteriaEnum::DAY_EQUAL_TO:
+                        case SearchCriteriaEnum::DAY_LESS_THAN:
+                        case SearchCriteriaEnum::DAY_GREATER_THAN:
+                            $attr['data-inputs'] = '.valueDay';
+                            break;
+                        case SearchCriteriaEnum::DAY_BETWEEN:
+                            $attr['data-inputs'] = '.valueDayFrom,.valueDayTo';
                             break;
                     }
                     return $attr;
@@ -113,7 +131,40 @@ class DateType extends AbstractWidgetType
                     'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
                 ] + $valueOptions)
             ->add('valueYear', IntegerType::class, [
-                'attr' => ['class' => 'valueYear hidden']
+                'attr' => ['class' => 'valueYear hidden'],
+                'required' => false
+            ])
+            ->add('valueYearFrom', IntegerType::class, [
+                'attr' => ['class' => 'valueYearFrom hidden'],
+                'required' => false
+            ])
+            ->add('valueYearTo', IntegerType::class, [
+                'attr' => ['class' => 'valueYearTo hidden'],
+                'required' => false
+            ])
+            ->add('valueMonth', IntegerType::class, [
+                'attr' => ['class' => 'valueMonth hidden'],
+                'required' => false
+            ])
+            ->add('valueMonthFrom', IntegerType::class, [
+                'attr' => ['class' => 'valueMonthFrom hidden'],
+                'required' => false
+            ])
+            ->add('valueMonthTo', IntegerType::class, [
+                'attr' => ['class' => 'valueMonthTo hidden'],
+                'required' => false
+            ])
+            ->add('valueDay', IntegerType::class, [
+                'attr' => ['class' => 'valueDay hidden'],
+                'required' => false
+            ])
+            ->add('valueDayFrom', IntegerType::class, [
+                'attr' => ['class' => 'valueDayFrom hidden'],
+                'required' => false
+            ])
+            ->add('valueDayTo', IntegerType::class, [
+                'attr' => ['class' => 'valueDayTo hidden'],
+                'required' => false
             ])
         ;
 
@@ -172,7 +223,17 @@ class DateType extends AbstractWidgetType
             SearchCriteriaEnum::YEAR_EQUAL_TO,
             SearchCriteriaEnum::YEAR_LESS_THAN,
             SearchCriteriaEnum::YEAR_GREATER_THAN,
-            SearchCriteriaEnum::YEAR_BETWEEN
+            SearchCriteriaEnum::YEAR_BETWEEN,
+
+            SearchCriteriaEnum::MONTH_EQUAL_TO,
+            SearchCriteriaEnum::MONTH_LESS_THAN,
+            SearchCriteriaEnum::MONTH_GREATER_THAN,
+            SearchCriteriaEnum::MONTH_BETWEEN,
+
+            SearchCriteriaEnum::DAY_EQUAL_TO,
+            SearchCriteriaEnum::DAY_LESS_THAN,
+            SearchCriteriaEnum::DAY_GREATER_THAN,
+            SearchCriteriaEnum::DAY_BETWEEN
         ];
     }
 

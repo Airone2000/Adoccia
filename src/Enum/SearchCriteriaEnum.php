@@ -28,6 +28,14 @@ final class SearchCriteriaEnum extends AbstractEnum
         YEAR_EQUAL_TO       = 'YEAR_EQUAL_TO',
         YEAR_GREATER_THAN   = 'YEAR_GREATER_THAN',
         YEAR_LESS_THAN      = 'YEAR_LESS_THAN',
-        YEAR_BETWEEN        = 'YEAR_BETWEEN'
+        YEAR_BETWEEN        = 'YEAR_BETWEEN',
+        MONTH_EQUAL_TO      = 'MONTH_EQUAL_TO',
+        MONTH_GREATER_THAN  = 'MONTH_GREATER_THAN',
+        MONTH_LESS_THAN     = 'MONTH_LESS_THAN',
+        MONTH_BETWEEN       = 'MONTH_BETWEEN',
+        DAY_EQUAL_TO        = 'DAY_EQUAL_TO',
+        DAY_GREATER_THAN    = 'DAY_GREATER_THAN',
+        DAY_LESS_THAN       = 'DAY_LESS_THAN',
+        DAY_BETWEEN         = 'DAY_BETWEEN'
     ;
 }

@@ -179,6 +179,54 @@ final class CategoryFinder implements CategoryFinderInterface
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} BETWEEN '{$searchValue}' AND '{$searchValue2}')";
                         }
                         break;
+                    case SearchCriteriaEnum::YEAR_EQUAL_TO:
+                    case SearchCriteriaEnum::MONTH_EQUAL_TO:
+                    case SearchCriteriaEnum::DAY_EQUAL_TO:
+                        $criteriaParts = explode('_', $searchCriteria);
+                        $datePart = strtolower($criteriaParts[0]);
+                        $searchValue = $criteria[$widget->getImmutableId()]['value'. ucfirst($datePart)];
+                        if ($searchValue !== null) {
+                            $searchValue = (int)$searchValue;
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$datePart}(v.{$valueColumn}) = :{$parameterKey})";
+                            $subOrWhereParameters[$parameterKey] = $searchValue;
+                        }
+                        break;
+                    case SearchCriteriaEnum::YEAR_LESS_THAN:
+                    case SearchCriteriaEnum::MONTH_LESS_THAN:
+                    case SearchCriteriaEnum::DAY_LESS_THAN:
+                        $criteriaParts = explode('_', $searchCriteria);
+                        $datePart = strtolower($criteriaParts[0]);
+                        $searchValue = $criteria[$widget->getImmutableId()]['value'. ucfirst($datePart)];
+                        if ($searchValue !== null) {
+                            $searchValue = (int)$searchValue;
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$datePart}(v.{$valueColumn}) < :{$parameterKey})";
+                            $subOrWhereParameters[$parameterKey] = $searchValue;
+                        }
+                        break;
+                    case SearchCriteriaEnum::YEAR_GREATER_THAN:
+                    case SearchCriteriaEnum::MONTH_GREATER_THAN:
+                    case SearchCriteriaEnum::DAY_GREATER_THAN:
+                        $criteriaParts = explode('_', $searchCriteria);
+                        $datePart = strtolower($criteriaParts[0]);
+                        $searchValue = $criteria[$widget->getImmutableId()]['value'. ucfirst($datePart)];
+                        if ($searchValue !== null) {
+                            $searchValue = (int)$searchValue;
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$datePart}(v.{$valueColumn}) > :{$parameterKey})";
+                            $subOrWhereParameters[$parameterKey] = $searchValue;
+                        }
+                        break;
+                    case SearchCriteriaEnum::YEAR_BETWEEN:
+                    case SearchCriteriaEnum::MONTH_BETWEEN:
+                    case SearchCriteriaEnum::DAY_BETWEEN:
+                        $criteriaParts = explode('_', $searchCriteria);
+                        $datePart = strtolower($criteriaParts[0]);
+                        $from = $criteria[$widget->getImmutableId()]['value'.ucfirst($datePart).'From'];
+                        $to = $criteria[$widget->getImmutableId()]['value'.ucfirst($datePart).'To'];
+                        if ($from !== null && $to !== null) {
+                            $from = (int)$from; $to = (int)$to;
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$datePart}(v.{$valueColumn}) BETWEEN '{$from}' AND '{$to}')";
+                        }
+                        break;
                 }
             }
         }

@@ -37,6 +37,14 @@
         {{ form_widget(form.value) }}
         {{ form_widget(form.value2) }}
         {{ form_widget(form.valueYear) }}
+        {{ form_widget(form.valueYearFrom) }}
+        {{ form_widget(form.valueYearTo) }}
+        {{ form_widget(form.valueMonth) }}
+        {{ form_widget(form.valueMonthFrom) }}
+        {{ form_widget(form.valueMonthTo) }}
+        {{ form_widget(form.valueDay) }}
+        {{ form_widget(form.valueDayFrom) }}
+        {{ form_widget(form.valueDayTo) }}
     {% else %}
         {{ form_widget(form) }}
         {{ form_errors(form) }}
