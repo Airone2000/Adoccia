@@ -132,26 +132,42 @@ final class CategoryFinder implements CategoryFinderInterface
                         break;
                     case SearchCriteriaEnum::EXACT:
                         if ($searchValue !== null) {
-                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} = :{$parameterKey})";
+                            $searchValue = explode(',', $searchValue);
+                            $searchValue = array_map('trim', $searchValue);
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} IN (:{$parameterKey}))";
                             $subOrWhereParameters[$parameterKey] = $searchValue;
                         }
                         break;
                     case SearchCriteriaEnum::CONTAINS:
                         if ($searchValue !== null) {
-                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
-                            $subOrWhereParameters[$parameterKey] = "%{$searchValue}%";
+                            $searchValue = explode(',', $searchValue);
+                            $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
+                            if (!empty($searchValue)) {
+                                $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND REGEXP(v.{$valueColumn}, :{$parameterKey}) = 1)";
+                                $subOrWhereParameters[$parameterKey] = implode('|', $searchValue);
+                            }
                         }
                         break;
                     case SearchCriteriaEnum::STARTS_WITH:
                         if ($searchValue !== null) {
-                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
-                            $subOrWhereParameters[$parameterKey] = "{$searchValue}%";
+                            $searchValue = explode(',', $searchValue);
+                            $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
+                            if (!empty($searchValue)) {
+                                $regexp = '^(' . implode('|', $searchValue) . ')';
+                                $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND REGEXP(v.{$valueColumn}, :{$parameterKey}) = 1)";
+                                $subOrWhereParameters[$parameterKey] = $regexp;
+                            }
                         }
                         break;
                     case SearchCriteriaEnum::ENDS_WITH:
                         if ($searchValue !== null) {
-                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} LIKE :{$parameterKey})";
-                            $subOrWhereParameters[$parameterKey] = "%{$searchValue}";
+                            $searchValue = explode(',', $searchValue);
+                            $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
+                            if (!empty($searchValue)) {
+                                $regexp = '(' . implode('|', $searchValue) . ')$';
+                                $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND REGEXP(v.{$valueColumn}, :{$parameterKey}) = 1)";
+                                $subOrWhereParameters[$parameterKey] = $regexp;
+                            }
                         }
                         break;
                     case SearchCriteriaEnum::GREATER_THAN:
@@ -260,5 +276,14 @@ final class CategoryFinder implements CategoryFinderInterface
     public function getLastSearchCriterias(): array
     {
         return $this->lastSearchCriterias ?? [];
+    }
+
+    private function removeNullOrBlankValuesFromArray(array $tab)
+    {
+        $tab = array_map('trim', $tab);
+        $tab = array_filter($tab, function($val){
+            return !($val === '' || $val === null);
+        });
+        return $tab;
     }
 }

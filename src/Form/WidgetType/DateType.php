@@ -74,9 +74,6 @@ class DateType extends AbstractWidgetType
             'attr' => [
                     'placeholder' => self::getDateTypePlaceholder($widget)
                 ] + $this->getHTMLInputAttributes($widget, []),
-            'constraints' => [
-                new DateTime()
-            ]
         ];
 
         $builder
