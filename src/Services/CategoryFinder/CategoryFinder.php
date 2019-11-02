@@ -134,7 +134,7 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::EXACT:
                         if ($searchValue !== null) {
                             $searchValue = explode(',', $searchValue);
-                            $searchValue = array_map('trim', $searchValue);
+                            $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} IN (:{$parameterKey}))";
                             $subOrWhereParameters[$parameterKey] = $searchValue;
                         }

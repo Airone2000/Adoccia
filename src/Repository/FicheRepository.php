@@ -64,27 +64,35 @@ class FicheRepository extends ServiceEntityRepository
                 // Nothing
                 return;
             case SearchCriteriaEnum::CONTAINS:
+                $value = explode(',', $value);
+                $value = $this->removeNullOrBlankValuesFromArray($value);
                 $queryBuilder
-                    ->andWhere('f.title LIKE :title')
-                    ->setParameter('title', "%{$value}%")
+                    ->andWhere('REGEXP(f.title, :title) = 1')
+                    ->setParameter('title', implode('|', $value))
                 ;
                 return;
             case SearchCriteriaEnum::EXACT:
+                $value = explode(',', $value);
+                $value = $this->removeNullOrBlankValuesFromArray($value);
                 $queryBuilder
-                    ->andWhere('f.title = :title')
-                    ->setParameter('title', $value)
+                    ->andWhere('f.title IN (:titles)')
+                    ->setParameter('titles', $value)
                 ;
                 return;
             case SearchCriteriaEnum::STARTS_WITH:
+                $value = explode(',', $value);
+                $value = $this->removeNullOrBlankValuesFromArray($value);
                 $queryBuilder
-                    ->andWhere('f.title LIKE :title')
-                    ->setParameter('title', "{$value}%")
+                    ->andWhere('REGEXP(f.title, :title) = 1')
+                    ->setParameter('title', '^('.implode('|', $value).')')
                 ;
                 return;
             case SearchCriteriaEnum::ENDS_WITH:
+                $value = explode(',', $value);
+                $value = $this->removeNullOrBlankValuesFromArray($value);
                 $queryBuilder
-                    ->andWhere('f.title LIKE :title')
-                    ->setParameter('title', "%{$value}")
+                    ->andWhere('REGEXP(f.title, :title) = 1')
+                    ->setParameter('title', '('.implode('|', $value).')$')
                 ;
                 return;
         }
@@ -101,5 +109,14 @@ class FicheRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    private function removeNullOrBlankValuesFromArray(array $tab)
+    {
+        $tab = array_map('trim', $tab);
+        $tab = array_filter($tab, function($val){
+            return !($val === '' || $val === null);
+        });
+        return $tab;
     }
 }
