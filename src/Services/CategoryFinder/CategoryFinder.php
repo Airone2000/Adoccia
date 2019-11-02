@@ -270,6 +270,55 @@ final class CategoryFinder implements CategoryFinderInterface
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') BETWEEN '{$start}' AND '{$end}' )";
                         }
                         break;
+                    case SearchCriteriaEnum::HOUR_EQUAL_TO:
+                    case SearchCriteriaEnum::MINUTE_EQUAL_TO:
+                    case SearchCriteriaEnum::SECOND_EQUAL_TO:
+                        $criteriaParts = explode('_', $searchCriteria);
+                        $timePart = strtolower($criteriaParts[0]);
+                        $selector = $timePart === 'hour' ? 'hour' : 'minOrSec';
+                        $searchValue = $criteria[$widget->getImmutableId()][$selector];
+                        if ($searchValue !== null) {
+                            $searchValue = (int)$searchValue;
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$timePart}(v.{$valueColumn}) = '{$searchValue}')";
+                        }
+                        break;
+                    case SearchCriteriaEnum::HOUR_LESS_THAN:
+                    case SearchCriteriaEnum::MINUTE_LESS_THAN:
+                    case SearchCriteriaEnum::SECOND_LESS_THAN:
+                        $criteriaParts = explode('_', $searchCriteria);
+                        $timePart = strtolower($criteriaParts[0]);
+                        $selector = $timePart === 'hour' ? 'hour' : 'minOrSec';
+                        $searchValue = $criteria[$widget->getImmutableId()][$selector];
+                        if ($searchValue !== null) {
+                            $searchValue = (int)$searchValue;
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$timePart}(v.{$valueColumn}) < '{$searchValue}')";
+                        }
+                        break;
+                    case SearchCriteriaEnum::HOUR_GREATER_THAN:
+                    case SearchCriteriaEnum::MINUTE_GREATER_THAN:
+                    case SearchCriteriaEnum::SECOND_GREATER_THAN:
+                        $criteriaParts = explode('_', $searchCriteria);
+                        $timePart = strtolower($criteriaParts[0]);
+                        $selector = $timePart === 'hour' ? 'hour' : 'minOrSec';
+                        $searchValue = $criteria[$widget->getImmutableId()][$selector];
+                        if ($searchValue !== null) {
+                            $searchValue = (int)$searchValue;
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$timePart}(v.{$valueColumn}) > '{$searchValue}')";
+                        }
+                        break;
+                    case SearchCriteriaEnum::HOUR_BETWEEN:
+                    case SearchCriteriaEnum::MINUTE_BETWEEN:
+                    case SearchCriteriaEnum::SECOND_BETWEEN:
+                        $criteriaParts = explode('_', $searchCriteria);
+                        $timePart = strtolower($criteriaParts[0]);
+                        $selector = $timePart === 'hour' ? 'hour' : 'minOrSec';
+                        $start = $criteria[$widget->getImmutableId()][$selector];
+                        $end = $criteria[$widget->getImmutableId()]["{$selector}2"];
+                        if ($start !== null && $end !== null) {
+                            $start = (int) $start; $end = (int) $end;
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$timePart}(v.{$valueColumn}) BETWEEN '{$start}' AND '{$end}')";
+                        }
+                        break;
                 }
             }
         }

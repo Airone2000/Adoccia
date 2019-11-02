@@ -42,6 +42,18 @@ final class SearchCriteriaEnum extends AbstractEnum
         TIME_EQUAL_TO       = 'TIME_EQUAL_TO',
         TIME_GREATER_THAN   = 'TIME_GREATER_THAN',
         TIME_LOWER_THAN     = 'TIME_LOWER_THAN',
-        TIME_BETWEEN        = 'TIME_BETWEEN'
+        TIME_BETWEEN        = 'TIME_BETWEEN',
+        HOUR_EQUAL_TO       = 'HOUR_EQUAL_TO',
+        HOUR_LESS_THAN      = 'HOUR_LESS_THAN',
+        HOUR_GREATER_THAN   = 'HOUR_GREATER_THAN',
+        HOUR_BETWEEN        = 'HOUR_BETWEEN',
+        MINUTE_EQUAL_TO     = 'MINUTE_EQUAL_TO',
+        MINUTE_LESS_THAN    = 'MINUTE_LESS_THAN',
+        MINUTE_GREATER_THAN = 'MINUTE_GREATER_THAN',
+        MINUTE_BETWEEN      = 'MINUTE_BETWEEN',
+        SECOND_EQUAL_TO     = 'SECOND_EQUAL_TO',
+        SECOND_LESS_THAN    = 'SECOND_LESS_THAN',
+        SECOND_GREATER_THAN = 'SECOND_GREATER_THAN',
+        SECOND_BETWEEN      = 'SECOND_BETWEEN'
     ;
 }

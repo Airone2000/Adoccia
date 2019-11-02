@@ -448,7 +448,7 @@ class Widget
      */
     public function getTimeFormat(): ?string
     {
-        return $this->timeFormat ?? TimeFormatEnum::HHMM;
+        return $this->timeFormat ?? TimeFormatEnum::DEFAULT_TIME_FORMAT;
     }
 
     /**

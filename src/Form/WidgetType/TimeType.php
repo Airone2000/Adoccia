@@ -56,8 +56,6 @@ class TimeType extends AbstractWidgetType
          * @var Widget $widget
          */
         $widget = $options['widget'];
-
-
         $view->vars['attr'] = $this->getHTMLInputAttributes($widget, $view->vars['attr'] ?? []);
     }
 
@@ -95,6 +93,26 @@ class TimeType extends AbstractWidgetType
                         case SearchCriteriaEnum::TIME_BETWEEN:
                             $attr['data-inputs'] = '.value,.value2';
                             break;
+                        case SearchCriteriaEnum::HOUR_EQUAL_TO:
+                        case SearchCriteriaEnum::HOUR_LESS_THAN:
+                        case SearchCriteriaEnum::HOUR_GREATER_THAN:
+                        $attr['data-inputs'] = '.hour';
+                            break;
+                        case SearchCriteriaEnum::HOUR_BETWEEN:
+                            $attr['data-inputs'] = '.hour,.hour2';
+                            break;
+                        case SearchCriteriaEnum::MINUTE_EQUAL_TO:
+                        case SearchCriteriaEnum::MINUTE_LESS_THAN:
+                        case SearchCriteriaEnum::MINUTE_GREATER_THAN:
+                        case SearchCriteriaEnum::SECOND_EQUAL_TO:
+                        case SearchCriteriaEnum::SECOND_LESS_THAN:
+                        case SearchCriteriaEnum::SECOND_GREATER_THAN:
+                            $attr['data-inputs'] = '.minOrSec';
+                            break;
+                        case SearchCriteriaEnum::MINUTE_BETWEEN:
+                        case SearchCriteriaEnum::SECOND_BETWEEN:
+                            $attr['data-inputs'] = '.minOrSec,.minOrSec2';
+                            break;
                     }
                     return $attr;
                 }
@@ -104,6 +122,18 @@ class TimeType extends AbstractWidgetType
                 ] + $valueOptions)
             ->add('value2', SfTextType::class, [
                     'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
+                ] + $valueOptions)
+            ->add('hour', IntegerType::class, [
+                    'attr' => ['class' => 'hour hidden']
+                ] + $valueOptions)
+            ->add('hour2', IntegerType::class, [
+                    'attr' => ['class' => 'hour2 hidden']
+                ] + $valueOptions)
+            ->add('minOrSec', IntegerType::class, [
+                    'attr' => ['class' => 'minOrSec hidden']
+                ] + $valueOptions)
+            ->add('minOrSec2', IntegerType::class, [
+                    'attr' => ['class' => 'minOrSec2 hidden']
                 ] + $valueOptions)
         ;
 
@@ -148,7 +178,22 @@ class TimeType extends AbstractWidgetType
             SearchCriteriaEnum::TIME_EQUAL_TO,
             SearchCriteriaEnum::TIME_LOWER_THAN,
             SearchCriteriaEnum::TIME_GREATER_THAN,
-            SearchCriteriaEnum::TIME_BETWEEN
+            SearchCriteriaEnum::TIME_BETWEEN,
+
+            SearchCriteriaEnum::HOUR_EQUAL_TO,
+            SearchCriteriaEnum::HOUR_LESS_THAN,
+            SearchCriteriaEnum::HOUR_GREATER_THAN,
+            SearchCriteriaEnum::HOUR_BETWEEN,
+
+            SearchCriteriaEnum::MINUTE_EQUAL_TO,
+            SearchCriteriaEnum::MINUTE_LESS_THAN,
+            SearchCriteriaEnum::MINUTE_GREATER_THAN,
+            SearchCriteriaEnum::MINUTE_BETWEEN,
+
+            SearchCriteriaEnum::SECOND_EQUAL_TO,
+            SearchCriteriaEnum::SECOND_LESS_THAN,
+            SearchCriteriaEnum::SECOND_GREATER_THAN,
+            SearchCriteriaEnum::SECOND_BETWEEN
         ];
     }
 
