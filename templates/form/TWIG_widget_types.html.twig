@@ -52,6 +52,23 @@
     {{ form_area_end(widget.formArea) }}
 {%- endblock -%}
 
+{%- block fichit_time_row -%}
+    {{ form_area_start(widget.formArea) }}
+    {% if form.parent.vars.mode is same as('DISPLAY') %}
+        <div>{{ form.vars.value }}</div>
+    {% elseif form.parent.vars.mode is same as('SEARCH') %}
+        {{ form_widget(form.criteria) }}
+        {{ form_widget(form.value) }}
+        {{ form_widget(form.value2) }}
+        {{ form_widget(form.valueTimeStart) }}
+        {{ form_widget(form.valueTimeEnd) }}
+    {% else %}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    {% endif %}
+    {{ form_area_end(widget.formArea) }}
+{%- endblock -%}
+
 {%- block fichit_int_row -%}
     {{ form_area_start(widget.formArea) }}
     {% if form.parent.vars.mode is same as('DISPLAY') %}

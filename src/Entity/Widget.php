@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Enum\DateFormatEnum;
 use App\Enum\TextAlignPositionEnum;
+use App\Enum\TimeFormatEnum;
 use App\Validator\Color;
 use App\Validator\Enum;
 use Doctrine\ORM\Mapping as ORM;
@@ -152,6 +153,16 @@ class Widget
      * )
      */
     private $dateFormat;
+
+    /**
+     * @var null|string
+     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Enum(
+     *     enumClass="App\Enum\TimeFormatEnum",
+     *     message="Widget.timeFormat.enum"
+     * )
+     */
+    private $timeFormat;
 
 
     public function __construct()
@@ -429,6 +440,24 @@ class Widget
     public function setDateFormat(?string $dateFormat): Widget
     {
         $this->dateFormat = $dateFormat;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTimeFormat(): ?string
+    {
+        return $this->timeFormat ?? TimeFormatEnum::HHMM;
+    }
+
+    /**
+     * @param string|null $timeFormat
+     * @return Widget
+     */
+    public function setTimeFormat(?string $timeFormat): Widget
+    {
+        $this->timeFormat = $timeFormat;
         return $this;
     }
 

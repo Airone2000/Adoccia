@@ -5,6 +5,7 @@ namespace App\Services\CategoryFinder;
 use App\Entity\Category;
 use App\Entity\Widget;
 use App\Enum\SearchCriteriaEnum;
+use App\Enum\TimeFormatEnum;
 use App\Repository\FicheRepository;
 use App\Repository\ValueRepository;
 use App\Repository\WidgetRepository;
@@ -241,6 +242,32 @@ final class CategoryFinder implements CategoryFinderInterface
                         if ($from !== null && $to !== null) {
                             $from = (int)$from; $to = (int)$to;
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$datePart}(v.{$valueColumn}) BETWEEN '{$from}' AND '{$to}')";
+                        }
+                        break;
+                    case SearchCriteriaEnum::TIME_EQUAL_TO:
+                        if ($searchValue != null) {
+                            $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') = '{$searchValue}' )";
+                        }
+                        break;
+                    case SearchCriteriaEnum::TIME_LOWER_THAN:
+                        if ($searchValue != null) {
+                            $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') < '{$searchValue}' )";
+                        }
+                        break;
+                    case SearchCriteriaEnum::TIME_GREATER_THAN:
+                        if ($searchValue != null) {
+                            $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') > '{$searchValue}' )";
+                        }
+                        break;
+                    case SearchCriteriaEnum::TIME_BETWEEN:
+                        $start = $criteria[$widget->getImmutableId()]['valueTimeEnd'];
+                        $end = $criteria[$widget->getImmutableId()]['valueTimeEnd'];
+                        if ($start !== null && $end !== null) {
+                            $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
+                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') BETWEEN '{$start}' AND '{$end}' )";
                         }
                         break;
                 }

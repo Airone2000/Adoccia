@@ -36,6 +36,12 @@ final class SearchCriteriaEnum extends AbstractEnum
         DAY_EQUAL_TO        = 'DAY_EQUAL_TO',
         DAY_GREATER_THAN    = 'DAY_GREATER_THAN',
         DAY_LESS_THAN       = 'DAY_LESS_THAN',
-        DAY_BETWEEN         = 'DAY_BETWEEN'
+        DAY_BETWEEN         = 'DAY_BETWEEN',
+
+        # Specific to time
+        TIME_EQUAL_TO       = 'TIME_EQUAL_TO',
+        TIME_GREATER_THAN   = 'TIME_GREATER_THAN',
+        TIME_LOWER_THAN     = 'TIME_LOWER_THAN',
+        TIME_BETWEEN        = 'TIME_BETWEEN'
     ;
 }
