@@ -7,6 +7,7 @@ use App\Enum\DateFormatEnum;
 use App\Enum\FicheModeEnum;
 use App\Enum\SearchCriteriaEnum;
 use App\Enum\TimeFormatEnum;
+use Symfony\Component\Form\Event\PreSetDataEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -92,7 +93,7 @@ class TimeType extends AbstractWidgetType
                             $attr['data-inputs'] = '.value';
                             break;
                         case SearchCriteriaEnum::TIME_BETWEEN:
-                            $attr['data-inputs'] = '.valueTimeStart,.valueTimeEnd';
+                            $attr['data-inputs'] = '.value,.value2';
                             break;
                     }
                     return $attr;
@@ -104,13 +105,38 @@ class TimeType extends AbstractWidgetType
             ->add('value2', SfTextType::class, [
                     'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
                 ] + $valueOptions)
-            ->add('valueTimeStart', SfTextType::class, [
-                    'attr' => ['class' => 'valueTimeStart hidden'] + $valueOptions['attr']
-                ] + $valueOptions)
-            ->add('valueTimeEnd', SfTextType::class, [
-                    'attr' => ['class' => 'valueTimeEnd hidden'] + $valueOptions['attr']
-                ] + $valueOptions)
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(PreSetDataEvent $preSetDataEvent) use ($widget){
+            $data = $preSetDataEvent->getData();
+            if ($data !== null) {
+                $value = !empty($data['value']) ? $data['value'] : null;
+                $data['value'] = self::transformTo($widget, $value);
+                $value2 = !empty($data['value2']) ? $data['value2'] : null;
+                $data['value2'] = self::transformTo($widget, $value2);
+                $preSetDataEvent->setData($data);
+            }
+        });
+
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(PreSubmitEvent $preSubmitEvent) use ($widget){
+            $data = $preSubmitEvent->getData();
+
+            $value = !empty($data['value']) ? $data['value'] : null;
+            $value = self::transformFrom($widget, $value);
+            if ($value instanceof \DateTime) {
+                $data['value'] = $value->format('H:i:s');
+            }
+            else $data['value'] = null;
+
+            $value2 = !empty($data['value2']) ? $data['value2'] : null;
+            $value2 = self::transformFrom($widget, $value2);
+            if ($value2 instanceof \DateTime) {
+                $data['value2'] = $value2->format('H:i:s');
+            }
+            else $data['value2'] = null;
+
+            $preSubmitEvent->setData($data);
+        });
     }
 
     protected function getSearchCriterias(): array
@@ -141,6 +167,11 @@ class TimeType extends AbstractWidgetType
 
     public static function transformTo(Widget $widget, $value)
     {
+        if (is_string($value)) {
+            $value = \DateTime::createFromFormat('H:i:s', $value);
+            $value->setDate(0,0,0);
+        }
+
         if ($value instanceof \DateTime) {
             $timeFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
             return $value->format($timeFormat);

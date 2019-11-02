@@ -263,8 +263,8 @@ final class CategoryFinder implements CategoryFinderInterface
                         }
                         break;
                     case SearchCriteriaEnum::TIME_BETWEEN:
-                        $start = $criteria[$widget->getImmutableId()]['valueTimeEnd'];
-                        $end = $criteria[$widget->getImmutableId()]['valueTimeEnd'];
+                        $start = $criteria[$widget->getImmutableId()]['value'];
+                        $end = $criteria[$widget->getImmutableId()]['value2'];
                         if ($start !== null && $end !== null) {
                             $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') BETWEEN '{$start}' AND '{$end}' )";

@@ -6,7 +6,7 @@ final class TimeFormatEnum extends AbstractEnum
 {
     const
         HHMM = 'HH:MM',
-        HHMMSS = 'HH:MM:SS'
+        HHMMSS = 'HH:MM:ss'
     ;
 
     const DEFAULT_TIME_FORMAT = self::HHMM;
