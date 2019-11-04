@@ -75,6 +75,12 @@ class Value
      */
     private $valueOfTypeTime;
 
+    /**
+     * @var string|null
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $valueOfTypeRadio;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -242,6 +248,24 @@ class Value
     public function setValueOfTypeTime(?\DateTime $valueOfTypeTime): Value
     {
         $this->valueOfTypeTime = $valueOfTypeTime;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getValueOfTypeRadio(): ?string
+    {
+        return $this->valueOfTypeRadio;
+    }
+
+    /**
+     * @param string|null $valueOfTypeRadio
+     * @return Value
+     */
+    public function setValueOfTypeRadio(?string $valueOfTypeRadio): Value
+    {
+        $this->valueOfTypeRadio = $valueOfTypeRadio;
         return $this;
     }
 

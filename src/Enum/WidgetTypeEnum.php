@@ -14,7 +14,8 @@ final class WidgetTypeEnum extends AbstractEnum
         INT = 'int',
         FLOAT = 'float',
         DATE = 'date',
-        TIME = 'time'
+        TIME = 'time',
+        RADIO = 'radio'
     ;
 
     public static function getGroupedWidgetTypes(): array
@@ -23,7 +24,8 @@ final class WidgetTypeEnum extends AbstractEnum
             'nonClassed' => [self::EMPTY, self::LABEL],
             'textual' => [self::STRING, self::TEXT],
             'number' => [self::INT, self::FLOAT],
-            'time' => [self::DATE, self::TIME]
+            'time' => [self::DATE, self::TIME],
+            'choices' => [self::RADIO]
         ];
     }
 

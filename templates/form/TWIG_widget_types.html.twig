@@ -115,6 +115,21 @@
     {{ form_area_end(widget.formArea) }}
 {%- endblock -%}
 
+{%- block fichit_radio_row -%}
+    {{ form_area_start(widget.formArea) }}
+        {% if form.parent.vars.mode is same as('DISPLAY') %}
+            {% for choice in choices %}
+                {% if choice.value is same as(form.vars.value) %}
+                    <div>{{ choice.label }}</div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {{- block('choice_widget') -}}
+            {{ form_errors(form) }}
+        {% endif %}
+    {{ form_area_end(widget.formArea) }}
+{%- endblock -%}
+
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         <ul>

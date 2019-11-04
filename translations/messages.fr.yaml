@@ -9,4 +9,6 @@ WidgetType.float: "Nombre à virgule"
 WidgetType.Group.time: "Temps"
 WidgetType.date: "Date"
 WidgetType.time: "Heure"
+WidgetType.Group.choices: "Liste de choix"
+WidgetType.radio: "Choix simple / multiple"
 

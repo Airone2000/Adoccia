@@ -164,6 +164,12 @@ class Widget
      */
     private $timeFormat;
 
+    /**
+     * @var array|null
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $choices;
+
 
     public function __construct()
     {
@@ -458,6 +464,24 @@ class Widget
     public function setTimeFormat(?string $timeFormat): Widget
     {
         $this->timeFormat = $timeFormat;
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getChoices(): ?array
+    {
+        return (array)$this->choices;
+    }
+
+    /**
+     * @param array|null $choices
+     * @return Widget
+     */
+    public function setChoices(?array $choices): Widget
+    {
+        $this->choices = $choices;
         return $this;
     }
 

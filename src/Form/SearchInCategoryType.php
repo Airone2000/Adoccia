@@ -19,6 +19,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchInCategoryType extends AbstractType
 {
+    /**
+     * Caches references to builders to prevent
+     * recreate instance for each dynamic field
+     * @var \App\Form\FormBuilder\FormBuilderInterface[]
+     */
+    private static $loadedDynamicFieldsBuilders = [];
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->addImmutableFields($builder, $options);
@@ -72,15 +79,22 @@ class SearchInCategoryType extends AbstractType
             $widget = $formArea->getWidget();
 
             $type = ucfirst(strtolower($widget->getType()));
-            $typeClass = "App\Form\WidgetType\\{$type}Type";
+            $builderClass = "App\Form\FormBuilder\\{$type}Builder";
 
-            if (class_exists($typeClass)) {
-                $builder->add($widget->getImmutableId(), $typeClass, [
-                    'widget' => $widget,
-                    'mode' => $options['mode'],
-                    'compound' => $options['compound']
-                ]);
+            /* @var \App\Form\FormBuilder\FormBuilderInterface[] $loadedBuilders */
+            if (!isset(self::$loadedDynamicFieldsBuilders[$builderClass])) {
+                if (class_exists($builderClass)) {
+                    self::$loadedDynamicFieldsBuilders[$builderClass] = new $builderClass();
+                }
+                else {
+                    throw new \LogicException("Builder class {$builderClass} does not exist.");
+                }
             }
+
+            self::$loadedDynamicFieldsBuilders[$builderClass]->buildSearchForm($builder, [
+                'mode' => $options['mode'],
+                'widget' => $widget
+            ]);
         }
     }
 
