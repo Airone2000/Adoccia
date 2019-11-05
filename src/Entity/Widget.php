@@ -43,7 +43,8 @@ class Widget
 
     /**
      * @var FormArea
-     * @ORM\OneToOne(targetEntity="App\Entity\FormArea", inversedBy="widget")
+     * Fetch EAGER for performance in TWIG_widget_types::form_area_start(widget.formArea)
+     * @ORM\OneToOne(targetEntity="App\Entity\FormArea", inversedBy="widget", fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
      */
     private $formArea;
@@ -169,6 +170,12 @@ class Widget
      * @ORM\Column(type="json", nullable=true)
      */
     private $choices;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default":0})
+     */
+    private $multipleValues = false;
 
 
     public function __construct()
@@ -483,6 +490,29 @@ class Widget
     {
         $this->choices = $choices;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getMultipleValues(): bool
+    {
+        return (bool) $this->multipleValues;
+    }
+
+    /**
+     * @param bool|null $multipleValues
+     * @return Widget
+     */
+    public function setMultipleValues(?bool $multipleValues): Widget
+    {
+        $this->multipleValues = $multipleValues;
+        return $this;
+    }
+
+    public function hasMultipleValues(): bool
+    {
+        return $this->getMultipleValues();
     }
 
 }

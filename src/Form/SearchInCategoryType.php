@@ -8,7 +8,9 @@ use App\Entity\FormArea;
 use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
 use App\Enum\SearchCriteriaEnum;
+use App\Repository\WidgetRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,6 +27,15 @@ class SearchInCategoryType extends AbstractType
      * @var \App\Form\FormBuilder\FormBuilderInterface[]
      */
     private static $loadedDynamicFieldsBuilders = [];
+    /**
+     * @var WidgetRepository
+     */
+    private $widgetRepository;
+
+    public function __construct(WidgetRepository $widgetRepository)
+    {
+        $this->widgetRepository = $widgetRepository;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -62,6 +73,12 @@ class SearchInCategoryType extends AbstractType
                         ]
                     ])
             )
+            ->add('published', CheckboxType::class, [
+                'required' => false
+            ])
+            ->add('valid', CheckboxType::class, [
+                'required' => false
+            ])
         ;
     }
 
@@ -71,13 +88,11 @@ class SearchInCategoryType extends AbstractType
         $category = $options['category'];
         /** @var Form $form */
         $form = $category->getForm();
+        /** @var Widget[] $widgets */
+        $widgets = $this->widgetRepository->findByForm($form);
 
-        /** @var FormArea $formArea */
-        foreach ($form->getAreas() as $formArea)
+        foreach ($widgets as $widget)
         {
-            /** @var Widget $widget */
-            $widget = $formArea->getWidget();
-
             $type = ucfirst(strtolower($widget->getType()));
             $builderClass = "App\Form\FormBuilder\\{$type}Builder";
 

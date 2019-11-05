@@ -29,10 +29,8 @@ final class StringBuilder implements FormBuilderInterface
     {
         /* @var \App\Entity\Widget $widget */
         $widget = $options['widget'];
-        $builder->add($widget->getImmutableId(), StringType::class, [
-            'widget' => $widget,
-            'mode' => FicheModeEnum::SEARCH,
-            'compound' => true
+        $builder->add($widget->getImmutableId(), \App\Form\SearchType\StringType::class, [
+            'widget' => $widget
         ]);
     }
 }

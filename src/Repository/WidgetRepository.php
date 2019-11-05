@@ -42,6 +42,7 @@ class WidgetRepository extends ServiceEntityRepository
             ->leftJoin('w.formArea', 'form_area')
             ->where('form_area.form = :form')
             ->setParameter('form', $form)
+            ->orderBy('form_area.position', 'ASC')
             ->getQuery()
             ->getResult()
         ;

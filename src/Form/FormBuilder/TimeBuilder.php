@@ -3,8 +3,10 @@
 namespace App\Form\FormBuilder;
 
 use App\Entity\Widget;
+use App\Enum\FicheModeEnum;
 use App\Enum\TimeFormatEnum;
 use App\Form\FormBuilderType\TimeType;
+use App\Form\SearchType\TimeType as TimeTypeSearch;
 use Symfony\Component\Form\CallbackTransformer;
 
 final class TimeBuilder implements FormBuilderInterface
@@ -17,7 +19,7 @@ final class TimeBuilder implements FormBuilderInterface
         $builder->add($widget->getId(), TimeType::class, [
             'widget' => $widget,
             'mode' => $options['mode'],
-            'attr' => $this->getWidgetAttributes($widget) + [
+            'attr' => TimeType::getHTMLInputAttributes($widget) + [
                 'required' => $widget->isRequired()
             ],
             'empty_data' => null
@@ -25,61 +27,21 @@ final class TimeBuilder implements FormBuilderInterface
 
         $builder->get($widget->getId())->addModelTransformer(new CallbackTransformer(
             function($value) use ($widget) {
-                return self::transformTo($widget, $value);
+                return TimeType::transformTo($widget, $value);
             },
             function($value) use ($widget) {
-                return self::transformFrom($widget, $value);
+                return TimeType::transformFrom($widget, $value);
             }
         ));
     }
 
     public function buildSearchForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)
     {
-        // TODO: Implement buildSearchForm() method.
+        /* @var \App\Entity\Widget $widget */
+        $widget = $options['widget'];
+        $builder->add($widget->getImmutableId(), TimeTypeSearch::class, [
+            'widget' => $widget
+        ]);
     }
 
-    private function getWidgetAttributes(Widget $widget): array
-    {
-        $attr = [];
-        $attr['data-masked'] = 'true';
-        $attr['data-inputmask-alias'] = 'datetime';
-        $attr['data-inputmask-inputformat'] = $widget->getTimeFormat();
-        $attr['data-inputmask-placeholder'] = $this->getTimeTypePlaceholder($widget);
-        $attr['inputmode'] = 'numeric';
-        return $attr;
-    }
-
-    private function getTimeTypePlaceholder(Widget $widget): ?string
-    {
-        if ($widget->getInputPlaceholder()) {
-            $placeholder = $widget->getInputPlaceholder();
-        }
-        else {
-            $placeholder = preg_replace('/[hms]/i', '_', $widget->getTimeFormat());
-        }
-
-        return $placeholder;
-    }
-
-    public static function transformFrom(Widget $widget, $value)
-    {
-        if (is_string($value)) {
-            $timeFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
-            $datetime = \DateTime::createFromFormat($timeFormat, $value);
-            if ($datetime !== false) {
-                $datetime->setDate(0,0,0);
-                return $datetime;
-            }
-        }
-        return null;
-    }
-
-    public static function transformTo(Widget $widget, $value)
-    {
-        if ($value instanceof \DateTime) {
-            $timeFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
-            return $value->format($timeFormat);
-        }
-        return null;
-    }
 }

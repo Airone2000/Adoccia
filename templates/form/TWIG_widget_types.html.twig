@@ -118,11 +118,10 @@
 {%- block fichit_radio_row -%}
     {{ form_area_start(widget.formArea) }}
         {% if form.parent.vars.mode is same as('DISPLAY') %}
-            {% for choice in choices %}
-                {% if choice.value is same as(form.vars.value) %}
-                    <div>{{ choice.label }}</div>
-                {% endif %}
-            {% endfor %}
+            {{ transformed_value_to_display }}
+        {% elseif form.parent.vars.mode is same as('SEARCH') %}
+            {{ form_widget(form.criteria) }}
+            {{ form_widget(form.value) }}
         {% else %}
             {{- block('choice_widget') -}}
             {{ form_errors(form) }}

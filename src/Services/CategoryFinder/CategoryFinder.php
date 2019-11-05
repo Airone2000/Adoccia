@@ -246,28 +246,50 @@ final class CategoryFinder implements CategoryFinderInterface
                         break;
                     case SearchCriteriaEnum::TIME_EQUAL_TO:
                         if ($searchValue != null) {
-                            $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
-                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') = '{$searchValue}' )";
+                            $phpFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
+                            $date = \DateTime::createFromFormat('H:i:s', $searchValue);
+                            if ($date instanceof \DateTime) {
+                                $searchValue = $date->format($phpFormat);
+                                $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
+                                $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') = '{$searchValue}' )";
+                            }
                         }
                         break;
                     case SearchCriteriaEnum::TIME_LOWER_THAN:
                         if ($searchValue != null) {
-                            $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
-                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') < '{$searchValue}' )";
+                            $phpFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
+                            $date = \DateTime::createFromFormat('H:i:s', $searchValue);
+                            if ($date instanceof \DateTime) {
+                                $searchValue = $date->format($phpFormat);
+                                $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
+                                $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') < '{$searchValue}' )";
+                            }
                         }
                         break;
                     case SearchCriteriaEnum::TIME_GREATER_THAN:
                         if ($searchValue != null) {
-                            $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
-                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') > '{$searchValue}' )";
+                            $phpFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
+                            $date = \DateTime::createFromFormat('H:i:s', $searchValue);
+                            if ($date instanceof \DateTime) {
+                                $searchValue = $date->format($phpFormat);
+                                $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
+                                $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') > '{$searchValue}' )";
+                            }
                         }
                         break;
                     case SearchCriteriaEnum::TIME_BETWEEN:
                         $start = $criteria[$widget->getImmutableId()]['value'];
                         $end = $criteria[$widget->getImmutableId()]['value2'];
                         if ($start !== null && $end !== null) {
-                            $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
-                            $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') BETWEEN '{$start}' AND '{$end}' )";
+                            $phpFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
+                            $dateStart = \DateTime::createFromFormat('H:i:s', $start);
+                            $dateEnd = \DateTime::createFromFormat('H:i:s', $end);
+                            if ($dateStart instanceof \DateTime && $dateEnd instanceof \DateTime) {
+                                $start = $searchValue = $dateStart->format($phpFormat);
+                                $end = $searchValue = $dateEnd->format($phpFormat);
+                                $sqlFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['sql'];
+                                $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND DATE_FORMAT(v.{$valueColumn}, '${sqlFormat}') BETWEEN '{$start}' AND '{$end}' )";
+                            }
                         }
                         break;
                     case SearchCriteriaEnum::HOUR_EQUAL_TO:
@@ -317,6 +339,67 @@ final class CategoryFinder implements CategoryFinderInterface
                         if ($start !== null && $end !== null) {
                             $start = (int) $start; $end = (int) $end;
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$timePart}(v.{$valueColumn}) BETWEEN '{$start}' AND '{$end}')";
+                        }
+                        break;
+                    case SearchCriteriaEnum::IN_ARRAY:
+                        if ($searchValue !== null) {
+                            $searchValue = json_decode($searchValue, true);
+                            if (is_array($searchValue)) {
+                                $subAndWheres = [];
+                                $i = 0;
+                                foreach ($searchValue as $value) {
+                                    $subParameterKey = ($parameterKey . $i++);
+                                    $subAndWheres[] = "(REGEXP(v.{$valueColumn}, :{$subParameterKey}) = 1)";
+                                    $subOrWhereParameters[$subParameterKey] = $value;
+                                }
+                                if (!empty($subAndWheres)) {
+                                    $glue = $widget->hasMultipleValues() ? ' AND ' : ' OR ';
+                                    $subAndWheres = implode($glue, $subAndWheres);
+                                    $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND ({$subAndWheres}))";
+                                }
+                            }
+                        }
+                        break;
+                    case SearchCriteriaEnum::NOT_IN_ARRAY:
+                        if ($searchValue !== null) {
+                            $searchValue = json_decode($searchValue, true);
+                            if (is_array($searchValue)) {
+                                $subAndWheres = [];
+                                $i = 0;
+                                foreach ($searchValue as $value) {
+                                    $subParameterKey = ($parameterKey . $i++);
+                                    $subAndWheres[] = "(REGEXP(v.{$valueColumn}, :{$subParameterKey}) = 0)";
+                                    $subOrWhereParameters[$subParameterKey] = $value;
+                                }
+                                if (!empty($subAndWheres)) {
+                                    $glue = $widget->hasMultipleValues() ? ' OR ' : ' AND ';
+                                    $subAndWheres = implode($glue, $subAndWheres);
+                                    $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND ({$subAndWheres}))";
+                                }
+                            }
+                        }
+                        break;
+                    case SearchCriteriaEnum::IN_ARRAY_EXACT:
+                        if ($searchValue !== null) {
+                            $searchValue = json_decode($searchValue, true);
+                            if (is_array($searchValue)) {
+
+                                $length = array_reduce($searchValue, function($acc, $value){
+                                    return $acc + mb_strlen($value);
+                                }, count($searchValue) - 1);
+
+                                $subAndWheres = [];
+                                $i = 0;
+                                foreach ($searchValue as $value) {
+                                    $subParameterKey = ($parameterKey . $i++);
+                                    $subAndWheres[] = "(REGEXP(v.{$valueColumn}, :{$subParameterKey}) = 1)";
+                                    $subOrWhereParameters[$subParameterKey] = $value;
+                                }
+                                if (!empty($subAndWheres)) {
+                                    $subAndWheres = implode(' AND ', $subAndWheres);
+                                    $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND CHAR_LENGTH(v.{$valueColumn}) = {$length} AND ({$subAndWheres}))";
+                                }
+                            }
                         }
                         break;
                 }

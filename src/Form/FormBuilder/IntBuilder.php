@@ -3,6 +3,7 @@
 namespace App\Form\FormBuilder;
 
 use App\Entity\Widget;
+use App\Enum\FicheModeEnum;
 use App\Form\FormBuilderType\IntType;
 
 final class IntBuilder implements FormBuilderInterface
@@ -26,6 +27,10 @@ final class IntBuilder implements FormBuilderInterface
 
     public function buildSearchForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)
     {
-        // TODO: Implement buildSearchForm() method.
+        /* @var \App\Entity\Widget $widget */
+        $widget = $options['widget'];
+        $builder->add($widget->getImmutableId(), \App\Form\SearchType\IntType::class, [
+            'widget' => $widget
+        ]);
     }
 }

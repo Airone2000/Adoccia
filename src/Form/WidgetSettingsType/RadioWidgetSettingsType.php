@@ -19,6 +19,7 @@ final class RadioWidgetSettingsType extends AbstractWidgetSettingsType
                 'required' => false
             ])
             ->add('required')
+            ->add('multipleValues')
 
             ->get('choices')->addModelTransformer(new CallbackTransformer(
                 function($value){

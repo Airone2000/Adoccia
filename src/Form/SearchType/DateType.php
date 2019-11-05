@@ -1,80 +1,29 @@
 <?php
 
-namespace App\Form\WidgetType;
+namespace App\Form\SearchType;
 
 use App\Entity\Widget;
-use App\Enum\DateFormatEnum;
-use App\Enum\FicheModeEnum;
 use App\Enum\SearchCriteriaEnum;
+use App\Form\FormBuilderType\DateType as DateTypeSingle;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType as SfTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\Validator\Constraints\DateTime;
 
-class DateType extends AbstractWidgetType
+final class DateType extends AbstractSearchType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        if ($options['mode'] === FicheModeEnum::SEARCH) {
-            $this->buildSearchForm($builder, $options);
-        }
-    }
-
-    public function getDateTypePlaceholder(Widget $widget): ?string
-    {
-        if ($widget->getInputPlaceholder()) {
-            $placeholder = $widget->getInputPlaceholder();
-        }
-        else {
-            $placeholder = preg_replace('/[dmy]/i', '_', $widget->getDateFormat());
-        }
-
-        return $placeholder;
-    }
-
-    private function getHTMLInputAttributes(Widget $widget, array $attr = []): array
-    {
-        $attr['data-masked'] = 'true';
-        $attr['data-inputmask-alias'] = 'datetime';
-        $attr['data-inputmask-inputformat'] = $widget->getDateFormat();
-        $attr['data-inputmask-placeholder'] = $this->getDateTypePlaceholder($widget);
-        $attr['inputmode'] = 'numeric';
-        return $attr;
-    }
-
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        /**
-         * @var Widget $widget
-         */
-        $widget = $options['widget'];
-
-
-        $view->vars['attr'] = $this->getHTMLInputAttributes($widget, $view->vars['attr'] ?? []);
-    }
-
     public function getBlockPrefix()
     {
         return 'fichit_date';
     }
 
-    private function buildSearchForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         /* @var Widget $widget */
         $widget = $options['widget'];
-
-        $valueOptions = [
-            'required' => false,
-            'attr' => [
-                    'placeholder' => self::getDateTypePlaceholder($widget)
-                ] + $this->getHTMLInputAttributes($widget, []),
-        ];
 
         $builder
             ->add('criteria', ChoiceType::class, [
@@ -121,12 +70,20 @@ class DateType extends AbstractWidgetType
                     return $attr;
                 }
             ])
-            ->add('value', SfTextType::class, [
-                    'attr' => ['class' => 'value hidden'] + $valueOptions['attr']
-                ] + $valueOptions)
-            ->add('value2', SfTextType::class, [
-                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
-                ] + $valueOptions)
+            ->add('value', TextType::class, [
+                'attr' => [
+                        'class' => 'value hidden',
+                        'placeholder' => DateTypeSingle::getDateTypePlaceholder($widget)
+                    ] + DateTypeSingle::getHTMLInputAttributes($widget),
+                'required' => false
+            ])
+            ->add('value2', TextType::class, [
+                'attr' => [
+                        'class' => 'value2 hidden',
+                        'placeholder' => DateTypeSingle::getDateTypePlaceholder($widget)
+                    ] + DateTypeSingle::getHTMLInputAttributes($widget),
+                'required' => false
+            ])
             ->add('valueYear', IntegerType::class, [
                 'attr' => ['class' => 'valueYear hidden'],
                 'required' => false
@@ -169,7 +126,7 @@ class DateType extends AbstractWidgetType
          * Get the value of criteria.
          * If it's equal to BETWEEN, let's display the Value2 input
          */
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $formEvent) use ($widget, $valueOptions) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $formEvent) use ($widget) {
             /**
              * Entity Search stores date like Y-m-d.
              * To render this value back in the form, we must convert it based on the widget->dateFormat()
@@ -177,9 +134,9 @@ class DateType extends AbstractWidgetType
             $data = $formEvent->getData();
             if ($data !== null) {
                 $value = !empty($data['value']) ? $data['value'] : null;
-                $data['value'] = self::transformTo($widget, $value);
+                $data['value'] = DateTypeSingle::transformTo($widget, $value);
                 $value2 = !empty($data['value2']) ? $data['value2'] : null;
-                $data['value2'] = self::transformTo($widget, $value2);
+                $data['value2'] = DateTypeSingle::transformTo($widget, $value2);
                 $formEvent->setData($data);
             }
         });
@@ -189,14 +146,14 @@ class DateType extends AbstractWidgetType
             $data = $preSubmitEvent->getData();
 
             $value = !empty($data['value']) ? $data['value'] : null;
-            $value = self::transformFrom($widget, $value);
+            $value = DateTypeSingle::transformFrom($widget, $value);
             if ($value instanceof \DateTime) {
                 $data['value'] = $value->format('Y-m-d');
             }
             else $data['value'] = null;
 
             $value2 = !empty($data['value2']) ? $data['value2'] : null;
-            $value2 = self::transformFrom($widget, $value2);
+            $value2 = DateTypeSingle::transformFrom($widget, $value2);
             if ($value2 instanceof \DateTime) {
                 $data['value2'] = $value2->format('Y-m-d');
             }
@@ -206,7 +163,7 @@ class DateType extends AbstractWidgetType
         });
     }
 
-    protected function getSearchCriterias(): array
+    private function getSearchCriterias(): array
     {
         return [
             SearchCriteriaEnum::DISABLED,
@@ -233,32 +190,4 @@ class DateType extends AbstractWidgetType
             SearchCriteriaEnum::DAY_BETWEEN
         ];
     }
-
-    public static function transformFrom(Widget $widget, $value)
-    {
-        if (is_string($value)) {
-            $dateFormat = DateFormatEnum::getPHPFormatForJsFormat($widget->getDateFormat());
-            $datetime = \DateTime::createFromFormat($dateFormat, $value);
-            if ($datetime !== false) {
-                $datetime->setTime(0, 0, 0, 0);
-                return $datetime;
-            }
-        }
-        return null;
-    }
-
-    public static function transformTo(Widget $widget, $value)
-    {
-        if (is_string($value) && preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $value)) {
-            // Let's assume it can be a value like Y-m-d (default value)
-            $value = \DateTime::createFromFormat('Y-m-d', $value);
-        }
-
-        if ($value instanceof \DateTime) {
-            $dateFormat = DateFormatEnum::getPHPFormatForJsFormat($widget->getDateFormat());
-            return $value->format($dateFormat);
-        }
-        return null;
-    }
-
 }

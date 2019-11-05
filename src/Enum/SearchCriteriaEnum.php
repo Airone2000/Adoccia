@@ -54,6 +54,13 @@ final class SearchCriteriaEnum extends AbstractEnum
         SECOND_EQUAL_TO     = 'SECOND_EQUAL_TO',
         SECOND_LESS_THAN    = 'SECOND_LESS_THAN',
         SECOND_GREATER_THAN = 'SECOND_GREATER_THAN',
-        SECOND_BETWEEN      = 'SECOND_BETWEEN'
+        SECOND_BETWEEN      = 'SECOND_BETWEEN',
+
+        # The value contains those values (and maybe more)
+        IN_ARRAY            = 'IN_ARRAY',
+        # The Value does not contain those values
+        NOT_IN_ARRAY        = 'NOT_IN_ARRAY',
+        # The value has exactly those values (and no more)
+        IN_ARRAY_EXACT      = 'IN_ARRAY_EXACT'
     ;
 }

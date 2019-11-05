@@ -1,80 +1,29 @@
 <?php
 
-namespace App\Form\WidgetType;
+namespace App\Form\SearchType;
 
 use App\Entity\Widget;
-use App\Enum\DateFormatEnum;
-use App\Enum\FicheModeEnum;
 use App\Enum\SearchCriteriaEnum;
-use App\Enum\TimeFormatEnum;
-use Symfony\Component\Form\Event\PreSetDataEvent;
+use App\Form\FormBuilderType\TimeType as TimeTypeSingle;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType as SfTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\Validator\Constraints\DateTime;
 
-class TimeType extends AbstractWidgetType
+final class TimeType extends AbstractSearchType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        if ($options['mode'] === FicheModeEnum::SEARCH) {
-            $this->buildSearchForm($builder, $options);
-        }
-    }
-
-    public function getTimeTypePlaceholder(Widget $widget): ?string
-    {
-        if ($widget->getInputPlaceholder()) {
-            $placeholder = $widget->getInputPlaceholder();
-        }
-        else {
-            $placeholder = preg_replace('/[hms]/i', '_', $widget->getTimeFormat());
-        }
-
-        return $placeholder;
-    }
-
-    private function getHTMLInputAttributes(Widget $widget, array $attr = []): array
-    {
-        $attr['data-masked'] = 'true';
-        $attr['data-inputmask-alias'] = 'datetime';
-        $attr['data-inputmask-inputformat'] = $widget->getTimeFormat();
-        $attr['data-inputmask-placeholder'] = $this->getTimeTypePlaceholder($widget);
-        $attr['inputmode'] = 'numeric';
-        return $attr;
-    }
-
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        /**
-         * @var Widget $widget
-         */
-        $widget = $options['widget'];
-        $view->vars['attr'] = $this->getHTMLInputAttributes($widget, $view->vars['attr'] ?? []);
-    }
-
     public function getBlockPrefix()
     {
         return 'fichit_time';
     }
 
-    private function buildSearchForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         /* @var Widget $widget */
         $widget = $options['widget'];
-
-        $valueOptions = [
-            'required' => false,
-            'attr' => [
-                'placeholder' => $this->getTimeTypePlaceholder($widget)
-                ] + $this->getHTMLInputAttributes($widget, []),
-        ];
 
         $builder
             ->add('criteria', ChoiceType::class, [
@@ -96,7 +45,7 @@ class TimeType extends AbstractWidgetType
                         case SearchCriteriaEnum::HOUR_EQUAL_TO:
                         case SearchCriteriaEnum::HOUR_LESS_THAN:
                         case SearchCriteriaEnum::HOUR_GREATER_THAN:
-                        $attr['data-inputs'] = '.hour';
+                            $attr['data-inputs'] = '.hour';
                             break;
                         case SearchCriteriaEnum::HOUR_BETWEEN:
                             $attr['data-inputs'] = '.hour,.hour2';
@@ -117,49 +66,92 @@ class TimeType extends AbstractWidgetType
                     return $attr;
                 }
             ])
-            ->add('value', SfTextType::class, [
-                    'attr' => ['class' => 'value hidden'] + $valueOptions['attr']
-                ] + $valueOptions)
-            ->add('value2', SfTextType::class, [
-                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
-                ] + $valueOptions)
+            ->add('value', TextType::class, [
+                    'required' => false,
+                    'attr' => [
+                            'class' => 'value hidden',
+                            'placeholder' => TimeTypeSingle::getTimeTypePlaceholder($widget)
+                        ] + TimeTypeSingle::getHTMLInputAttributes($widget)
+                ]
+            )
+            ->add('value2', TextType::class, [
+                    'required' => false,
+                    'attr' => [
+                            'class' => 'value2 hidden',
+                            'placeholder' => TimeTypeSingle::getTimeTypePlaceholder($widget)
+                        ] + TimeTypeSingle::getHTMLInputAttributes($widget)
+                ]
+            )
             ->add('hour', IntegerType::class, [
-                    'attr' => ['class' => 'hour hidden']
-                ] + $valueOptions)
+                    'required' => false,
+                    'attr' => [
+                        'class' => 'hour hidden',
+                        'min' => 0,
+                        'max' => 24
+                    ]
+                ]
+            )
             ->add('hour2', IntegerType::class, [
-                    'attr' => ['class' => 'hour2 hidden']
-                ] + $valueOptions)
+                    'required' => false,
+                    'attr' => [
+                        'class' => 'hour2 hidden',
+                        'min' => 0,
+                        'max' => 24
+                    ]
+                ]
+            )
             ->add('minOrSec', IntegerType::class, [
-                    'attr' => ['class' => 'minOrSec hidden']
-                ] + $valueOptions)
+                    'required' => false,
+                    'attr' => [
+                        'class' => 'minOrSec hidden',
+                        'min' => 0,
+                        'max' => 60
+                    ]
+                ]
+            )
             ->add('minOrSec2', IntegerType::class, [
-                    'attr' => ['class' => 'minOrSec2 hidden']
-                ] + $valueOptions)
+                    'required' => false,
+                    'attr' => [
+                        'class' => 'minOrSec2 hidden',
+                        'min' => 0,
+                        'max' => 60
+                    ]
+                ]
+            )
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(PreSetDataEvent $preSetDataEvent) use ($widget){
-            $data = $preSetDataEvent->getData();
+        /**
+         * Get the value of criteria.
+         * If it's equal to BETWEEN, let's display the Value2 input
+         */
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $formEvent) use ($widget) {
+            /**
+             * Entity Search stores date like Y-m-d.
+             * To render this value back in the form, we must convert it based on the widget->dateFormat()
+             */
+            $data = $formEvent->getData();
             if ($data !== null) {
                 $value = !empty($data['value']) ? $data['value'] : null;
-                $data['value'] = self::transformTo($widget, $value);
+                $data['value'] = TimeTypeSingle::transformTo($widget, $value);
                 $value2 = !empty($data['value2']) ? $data['value2'] : null;
-                $data['value2'] = self::transformTo($widget, $value2);
-                $preSetDataEvent->setData($data);
+                $data['value2'] = TimeTypeSingle::transformTo($widget, $value2);
+                $formEvent->setData($data);
             }
         });
 
+        # We cannot add modelTransformer in eventListenerHandler
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function(PreSubmitEvent $preSubmitEvent) use ($widget){
             $data = $preSubmitEvent->getData();
 
             $value = !empty($data['value']) ? $data['value'] : null;
-            $value = self::transformFrom($widget, $value);
+            $value = TimeTypeSingle::transformFrom($widget, $value);
             if ($value instanceof \DateTime) {
                 $data['value'] = $value->format('H:i:s');
             }
             else $data['value'] = null;
 
             $value2 = !empty($data['value2']) ? $data['value2'] : null;
-            $value2 = self::transformFrom($widget, $value2);
+            $value2 = TimeTypeSingle::transformFrom($widget, $value2);
             if ($value2 instanceof \DateTime) {
                 $data['value2'] = $value2->format('H:i:s');
             }
@@ -169,7 +161,7 @@ class TimeType extends AbstractWidgetType
         });
     }
 
-    protected function getSearchCriterias(): array
+    private function getSearchCriterias(): array
     {
         return [
             SearchCriteriaEnum::DISABLED,
@@ -196,33 +188,4 @@ class TimeType extends AbstractWidgetType
             SearchCriteriaEnum::SECOND_BETWEEN
         ];
     }
-
-    public static function transformFrom(Widget $widget, $value)
-    {
-        if (is_string($value)) {
-            $timeFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
-            $datetime = \DateTime::createFromFormat($timeFormat, $value);
-            if ($datetime !== false) {
-                $datetime->setDate(0,0,0);
-                return $datetime;
-            }
-        }
-        return null;
-    }
-
-    public static function transformTo(Widget $widget, $value)
-    {
-        if (is_string($value)) {
-            $value = \DateTime::createFromFormat('H:i:s', $value);
-            $value->setDate(0,0,0);
-        }
-
-        if ($value instanceof \DateTime) {
-            $timeFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
-            return $value->format($timeFormat);
-        }
-        return null;
-    }
-
-
 }

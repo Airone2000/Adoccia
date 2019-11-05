@@ -30,3 +30,4 @@ doctrine:
                 SECOND: DoctrineExtensions\Query\Mysql\Second
                 REGEXP: DoctrineExtensions\Query\Mysql\Regexp
                 DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
+                CHAR_LENGTH: DoctrineExtensions\Query\Mysql\CharLength

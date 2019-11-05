@@ -24,6 +24,24 @@
                     {{ form_errors(form.title) }}
                 </div>
 
+                <hr>
+
+                <div style="display:flex;">
+                    <div>
+                        {{ form_label(form.published) }}
+                        {{ form_widget(form.published) }}
+                        {{ form_errors(form.published) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.valid) }}
+                        {{ form_widget(form.valid) }}
+                        {{ form_errors(form.valid) }}
+                    </div>
+                </div>
+
+                <hr>
+
                     {{ form_widget(form) }}
 
                     {% if search.id %}

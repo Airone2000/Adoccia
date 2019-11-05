@@ -27,7 +27,7 @@ class Value
 
     /**
      * @var Widget
-     * @ORM\ManyToOne(targetEntity="App\Entity\Widget")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Widget", fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
      * @Assert\NotNull()
      */
@@ -260,11 +260,15 @@ class Value
     }
 
     /**
-     * @param string|null $valueOfTypeRadio
+     * @param string|null|array $valueOfTypeRadio
      * @return Value
      */
-    public function setValueOfTypeRadio(?string $valueOfTypeRadio): Value
+    public function setValueOfTypeRadio($valueOfTypeRadio): Value
     {
+        if (is_array($valueOfTypeRadio)) {
+            $valueOfTypeRadio = implode(',', $valueOfTypeRadio);
+        }
+
         $this->valueOfTypeRadio = $valueOfTypeRadio;
         return $this;
     }

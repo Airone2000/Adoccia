@@ -1,34 +1,24 @@
 <?php
 
-namespace App\Form\WidgetType;
+namespace App\Form\SearchType;
 
 use App\Entity\Widget;
-use App\Enum\FicheModeEnum;
 use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\Type;
 
-class FloatType extends AbstractWidgetType
+final class IntType extends AbstractSearchType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        if ($options['mode'] === FicheModeEnum::SEARCH) {
-            $this->buildSearchForm($builder, $options);
-        }
-    }
-
     public function getBlockPrefix()
     {
-        return 'fichit_float';
+        return 'fichit_int';
     }
 
-    private function buildSearchForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /* @var Widget $widget */
+        /* @var Widget $widget*/
         $widget = $options['widget'];
 
         $valueOptions = [
@@ -39,7 +29,6 @@ class FloatType extends AbstractWidgetType
                 'max' => $widget->getMax() ?? '',
                 'step' => 'any'
             ],
-            'html5' => true,
             'constraints' => [
                 new Type(['type' => 'numeric'])
             ]
@@ -48,9 +37,7 @@ class FloatType extends AbstractWidgetType
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function(string $label) {
-                    return 'trans.'.$label;
-                },
+                'choice_label' => function($value){ return "trans.{$value}"; },
                 'choice_attr' => function(string $value) {
                     $attr = [];
                     switch ($value) {
@@ -66,17 +53,17 @@ class FloatType extends AbstractWidgetType
                     return $attr;
                 }
             ])
-            ->add('value', NumberType::class, [
+            ->add('value', IntegerType::class, [
                     'attr' => ['class' => 'value hidden'] + $valueOptions['attr']
-                ] + $valueOptions)
-            ->add('value2', NumberType::class,[
-                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
                 ] + $valueOptions
             )
+            ->add('value2', IntegerType::class, [
+                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
+                ] + $valueOptions)
         ;
     }
 
-    protected function getSearchCriterias(): array
+    private function getSearchCriterias(): array
     {
         return [
             SearchCriteriaEnum::DISABLED,
@@ -87,24 +74,5 @@ class FloatType extends AbstractWidgetType
             SearchCriteriaEnum::LOWER_THAN,
             SearchCriteriaEnum::BETWEEN
         ];
-    }
-
-    public static function transformToFloat(Widget $widget, $value)
-    {
-        if ($value !== null) {
-            $decimalCount = $widget->getDecimalCount();
-            $value = number_format($value, $decimalCount, '.', '');
-        }
-        return $value;
-    }
-
-    public static function transformTo(Widget $widget, $value)
-    {
-        return self::transformToFloat($widget, $value);
-    }
-
-    public static function transformFrom(Widget $widget, $value)
-    {
-        return self::transformToFloat($widget, $value);
     }
 }

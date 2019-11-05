@@ -21,6 +21,6 @@ final class EmptyBuilder implements FormBuilderInterface
 
     public function buildSearchForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)
     {
-        // TODO: Implement buildSearchForm() method.
+        $this->buildForm($builder, $options);
     }
 }

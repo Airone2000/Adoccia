@@ -1,40 +1,29 @@
 <?php
 
-namespace App\Form\WidgetType;
+namespace App\Form\SearchType;
 
-use App\Entity\Widget;
-use App\Enum\FicheModeEnum;
 use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType as SfTextType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 
-class StringType extends AbstractWidgetType
+final class StringType extends AbstractSearchType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        if ($options['mode'] === FicheModeEnum::SEARCH) {
-            $this->buildSearchForm($builder, $options);
-        }
-    }
-
     public function getBlockPrefix()
     {
         return 'fichit_string';
     }
 
-    private function buildSearchForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /* @var Widget $widget */
+        /* @var \App\Entity\Widget $widget */
         $widget = $options['widget'];
 
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function(string $label) {
-                    return $label;
-                },
+                'choice_label' => function($value){ return "trans.{$value}"; },
                 'choice_attr' => function(string $value) {
                     $attr = [];
                     switch ($value) {
@@ -48,11 +37,9 @@ class StringType extends AbstractWidgetType
                     return $attr;
                 }
             ])
-            ->add('value', SfTextType::class, [
+            ->add('value', TextType::class, [
                 'required' => false,
-                'constraints' => [
-                    new Length(['max' => 250])
-                ],
+                'constraints' => [new Length(['max' => 250])],
                 'attr' => [
                     'placeholder' => $widget->getInputPlaceholder(),
                     'class' => 'value hidden'
@@ -61,7 +48,7 @@ class StringType extends AbstractWidgetType
         ;
     }
 
-    protected function getSearchCriterias(): array
+    private function getSearchCriterias(): array
     {
         return [
             SearchCriteriaEnum::DISABLED,
