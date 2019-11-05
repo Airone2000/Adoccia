@@ -94,6 +94,11 @@ final class CategoryFinder implements CategoryFinderInterface
         }
 
         if ($this->searchCriteriaCount > 0) {
+            $alias = $fichesQ->getRootAliases()[0];
+            $fichesQ
+                ->andWhere($alias.'.valid = 1') # Fiche not valid are not trustable for research
+            ;
+
             return $fichesQ->getQuery()->getResult();
         }
 

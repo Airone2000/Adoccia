@@ -73,12 +73,6 @@ class SearchInCategoryType extends AbstractType
                         ]
                     ])
             )
-            ->add('published', CheckboxType::class, [
-                'required' => false
-            ])
-            ->add('valid', CheckboxType::class, [
-                'required' => false
-            ])
         ;
     }
 
