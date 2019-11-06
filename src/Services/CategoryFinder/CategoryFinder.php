@@ -407,6 +407,40 @@ final class CategoryFinder implements CategoryFinderInterface
                             }
                         }
                         break;
+                    case SearchCriteriaEnum::BUTTON_LABEL_EQUAL_TO:
+                    case SearchCriteriaEnum::BUTTON_LABEL_NOT_EQUAL_TO:
+                    case SearchCriteriaEnum::BUTTON_TARGET_EQUAL_TO:
+                    case SearchCriteriaEnum::BUTTON_TARGET_NOT_EQUAL_TO:
+                        if ($searchValue !== null) {
+                            $attribute = strpos($searchCriteria, 'LABEL') !== false ? 'ilabel' : 'itarget';
+                            $not = strpos($searchCriteria, 'NOT') !== false ? 'NOT' : '';
+                            $searchValue = mb_strtolower($searchValue);
+                            $searchValue = explode(',', $searchValue);
+                            $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
+                            if (!empty($searchValue)) {
+                                $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND JSON_UNQUOTE(JSON_EXTRACT(v.valueOfTypeButton, '$.{$attribute}')) {$not} IN (:{$parameterKey}) )";
+                                $subOrWhereParameters[$parameterKey] = $searchValue;
+                            }
+                        }
+                        break;
+                    case SearchCriteriaEnum::BUTTON_LABEL_CONTAINS:
+                    case SearchCriteriaEnum::BUTTON_LABEL_NOT_CONTAINS:
+                    case SearchCriteriaEnum::BUTTON_TARGET_CONTAINS:
+                    case SearchCriteriaEnum::BUTTON_TARGET_NOT_CONTAINS:
+                        if ($searchValue !== null) {
+                            if ($searchValue !== null) {
+                                $attribute = strpos($searchCriteria, 'LABEL') !== false ? 'ilabel' : 'itarget';
+                                $not = strpos($searchCriteria, 'NOT') !== false ? '0' : '1';
+                                $searchValue = mb_strtolower($searchValue);
+                                $searchValue = explode(',', $searchValue);
+                                $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
+                                if (!empty($searchValue)) {
+                                    $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND REGEXP(JSON_UNQUOTE(JSON_EXTRACT(v.valueOfTypeButton, '$.{$attribute}')), :{$parameterKey}) = {$not})";
+                                    $subOrWhereParameters[$parameterKey] = implode('|', $searchValue);
+                                }
+                            }
+                        }
+                        break;
                 }
             }
         }

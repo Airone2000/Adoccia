@@ -156,3 +156,25 @@
         {{ parent() }}
     {% endif %}
 {%- endblock -%}
+
+{%- block fichit_button_row -%}
+    {{ form_area_start(widget.formArea) }}
+        {% if form.vars.mode is same as('DISPLAY') %}
+            {% if form.vars.value %}
+                {% if form.vars.value.target is not null %}
+                    <a href="{{ form.vars.value.target }}" target="_blank">
+                        <button type="button">
+                            {{ form.vars.value.label ? form.vars.value.label : form.vars.value.target  }}
+                        </button>
+                    </a>
+                {% endif %}
+            {% endif %}
+        {% elseif form.parent.vars.mode is same as('SEARCH') %}
+            {{ form_widget(form.criteria) }}
+            {{ form_widget(form.value) }}
+        {% else %}
+            {{ form_widget(form.label) }}
+            {{ form_widget(form.target) }}
+        {% endif %}
+    {{ form_area_end(widget.formArea) }}
+{%- endblock -%}

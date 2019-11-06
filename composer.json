@@ -9,6 +9,7 @@
         "html2text/html2text": "^4.2",
         "liip/imagine-bundle": "^2.2",
         "mailjet/mailjet-apiv3-php": "^1.4",
+        "scienta/doctrine-json-functions": "^4.0",
         "sensio/framework-extra-bundle": "^5.4",
         "symfony/console": "4.3.*",
         "symfony/dotenv": "4.3.*",

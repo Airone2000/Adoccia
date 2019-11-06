@@ -81,6 +81,12 @@ class Value
      */
     private $valueOfTypeRadio;
 
+    /**
+     * @var array|null
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $valueOfTypeButton;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -270,6 +276,35 @@ class Value
         }
 
         $this->valueOfTypeRadio = $valueOfTypeRadio;
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getValueOfTypeButton(): ?array
+    {
+        return $this->valueOfTypeButton;
+    }
+
+    /**
+     * @param array|null $valueOfTypeButton
+     * @return Value
+     */
+    public function setValueOfTypeButton(?array $valueOfTypeButton): Value
+    {
+        if (is_array($valueOfTypeButton)) {
+            $label = $valueOfTypeButton['label'];
+            $target = $valueOfTypeButton['target'];
+
+            if (is_string($label)) {$label = trim(mb_strtolower($label));}
+            if (is_string($target)) {$target = trim(mb_strtolower($target));}
+
+            $valueOfTypeButton = $valueOfTypeButton + ['ilabel' => $label, 'itarget' => $target];
+
+        }
+
+        $this->valueOfTypeButton = $valueOfTypeButton;
         return $this;
     }
 

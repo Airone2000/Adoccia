@@ -61,6 +61,17 @@ final class SearchCriteriaEnum extends AbstractEnum
         # The Value does not contain those values
         NOT_IN_ARRAY        = 'NOT_IN_ARRAY',
         # The value has exactly those values (and no more)
-        IN_ARRAY_EXACT      = 'IN_ARRAY_EXACT'
+        IN_ARRAY_EXACT      = 'IN_ARRAY_EXACT',
+
+
+        # Specific to button
+        BUTTON_LABEL_EQUAL_TO = 'BUTTON_LABEL_EQUAL_TO',
+        BUTTON_LABEL_NOT_EQUAL_TO = 'BUTTON_LABEL_NOT_EQUAL_TO',
+        BUTTON_LABEL_CONTAINS = 'BUTTON_LABEL_CONTAINS',
+        BUTTON_LABEL_NOT_CONTAINS = 'BUTTON_LABEL_NOT_CONTAINS',
+        BUTTON_TARGET_EQUAL_TO = 'BUTTON_TARGET_EQUAL_TO',
+        BUTTON_TARGET_NOT_EQUAL_TO = 'BUTTON_TARGET_NOT_EQUAL_TO',
+        BUTTON_TARGET_CONTAINS = 'BUTTON_TARGET_CONTAINS',
+        BUTTON_TARGET_NOT_CONTAINS = 'BUTTON_TARGET_NOT_CONTAINS'
     ;
 }

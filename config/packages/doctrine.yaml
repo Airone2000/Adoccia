@@ -31,3 +31,5 @@ doctrine:
                 REGEXP: DoctrineExtensions\Query\Mysql\Regexp
                 DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
                 CHAR_LENGTH: DoctrineExtensions\Query\Mysql\CharLength
+                JSON_EXTRACT: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonExtract
+                JSON_UNQUOTE: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonUnquote

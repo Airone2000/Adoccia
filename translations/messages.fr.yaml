@@ -11,4 +11,6 @@ WidgetType.date: "Date"
 WidgetType.time: "Heure"
 WidgetType.Group.choices: "Liste de choix"
 WidgetType.radio: "Choix simple / multiple"
+WidgetType.Group.misc: "Autres"
+WidgetType.button: "Bouton / Lien"
 
