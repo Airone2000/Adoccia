@@ -10,6 +10,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Value
 {
+    const DEFAULT_VALUE_OF_TYPE_BUTTON = [
+        'label' => '', 'ilabel' => '',
+        'target' => '', 'itarget' => ''
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -97,10 +102,7 @@ class Value
      * @var array|null
      * @ORM\Column(type="json", nullable=true)
      */
-    private $valueOfTypeButton = [
-        'label' => '', 'ilabel' => '',
-        'target' => '', 'itarget' => ''
-    ];
+    private $valueOfTypeButton = self::DEFAULT_VALUE_OF_TYPE_BUTTON;
 
     public function getId(): ?int
     {
@@ -308,6 +310,10 @@ class Value
      */
     public function setValueOfTypeButton(?array $valueOfTypeButton): Value
     {
+        if ($valueOfTypeButton === null) {
+            $valueOfTypeButton = self::DEFAULT_VALUE_OF_TYPE_BUTTON;
+        }
+
         if (is_array($valueOfTypeButton)) {
             $label = (string)$valueOfTypeButton['label'];
             $target = (string)$valueOfTypeButton['target'];
@@ -347,6 +353,5 @@ class Value
         $this->valueOfTypeEmail = $valueOfTypeEmail;
         return $this;
     }
-
 
 }

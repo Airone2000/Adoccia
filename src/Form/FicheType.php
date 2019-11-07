@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Fiche;
 use App\Entity\FormArea;
 use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
@@ -96,7 +97,8 @@ final class FicheType extends AbstractType
 
         self::$loadedDynamicFieldsBuilders[$builderClass]->buildForm($builder, [
             'mode' => $options['mode'],
-            'widget' => $widget
+            'widget' => $widget,
+            'fiche' => $options['fiche']
         ]);
     }
 
@@ -114,5 +116,7 @@ final class FicheType extends AbstractType
         $resolver->setDefault('error_bubbling', false);
         $resolver->setDefault('mode', FicheModeEnum::DISPLAY);
         $resolver->setDefault('is_form_preview', false);
+        $resolver->setRequired('fiche');
+        $resolver->setAllowedTypes('fiche', Fiche::class);
     }
 }

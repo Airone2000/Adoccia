@@ -46,7 +46,8 @@ final class FicheController extends AbstractController
         $form = $this->createForm(FicheType::class, $data, [
             'category' => $fiche->getCategory(),
             'mode' => FicheModeEnum::EDITION,
-            'method' => 'PUT'
+            'method' => 'PUT',
+            'fiche' => $fiche
         ]);
 
         $form->handleRequest($request);

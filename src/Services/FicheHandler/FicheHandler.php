@@ -10,6 +10,7 @@ use App\Form\FicheType;
 use App\Repository\WidgetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twig\Environment;
 
@@ -35,18 +36,24 @@ final class FicheHandler implements FicheHandlerInterface
      * @var Environment
      */
     private $twig;
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
 
     public function __construct(EntityManagerInterface $entityManager,
                                 WidgetRepository $widgetRepository,
                                 ValidatorInterface $validator,
                                 FormFactoryInterface $formFactory,
-                                Environment $twig)
+                                Environment $twig,
+                                TokenStorageInterface $tokenStorage)
     {
         $this->entityManager = $entityManager;
         $this->widgetRepository = $widgetRepository;
         $this->validator = $validator;
         $this->formFactory = $formFactory;
         $this->twig = $twig;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -87,6 +94,7 @@ final class FicheHandler implements FicheHandlerInterface
         $fiche
             ->setTitle($data['title'])
             ->setPublished((bool)($data['published'] ?? null))
+            ->setCreator($this->tokenStorage->getToken()->getUser())
         ;
 
         # Link category
@@ -146,7 +154,8 @@ final class FicheHandler implements FicheHandlerInterface
         $form = $this->formFactory->create(FicheType::class, $formData, [
             'category' => $fiche->getCategory(),
             'attr' => ['readonly' => 'readonly'], # <- prevent from modifying input
-            'mode' => FicheModeEnum::DISPLAY
+            'mode' => FicheModeEnum::DISPLAY,
+            'fiche' => $fiche
         ]);
 
         $template = $this->twig->render('fiche/_fiche.html.twig', [

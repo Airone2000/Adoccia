@@ -47,6 +47,11 @@ final class CategoryFinder implements CategoryFinderInterface
     /**
      * @var array
      */
+    private $fichesWhereAuthors = ['direction' => null, 'authors' => []];
+
+    /**
+     * @var array
+     */
     private $lastSearchCriterias;
 
     public function __construct(EntityManagerInterface $entityManager,
@@ -89,8 +94,18 @@ final class CategoryFinder implements CategoryFinderInterface
         if (array_key_exists('title', $criterias)) {
             $criteriaTitle = $criterias['title'];
             if ($criteriaTitle['criteria'] !== SearchCriteriaEnum::DISABLED && !empty($criteriaTitle['value'])) {
+                $this->searchCriteriaCount++;
                 $this->ficheRepository->filterByTitle($fichesQ, $criteriaTitle['criteria'], $criteriaTitle['value']);
             }
+        }
+
+        # Filter on authors
+        if ($this->fichesWhereAuthors['direction'] !== null && !empty($this->fichesWhereAuthors['authors'])) {
+            $this->searchCriteriaCount++;
+            $fichesQ
+                ->andWhere("f.creator {$this->fichesWhereAuthors['direction']} (:authors)")
+                ->setParameter('authors', $this->fichesWhereAuthors['authors'])
+            ;
         }
 
         if ($this->searchCriteriaCount > 0) {
@@ -446,6 +461,14 @@ final class CategoryFinder implements CategoryFinderInterface
                         $attribute = strpos($searchCriteria, 'LABEL') !== false ? 'ilabel' : 'itarget';
                         $operator = strpos($searchCriteria, 'NOT') !== false ? '<>' : '=';
                         $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND JSON_EXTRACT(v.valueOfTypeButton, '$.{$attribute}') {$operator} '')";
+                        break;
+                    case SearchCriteriaEnum::CREATOR_IS:
+                    case SearchCriteriaEnum::CREATOR_IS_NOT:
+                        if (!empty($searchValue) && is_array($searchValue)) {
+                            $direction = strpos($searchCriteria, 'NOT') !== false ? 'NOT IN' : 'IN';
+                            $this->fichesWhereAuthors['direction'] = $direction;
+                            $this->fichesWhereAuthors['authors'] = $searchValue;
+                        }
                         break;
                 }
             }

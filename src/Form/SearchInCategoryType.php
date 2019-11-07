@@ -102,7 +102,8 @@ class SearchInCategoryType extends AbstractType
 
             self::$loadedDynamicFieldsBuilders[$builderClass]->buildSearchForm($builder, [
                 'mode' => $options['mode'],
-                'widget' => $widget
+                'widget' => $widget,
+                'category' => $category
             ]);
         }
     }

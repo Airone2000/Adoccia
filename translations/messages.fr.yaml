@@ -14,4 +14,6 @@ WidgetType.Group.choices: "Liste de choix"
 WidgetType.radio: "Choix simple / multiple"
 WidgetType.Group.misc: "Autres"
 WidgetType.button: "Bouton / Lien"
+WidgetType.map: "Carte"
+WidgetType.ficheCreator: "Créateur de la fiche"
 

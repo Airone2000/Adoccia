@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use App\Entity\Fiche;
+use App\Entity\User;
 use App\Enum\SearchCriteriaEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -118,5 +119,29 @@ class FicheRepository extends ServiceEntityRepository
             return !($val === '' || $val === null);
         });
         return $tab;
+    }
+
+    public function getCreatorsForCategory(Category $category): array
+    {
+        # SubQuery
+        $qDistinctUser = $this->createQueryBuilder('f');
+        $qDistinctUser
+            ->select('DISTINCT(f.creator)')
+            ->where('f.category = :category')
+        ;
+
+        # Main query with subQuery appended
+        $qUsers = $this->getEntityManager()->createQueryBuilder();
+        $users = $qUsers
+            ->select('u.id, u.username')
+            ->from(User::class, 'u', 'u.id')
+            ->where('u IN ('. $qDistinctUser->getDQL() .')')
+            # /!\ SubQuery parameter must be set on the parent query
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $users;
     }
 }

@@ -132,9 +132,13 @@ class CategoryController extends AbstractController
      */
     public function addFiche(Category $category, Request $request, FicheHandlerInterface $ficheHandler): Response
     {
+        $fiche = new Fiche();
+        $fiche->setCreator($this->getUser());
+
         $form = $this->createForm(FicheType::class, null, [
             'category' => $category,
-            'mode' => FicheModeEnum::EDITION
+            'mode' => FicheModeEnum::EDITION,
+            'fiche' => $fiche
         ]);
 
         $form->handleRequest($request);

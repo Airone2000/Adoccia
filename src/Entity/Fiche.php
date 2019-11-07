@@ -27,6 +27,13 @@ class Fiche
     private $category;
 
     /**
+     * @var User|null
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $creator;
+
+    /**
      * @var string|null
      * @ORM\Column(type="string", nullable=false)
      * @Assert\Length(
@@ -162,6 +169,24 @@ class Fiche
     public function setValid(bool $valid): Fiche
     {
         $this->valid = $valid;
+        return $this;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getCreator(): ?User
+    {
+        return $this->creator;
+    }
+
+    /**
+     * @param User|null $creator
+     * @return Fiche
+     */
+    public function setCreator(?User $creator): Fiche
+    {
+        $this->creator = $creator;
         return $this;
     }
 

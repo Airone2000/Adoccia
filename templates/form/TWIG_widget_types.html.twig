@@ -178,3 +178,22 @@
         {% endif %}
     {{ form_area_end(widget.formArea) }}
 {%- endblock -%}
+
+{%- block fichit_map_row -%}
+    {{ form_area_start(widget.formArea) }}
+        <div data-type="osm" id="map" style="width:100%;height:400px;">
+
+        </div>
+    {{ form_area_end(widget.formArea) }}
+{%- endblock -%}
+
+{%- block fichit_fiche_creator_row -%}
+    {{ form_area_start(widget.formArea) }}
+        {% if form.parent.vars.mode is same as('SEARCH') %}
+            {{ form_widget(form.criteria) }}
+            {{ form_widget(form.value) }}
+        {% else %}
+            {{ form.vars.value|default('ficheCreatorRemoved') }}
+        {% endif %}
+    {{ form_area_end(widget.formArea) }}
+{%- endblock -%}
