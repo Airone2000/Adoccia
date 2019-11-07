@@ -89,7 +89,6 @@ final class CategoryFinder implements CategoryFinderInterface
         if (array_key_exists('title', $criterias)) {
             $criteriaTitle = $criterias['title'];
             if ($criteriaTitle['criteria'] !== SearchCriteriaEnum::DISABLED && !empty($criteriaTitle['value'])) {
-                $this->searchCriteriaCount++;
                 $this->ficheRepository->filterByTitle($fichesQ, $criteriaTitle['criteria'], $criteriaTitle['value']);
             }
         }

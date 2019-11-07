@@ -16,14 +16,15 @@ final class WidgetTypeEnum extends AbstractEnum
         DATE = 'date',
         TIME = 'time',
         RADIO = 'radio',
-        BUTTON = 'button'
+        BUTTON = 'button',
+        EMAIL = 'email'
     ;
 
     public static function getGroupedWidgetTypes(): array
     {
         return [
             'nonClassed' => [self::EMPTY, self::LABEL],
-            'textual' => [self::STRING, self::TEXT],
+            'textual' => [self::STRING, self::TEXT, self::EMAIL],
             'number' => [self::INT, self::FLOAT],
             'time' => [self::DATE, self::TIME],
             'choices' => [self::RADIO],

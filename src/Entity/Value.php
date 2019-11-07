@@ -82,6 +82,12 @@ class Value
     private $valueOfTypeRadio;
 
     /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $valueOfTypeEmail;
+
+    /**
      * JSON_EXTRACT is case-sensitive.
      * Thus, I created a "ilabel" and "itarget" attributes
      * to help search CI
@@ -324,6 +330,23 @@ class Value
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getValueOfTypeEmail(): ?string
+    {
+        return $this->valueOfTypeEmail;
+    }
+
+    /**
+     * @param string|null $valueOfTypeEmail
+     * @return Value
+     */
+    public function setValueOfTypeEmail(?string $valueOfTypeEmail): Value
+    {
+        $this->valueOfTypeEmail = $valueOfTypeEmail;
+        return $this;
+    }
 
 
 }

@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class StringType extends TextType
+class StringType extends TextType
 {
     use FormBuilderTypeTrait;
 

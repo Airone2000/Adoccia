@@ -3,17 +3,18 @@
 namespace App\Form\FormBuilder;
 
 use App\Entity\Widget;
-use App\Enum\FicheModeEnum;
 use App\Form\FormBuilderType\StringType;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
-final class StringBuilder implements FormBuilderInterface
+class StringBuilder implements FormBuilderInterface
 {
     public function buildForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)
     {
         /* @var Widget $widget */
         $widget = $options['widget'];
 
-        $builder->add($widget->getId(), StringType::class, [
+        $builder->add($widget->getId(), $this->getBuilderTypeClass(), [
             'widget' => $widget,
             'mode' => $options['mode'],
             'empty_data' => null,
@@ -21,8 +22,32 @@ final class StringBuilder implements FormBuilderInterface
                 'minLength' => $widget->getMinLength(),
                 'maxLength' => $widget->getMaxLength(),
                 'required' => $widget->isRequired()
-            ]
+            ],
+            'constraints' => $this->getConstraints($widget)
         ]);
+    }
+
+    protected function getBuilderTypeClass()
+    {
+        return StringType::class;
+    }
+
+    protected function getConstraints(Widget $widget): array {
+        $constraints = [];
+
+        if ($widget->getMinLength() !== null) {
+            $constraints[] = new Length(['min' => $widget->getMinLength()]);
+        }
+
+        if ($widget->getMaxLength() !== null) {
+            $constraints[] = new Length(['max' => $widget->getMaxLength()]);
+        }
+
+        if ($widget->isRequired()) {
+            $constraints[] = new NotBlank(['allowNull' => true]);
+        }
+
+        return $constraints;
     }
 
     public function buildSearchForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)

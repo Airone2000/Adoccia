@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 
-final class StringType extends AbstractSearchType
+class StringType extends AbstractSearchType
 {
     public function getBlockPrefix()
     {

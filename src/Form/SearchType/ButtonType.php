@@ -55,6 +55,7 @@ final class ButtonType extends AbstractSearchType
     private function getSearchCriterias(): array
     {
         return [
+            SearchCriteriaEnum::DISABLED,
             SearchCriteriaEnum::BUTTON_LABEL_IS_NULL,
             SearchCriteriaEnum::BUTTON_LABEL_IS_NOT_NULL,
             SearchCriteriaEnum::BUTTON_LABEL_EQUAL_TO,

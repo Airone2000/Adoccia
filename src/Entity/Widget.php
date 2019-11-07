@@ -3,12 +3,10 @@
 namespace App\Entity;
 
 use App\Enum\DateFormatEnum;
-use App\Enum\TextAlignPositionEnum;
 use App\Enum\TimeFormatEnum;
 use App\Validator\Color;
 use App\Validator\Enum;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -514,5 +512,6 @@ class Widget
     {
         return $this->getMultipleValues();
     }
+
 
 }
