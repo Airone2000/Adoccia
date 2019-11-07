@@ -55,10 +55,14 @@ final class ButtonType extends AbstractSearchType
     private function getSearchCriterias(): array
     {
         return [
+            SearchCriteriaEnum::BUTTON_LABEL_IS_NULL,
+            SearchCriteriaEnum::BUTTON_LABEL_IS_NOT_NULL,
             SearchCriteriaEnum::BUTTON_LABEL_EQUAL_TO,
             SearchCriteriaEnum::BUTTON_LABEL_NOT_EQUAL_TO,
             SearchCriteriaEnum::BUTTON_LABEL_CONTAINS,
             SearchCriteriaEnum::BUTTON_LABEL_NOT_CONTAINS,
+            SearchCriteriaEnum::BUTTON_TARGET_IS_NULL,
+            SearchCriteriaEnum::BUTTON_TARGET_IS_NOT_NULL,
             SearchCriteriaEnum::BUTTON_TARGET_EQUAL_TO,
             SearchCriteriaEnum::BUTTON_TARGET_NOT_EQUAL_TO,
             SearchCriteriaEnum::BUTTON_TARGET_CONTAINS,

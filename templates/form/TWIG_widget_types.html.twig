@@ -161,10 +161,10 @@
     {{ form_area_start(widget.formArea) }}
         {% if form.vars.mode is same as('DISPLAY') %}
             {% if form.vars.value %}
-                {% if form.vars.value.target is not null %}
+                {% if form.vars.value.target is not empty %}
                     <a href="{{ form.vars.value.target }}" target="_blank">
                         <button type="button">
-                            {{ form.vars.value.label ? form.vars.value.label : form.vars.value.target  }}
+                            {{ form.vars.value.label is not empty ? form.vars.value.label : form.vars.value.target  }}
                         </button>
                     </a>
                 {% endif %}

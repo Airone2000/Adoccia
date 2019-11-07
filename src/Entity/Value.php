@@ -82,10 +82,19 @@ class Value
     private $valueOfTypeRadio;
 
     /**
+     * JSON_EXTRACT is case-sensitive.
+     * Thus, I created a "ilabel" and "itarget" attributes
+     * to help search CI
+     *
+     * Defined as default value here make sure the search always work for any fiche
+     *
      * @var array|null
      * @ORM\Column(type="json", nullable=true)
      */
-    private $valueOfTypeButton;
+    private $valueOfTypeButton = [
+        'label' => '', 'ilabel' => '',
+        'target' => '', 'itarget' => ''
+    ];
 
     public function getId(): ?int
     {
@@ -294,13 +303,20 @@ class Value
     public function setValueOfTypeButton(?array $valueOfTypeButton): Value
     {
         if (is_array($valueOfTypeButton)) {
-            $label = $valueOfTypeButton['label'];
-            $target = $valueOfTypeButton['target'];
+            $label = (string)$valueOfTypeButton['label'];
+            $target = (string)$valueOfTypeButton['target'];
 
-            if (is_string($label)) {$label = trim(mb_strtolower($label));}
-            if (is_string($target)) {$target = trim(mb_strtolower($target));}
+            if (empty($target)) {
+                $label = '';
+            }
 
-            $valueOfTypeButton = $valueOfTypeButton + ['ilabel' => $label, 'itarget' => $target];
+            $valueOfTypeButton['label'] = $label;
+            $valueOfTypeButton['target'] = $target;
+
+            $label = trim(mb_strtolower($label));
+            $target = trim(mb_strtolower($target));
+
+            $valueOfTypeButton = ['ilabel' => $label, 'itarget' => $target] + $valueOfTypeButton;
 
         }
 
