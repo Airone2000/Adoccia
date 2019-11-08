@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('theme') }}
+            {{ load_Leaflet_style() }}
         {% endblock %}
     </head>
     <body>
@@ -13,6 +14,7 @@
         {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
+            {{ load_Leaflet_script() }}
             {{ encore_entry_script_tags('app') }}
             {% include '_endpoints.html.twig' %}
             <script src="https://kit.fontawesome.com/c6268521db.js" crossorigin="anonymous"></script>

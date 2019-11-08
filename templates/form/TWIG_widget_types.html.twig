@@ -181,8 +181,8 @@
 
 {%- block fichit_map_row -%}
     {{ form_area_start(widget.formArea) }}
-        <div data-type="osm" id="map" style="width:100%;height:400px;">
-
+        <div data-type="leaflet-map" style="width:100%;height:400px;">
+            {{- block('hidden_widget') -}}
         </div>
     {{ form_area_end(widget.formArea) }}
 {%- endblock -%}

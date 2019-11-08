@@ -2,20 +2,14 @@
 
 namespace App\Form\FormBuilderType;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MapType extends AbstractType
+class MapType extends HiddenType
 {
     use FormBuilderTypeTrait;
-
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-
-    }
 
     public function getBlockPrefix()
     {
@@ -25,6 +19,7 @@ class MapType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $this->unifiedBuildView($view, $form, $options);
+        $view->vars['attr']['class'] = 'value';
     }
 
     public function configureOptions(OptionsResolver $resolver)

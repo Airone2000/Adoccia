@@ -44,3 +44,13 @@
     border-color: #c60800;
     color: #c60800;
 }
+
+.leaflet-control-add-marker {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    box-sizing: initial;
+    cursor:pointer;
+    background-image: url('https://cdn3.iconfinder.com/data/icons/glypho-travel/64/map-pin-marker-plus-512.png');
+    background-size: contain;
+}

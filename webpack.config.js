@@ -29,6 +29,7 @@ Encore
     .addEntry('form/edit', './assets/js/form/edit.js')
     .addEntry('category/search', './assets/js/category/search.js')
     .addEntry('app', './assets/js/app.js')
+    .addEntry('mapsBuilder', './assets/vendor/leaflet/mapsBuilder.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
@@ -67,13 +68,8 @@ Encore
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
     //.enableIntegrityHashes(Encore.isProduction())
-
-    // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
 
-    // uncomment if you use API Platform Admin (composer req api-admin)
-    //.enableReactPreset()
-    //.addEntry('admin', './assets/js/admin.js')
 ;
 
 module.exports = Encore.getWebpackConfig();

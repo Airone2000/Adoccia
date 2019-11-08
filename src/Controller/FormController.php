@@ -129,17 +129,21 @@ final class FormController extends AbstractController
      */
     function preview(Form $form, CategoryRepository $categoryRepository): Response
     {
+        $fiche =new Fiche();
+        $fiche->setCreator($this->getUser());
+
         $category = $categoryRepository->findOneBy(['draftForm' => $form]);
         $form = $this->createForm(FicheType::class, null, [
             'category' => $category,
             'mode' => FicheModeEnum::EDITION,
             'disabled' => true,
-            'is_form_preview' => true
+            'is_form_preview' => true,
+            'fiche' => $fiche
         ]);
 
         $view = $this->renderView('form/_preview.html.twig', [
             'form' => $form->createView(),
-            'fiche' => new Fiche()
+            'fiche' => $fiche
         ]);
 
         return new JsonResponse([
