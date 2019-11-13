@@ -509,7 +509,6 @@ final class CategoryFinder implements CategoryFinderInterface
 
     private function applyMapAroundCriterias()
     {
-        $this->searchCriteriaCount++;
         $valuesToTest = $this->valueRepository->findValueOfTypeMapWhereImmutableIdIsIn(array_keys($this->mapAroundCriterias));
         $matchingValues = [];
         $myLat = 49.4431;
@@ -540,10 +539,13 @@ final class CategoryFinder implements CategoryFinderInterface
             }
         }
 
-        $this->qb
-            ->andWhere('v.id IN (:ids)')
-            ->setParameter('ids', $matchingValues)
-        ;
+        if (count($matchingValues) > 0) {
+            $this->searchCriteriaCount++;
+            $this->qb
+                ->andWhere('v.id IN (:ids)')
+                ->setParameter('ids', $matchingValues)
+            ;
+        }
     }
 
     private function setWhereCategory(Category $category)
