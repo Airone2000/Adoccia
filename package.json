@@ -19,6 +19,8 @@
         "a-color-picker": "^1.2.1",
         "inputmask": "^4.0.9",
         "jquery": "^3.4.1",
+        "places.js": "^1.17.0",
+        "uniqid": "^5.1.0",
         "whatwg-fetch": "^3.0.0"
     }
 }

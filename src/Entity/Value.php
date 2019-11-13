@@ -15,6 +15,12 @@ class Value
         'target' => '', 'itarget' => ''
     ];
 
+    const DEFAULT_VALUE_OF_TYPE_MAP = [
+        'center' => null,
+        'zoom' => null,
+        'markers' => []
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -91,6 +97,14 @@ class Value
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $valueOfTypeEmail;
+
+    /**
+     * @var array|null
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $valueOfTypeMap;
+
+
 
     /**
      * JSON_EXTRACT is case-sensitive.
@@ -351,6 +365,28 @@ class Value
     public function setValueOfTypeEmail(?string $valueOfTypeEmail): Value
     {
         $this->valueOfTypeEmail = $valueOfTypeEmail;
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getValueOfTypeMap(): ?array
+    {
+        return $this->valueOfTypeMap;
+    }
+
+    /**
+     * @param array|null $valueOfTypeMap
+     * @return Value
+     */
+    public function setValueOfTypeMap(?array $valueOfTypeMap): Value
+    {
+        if ($valueOfTypeMap === null) {
+            $valueOfTypeMap = self::DEFAULT_VALUE_OF_TYPE_MAP;
+        }
+
+        $this->valueOfTypeMap = $valueOfTypeMap;
         return $this;
     }
 

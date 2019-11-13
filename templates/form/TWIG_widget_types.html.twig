@@ -181,9 +181,15 @@
 
 {%- block fichit_map_row -%}
     {{ form_area_start(widget.formArea) }}
-        <div data-type="leaflet-map" style="width:100%;height:400px;">
+    {% if form.vars.mode is same as('SEARCH') %}
+        {{ form_widget(form.criteria) }}
+        {{ form_widget(form.distance) }}
+        {{ form_widget(form.unit) }}
+    {% else %}
+        <div id="map-widget-{{ widget.id }}" data-mode="{{ form.vars.mode }}" class="mapWrapper" data-type="leaflet-map" style="width:100%;height:400px;">
             {{- block('hidden_widget') -}}
         </div>
+    {% endif %}
     {{ form_area_end(widget.formArea) }}
 {%- endblock -%}
 

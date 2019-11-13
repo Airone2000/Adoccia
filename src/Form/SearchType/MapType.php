@@ -4,6 +4,7 @@ namespace App\Form\SearchType;
 
 use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
@@ -12,7 +13,7 @@ class MapType extends AbstractSearchType
 {
     public function getBlockPrefix()
     {
-        return 'fichit_string';
+        return 'fichit_map';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -27,22 +28,25 @@ class MapType extends AbstractSearchType
                 'choice_attr' => function(string $value) {
                     $attr = [];
                     switch ($value) {
-                        case SearchCriteriaEnum::EXACT:
-                        case SearchCriteriaEnum::CONTAINS:
-                        case SearchCriteriaEnum::STARTS_WITH:
-                        case SearchCriteriaEnum::ENDS_WITH:
-                            $attr['data-inputs'] = '.value';
+                        case SearchCriteriaEnum::MAP_AROUND:
+                        case SearchCriteriaEnum::MAP_LABEL_CONTAINS:
+                            $attr['data-inputs'] = '.distance,.unit';
                             break;
                     }
                     return $attr;
                 }
             ])
-            ->add('value', TextType::class, [
+            ->add('distance', IntegerType::class, [
                 'required' => false,
-                'constraints' => [new Length(['max' => 250])],
                 'attr' => [
-                    'placeholder' => $widget->getInputPlaceholder(),
-                    'class' => 'value hidden'
+                    'class' => 'distance hidden',
+                    'min' => 0
+                ]
+            ])
+            ->add('unit', ChoiceType::class, [
+                'choices' => ['km' => 'km', 'm' => 'm'],
+                'attr' => [
+                    'class' => 'unit hidden'
                 ]
             ])
         ;
@@ -52,12 +56,8 @@ class MapType extends AbstractSearchType
     {
         return [
             SearchCriteriaEnum::DISABLED,
-            SearchCriteriaEnum::IS_NULL,
-            SearchCriteriaEnum::IS_NOT_NULL,
-            SearchCriteriaEnum::EXACT,
-            SearchCriteriaEnum::CONTAINS,
-            SearchCriteriaEnum::STARTS_WITH,
-            SearchCriteriaEnum::ENDS_WITH
+            SearchCriteriaEnum::MAP_AROUND,
+            SearchCriteriaEnum::MAP_LABEL_CONTAINS
         ];
     }
 }

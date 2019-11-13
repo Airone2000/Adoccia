@@ -5,6 +5,11 @@
     {{ encore_entry_link_tags('fiche') }}
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('mapsBuilder') }}
+{% endblock %}
+
 {% block body %}
     <h1>Modifier la fiche "{{ fiche.title }}"</h1>
 

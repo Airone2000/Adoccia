@@ -68,4 +68,17 @@ SQL;
         $pdo = $this->getEntityManager()->getConnection();
         $pdo->exec($q);
     }
+
+    public function findValueOfTypeMapWhereImmutableIdIsIn(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('v');
+        return $qb
+            ->select('v.id, v.widgetImmutableId, v.valueOfTypeMap')
+            ->where('v.widgetImmutableId IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->andWhere('v.valueOfTypeMap IS NOT NULL')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

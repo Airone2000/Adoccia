@@ -9,6 +9,11 @@
     {{ encore_entry_link_tags('add_fiche') }}
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('mapsBuilder') }}
+{% endblock %}
+
 {% block body %}
     <h1>Add fiche to {{ category.name }}</h1>
 

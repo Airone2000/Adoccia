@@ -20,7 +20,6 @@ final class CategoryFinder implements CategoryFinderInterface
      * @var EntityManagerInterface
      */
     private $entityManager;
-
     /**
      * @var QueryBuilder
      */
@@ -37,22 +36,26 @@ final class CategoryFinder implements CategoryFinderInterface
      * @var WidgetRepository
      */
     private $widgetRepository;
-
     /**
      * @var int
      * The number of criteria filled by the user to filter
      */
     private $searchCriteriaCount;
-
     /**
      * @var array
      */
     private $fichesWhereAuthors = ['direction' => null, 'authors' => []];
-
     /**
      * @var array
      */
     private $lastSearchCriterias;
+
+    /**
+     * @var array
+     */
+    private $mapAroundCriterias = [];
+
+
 
     public function __construct(EntityManagerInterface $entityManager,
                                 ValueRepository $valueRepository,
@@ -78,6 +81,9 @@ final class CategoryFinder implements CategoryFinderInterface
         # Apply criterias
         $this->applyCriterias($category, $criterias);
 
+        # Apply criterias for map (need to compute some things right in the code)
+        $this->applyMapAroundCriterias();
+
         # Matching widgets
         $matchingValues = $this->qb->getQuery()->getArrayResult();
 
@@ -99,7 +105,7 @@ final class CategoryFinder implements CategoryFinderInterface
             }
         }
 
-        # Filter on authors
+        # Filter on authors / direction = (IN|NOT IN)
         if ($this->fichesWhereAuthors['direction'] !== null && !empty($this->fichesWhereAuthors['authors'])) {
             $this->searchCriteriaCount++;
             $fichesQ
@@ -142,7 +148,7 @@ final class CategoryFinder implements CategoryFinderInterface
                 $valueColumn = "valueOfType{$type}";
                 $parameterKey = "value{$widget->getImmutableId()}";
                 $searchCriteria = $criteria[$widget->getImmutableId()]['criteria'];
-                $searchValue = $criteria[$widget->getImmutableId()]['value'];
+                $searchValue = $criteria[$widget->getImmutableId()]['value'] ?? null;
 
                 switch ($searchCriteria) {
                     case SearchCriteriaEnum::IS_NULL:
@@ -470,6 +476,16 @@ final class CategoryFinder implements CategoryFinderInterface
                             $this->fichesWhereAuthors['authors'] = $searchValue;
                         }
                         break;
+                    case SearchCriteriaEnum::MAP_AROUND:
+                        $distance = $criteria[$widget->getImmutableId()]['distance'] ?? null;
+                        $unit = $criteria[$widget->getImmutableId()]['unit'] ?? 'm';
+                        if ($distance !== null && is_int($distance) && $distance > -1) {
+                            $this->mapAroundCriterias[$widget->getImmutableId()] = [
+                                'boundary' => $distance,
+                                'unit' => $unit
+                            ];
+                        }
+                        break;
                 }
             }
         }
@@ -489,6 +505,45 @@ final class CategoryFinder implements CategoryFinderInterface
                 $this->qb->setParameter($parameterKey, $value);
             }
         }
+    }
+
+    private function applyMapAroundCriterias()
+    {
+        $this->searchCriteriaCount++;
+        $valuesToTest = $this->valueRepository->findValueOfTypeMapWhereImmutableIdIsIn(array_keys($this->mapAroundCriterias));
+        $matchingValues = [];
+        $myLat = 49.4431;
+        $myLng = 1.0993;
+        $earth_radius = 6371;
+
+        foreach ($valuesToTest as $valueToTest) {
+            $boundary = &$this->mapAroundCriterias[$valueToTest['widgetImmutableId']]['boundary'];
+            $unit = &$this->mapAroundCriterias[$valueToTest['widgetImmutableId']]['unit'];
+            $markers = &$valueToTest['valueOfTypeMap']['markers'];
+            foreach ($markers as $marker) {
+                $markerPosition = &$marker['position'];
+                $latitude1 = &$myLat; $latitude2 = &$markerPosition['lat'];
+                $longitude1 = &$myLng; $longitude2 = &$markerPosition['lng'];
+                $dLat = deg2rad($latitude2 - $latitude1);
+                $dLon = deg2rad($longitude2 - $longitude1);
+                $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * sin($dLon/2) * sin($dLon/2);
+                $c = 2 * asin(sqrt($a));
+                $d = $earth_radius * $c;
+
+                if ($unit === 'm') {
+                    $d = $d * 1000;
+                }
+
+                if ($d <= $boundary) {
+                    $matchingValues[] = $valueToTest['id'];
+                }
+            }
+        }
+
+        $this->qb
+            ->andWhere('v.id IN (:ids)')
+            ->setParameter('ids', $matchingValues)
+        ;
     }
 
     private function setWhereCategory(Category $category)
