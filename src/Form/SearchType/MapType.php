@@ -3,7 +3,9 @@
 namespace App\Form\SearchType;
 
 use App\Enum\SearchCriteriaEnum;
+use App\Form\SearchType\SubTypes\MapAroundType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,25 +31,14 @@ class MapType extends AbstractSearchType
                     $attr = [];
                     switch ($value) {
                         case SearchCriteriaEnum::MAP_AROUND:
-                        case SearchCriteriaEnum::MAP_LABEL_CONTAINS:
-                            $attr['data-inputs'] = '.distance,.unit';
+                            $attr['data-inputs'] = '.mapAround';
                             break;
                     }
                     return $attr;
                 }
             ])
-            ->add('distance', IntegerType::class, [
-                'required' => false,
-                'attr' => [
-                    'class' => 'distance hidden',
-                    'min' => 0
-                ]
-            ])
-            ->add('unit', ChoiceType::class, [
-                'choices' => ['km' => 'km', 'm' => 'm'],
-                'attr' => [
-                    'class' => 'unit hidden'
-                ]
+            ->add('mapAround', MapAroundType::class, [
+                'attr' => ['class' => 'sinput hidden mapAround']
             ])
         ;
     }
@@ -56,8 +47,7 @@ class MapType extends AbstractSearchType
     {
         return [
             SearchCriteriaEnum::DISABLED,
-            SearchCriteriaEnum::MAP_AROUND,
-            SearchCriteriaEnum::MAP_LABEL_CONTAINS
+            SearchCriteriaEnum::MAP_AROUND
         ];
     }
 }

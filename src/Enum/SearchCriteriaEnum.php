@@ -83,7 +83,6 @@ final class SearchCriteriaEnum extends AbstractEnum
         CREATOR_IS_NOT = 'CREATOR_IS_NOT',
 
         # Specific to map
-        MAP_AROUND = 'MAP_AROUND',
-        MAP_LABEL_CONTAINS = 'MAP_LABEL_CONTAINS'
+        MAP_AROUND = 'MAP_AROUND'
     ;
 }

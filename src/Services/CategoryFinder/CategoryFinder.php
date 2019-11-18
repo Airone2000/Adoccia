@@ -477,12 +477,23 @@ final class CategoryFinder implements CategoryFinderInterface
                         }
                         break;
                     case SearchCriteriaEnum::MAP_AROUND:
-                        $distance = $criteria[$widget->getImmutableId()]['distance'] ?? null;
-                        $unit = $criteria[$widget->getImmutableId()]['unit'] ?? 'm';
-                        if ($distance !== null && is_int($distance) && $distance > -1) {
+                        $value = $criteria[$widget->getImmutableId()]['mapAround'];
+                        $distance = &$value['distance'] ?? 'm';
+                        $unit = &$value['unit'] ?? 'm';
+                        $latLng = json_decode($value['latlng'] ?? '{}', true);
+
+                        $lat = $latLng['lat'] ?? null;
+                        $lng = $latLng['lng'] ?? null;
+
+                        if (!is_float($lat) || !is_float($lng)) {
+                            $latLng = null;
+                        }
+
+                        if ($distance !== null && is_int($distance) && $distance > -1 && $latLng) {
                             $this->mapAroundCriterias[$widget->getImmutableId()] = [
                                 'boundary' => $distance,
-                                'unit' => $unit
+                                'unit' => $unit,
+                                'latLng' => $latLng
                             ];
                         }
                         break;
@@ -510,16 +521,24 @@ final class CategoryFinder implements CategoryFinderInterface
     private function applyMapAroundCriterias()
     {
         $valuesToTest = $this->valueRepository->findValueOfTypeMapWhereImmutableIdIsIn(array_keys($this->mapAroundCriterias));
-        $matchingValues = [];
-        $myLat = 49.4431;
-        $myLng = 1.0993;
+        $mapMatchingValuesToFicheId = [];
         $earth_radius = 6371;
+        $eliminatedFiches = [];
 
         foreach ($valuesToTest as $valueToTest) {
+            $fiche = $valueToTest['fiche'];
+
+            if (in_array($fiche, $eliminatedFiches)) continue;
+
+            $mapMatchingValuesToFicheId[$fiche] = $mapMatchingValuesToFicheId[$fiche] ?? [];
             $boundary = &$this->mapAroundCriterias[$valueToTest['widgetImmutableId']]['boundary'];
             $unit = &$this->mapAroundCriterias[$valueToTest['widgetImmutableId']]['unit'];
+            $latLng = &$this->mapAroundCriterias[$valueToTest['widgetImmutableId']]['latLng'];
+            $myLat = $latLng['lat']; $myLng = $latLng['lng'];
             $markers = &$valueToTest['valueOfTypeMap']['markers'];
+            $oneMarkersMatch = false;
             foreach ($markers as $marker) {
+                if ($oneMarkersMatch === true) continue;
                 $markerPosition = &$marker['position'];
                 $latitude1 = &$myLat; $latitude2 = &$markerPosition['lat'];
                 $longitude1 = &$myLng; $longitude2 = &$markerPosition['lng'];
@@ -534,16 +553,27 @@ final class CategoryFinder implements CategoryFinderInterface
                 }
 
                 if ($d <= $boundary) {
-                    $matchingValues[] = $valueToTest['id'];
+                    $oneMarkersMatch = true;
+                    $mapMatchingValuesToFicheId[$fiche][] = $valueToTest['id'];
                 }
+            }
+            
+            if ($oneMarkersMatch === false) {
+                $eliminatedFiches[] = $fiche;
+                unset($mapMatchingValuesToFicheId[$fiche]);
             }
         }
 
-        if (count($matchingValues) > 0) {
-            $this->searchCriteriaCount++;
+        $valueIds = [];
+        foreach ($mapMatchingValuesToFicheId as $fiche => $ids) {
+            $valueIds = array_merge($valueIds, $ids);
+        }
+
+        if (count($valueIds) > 0) {
+            $this->searchCriteriaCount += count($this->mapAroundCriterias);
             $this->qb
                 ->andWhere('v.id IN (:ids)')
-                ->setParameter('ids', $matchingValues)
+                ->setParameter('ids', $valueIds)
             ;
         }
     }

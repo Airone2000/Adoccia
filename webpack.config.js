@@ -29,9 +29,7 @@ Encore
     .addEntry('form/edit', './assets/js/form/edit.js')
     .addEntry('category/search', './assets/js/category/search.js')
     .addEntry('app', './assets/js/app.js')
-    .addEntry('mapsBuilder', './assets/vendor/leaflet/mapsBuilder.js')
-    //.addEntry('page1', './assets/js/page1.js')
-    //.addEntry('page2', './assets/js/page2.js')
+    .addEntry('mapsBuilder', './assets/vendor/leaflet/mapsBuilder')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

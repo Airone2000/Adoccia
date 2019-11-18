@@ -73,7 +73,7 @@ SQL;
     {
         $qb = $this->createQueryBuilder('v');
         return $qb
-            ->select('v.id, v.widgetImmutableId, v.valueOfTypeMap')
+            ->select('v.id, v.widgetImmutableId, v.valueOfTypeMap, IDENTITY(v.fiche) AS fiche')
             ->where('v.widgetImmutableId IN (:ids)')
             ->setParameter('ids', $ids)
             ->andWhere('v.valueOfTypeMap IS NOT NULL')
