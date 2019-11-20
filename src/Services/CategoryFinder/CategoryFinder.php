@@ -485,7 +485,7 @@ final class CategoryFinder implements CategoryFinderInterface
                         $lat = $latLng['lat'] ?? null;
                         $lng = $latLng['lng'] ?? null;
 
-                        if (!is_float($lat) || !is_float($lng)) {
+                        if (!is_numeric($lat) || !is_numeric($lng)) {
                             $latLng = null;
                         }
 
@@ -557,7 +557,7 @@ final class CategoryFinder implements CategoryFinderInterface
                     $mapMatchingValuesToFicheId[$fiche][] = $valueToTest['id'];
                 }
             }
-            
+
             if ($oneMarkersMatch === false) {
                 $eliminatedFiches[] = $fiche;
                 unset($mapMatchingValuesToFicheId[$fiche]);

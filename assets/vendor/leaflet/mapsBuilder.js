@@ -200,7 +200,6 @@ L.Control.Photon = L.Control.extend({
 
     search: function() {
         let val = this.input.value;
-        console.log(val,this.options.minChar);
         if (val.length < this.options.minChar) {
             this.clear();
             return;
@@ -411,36 +410,9 @@ class MapsBuilder
         this.findPlacesTimeout = null;
 
         this._buildMaps();
-        this._listenForFindPlaces();
     }
 
-    _listenForFindPlaces() {
-        $(document).on('keyup', '.SearchLocationInput', (e) => {
-            clearTimeout(this.findPlacesTimeout);
-            this.findPlacesTimeout = setTimeout(() => {
-                let $input = $(e.target);
-                let value = $input.val();
-                let $resultContainer = $input.next('datalist');
-                let url = `https://photon.komoot.de/api/?q=${value}&limit=10&lang=fr`;
-                aFetch(url, {method: 'get'})
-                    .then(response => {
-                        if (response.status === 200) {
-                            return response.json();
-                        }
-                        else throw new Error();
-                    })
-                    .then(jsonResponse => {
-                        $resultContainer.find('option:not(:first)').remove();
-                        jsonResponse.features.forEach((result) => {
-                            console.log(result);
-                            $resultContainer.append(`<option>${result.properties.name}, ${result.properties.country}</option>`);
-                        });
-                    })
-                    .catch(() => {})
-                ;
-            }, 300);
-        });
-    }
+
 
     registerJSONMap(mapElement) {
         let mapId = mapElement.id;

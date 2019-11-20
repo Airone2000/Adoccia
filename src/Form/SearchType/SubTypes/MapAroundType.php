@@ -33,8 +33,17 @@ class MapAroundType extends AbstractType
             ->add('location', TextType::class, [
                 'required' => false,
                 'attr' => [
-                    'class' => "location_{$uniqidId}"
-                ]
+                    'class' => "location_{$uniqidId} mapSearchLocationInput"
+                ],
+                'data' => null
+            ])
+            ->add('selectedLocation', TextType::class, [
+                'attr' => [
+                    'readonly' => true,
+                    'class' => "selectedLocation_{$uniqidId} mapSearchSelectedLocation",
+                    'style' => 'border:0;outline:0;'
+                ],
+                'label' => 'Votre choix : '
             ])
             ->add('findMe', ButtonType::class, [
                 'attr' => [
@@ -44,7 +53,7 @@ class MapAroundType extends AbstractType
             ])
             ->add('latlng', HiddenType::class, [
                 'attr' => [
-                    'class' => "latlng_{$uniqidId}"
+                    'class' => "latlng_{$uniqidId} mapSearchLatLngInput"
                 ]
             ])
         ;

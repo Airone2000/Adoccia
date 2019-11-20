@@ -30,6 +30,7 @@ Encore
     .addEntry('category/search', './assets/js/category/search.js')
     .addEntry('app', './assets/js/app.js')
     .addEntry('mapsBuilder', './assets/vendor/leaflet/mapsBuilder')
+    .addEntry('vanillaAutocomplete', './assets/vendor/vanilla-autocomplete/auto-complete')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
