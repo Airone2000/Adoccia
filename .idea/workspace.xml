@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/vendor/vanilla-autocomplete/auto-complete.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/vendor/vanilla-autocomplete/auto-complete.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/vendor/vanilla-autocomplete/auto-complete.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/category/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/category/search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/vendor/leaflet/mapsBuilder.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/leaflet/mapsBuilder.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/SearchType/SubTypes/MapAroundType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/SearchType/SubTypes/MapAroundType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/category/search.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="75" column="44" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="44" />
+            <state relative-caret-position="208">
+              <caret line="98" column="82" selection-start-line="98" selection-start-column="82" selection-end-line="98" selection-end-column="82" />
               <folding>
                 <element signature="e#92#137#0" expanded="true" />
               </folding>
@@ -54,18 +47,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="461">
               <caret line="39" column="37" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Form/SearchType/SubTypes/MapAroundType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
-              <folding>
-                <element signature="e#48#88#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -86,7 +67,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>leaflet</find>
       <find>m</find>
       <find>searchCriteriaCount</find>
       <find>SearchLocationInput</find>
@@ -116,6 +96,7 @@
       <find>_listenForFindPlaces</find>
       <find>console.log</find>
       <find>truste</find>
+      <find>Position actu</find>
     </findStrings>
     <replaceStrings>
       <replace>_makeFormSyncing</replace>
@@ -182,8 +163,8 @@
         <option value="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" />
         <option value="$PROJECT_DIR$/assets/vendor/leaflet/mapsBuilder.js" />
         <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
-        <option value="$PROJECT_DIR$/assets/js/category/search.js" />
         <option value="$PROJECT_DIR$/src/Form/SearchType/SubTypes/MapAroundType.php" />
+        <option value="$PROJECT_DIR$/assets/js/category/search.js" />
       </list>
     </option>
   </component>
@@ -427,12 +408,12 @@
       <workItem from="1573734297433" duration="3020000" />
       <workItem from="1574077650390" duration="11015000" />
       <workItem from="1574169299413" duration="4194000" />
-      <workItem from="1574236383082" duration="5492000" />
+      <workItem from="1574236383082" duration="6046000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="439317000" />
+    <option name="totallyTimeSpent" value="439871000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -912,6 +893,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/SearchType/SubTypes/MapAroundType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
+          <folding>
+            <element signature="e#48#88#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/SearchType/MapType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="461">
@@ -921,20 +912,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/category/search.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="75" column="44" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="44" />
+        <state relative-caret-position="208">
+          <caret line="98" column="82" selection-start-line="98" selection-start-column="82" selection-end-line="98" selection-end-column="82" />
           <folding>
             <element signature="e#92#137#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/SearchType/SubTypes/MapAroundType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
-          <folding>
-            <element signature="e#48#88#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

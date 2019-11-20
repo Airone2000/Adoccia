@@ -33,7 +33,8 @@ class MapAroundType extends AbstractType
             ->add('location', TextType::class, [
                 'required' => false,
                 'attr' => [
-                    'class' => "location_{$uniqidId} mapSearchLocationInput"
+                    'class' => "location_{$uniqidId} mapSearchLocationInput",
+                    'placeholder' => 'Find a place...'
                 ],
                 'data' => null
             ])

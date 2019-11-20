@@ -39,7 +39,7 @@ class Search {
                     let coords = {};
                     let suggestions = [];
 
-                    let url = `https://photon.komoot.de/api/?q=${term}&limit=10&lang=fr`;
+                    let url = `https://photon.komoot.de/api/?q=${term}&limit=15&lang=fr`;
                     aFetch(url, {method: 'get'})
                         .then(response => {
                             if (response.status === 200) {
@@ -49,13 +49,15 @@ class Search {
                         })
                         .then(jsonResponse => {
                             jsonResponse.features.forEach((result) => {
-                                let resultCoords = {
-                                    lat: result.geometry.coordinates[1],
-                                    lng: result.geometry.coordinates[0]
-                                };
                                 let place = `${result.properties.name}, ${result.properties.country}`;
-                                coords[place] = resultCoords;
-                                choices.push(place);
+                                if (choices.indexOf(place) < 0) {
+                                    choices.push(place);
+                                    let resultCoords = {
+                                        lat: result.geometry.coordinates[1],
+                                        lng: result.geometry.coordinates[0]
+                                    };
+                                    coords[place] = resultCoords;
+                                }
                             });
 
                             for (let i=0;i<choices.length;i++)
@@ -90,12 +92,11 @@ class Search {
 
             let $button = $(e.target);
             let uniqid = $button.data('uniqid');
-            let $targetDisplay = $(document).find(`.location_${uniqid}`);
+            let $targetDisplay = $(document).find(`.selectedLocation_${uniqid}`);
             let $targetValue = $(document).find(`.latlng_${uniqid}`);
 
             if (navigator.geolocation) {
-                $targetDisplay.prop('readonly', true);
-                $targetDisplay.val('Patientez...');
+                $targetDisplay.val('Patientez, nous recherchons votre position ...');
                 navigator.geolocation.getCurrentPosition((position) => {
                     let coords = JSON.stringify({
                         lat: position.coords.latitude,
