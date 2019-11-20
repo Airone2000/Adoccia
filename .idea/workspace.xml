@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Form/WidgetSettingsType/MapWidgetSettingsType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/builder/_settings_map.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/form/builder/_widget_map.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/vendor/leaflet/mapsBuilder.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/leaflet/mapsBuilder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Widget.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Widget.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/FormBuilder/MapBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FormBuilder/MapBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/WidgetSettingsType/FloatWidgetSettingsType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/WidgetSettingsType/FloatWidgetSettingsType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/builder/_widget_date.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_widget_date.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/builder/_widget_float.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_widget_float.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/builder/_widget_int.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_widget_int.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/builder/_widget_radio.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_widget_radio.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/builder/_widget_text.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_widget_text.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form/builder/_widget_time.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/builder/_widget_time.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/FormBuilderType/MapType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FormBuilderType/MapType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,21 +33,25 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Validator/HasMarkersCountBetween.php">
+        <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+            <state relative-caret-position="337">
+              <caret line="187" column="40" selection-start-line="187" selection-start-column="24" selection-end-line="187" selection-end-column="40" />
+              <folding>
+                <element signature="e#12#37#0#Twig" expanded="true" />
+                <element signature="e#6696#6728#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Form/WidgetSettingsType/MapWidgetSettingsType.php">
+        <entry file="file://$PROJECT_DIR$/src/Form/FormBuilderType/MapType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="28" lean-forward="true" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+            <state relative-caret-position="405">
+              <caret line="27" column="28" lean-forward="true" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
               <folding>
-                <element signature="e#47#94#0#PHP" expanded="true" />
+                <element signature="e#44#71#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,7 +61,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_do_search</find>
       <find>options</find>
       <find>photon</find>
       <find>mapsBuilder</find>
@@ -97,6 +90,7 @@
       <find>te $decimal</find>
       <find>DEFAULT_DECIMAL_COUNT</find>
       <find>setValueOfTypemap</find>
+      <find>_addMarkerToMap</find>
     </findStrings>
     <replaceStrings>
       <replace>_makeFormSyncing</replace>
@@ -126,7 +120,6 @@
         <option value="$PROJECT_DIR$/assets/js/app.js" />
         <option value="$PROJECT_DIR$/assets/vendor/leaflet/leaflet.js" />
         <option value="$PROJECT_DIR$/readme.md" />
-        <option value="$PROJECT_DIR$/src/Form/FormBuilderType/MapType.php" />
         <option value="$PROJECT_DIR$/src/Entity/Value.php" />
         <option value="$PROJECT_DIR$/src/Controller/CategoryController.php" />
         <option value="$PROJECT_DIR$/src/Enum/SearchCriteriaEnum.php" />
@@ -144,10 +137,8 @@
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/templates/category/search.html.twig" />
         <option value="$PROJECT_DIR$/src/Services/CategoryFinder/CategoryFinder.php" />
-        <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/SearchType/SubTypes/MapAroundType.php" />
         <option value="$PROJECT_DIR$/assets/js/category/search.js" />
-        <option value="$PROJECT_DIR$/assets/vendor/leaflet/mapsBuilder.js" />
         <option value="$PROJECT_DIR$/templates/form/builder/_widget_radio.html.twig" />
         <option value="$PROJECT_DIR$/templates/form/builder/_widget_text.html.twig" />
         <option value="$PROJECT_DIR$/templates/form/builder/_widget_time.html.twig" />
@@ -165,6 +156,9 @@
         <option value="$PROJECT_DIR$/src/Validator/HasMapShapeValidator.php" />
         <option value="$PROJECT_DIR$/src/Validator/HasMarkersCountBetween.php" />
         <option value="$PROJECT_DIR$/src/Form/WidgetSettingsType/MapWidgetSettingsType.php" />
+        <option value="$PROJECT_DIR$/assets/vendor/leaflet/mapsBuilder.js" />
+        <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
+        <option value="$PROJECT_DIR$/src/Form/FormBuilderType/MapType.php" />
       </list>
     </option>
   </component>
@@ -289,17 +283,6 @@
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Validator" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -379,12 +362,12 @@
       <workItem from="1574077650390" duration="11015000" />
       <workItem from="1574169299413" duration="4194000" />
       <workItem from="1574236383082" duration="6117000" />
-      <workItem from="1574252167721" duration="6280000" />
+      <workItem from="1574252167721" duration="7555000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="446222000" />
+    <option name="totallyTimeSpent" value="447497000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -625,27 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="185" column="22" selection-start-line="185" selection-start-column="22" selection-end-line="185" selection-end-column="22" />
-          <folding>
-            <element signature="e#12#37#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/vendor/leaflet/mapsBuilder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="586" column="39" selection-start-line="586" selection-start-column="39" selection-end-line="586" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/form/builder/_settings_radio.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -819,16 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/FormBuilderType/MapType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding>
-            <element signature="e#44#102#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/form/CallbackTransformer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -857,16 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/FormBuilder/MapBuilder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <element signature="e#40#61#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Value.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -887,19 +829,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Validator/HasMarkersCountBetween.php">
+    <entry file="file://$PROJECT_DIR$/src/Form/WidgetSettingsType/MapWidgetSettingsType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+        <state relative-caret-position="330">
+          <caret line="22" column="14" lean-forward="true" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+          <folding>
+            <element signature="e#47#94#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/WidgetSettingsType/MapWidgetSettingsType.php">
+    <entry file="file://$PROJECT_DIR$/src/Validator/HasMarkersCountBetween.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="28" lean-forward="true" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+        <state relative-caret-position="330">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/vendor/leaflet/mapsBuilder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="508" column="47" selection-start-line="508" selection-start-column="47" selection-end-line="508" selection-end-column="47" />
           <folding>
-            <element signature="e#47#94#0#PHP" expanded="true" />
+            <element signature="e#0#28#0" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/FormBuilder/MapBuilder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="28" column="17" lean-forward="true" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+          <folding>
+            <element signature="e#40#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="187" column="40" selection-start-line="187" selection-start-column="24" selection-end-line="187" selection-end-column="40" />
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+            <element signature="e#6696#6728#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/FormBuilderType/MapType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="28" lean-forward="true" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+          <folding>
+            <element signature="e#44#71#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

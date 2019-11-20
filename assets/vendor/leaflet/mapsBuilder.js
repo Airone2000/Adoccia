@@ -506,9 +506,15 @@ class MapsBuilder
             this.saveJSONMap(map);
         }
 
-        let popup = L.popup();
-        popup.setContent(markerLabel);
-        marker.bindPopup(popup);
+        // No popup if no label in display mode
+        if (mode === 'DISPLAY' && markerLabel === null) {
+            // Do nothing
+        }
+        else {
+            let popup = L.popup();
+            popup.setContent(markerLabel);
+            marker.bindPopup(popup);
+        }
 
         // Open popup
         if (autoOpenPopup) {

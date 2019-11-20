@@ -185,9 +185,11 @@
         {{ form_widget(form.criteria) }}
         {{ form_widget(form.mapAround) }}
     {% else %}
-        <div id="map-widget-{{ widget.id }}" data-mode="{{ form.vars.mode }}" class="mapWrapper" data-type="leaflet-map" style="width:100%;height:400px;">
-            {{- block('hidden_widget') -}}
-        </div>
+        {% if form.vars.mapShouldDisplay %}
+            <div id="map-widget-{{ widget.id }}" data-mode="{{ form.vars.mode }}" class="mapWrapper" data-type="leaflet-map" style="width:100%;height:400px;">
+                {{- block('hidden_widget') -}}
+            </div>
+        {% endif %}
     {% endif %}
     {{ form_area_end(widget.formArea) }}
 {%- endblock -%}

@@ -2,6 +2,7 @@
 
 namespace App\Form\FormBuilderType;
 
+use App\Enum\FicheModeEnum;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -20,6 +21,23 @@ class MapType extends HiddenType
     {
         $this->unifiedBuildView($view, $form, $options);
         $view->vars['attr']['class'] = 'value';
+
+        $mapShouldDisplay = true;
+
+        if ($view->vars['mode'] === FicheModeEnum::DISPLAY) {
+            # HasMarkers var
+            # Produce this value for displaying or not the map
+            # if no marker, then hide the map, else display it
+            $hasMarkers = false;
+            $value = json_decode($view->vars['value'], true);
+            if (is_array($value)) {
+                $hasMarkers = !empty($value['markers']);
+            }
+            $view->vars['hasMarkers'] = $hasMarkers;
+            $mapShouldDisplay = $hasMarkers;
+        }
+
+        $view->vars['mapShouldDisplay'] = $mapShouldDisplay;
     }
 
     public function configureOptions(OptionsResolver $resolver)
