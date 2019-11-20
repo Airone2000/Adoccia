@@ -104,6 +104,12 @@ class Value
      */
     private $valueOfTypeMap;
 
+    /**
+     * @var null|string
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $valueOfTypeVideo;
+
 
 
     /**
@@ -387,6 +393,24 @@ class Value
         }
 
         $this->valueOfTypeMap = $valueOfTypeMap;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getValueOfTypeVideo(): ?string
+    {
+        return $this->valueOfTypeVideo;
+    }
+
+    /**
+     * @param string|null $valueOfTypeVideo
+     * @return Value
+     */
+    public function setValueOfTypeVideo(?string $valueOfTypeVideo): Value
+    {
+        $this->valueOfTypeVideo = $valueOfTypeVideo;
         return $this;
     }
 

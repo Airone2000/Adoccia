@@ -28,6 +28,23 @@
     {{ form_area_end(widget.formArea) }}
 {%- endblock -%}
 
+{%- block fichit_video_row -%}
+    {{ form_area_start(widget.formArea) }}
+    {% if form.parent.vars.mode is same as('DISPLAY') %}
+        {% if form.vars.value is not null %}
+            <div class="videoWrapper">
+                <iframe src="{{ form.vars.value }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        {% endif %}
+    {% elseif form.parent.vars.mode is same as('SEARCH') %}
+        {{ form_widget(form.criteria) }}
+    {% else %}
+        {{- block('form_widget_simple') -}}
+        {{ form_errors(form) }}
+    {% endif %}
+    {{ form_area_end(widget.formArea) }}
+{%- endblock -%}
+
 {%- block fichit_date_row -%}
     {{ form_area_start(widget.formArea) }}
     {% if form.parent.vars.mode is same as('DISPLAY') %}
