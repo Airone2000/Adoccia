@@ -138,7 +138,13 @@ class Widget
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\Length(
      *     max="100",
-     *     maxMessage="Widget.decimalCount.length.max"
+     *     maxMessage="Widget.decimalCount.length.max",
+     *     groups={"FloatWidget:SetSettings"}
+     * )
+     *
+     * @Assert\Type(
+     *     type="numeric",
+     *     groups={"FloatWidget:SetSettings"}
      * )
      */
     private $decimalCount;
@@ -174,6 +180,23 @@ class Widget
      * @ORM\Column(type="boolean", options={"default":0})
      */
     private $multipleValues = false;
+
+    /**
+     * @var int|null
+     * @ORM\Column(type="integer", nullable=true)
+     *
+     * @Assert\GreaterThanOrEqual(
+     *     value=0,
+     *     groups={"MapWidget:SetSettings"}
+     * )
+     */
+    private $minMarkers;
+
+    /**
+     * @var int|null
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $maxMarkers;
 
 
     public function __construct()
@@ -513,5 +536,40 @@ class Widget
         return $this->getMultipleValues();
     }
 
+    /**
+     * @return int|null
+     */
+    public function getMinMarkers(): ?int
+    {
+        return $this->minMarkers;
+    }
+
+    /**
+     * @param int|null $minMarkers
+     * @return Widget
+     */
+    public function setMinMarkers(?int $minMarkers): Widget
+    {
+        $this->minMarkers = $minMarkers;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMaxMarkers(): ?int
+    {
+        return $this->maxMarkers;
+    }
+
+    /**
+     * @param int|null $maxMarkers
+     * @return Widget
+     */
+    public function setMaxMarkers(?int $maxMarkers): Widget
+    {
+        $this->maxMarkers = $maxMarkers;
+        return $this;
+    }
 
 }

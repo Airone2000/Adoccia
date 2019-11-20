@@ -5,6 +5,8 @@ namespace App\Form\FormBuilder;
 use App\Entity\Value;
 use App\Entity\Widget;
 use App\Form\FormBuilderType\MapType;
+use App\Validator\HasMapShape;
+use App\Validator\HasMarkersCountBetween;
 use Symfony\Component\Form\CallbackTransformer;
 
 final class MapBuilder implements FormBuilderInterface
@@ -17,7 +19,14 @@ final class MapBuilder implements FormBuilderInterface
         $builder
             ->add($widget->getId(), MapType::class, [
                 'mode' =>$options['mode'],
-                'widget' => $widget
+                'widget' => $widget,
+                'constraints' => [
+                    new HasMapShape(),
+                    new HasMarkersCountBetween([
+                        'min' => $widget->getMinMarkers(),
+                        'max' => $widget->getMaxMarkers()
+                    ])
+                ]
             ])
             ->get($widget->getId())->addModelTransformer(new CallbackTransformer(
                 function($value){

@@ -17,12 +17,7 @@ final class FloatWidgetSettingsType extends AbstractWidgetSettingsType
             ->add('min', IntegerType::class, ['required' => false])
             ->add('max', IntegerType::class, ['required' => false])
             ->add('decimalCount', IntegerType::class, [
-                'required' => false,
-                'constraints' => [
-                    new Length(['max' => 100]),
-                    new Type(['type' => 'int']),
-                    new GreaterThanOrEqual(['value' => 2])
-                ]
+                'required' => false
             ])
             ->add('required')
             ->add('inputPlaceholder')

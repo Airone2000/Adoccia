@@ -486,8 +486,11 @@ class MapsBuilder
             saveInJsonMap = false;
         }
 
-        if (mode !== 'DISPLAY') {
-            markerLabel = `<textarea style="width: 250px; resize: none;">${markerLabel}</textarea>`;
+        if (mode !== 'DISPLAY') { // Edit mode
+            markerLabel = `
+                <textarea style="width: 250px; resize: none;">${markerLabel}</textarea>
+                <button>Retirer</button>
+            `;
         }
 
         let marker = L.marker(markerPosition, {draggable: mode !== 'DISPLAY', markerId}).addTo(map);
@@ -575,10 +578,11 @@ class MapsBuilder
             map.addControl(this._buildAddMarkerControl());
             map.addControl(this._buildSearchForm(uniqIdentifier));
 
-            map.on('popupopen', (e) => {
-                let $textarea = $(e.popup._contentNode).find('textarea');
-                let markerId = e.popup._source.options.markerId;
-                let map = e.target;
+            map.on('popupopen', (popupopenEvent) => {
+                let $textarea = $(popupopenEvent.popup._contentNode).find('textarea');
+                let $btnDelete = $(popupopenEvent.popup._contentNode).find('button');
+                let markerId = popupopenEvent.popup._source.options.markerId;
+                let map = popupopenEvent.target;
                 let jsonMap = this.getJSONMap(map);
                 let marker = jsonMap.markers[markerId];
 
@@ -594,6 +598,14 @@ class MapsBuilder
                         marker.label = label;
                         this.saveJSONMap(map);
                     }, 250);
+                });
+
+                $btnDelete.on('click', (clickEvent) => {
+                    clickEvent.preventDefault();
+                    delete jsonMap.markers[markerId];
+                    this.saveJSONMap(map);
+                    // Remove the marker from map
+                    map.removeLayer(popupopenEvent.popup._source);
                 });
             });
 
