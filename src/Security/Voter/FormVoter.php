@@ -18,7 +18,8 @@ class FormVoter extends Voter
         ADD_FORM_AREA_TO_DRAFT_FORM = 'ADD_FORM_AREA_TO_DRAFT_FORM',
         SORT_DRAFT_FORM_AREAS = 'SORT_DRAFT_FORM_AREAS',
         PUBLISH_DRAFT_FORM = 'PUBLISH_DRAFT_FORM',
-        DELETE_DRAFT_FORM = 'DELETE_DRAFT_FORM'
+        DELETE_DRAFT_FORM = 'DELETE_DRAFT_FORM',
+        PREVIEW_DRAFT_FORM = 'PREVIEW_DRAFT_FORM'
     ;
     /**
      * @var CategoryRepository
@@ -38,6 +39,7 @@ class FormVoter extends Voter
         if ($attribute === self::SORT_DRAFT_FORM_AREAS && $subject instanceof Form) return true;
         if ($attribute === self::PUBLISH_DRAFT_FORM && $subject instanceof Form) return true;
         if ($attribute === self::DELETE_DRAFT_FORM && $subject instanceof Form) return true;
+        if ($attribute === self::PREVIEW_DRAFT_FORM && $subject instanceof Form) return true;
         return false;
     }
 
@@ -62,6 +64,8 @@ class FormVoter extends Voter
                 return $this->canPublishDraftForm($user, $subject);
             case self::DELETE_DRAFT_FORM:
                 return $this->canDeleteDraftForm($user, $subject);
+            case self::PREVIEW_DRAFT_FORM:
+                return $this->canPreviewDraftForm($user, $subject);
         }
 
         return false;
@@ -80,6 +84,11 @@ class FormVoter extends Voter
         }
 
         return false;
+    }
+
+    private function canPreviewDraftForm(User $user, Form $form): bool
+    {
+        return $this->canEditDraftForm($user, $form);
     }
 
     private function canDeleteDraftForm(User $user, Form $form): bool

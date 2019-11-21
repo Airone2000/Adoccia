@@ -13,7 +13,8 @@ class FormAreaVoter extends Voter
 {
     const
         DELETE_FORM_AREA = 'DELETE_FORM_AREA',
-        SET_FORM_AREA_WIDTH = 'SET_FORM_AREA_WIDTH'
+        SET_FORM_AREA_WIDTH = 'SET_FORM_AREA_WIDTH',
+        SET_FORM_AREA_SETTINGS = 'SET_FORM_AREA_SETTINGS'
     ;
 
     /**
@@ -30,6 +31,7 @@ class FormAreaVoter extends Voter
     {
         if ($attribute === self::DELETE_FORM_AREA && $subject instanceof FormArea) return true;
         if ($attribute === self::SET_FORM_AREA_WIDTH && $subject instanceof FormArea) return true;
+        if ($attribute === self::SET_FORM_AREA_SETTINGS && $subject instanceof FormArea) return true;
         return false;
     }
 
@@ -48,6 +50,7 @@ class FormAreaVoter extends Voter
         switch ($attribute) {
             case self::DELETE_FORM_AREA:
             case self::SET_FORM_AREA_WIDTH:
+            case self::SET_FORM_AREA_SETTINGS:
                 return $this->authorizationChecker->isGranted(FormVoter::EDIT_DRAFT_FORM, $subject->getForm());
         }
 

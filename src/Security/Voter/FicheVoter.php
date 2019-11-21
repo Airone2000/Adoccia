@@ -38,17 +38,18 @@ class FicheVoter extends Voter
 
     private function canEditFiche(User $user, Fiche $fiche): bool
     {
-        # SuperAdmin
-        if ($user->isSuperAdmin()) return true;
+        if (CategoryVoter::canSeeCategory($user, $fiche->getCategory())) {
+            # SuperAdmin
+            if ($user->isSuperAdmin()) return true;
 
-        # Category creator
-        if (($categoryCreator = $fiche->getCategory()->getCreatedBy()) instanceof User) {
-            if ($categoryCreator->getId() === $user->getId()) return true;
+            # Category creator
+            if (($categoryCreator = $fiche->getCategory()->getCreatedBy()) instanceof User) {
+                if ($categoryCreator->getId() === $user->getId()) return true;
+            }
+
+            # Fiche creator
+            if ($fiche->getCreator() && $fiche->getCreator() === $user) return true;
         }
-
-        # Fiche creator
-        if ($fiche->getCreator() && $fiche->getCreator() === $user) return true;
-
         return false;
     }
 

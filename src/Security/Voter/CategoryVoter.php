@@ -52,6 +52,16 @@ class CategoryVoter extends Voter
         }
     }
 
+    public static function canSearchInCategory(?User $user, Category $category): bool
+    {
+        return self::canSeeCategory($user, $category);
+    }
+
+    public static function canListCategoryFiches(?User $user, Category $category): bool
+    {
+        return self::canSeeCategory($user, $category);
+    }
+
     public static function canSeeCategory(?User $user, Category $category): bool
     {
         if ($category->isOnline() && $category->isPublic()) {

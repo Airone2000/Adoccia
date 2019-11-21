@@ -47,13 +47,6 @@ class FicheRepository extends ServiceEntityRepository
         return $user;
     }
 
-    public function getCategoryFiches(Category $category, array $moreCriterias = [])
-    {
-        $qb = $this->createQueryBuilder('f');
-
-        return $qb->getQuery()->getResult();
-    }
-
     /**
      * Used by the CategoryFinder to retrieve fiches having values that match user criterias
      * @param QueryBuilder $queryBuilder
@@ -63,7 +56,6 @@ class FicheRepository extends ServiceEntityRepository
      */
     public function getFicheByValues(QueryBuilder $queryBuilder, array $values, int $havingCount): QueryBuilder
     {
-        $this->getForUser($this->getUser(), $queryBuilder);
         return $queryBuilder
             ->leftJoin('f.values', 'v')
             ->andWhere('v.id IN (:values)')
@@ -164,8 +156,9 @@ class FicheRepository extends ServiceEntityRepository
         return $users;
     }
 
-    private function getForUser(?User $user, QueryBuilder $queryBuilder): void
+    public function getForUser(?User $user, QueryBuilder $queryBuilder): void
     {
+        $user = $user ?? $this->getUser();
         $q = '(f.published = 1 AND f.valid = 1)';
         if ($user instanceof User) {
             $q = "({$q} OR f.creator = :user)";
@@ -186,16 +179,14 @@ class FicheRepository extends ServiceEntityRepository
         return $paginator;
     }
 
-    public function getOneForUserByCategoryAndId(?User $user, $categoryId, $ficheId): ?Fiche
+    public function getOneForUserById(?User $user, $ficheId): ?Fiche
     {
         $user = $user ?? $this->getUser();
         $qb = $this->createQueryBuilder('f');
         $this->getForUser($user, $qb);
         return $qb
             ->andWhere('f.id = :fid')
-            ->andWhere('f.category = :cid')
             ->setParameter('fid', $ficheId)
-            ->setParameter('cid', $categoryId)
             ->getQuery()
             ->getOneOrNullResult()
         ;

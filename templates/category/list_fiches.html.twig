@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{ fiche.title }}</td>
                         <td>
-                            <a href="{{ url('fiche.show', {'categoryId': category.id, 'ficheId': fiche.id}) }}">Voir</a>
+                            <a href="{{ url('fiche.show', {'id': fiche.id}) }}">Voir</a>
                         </td>
                     </tr>
                 {% endfor %}

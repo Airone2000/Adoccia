@@ -14,7 +14,7 @@
     <h1>{{ fiche.title }}</h1>
 
     {% if is_granted('CAN_EDIT_FICHE', fiche) %}
-        <a href="{{ url('fiche.edit', {'categoryId': category.id, 'ficheId': fiche.id}) }}">Edit</a>
+        <a href="{{ url('fiche.edit', {'id': fiche.id}) }}">Edit</a>
     {% endif %}
 
     <div id="fiche" style="width:600px;">

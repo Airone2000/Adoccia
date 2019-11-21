@@ -61,6 +61,7 @@ final class FormAreaController extends AbstractController
      *     condition="request.isXmlHttpRequest()",
      *     name="formArea.getSettingsView"
      * )
+     * @IsGranted("SET_FORM_AREA_SETTINGS", subject="formArea")
      * @inheritdoc
      */
     function getSettingsView(FormArea $formArea, Request $request): Response

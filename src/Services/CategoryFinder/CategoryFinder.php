@@ -89,6 +89,7 @@ final class CategoryFinder implements CategoryFinderInterface
 
         # Query for fiches in this category
         $fichesQ = $this->ficheRepository->createQueryBuilder('f');
+        $this->ficheRepository->getForUser(null, $fichesQ);
         $fichesQ->andWhere('f.category = :category')->setParameter('category', $category);
 
         # Search fiches by matching widgets

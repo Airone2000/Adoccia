@@ -48,7 +48,6 @@ final class FormController extends AbstractController
      *     condition="request.isXmlHttpRequest()",
      *     name="draftForm.addArea"
      * )
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("ADD_FORM_AREA_TO_DRAFT_FORM", subject="form")
      * @inheritdoc
      */
@@ -68,7 +67,6 @@ final class FormController extends AbstractController
      *     condition="request.isXmlHttpRequest() and request.headers.get('Content-Type') == 'application/json'",
      *     name="draftForm.sortAreas"
      * )
-     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      * @IsGranted("SORT_DRAFT_FORM_AREAS", subject="form")
      * @inheritdoc
      */
@@ -125,6 +123,7 @@ final class FormController extends AbstractController
 
     /**
      * @Route("/{id}/preview", methods={"get"}, name="draftForm.preview", condition="request.isXmlHttpRequest()")
+     * @IsGranted("PREVIEW_DRAFT_FORM", subject="form")
      * @inheritdoc
      */
     function preview(Form $form, CategoryRepository $categoryRepository): Response
