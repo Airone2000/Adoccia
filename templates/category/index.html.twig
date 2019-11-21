@@ -13,7 +13,8 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>CreatedAt</th>
-                <th>Published</th>
+                <th>Online</th>
+                <th>Public</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -29,10 +30,14 @@
                 <td>{{ category.name }}</td>
                 <td>{{ category.description }}</td>
                 <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ category.published ? 'Yes' : 'No' }}</td>
+                <td>{{ category.online ? 'Yes' : 'No' }}</td>
+                <td>{{ category.public ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('category.show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('category.edit', {'id': category.id}) }}">edit</a>
+
+                    {% if is_granted('EDIT_CATEGORY', category) %}
+                        <a href="{{ path('category.edit', {'id': category.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

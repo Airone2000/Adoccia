@@ -11,12 +11,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class FicheVoter extends Voter
 {
     const
-        SEE_FICHE = 'CAN_SEE_FICHE'
+        EDIT_FICHE = 'CAN_EDIT_FICHE'
     ;
 
     protected function supports($attribute, $subject)
     {
-        if ($attribute === self::SEE_FICHE && $subject instanceof Fiche) return true;
+        if ($attribute === self::EDIT_FICHE && $subject instanceof Fiche) return true;
         return false;
     }
 
@@ -28,15 +28,15 @@ class FicheVoter extends Voter
         }
 
         switch ($attribute) {
-            case self::SEE_FICHE:
-                return $this->canSeeFiche($user, $subject);
+            case self::EDIT_FICHE:
+                return $this->canEditFiche($user, $subject);
 
         }
 
         return false;
     }
 
-    private function canSeeFiche(User $user, Fiche $fiche): bool
+    private function canEditFiche(User $user, Fiche $fiche): bool
     {
         # SuperAdmin
         if ($user->isSuperAdmin()) return true;
@@ -44,6 +44,25 @@ class FicheVoter extends Voter
         # Category creator
         if (($categoryCreator = $fiche->getCategory()->getCreatedBy()) instanceof User) {
             if ($categoryCreator->getId() === $user->getId()) return true;
+        }
+
+        # Fiche creator
+        if ($fiche->getCreator() && $fiche->getCreator() === $user) return true;
+
+        return false;
+    }
+
+    public static function canSeeFiche(?User $user, Fiche $fiche): bool
+    {
+        if (CategoryVoter::canSeeCategory($user, $fiche->getCategory())) {
+            if ($fiche->isPublished() && $fiche->isValid()) {
+                return true;
+            }
+
+            if ($user instanceof User) {
+                if ($user->isSuperAdmin()) return true;
+                if ($fiche->getCreator() && $fiche->getCreator() === $user) return true;
+            }
         }
 
         return false;

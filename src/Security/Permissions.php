@@ -8,6 +8,7 @@ final class Permissions
 
         APP_LOGIN = 0.1,
 
+        CATEGORY_LIST = 1.1,
         CATEGORY_CREATE = 1.2
 
     ;

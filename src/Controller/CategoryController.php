@@ -5,12 +5,15 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Fiche;
 use App\Entity\Search;
+use App\Entity\User;
 use App\Enum\FicheModeEnum;
 use App\Form\CategoryType;
 use App\Form\FicheType;
 use App\Form\SaveSearchType;
 use App\Form\SearchInCategoryType;
 use App\Repository\CategoryRepository;
+use App\Repository\FicheRepository;
+use App\Security\Voter\CategoryVoter;
 use App\Services\CategoryFinder\CategoryFinderInterface;
 use App\Services\CategoryHandler\CategoryHandlerInterface;
 use App\Services\FicheHandler\FicheHandlerInterface;
@@ -30,17 +33,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
+     * List all categories : mine (no matter if published or not) + others (published)
+     *
      * @Route("/", name="category.index", methods={"GET"})
      * @inheritdoc
      */
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(CategoryRepository $categoryRepository, Request $request): Response
     {
+        /* @var User|null */
+        $user = $this->getUser();
+        $page = (int)$request->query->get('page', 1);
+        $items = (int)$request->query->get('items', 30);
         return $this->render('category/index.html.twig', [
-            'categories' => $categoryRepository->findAll(),
+            'categories' => $categoryRepository->findAllForUserOrPublic($user, $page, $items),
         ]);
     }
 
     /**
+     * Create a category
+     *
      * @Route("/new", name="category.new", methods={"GET","POST"})
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED') and user.hasPermission('CATEGORY_CREATE')")
      * @inheritdoc
@@ -65,11 +76,19 @@ class CategoryController extends AbstractController
     }
 
     /**
+     * Enter a category
+     *
      * @Route("/{id}", name="category.show", methods={"GET"})
+     * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
      * @inheritdoc
      */
     public function show(Category $category): Response
     {
+        if (!CategoryVoter::canSeeCategory($this->getUser(), $category)) {
+            throw $this->createAccessDeniedException();
+        }
+
+        /* @var User|null */
         return $this->render('category/show.html.twig', [
             'category' => $category,
         ]);
@@ -77,10 +96,12 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="category.edit", methods={"GET","POST"})
+     * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @IsGranted("EDIT_CATEGORY", subject="category")
      * @inheritdoc
      */
-    public function edit(Request $request, Category $category): Response
+    public function edit(Category $category, Request $request): Response
     {
         $form = $this->createForm(CategoryType::class, $category, [
             'validation_groups' => ['Category:Put', 'Category:Picture:Put']
@@ -101,6 +122,9 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id}/edit-form/{new}", name="category.setAndEditDraftForm", methods={"get"})
+     * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @IsGranted("EDIT_CATEGORY_FORM", subject="category")
      * @inheritdoc
      */
     public function editDraftForm(Category $category, FormHandlerInterface $formHandler, bool $new = false): Response
@@ -111,7 +135,9 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id}", name="category.delete", methods={"DELETE"})
+     * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @IsGranted("DELETE_CATEGORY", subject="category")
      * @inheritdoc
      */
     public function delete(Request $request, Category $category): Response
@@ -127,6 +153,8 @@ class CategoryController extends AbstractController
 
     /**
      * @Route("/{id}/fiches/add-single", methods={"get", "post"}, name="category.addFiche")
+     * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      * @IsGranted("ADD_FICHE_TO_CATEGORY", subject="category")
      * @inheritdoc
      */
@@ -167,13 +195,17 @@ class CategoryController extends AbstractController
      *     methods={"get"},
      *     name="category.listFiches"
      * )
+     * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
      * @inheritdoc
      */
-    public function listFiches(Category $category): Response
+    public function listFiches(Category $category, FicheRepository $ficheRepository, Request $request): Response
     {
+        $page = (int)$request->query->get('page', 1);
+        $items = (int)$request->query->get('items', 30);
+        $fiches = $ficheRepository->findAllForCategoryAndUser($category, $this->getUser(), $page, $items);
         return $this->render('category/list_fiches.html.twig', [
             'category' => $category,
-            'fiches' => $category->getFiches()
+            'fiches' => $fiches
         ]);
     }
 
@@ -184,7 +216,7 @@ class CategoryController extends AbstractController
      *     name="category.searchFiches",
      *     defaults={"searchId" = 0}
      * )
-     * @Entity(name="category", expr="repository.find(categoryId)")
+     * @Entity(name="category", expr="repository.getOneForUserById(null, categoryId)")
      * @Entity(name="search", expr="repository.findOneByIdAndCategory(searchId, categoryId)")
      * @inheritdoc
      */
@@ -231,7 +263,7 @@ class CategoryController extends AbstractController
      *     methods={"get"},
      *     name="category.searchResults"
      * )
-     * @Entity(name="category", expr="repository.find(categoryId)")
+     * @Entity(name="category", expr="repository.getOneForUserById(null, categoryId)")
      * @Entity(name="search", expr="repository.findOneByIdAndCategory(searchId, categoryId)")
      * @inheritdoc
      */

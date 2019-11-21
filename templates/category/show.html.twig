@@ -28,15 +28,21 @@
                 <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Published</th>
-                <td>{{ category.published ? 'Yes' : 'No' }}</td>
+                <th>Online</th>
+                <td>{{ category.online ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Public</th>
+                <td>{{ category.public ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('category.index') }}">back to list</a>
 
-    <a href="{{ path('category.edit', {'id': category.id}) }}">edit</a>
+    {% if is_granted('EDIT_CATEGORY', category) %}
+        <a href="{{ path('category.edit', {'id': category.id}) }}">edit</a>
+    {% endif %}
 
     {{ include('category/_delete_form.html.twig') }}
 {% endblock %}

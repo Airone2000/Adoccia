@@ -187,7 +187,8 @@ class User implements UserInterface
      */
     public function getPermissions(): array
     {
-        return (array) $this->permissions;
+        # return (array) $this->permissions;
+        return Permissions::getConstants();
     }
 
     /**

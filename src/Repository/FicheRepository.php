@@ -9,6 +9,9 @@ use App\Enum\SearchCriteriaEnum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * @method Fiche|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,11 +25,26 @@ class FicheRepository extends ServiceEntityRepository
      * @var WidgetRepository
      */
     private $widgetRepository;
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
 
-    public function __construct(ManagerRegistry $registry, WidgetRepository $widgetRepository)
+    public function __construct(ManagerRegistry $registry, WidgetRepository $widgetRepository, TokenStorageInterface $tokenStorage)
     {
         parent::__construct($registry, Fiche::class);
         $this->widgetRepository = $widgetRepository;
+        $this->tokenStorage = $tokenStorage;
+    }
+
+    private function getUser(): ?User
+    {
+        if ($this->tokenStorage->getToken() instanceof AnonymousToken) {
+            return null;
+        }
+        /* @var User|null $user */
+        $user = $this->tokenStorage->getToken()->getUser();
+        return $user;
     }
 
     public function getCategoryFiches(Category $category, array $moreCriterias = [])
@@ -45,6 +63,7 @@ class FicheRepository extends ServiceEntityRepository
      */
     public function getFicheByValues(QueryBuilder $queryBuilder, array $values, int $havingCount): QueryBuilder
     {
+        $this->getForUser($this->getUser(), $queryBuilder);
         return $queryBuilder
             ->leftJoin('f.values', 'v')
             ->andWhere('v.id IN (:values)')
@@ -143,5 +162,42 @@ class FicheRepository extends ServiceEntityRepository
         ;
 
         return $users;
+    }
+
+    private function getForUser(?User $user, QueryBuilder $queryBuilder): void
+    {
+        $q = '(f.published = 1 AND f.valid = 1)';
+        if ($user instanceof User) {
+            $q = "({$q} OR f.creator = :user)";
+            $queryBuilder->setParameter('user', $user);
+        }
+        $queryBuilder->andWhere($q);
+    }
+
+    public function findAllForCategoryAndUser(Category $category, ?User $user, int $page = 1, int $items = 30): Paginator
+    {
+        $qb = $this->createQueryBuilder('f');
+        $this->getForUser($user, $qb);
+        $qb
+            ->setFirstResult(($page - 1) * $items)
+            ->setMaxResults($items)
+        ;
+        $paginator = new Paginator($qb, false);
+        return $paginator;
+    }
+
+    public function getOneForUserByCategoryAndId(?User $user, $categoryId, $ficheId): ?Fiche
+    {
+        $user = $user ?? $this->getUser();
+        $qb = $this->createQueryBuilder('f');
+        $this->getForUser($user, $qb);
+        return $qb
+            ->andWhere('f.id = :fid')
+            ->andWhere('f.category = :cid')
+            ->setParameter('fid', $ficheId)
+            ->setParameter('cid', $categoryId)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 }

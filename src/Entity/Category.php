@@ -38,11 +38,6 @@ class Category
     private $createdAt;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":0})
-     */
-    private $published = false;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="categories")
      */
     private $createdBy;
@@ -75,6 +70,18 @@ class Category
      * @ORM\OneToMany(targetEntity="App\Entity\Fiche", mappedBy="category", cascade={"remove"})
      */
     private $fiches;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default":0})
+     */
+    private $online = false;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default":0})
+     */
+    private $public = false;
 
 
     public function __construct()
@@ -121,18 +128,6 @@ class Category
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getPublished(): ?bool
-    {
-        return $this->published;
-    }
-
-    public function setPublished(bool $published): self
-    {
-        $this->published = $published;
 
         return $this;
     }
@@ -212,6 +207,42 @@ class Category
     public function getFiches(): Collection
     {
         return $this->fiches;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOnline(): bool
+    {
+        return $this->online;
+    }
+
+    /**
+     * @param bool $online
+     * @return Category
+     */
+    public function setOnline(bool $online): Category
+    {
+        $this->online = $online;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublic(): bool
+    {
+        return $this->public;
+    }
+
+    /**
+     * @param bool $public
+     * @return Category
+     */
+    public function setPublic(bool $public): Category
+    {
+        $this->public = $public;
+        return $this;
     }
 
 }

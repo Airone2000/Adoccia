@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Fiche;
 use App\Enum\FicheModeEnum;
 use App\Form\FicheType;
+use App\Security\Voter\FicheVoter;
 use App\Services\FicheHandler\FicheHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -17,13 +18,16 @@ final class FicheController extends AbstractController
 {
     /**
      * @Route("/categories/{categoryId}/fiches/{ficheId}", methods={"get"}, name="fiche.show")
-     * @Entity(name="category", expr="repository.find(categoryId)")
-     * @Entity(name="fiche", expr="repository.findFicheByCategoryAndId(categoryId, ficheId)")
-     * @IsGranted("CAN_SEE_FICHE", subject="fiche")
+     * @Entity(name="category", expr="repository.getOneForUserById(null, categoryId)")
+     * @Entity(name="fiche", expr="repository.getOneForUserByCategoryAndId(null, categoryId, ficheId)")
      * @inheritdoc
      */
     function showFiche(Category $category, Fiche $fiche, FicheHandlerInterface $ficheHandler): Response
     {
+        if (!FicheVoter::canSeeFiche($this->getUser(), $fiche)) {
+            throw $this->createAccessDeniedException();
+        }
+
         return $this->render('fiche/show.html.twig', [
             'category' => $category,
             'fiche' => $fiche,
@@ -33,8 +37,9 @@ final class FicheController extends AbstractController
 
     /**
      * @Route("/categories/{categoryId}/fiches/{ficheId}/edit", methods={"get", "put"}, name="fiche.edit")
-     * @Entity(name="category", expr="repository.find(categoryId)")
-     * @Entity(name="fiche", expr="repository.findFicheByCategoryAndId(categoryId, ficheId)")
+     * @Entity(name="category", expr="repository.getOneForUserById(null, categoryId)")
+     * @Entity(name="fiche", expr="repository.getOneForUserByCategoryAndId(null, categoryId, ficheId)")
+     * @IsGranted("CAN_EDIT_FICHE", subject="fiche")
      * @inheritdoc
      */
     function editFiche(Category $category, Fiche $fiche, Request $request, FicheHandlerInterface $ficheHandler): Response
