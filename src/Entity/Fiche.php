@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Validator\FichePicture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -24,6 +25,9 @@ class Fiche
      * @var Picture|null
      * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"}, mappedBy="fiche")
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     *
+     * @FichePicture()
+     * @Assert\Valid()
      */
     private $picture;
 

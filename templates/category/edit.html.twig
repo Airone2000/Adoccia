@@ -8,7 +8,10 @@
 {% block title %}Edit Category{% endblock %}
 
 {% block body %}
-    <h1>Edit Category</h1>
+    <h1>Edit Category {{ category.name }}</h1>
+    {% if category.picture %}
+        <img src="{{ absolute_url(asset(picturesDir ~ 'crpd_' ~category.picture.filename)) | imagine_filter('category_picture_thumbnail')  }}" alt="{{ category.picture.filename }}" width="100" height="100">
+    {% endif %}
 
     {% for label, messages in app.flashes(['draftFormPublished', 'draftFormDeleted']) %}
         <div>

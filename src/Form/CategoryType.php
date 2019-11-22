@@ -24,7 +24,7 @@ class CategoryType extends AbstractType
                 'required' => false,
                 'picture' => $category->getPicture() ?? new Picture()
             ])
-            ->add('name')
+            ->add('name', null)
             ->add('description')
             ->add('online')
             ->add('public')
