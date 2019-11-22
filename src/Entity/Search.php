@@ -27,6 +27,7 @@ class Search
     /**
      * @var Category
      * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $category;
 

@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+use App\Validator\CategoryPicture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -43,10 +45,16 @@ class Category
     private $createdBy;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
      * @var Picture|null
      * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"}, mappedBy="category")
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      *
+     * @CategoryPicture(groups={"Category:Post", "CategoryPut"})
      * @Assert\Valid(groups={"Category:Post", "CategoryPut"})
      */
     private $picture;
@@ -242,6 +250,24 @@ class Category
     public function setPublic(bool $public): Category
     {
         $this->public = $public;
+        return $this;
+    }
+
+    /**
+     * @return null|\DateTime
+     */
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     * @return Category
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 

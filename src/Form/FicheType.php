@@ -5,15 +5,19 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\Fiche;
 use App\Entity\FormArea;
+use App\Entity\Picture;
 use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
 use App\Enum\WidgetTypeEnum;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -41,6 +45,9 @@ final class FicheType extends AbstractType
     {
         if ($options['is_form_preview'] === true) return;
 
+        /* @var Fiche $fiche */
+        $fiche = $options['fiche'];
+
         if ($options['mode'] === FicheModeEnum::EDITION) {
             $builder
                 ->add('title', TextType::class, [
@@ -49,8 +56,44 @@ final class FicheType extends AbstractType
                         new Length(['max' => 255])
                     ]
                 ])
-                ->add('published', CheckboxType::class);
+                ->add('picture', AdvancedPictureType::class, [
+                    'validation_groups' => $options['validation_groups'],
+                    'required' => false,
+                    'picture' => $fiche->getPicture() ?? new Picture()
+                ])
+                ->add('published', CheckboxType::class)
+            ;
+
+            $this->setDefaultValueForPictureCoords($builder);
         }
+    }
+
+    private function setDefaultValueForPictureCoords(FormBuilderInterface $builder): void
+    {
+        $builder->addEventListener(FormEvents::POST_SUBMIT, function(PostSubmitEvent $postSubmitEvent){
+            $data = $postSubmitEvent->getData();
+            $picture = $data['picture'] ?? null;
+            if($picture instanceof Picture) {
+                if ($picture->getCropCoords() === null) {
+                    if ($picture->getUploadedFile() instanceof UploadedFile && $picture->getCropCoords() === null) {
+                        $sizes = getimagesize($picture->getUploadedFile());
+                        $size = min($sizes[0], $sizes[1]);
+                        $x = ($sizes[0] - $size) / 2;
+                        $y = ($sizes[1] - $size) / 2;
+                        $defaultCropCoords = [
+                            'width' => $size,
+                            'height' => $size,
+                            'x' => $x,
+                            'y' => $y
+                        ];
+                        $picture->setCropCoords($defaultCropCoords);
+                    }
+                }
+            }
+
+            $data['picture'] = $picture;
+            $postSubmitEvent->setData($data);
+        });
     }
 
     /**

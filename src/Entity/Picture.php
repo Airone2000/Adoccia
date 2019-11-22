@@ -39,6 +39,13 @@ class Picture
     private $category;
 
     /**
+     * @var Fiche|null
+     * @ORM\OneToOne(targetEntity="App\Entity\Fiche", inversedBy="picture")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $fiche;
+
+    /**
      * @var int
      * @ORM\Column(type="smallint")
      */
@@ -56,6 +63,11 @@ class Picture
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @var array|null
+     */
+    private $cropCoords;
 
 
     public function getId(): ?int
@@ -113,6 +125,24 @@ class Picture
     }
 
     /**
+     * @return Fiche|null
+     */
+    public function getFiche(): ?Fiche
+    {
+        return $this->fiche;
+    }
+
+    /**
+     * @param Fiche|null $fiche
+     * @return Picture
+     */
+    public function setFiche(?Fiche $fiche): Picture
+    {
+        $this->fiche = $fiche;
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getPublic(): int
@@ -163,6 +193,24 @@ class Picture
     public function setUpdatedAt(?\DateTime $updatedAt): Picture
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getCropCoords(): ?array
+    {
+        return $this->cropCoords;
+    }
+
+    /**
+     * @param array|null $cropCoords
+     * @return Picture
+     */
+    public function setCropCoords(?array $cropCoords): Picture
+    {
+        $this->cropCoords = $cropCoords;
         return $this;
     }
 

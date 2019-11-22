@@ -1,6 +1,5 @@
-{% form_theme form 'form/TWIG_widget_types.html.twig' %}
+{% form_theme form with ['form/TWIG_widget_types.html.twig', 'formTheme/custom_form_theme.html.twig'] %}
 {% set isFormPreview = isFormPreview|default(false) %}
-
 
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
@@ -12,6 +11,9 @@
                 {{ form_label(form.title) }}
                 {{ form_widget(form.title) }}
                 {{ form_errors(form.title) }}
+            </div>
+            <div>
+                {{ form_row(form.picture) }}
             </div>
             <hr>
         {% endif %}

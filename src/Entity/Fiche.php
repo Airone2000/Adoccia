@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -18,6 +19,13 @@ class Fiche
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var Picture|null
+     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"}, mappedBy="fiche")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     */
+    private $picture;
 
     /**
      * @var Category
@@ -189,5 +197,27 @@ class Fiche
         $this->creator = $creator;
         return $this;
     }
+
+    /**
+     * @return Picture|null
+     */
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param Picture|null $picture
+     * @return Fiche
+     */
+    public function setPicture(?Picture $picture): Fiche
+    {
+        $this->picture = $picture;
+        $picture
+            ->setFiche($this)
+        ;
+        return $this;
+    }
+
 
 }

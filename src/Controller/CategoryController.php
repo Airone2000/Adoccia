@@ -170,7 +170,7 @@ class CategoryController extends AbstractController
                 $data = $form->getData();
                 $data['category'] = $category;
                 $fiche = $ficheHandler->createFicheFromFicheTypeData($data);
-                return $this->redirectToRoute('fiche.show', ['categoryId' => $category->getId(), 'ficheId' => $fiche->getId()]);
+                return $this->redirectToRoute('fiche.show', ['id' => $fiche->getId()]);
             }
             catch (\Exception $e) {
                 $this->addFlash('addFicheError', '');

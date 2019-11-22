@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'form/TWIG_widget_types.html.twig' %}
+
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('fiche') }}
@@ -9,6 +9,7 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('mapsBuilder') }}
+    {{ encore_entry_script_tags('advancedPicture') }}
 {% endblock %}
 
 {% block body %}

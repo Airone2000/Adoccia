@@ -95,6 +95,7 @@ final class FicheHandler implements FicheHandlerInterface
             ->setTitle($data['title'])
             ->setPublished((bool)($data['published'] ?? null))
             ->setCreator($this->tokenStorage->getToken()->getUser())
+            ->setPicture($data['picture'] ?? null)
         ;
 
         # Link category

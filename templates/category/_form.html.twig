@@ -1,4 +1,30 @@
+{% form_theme form 'formTheme/custom_form_theme.html.twig' %}
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    <div>
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+    </div>
+
+    <div>
+        {{ form_row(form.picture) }}
+    </div>
+
+    <div>
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+    </div>
+
+    <div>
+        {{ form_label(form.online) }}
+        {{ form_widget(form.online) }}
+    </div>
+
+    <div>
+        {{ form_label(form.public) }}
+        {{ form_widget(form.public) }}
+    </div>
+
+    <button type="submit" class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
