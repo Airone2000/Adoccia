@@ -14,10 +14,28 @@
     {{ form_area_end(widget.formArea) }}
 {%- endblock -%}
 
+{%- block fichit_picture_row -%}
+    {{ form_area_start(widget.formArea) }}
+    {% if form.parent.vars.mode is same as('DISPLAY') %}
+        <div>
+        {% set picture = form.vars.value|default(null) %}
+        {% if picture %}
+            <img src="{{ absolute_url(asset(picturesDir ~ 'crpd_' ~ picture.filename)) }}" alt="{{ picture.filename }}" style="max-width:100%;">
+        {% endif %}
+        </div>
+
+    {% elseif form.parent.vars.mode is same as('SEARCH') %}
+        {{ form_widget(form.criteria) }}
+    {% else %}
+        {{- block('advanced_picture_row') -}}
+    {% endif %}
+    {{ form_area_end(widget.formArea) }}
+{%- endblock -%}
+
 {%- block fichit_string_row -%}
     {{ form_area_start(widget.formArea) }}
         {% if form.parent.vars.mode is same as('DISPLAY') %}
-            <div>{{ form.vars.value }}</div>
+            <div>{{ dump(form.vars.value) }}</div>
         {% elseif form.parent.vars.mode is same as('SEARCH') %}
             {{ form_widget(form.criteria) }}
             {{ form_widget(form.value) }}

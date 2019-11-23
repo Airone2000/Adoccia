@@ -51,11 +51,15 @@ final class PictureListener
                 $imageName
             );
 
-            # Remove old file if exists
+            # Remove old file if exists (original and cropped)
             if ($picture->getFilename() !== null) {
                 $oldFile = "{$this->uploadDir}/{$picture->getFilename()}";
+                $oldCrpdFile = "{$this->uploadDir}/crpd_{$picture->getFilename()}";
                 if (file_exists($oldFile)) {
                     @unlink($oldFile);
+                }
+                if (file_exists($oldCrpdFile)) {
+                    @unlink($oldCrpdFile);
                 }
             }
 

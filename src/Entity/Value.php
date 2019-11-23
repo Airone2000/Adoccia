@@ -110,6 +110,13 @@ class Value
      */
     private $valueOfTypeVideo;
 
+    /**
+     * @var null|Picture
+     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $valueOfTypePicture;
+
 
 
     /**
@@ -411,6 +418,24 @@ class Value
     public function setValueOfTypeVideo(?string $valueOfTypeVideo): Value
     {
         $this->valueOfTypeVideo = $valueOfTypeVideo;
+        return $this;
+    }
+
+    /**
+     * @return Picture|null
+     */
+    public function getValueOfTypePicture(): ?Picture
+    {
+        return $this->valueOfTypePicture;
+    }
+
+    /**
+     * @param Picture|null $valueOfTypePicture
+     * @return Value
+     */
+    public function setValueOfTypePicture(?Picture $valueOfTypePicture): Value
+    {
+        $this->valueOfTypePicture = $valueOfTypePicture;
         return $this;
     }
 

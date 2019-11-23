@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class AdvancedPictureType extends AbstractType
+class AdvancedPictureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -43,17 +43,16 @@ final class AdvancedPictureType extends AbstractType
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['picture'] = $options['picture'];
+        $view->vars['aspectRatio'] = $options['aspectRatio'];
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Picture::class
+            'data_class' => Picture::class,
+            'aspectRatio' => 1
         ]);
 
-        $resolver->setRequired('picture');
-        $resolver->setAllowedTypes('picture', Picture::class);
     }
 
     public function getBlockPrefix()

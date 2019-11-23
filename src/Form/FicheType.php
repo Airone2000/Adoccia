@@ -58,8 +58,7 @@ final class FicheType extends AbstractType
                 ])
                 ->add('picture', AdvancedPictureType::class, [
                     'validation_groups' => $options['validation_groups'],
-                    'required' => false,
-                    'picture' => $fiche->getPicture() ?? new Picture()
+                    'required' => false
                 ])
                 ->add('published', CheckboxType::class)
             ;

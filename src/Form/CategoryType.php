@@ -21,8 +21,7 @@ class CategoryType extends AbstractType
         $builder
             ->add('picture', AdvancedPictureType::class, [
                 'validation_groups' => $options['validation_groups'],
-                'required' => false,
-                'picture' => $category->getPicture() ?? new Picture()
+                'required' => false
             ])
             ->add('name', null)
             ->add('description')

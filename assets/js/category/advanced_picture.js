@@ -34,24 +34,32 @@ class AdvancedPicture
                 $displayer.attr('src', e.target.result);
                 $displayer.attr('id', id);
 
-                setTimeout( () => {
-                    let croppr = new Croppr(`#${id}`, {
-                        aspectRatio: 1,
-                        startSize: [100, 100],
-                        returnMode: 'real',
-                        onCropMove: (data) => {
-                            data = JSON.stringify(data);
-                            $coordsInput.val(data);
-                        },
-                        onCropEnd: (data) => {
-                            data = JSON.stringify(data);
-                            $coordsInput.val(data);
+                $displayer.on('load', () => {
+                    setTimeout( () => {
+
+                        let cropprOpts = {
+                            startSize: [100, 100],
+                            returnMode: 'real',
+                            onCropMove: (data) => {
+                                data = JSON.stringify(data);
+                                $coordsInput.val(data);
+                            },
+                            onCropEnd: (data) => {
+                                data = JSON.stringify(data);
+                                $coordsInput.val(data);
+                            }
+                        };
+
+                        let aspectRatio = +$displayer.parents('.advanced-picture').data('aspectratio');
+                        if (aspectRatio != 0) {
+                            cropprOpts['aspectRatio'] = aspectRatio;
                         }
-                    });
 
-                    $coordsInput.data('croppr', croppr);
-                }, 50);
+                        let croppr = new Croppr(`#${id}`, cropprOpts);
 
+                        $coordsInput.data('croppr', croppr);
+                    }, 50);
+                });
 
             }
             reader.readAsDataURL(input.files[0]);
