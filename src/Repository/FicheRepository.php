@@ -172,6 +172,8 @@ class FicheRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('f');
         $this->getForUser($user, $qb);
         $qb
+            ->andWhere('f.category = :category')
+            ->setParameter('category', $category)
             ->setFirstResult(($page - 1) * $items)
             ->setMaxResults($items)
         ;

@@ -50,7 +50,7 @@ class PictureBuilder implements FormBuilderInterface
     {
         /* @var \App\Entity\Widget $widget */
         $widget = $options['widget'];
-        $builder->add($widget->getImmutableId(), \App\Form\SearchType\StringType::class, [
+        $builder->add($widget->getImmutableId(), \App\Form\SearchType\PictureType::class, [
             'widget' => $widget
         ]);
     }

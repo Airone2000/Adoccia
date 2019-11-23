@@ -17,5 +17,5 @@ WidgetType.button: "Bouton / Lien"
 WidgetType.map: "Carte"
 WidgetType.ficheCreator: "Créateur de la fiche"
 WidgetType.video: "Vidéo"
-WidgetType.image: "Image"
+WidgetType.picture: "Image"
 

@@ -217,9 +217,10 @@ class Fiche
     public function setPicture(?Picture $picture): Fiche
     {
         $this->picture = $picture;
-        $picture
-            ->setFiche($this)
-        ;
+        if ($picture instanceof Picture) {
+            $picture
+                ->setFiche($this);
+        }
         return $this;
     }
 

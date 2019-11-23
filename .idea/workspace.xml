@@ -2,18 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/FormBuilderType/PictureType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/SearchType/PictureType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/category/advanced_picture.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/category/advanced_picture.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Value.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Value.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EntityListener/PictureListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EntityListener/PictureListener.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enum/WidgetTypeEnum.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enum/WidgetTypeEnum.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AdvancedPictureType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AdvancedPictureType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CategoryType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CategoryType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/FicheType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FicheType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Fiche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Fiche.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191118154137.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191120124947.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191120135606.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191120141123.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191120201500.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191121115242.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191121115334.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191122115129.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191122122004.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191122130447.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20191123224014.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/FicheRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/FicheRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/category/search_results.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/search_results.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/translations/messages.fr.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages.fr.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,11 +47,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Fiche.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="127" selection-start-line="5" selection-start-column="127" selection-end-line="5" selection-end-column="127" />
+            <state relative-caret-position="426">
+              <caret line="212" column="7" selection-start-line="212" selection-start-column="7" selection-end-line="212" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/translations/messages.fr.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -54,7 +69,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>select-areas-background-area</find>
       <find>min</find>
       <find>stop</find>
       <find>setUpl</find>
@@ -78,12 +92,13 @@
       <find>$this-&gt;submit</find>
       <find>uploadedfile</find>
       <find>te $crop</find>
-      <find>setPic</find>
       <find>n getFicheV</find>
       <find>picture</find>
       <find>te $valueOfTypePi</find>
       <find>addFic</find>
       <find>edit</find>
+      <find>/fiches</find>
+      <find>setPic</find>
     </findStrings>
     <replaceStrings>
       <replace>_makeFormSyncing</replace>
@@ -101,9 +116,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Twig/StringyExtension.php" />
-        <option value="$PROJECT_DIR$/templates/category/show.html.twig" />
-        <option value="$PROJECT_DIR$/templates/category/list_fiches.html.twig" />
         <option value="$PROJECT_DIR$/src/Security/Voter/CategoryVoter.php" />
         <option value="$PROJECT_DIR$/src/Controller/FormController.php" />
         <option value="$PROJECT_DIR$/src/Security/Voter/FormVoter.php" />
@@ -120,7 +132,6 @@
         <option value="$PROJECT_DIR$/templates/fiche/show.html.twig" />
         <option value="$PROJECT_DIR$/src/Services/FicheHandler/FicheHandler.php" />
         <option value="$PROJECT_DIR$/src/Validator/FichePictureValidator.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Fiche.php" />
         <option value="$PROJECT_DIR$/src/Validator/CategoryPictureValidator.php" />
         <option value="$PROJECT_DIR$/templates/fiche/edit.html.twig" />
         <option value="$PROJECT_DIR$/templates/_endpoints.html.twig" />
@@ -135,7 +146,6 @@
         <option value="$PROJECT_DIR$/templates/category/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/EntityListener/CategoryListener.php" />
         <option value="$PROJECT_DIR$/src/Repository/PictureRepository.php" />
-        <option value="$PROJECT_DIR$/translations/messages.fr.yaml" />
         <option value="$PROJECT_DIR$/src/Form/FormBuilder/ImageBuilder.php" />
         <option value="$PROJECT_DIR$/src/Form/FormBuilderType/ImageType.php" />
         <option value="$PROJECT_DIR$/src/Form/FicheType.php" />
@@ -144,14 +154,19 @@
         <option value="$PROJECT_DIR$/src/Controller/CategoryController.php" />
         <option value="$PROJECT_DIR$/src/Controller/FicheController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Value.php" />
-        <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
         <option value="$PROJECT_DIR$/config/packages/twig.yaml" />
         <option value="$PROJECT_DIR$/src/EntityListener/PictureListener.php" />
         <option value="$PROJECT_DIR$/src/Form/FormBuilderType/PictureType.php" />
         <option value="$PROJECT_DIR$/src/Form/AdvancedPictureType.php" />
         <option value="$PROJECT_DIR$/assets/js/category/advanced_picture.js" />
-        <option value="$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php" />
         <option value="$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig" />
+        <option value="$PROJECT_DIR$/src/Form/SearchType/PictureType.php" />
+        <option value="$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php" />
+        <option value="$PROJECT_DIR$/src/Repository/FicheRepository.php" />
+        <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
+        <option value="$PROJECT_DIR$/templates/category/search_results.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Fiche.php" />
+        <option value="$PROJECT_DIR$/translations/messages.fr.yaml" />
       </list>
     </option>
   </component>
@@ -293,20 +308,13 @@
             <path>
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="uploads" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="uploads" type="462c0819:PsiDirectoryNode" />
-              <item name="pictures" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Migrations" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -325,9 +333,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Form/SearchType" />
       <recent name="$PROJECT_DIR$/src/Form/FormBuilderType" />
       <recent name="$PROJECT_DIR$/src/Form/FormBuilder" />
-      <recent name="$PROJECT_DIR$/src/Form/SearchType" />
       <recent name="$PROJECT_DIR$/src/Form/WidgetSettingsType" />
       <recent name="$PROJECT_DIR$/templates/form/builder" />
     </key>
@@ -388,18 +396,18 @@
       <workItem from="1574077650390" duration="11015000" />
       <workItem from="1574169299413" duration="4194000" />
       <workItem from="1574236383082" duration="6117000" />
-      <workItem from="1574252167721" duration="75185000" />
+      <workItem from="1574252167721" duration="75943000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="515127000" />
+    <option name="totallyTimeSpent" value="515885000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28826895" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28826895" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" />
@@ -448,41 +456,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/form/FormInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="191" column="7" lean-forward="true" selection-start-line="191" selection-start-column="7" selection-end-line="191" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/form/RequestHandlerInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="28" column="7" lean-forward="true" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/form/FormConfigInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="218" column="20" selection-start-line="218" selection-start-column="20" selection-end-line="218" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/form/Form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="507" column="54" lean-forward="true" selection-start-line="507" selection-start-column="54" selection-end-line="507" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/form/Extension/Core/Type/FileType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/ControllerTrait.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
@@ -607,13 +580,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/translations/messages.fr.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/FormBuilder/EmailBuilder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -710,33 +676,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="56" lean-forward="true" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
-          <folding>
-            <element signature="e#12#37#0#Twig" expanded="true" />
-            <element signature="e#909#932#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/FicheController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="40" selection-start-line="40" selection-end-line="40" />
           <folding>
             <element signature="e#924#946#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/CategoryController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="169" column="41" selection-start-line="169" selection-start-column="41" selection-end-line="169" selection-end-column="41" />
-          <folding>
-            <element signature="e#3243#3259#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -779,16 +724,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="38" column="37" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
-          <folding>
-            <element signature="e#40#63#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/FormBuilderType/PictureType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
@@ -818,8 +753,87 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="127" selection-start-line="5" selection-start-column="127" selection-end-line="5" selection-end-column="127" />
+        <state relative-caret-position="135">
+          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/SearchType/PictureType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/SearchType/StringType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="32" column="22" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
+          <folding>
+            <element signature="e#40#63#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/category/search_results.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="e#477#487#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/FicheRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="157" selection-start-line="157" selection-end-line="157" />
+          <folding>
+            <element signature="e#34#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/CategoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="200" column="56" selection-start-line="200" selection-start-column="56" selection-end-line="200" selection-end-column="56" />
+          <folding>
+            <element signature="e#3243#3259#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Fiche.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="212" column="7" selection-start-line="212" selection-start-column="7" selection-end-line="212" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/messages.fr.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
         </state>
       </provider>
     </entry>
