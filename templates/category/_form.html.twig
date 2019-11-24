@@ -2,25 +2,33 @@
 
 {{ form_start(form) }}
 
-    <div>
-        {{ form_label(form.name) }}
-        {{ form_widget(form.name) }}
-    </div>
+<div>
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+</div>
 
-    <div>
-        {{ form_label(form.description) }}
-        {{ form_widget(form.description) }}
-    </div>
+<div>
+    {{ form_widget(form.picture) }}
 
-    <div>
-        {{ form_label(form.online) }}
-        {{ form_widget(form.online) }}
-    </div>
+    {% set pictureURL = category.picture ? app.request.schemeAndHttpHost ~ '/' ~ picturePublicUploadDir ~ '/' ~ category.picture.filename : null %}
+    <img id="category_picture_preview" style="max-width: 300px;" src="{{ pictureURL }}" />
+    <button id="category_picture_remove" class="{{ pictureURL ? '' : 'hidden' }}" type="button">Remove</button>
+</div>
 
-    <div>
-        {{ form_label(form.public) }}
-        {{ form_widget(form.public) }}
-    </div>
+<div>
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description) }}
+</div>
 
-    <button type="submit" class="btn">{{ button_label|default('Save') }}</button>
+<div>
+    {{ form_label(form.online) }}
+    {{ form_widget(form.online) }}
+</div>
+
+<div>
+    {{ form_label(form.public) }}
+    {{ form_widget(form.public) }}
+</div>
+
+<button type="submit" class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

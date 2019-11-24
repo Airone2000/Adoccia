@@ -9,3 +9,5 @@ twig:
 
         textAlignPositions: '@App\Enum\TextAlignPositionEnum'
         widgetTypes: '@App\Enum\WidgetTypeEnum'
+
+        picturePublicUploadDir: '%picturePublicUploadDir%'

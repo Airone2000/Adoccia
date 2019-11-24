@@ -29,6 +29,13 @@ class Category
     private $name;
 
     /**
+     * @var Picture|null
+     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"remove"})
+     * @ORM\JoinColumn(onDelete="SET NULL", nullable=true)
+     */
+    private $picture;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -236,6 +243,24 @@ class Category
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * @return Picture|null
+     */
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param Picture|null $picture
+     * @return Category
+     */
+    public function setPicture(?Picture $picture): Category
+    {
+        $this->picture = $picture;
         return $this;
     }
 

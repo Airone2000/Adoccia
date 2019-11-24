@@ -1,0 +1,13 @@
+{%- block picture_uploader_row -%}
+    <div class="picture_uploader">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+
+            <div class="picture-preview">
+                <img />
+            </div>
+
+            <button type="submit">Valider</button>
+        {{ form_end(form) }}
+    </div>
+{%- endblock -%}

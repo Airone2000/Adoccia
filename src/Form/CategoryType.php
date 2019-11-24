@@ -32,6 +32,7 @@ class CategoryType extends AbstractType
 
         $builder
             ->add('name', null)
+            ->add('picture', PictureType::class) # constraint : make sure -> NULL or EXISTING or AVAILABLE for this user
             ->add('description')
             ->add('online')
             ->add('public')

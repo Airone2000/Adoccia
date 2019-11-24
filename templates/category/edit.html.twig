@@ -2,6 +2,8 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {{ encore_entry_script_tags('pictureUploader') }}
+    {{ encore_entry_script_tags('categoryForm') }}
 {% endblock %}
 
 {% block title %}Edit Category{% endblock %}

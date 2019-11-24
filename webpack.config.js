@@ -31,6 +31,8 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('mapsBuilder', './assets/vendor/leaflet/mapsBuilder')
     .addEntry('vanillaAutocomplete', './assets/vendor/vanilla-autocomplete/auto-complete')
+    .addEntry('pictureUploader', './assets/js/PictureUploader.js')
+    .addEntry('categoryForm', './assets/js/category/CategoryForm.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

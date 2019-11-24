@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "a-color-picker": "^1.2.1",
+        "croppie": "^2.6.4",
         "inputmask": "^4.0.9",
         "jquery": "^3.4.1",
         "places.js": "^1.17.0",
