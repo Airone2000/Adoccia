@@ -29,25 +29,7 @@ class PictureBuilder implements FormBuilderInterface
             'widget' => $widget,
             'mode' => $options['mode']
         ]);
-
-        $builder->get($widget->getId())->addModelTransformer(new CallbackTransformer(
-            function($value){return $value;},
-            function($value){
-                if ($value instanceof Picture) {
-                    if ($value->isAutoDelete()){
-                        if ($value->getId() !== null) {
-                            /* @var EntityManagerInterface $em */
-                            $em = $this->args['em'];
-                            $em->getRepository(Picture::class)->deletePicture($value);
-                        }
-                        return null;
-                    }
-                }
-                return $value;
-            }
-        ));
-
-
+        
         $this->setDefaultValueForPictureCoords($builder, $widget);
     }
 

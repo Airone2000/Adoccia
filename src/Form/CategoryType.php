@@ -41,27 +41,6 @@ class CategoryType extends AbstractType
             ->add('public')
         ;
 
-        $builder->get('picture')->addModelTransformer(new CallbackTransformer(
-            function($value){return $value;},
-            function($value){
-                if ($value instanceof Picture) {
-                    if ($value->isAutoDelete()){
-                        if ($value->getId() !== null) {
-                            /* @var EntityManagerInterface $em */
-                            $em = $this->entityManager;
-                            $em->getRepository(Picture::class)->deletePicture($value);
-                        }
-                        return null;
-                    }
-
-                    if ($value->getUploadedFile() === null) {
-                        return null;
-                    }
-                }
-                return $value;
-            }
-        ));
-
         $this->setDefaultValueForPictureCoords($builder);
     }
 

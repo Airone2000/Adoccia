@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Picture;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -15,6 +16,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AdvancedPictureType extends AbstractType
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -36,6 +47,27 @@ class AdvancedPictureType extends AbstractType
                 ]
             ])
         ;
+
+        $builder->addModelTransformer(new CallbackTransformer(
+            function($value){return $value;},
+            function($value){
+                if ($value instanceof Picture) {
+                    if ($value->isAutoDelete()){
+                        if ($value->getId() !== null) {
+                            /* @var EntityManagerInterface $em */
+                            $em = $this->entityManager;
+                            $em->getRepository(Picture::class)->deletePicture($value);
+                        }
+                        return null;
+                    }
+
+                    if ($value->getUploadedFile() === null) {
+                        return null;
+                    }
+                }
+                return $value;
+            }
+        ));
 
         $builder->get('cropCoords')->addModelTransformer(new CallbackTransformer(
             function($value){return $value;},
