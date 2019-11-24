@@ -32,12 +32,6 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    picture_listener:
-        class: App\EntityListener\PictureListener
-        tags: [ 'doctrine.orm.entity_listener' ]
-        arguments:
-            $uploadDir: '%pictureUploadDir%'
-
     category_listener:
         class: App\EntityListener\CategoryListener
         tags: ['doctrine.orm.entity_listener']
