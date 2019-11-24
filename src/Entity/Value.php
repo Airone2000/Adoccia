@@ -113,7 +113,7 @@ class Value
     /**
      * @var null|Picture
      * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(onDelete="SET NULL")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $valueOfTypePicture;
 

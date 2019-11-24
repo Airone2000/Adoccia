@@ -19,32 +19,15 @@ class PictureRepository extends ServiceEntityRepository
         parent::__construct($registry, Picture::class);
     }
 
-    // /**
-    //  * @return Picture[] Returns an array of Picture objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function deletePicture(Picture $picture): void
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->delete()
+            ->where('p = :picture')
+            ->setParameter('picture', $picture)
             ->getQuery()
-            ->getResult()
+            ->execute()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Picture
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

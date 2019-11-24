@@ -9,7 +9,9 @@ use App\Entity\Picture;
 use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
 use App\Enum\WidgetTypeEnum;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,6 +26,16 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class FicheType extends AbstractType
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * Caches references to builders to prevent
      * recreate instance for each dynamic field
@@ -62,6 +74,28 @@ final class FicheType extends AbstractType
                 ])
                 ->add('published', CheckboxType::class)
             ;
+
+            $builder->get('picture')->addModelTransformer(new CallbackTransformer(
+                function($value){return $value;},
+                function($value){
+                    if ($value instanceof Picture) {
+                        if ($value->isAutoDelete()){
+                            if ($value->getId() !== null) {
+                                /* @var EntityManagerInterface $em */
+                                $em = $this->entityManager;
+                                $em->getRepository(Picture::class)->deletePicture($value);
+                            }
+                            return null;
+                        }
+
+                        if ($value->getUploadedFile() === null) {
+                            return null;
+                        }
+                    }
+                    return $value;
+                }
+            ));
+
 
             $this->setDefaultValueForPictureCoords($builder);
         }
@@ -130,7 +164,9 @@ final class FicheType extends AbstractType
         /* @var \App\Form\FormBuilder\FormBuilderInterface[] $loadedBuilders */
         if (!isset(self::$loadedDynamicFieldsBuilders[$builderClass])) {
             if (class_exists($builderClass)) {
-                self::$loadedDynamicFieldsBuilders[$builderClass] = new $builderClass();
+                self::$loadedDynamicFieldsBuilders[$builderClass] = new $builderClass([
+                    'em' => $this->entityManager
+                ]);
             }
             else {
                 throw new \LogicException("Builder class {$builderClass} does not exist.");

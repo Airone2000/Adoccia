@@ -69,6 +69,11 @@ class Picture
      */
     private $cropCoords;
 
+    /**
+     * @var bool
+     */
+    private $autoDelete = false;
+
 
     public function getId(): ?int
     {
@@ -211,6 +216,24 @@ class Picture
     public function setCropCoords(?array $cropCoords): Picture
     {
         $this->cropCoords = $cropCoords;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAutoDelete(): bool
+    {
+        return $this->autoDelete;
+    }
+
+    /**
+     * @param bool $autoDelete
+     * @return Picture
+     */
+    public function setAutoDelete(bool $autoDelete): Picture
+    {
+        $this->autoDelete = $autoDelete;
         return $this;
     }
 

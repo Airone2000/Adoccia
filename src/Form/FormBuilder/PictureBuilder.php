@@ -5,12 +5,21 @@ namespace App\Form\FormBuilder;
 use App\Entity\Picture;
 use App\Entity\Widget;
 use App\Form\FormBuilderType\PictureType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PictureBuilder implements FormBuilderInterface
 {
+    private $args;
+
+    public function __construct($args)
+    {
+        $this->args = $args;
+    }
+
     public function buildForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)
     {
         /* @var Widget $widget */
@@ -20,6 +29,23 @@ class PictureBuilder implements FormBuilderInterface
             'widget' => $widget,
             'mode' => $options['mode']
         ]);
+
+        $builder->get($widget->getId())->addModelTransformer(new CallbackTransformer(
+            function($value){return $value;},
+            function($value){
+                if ($value instanceof Picture) {
+                    if ($value->isAutoDelete()){
+                        if ($value->getId() !== null) {
+                            /* @var EntityManagerInterface $em */
+                            $em = $this->args['em'];
+                            $em->getRepository(Picture::class)->deletePicture($value);
+                        }
+                        return null;
+                    }
+                }
+                return $value;
+            }
+        ));
 
 
         $this->setDefaultValueForPictureCoords($builder, $widget);

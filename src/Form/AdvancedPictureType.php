@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Picture;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,6 +27,12 @@ class AdvancedPictureType extends AbstractType
             ->add('cropCoords', HiddenType::class, [
                 'attr' => [
                     'class' => 'cropCoords'
+                ]
+            ])
+            ->add('autoDelete', CheckboxType::class, [
+                'label' => 'None',
+                'attr' => [
+                    'class' => 'autoDelete'
                 ]
             ])
         ;
