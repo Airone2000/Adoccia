@@ -31,47 +31,13 @@ class CategoryType extends AbstractType
         $category = $options['data'];
 
         $builder
-            ->add('picture', AdvancedPictureType::class, [
-                'validation_groups' => $options['validation_groups'],
-                'required' => false
-            ])
             ->add('name', null)
             ->add('description')
             ->add('online')
             ->add('public')
         ;
-
-        $this->setDefaultValueForPictureCoords($builder);
     }
 
-    private function setDefaultValueForPictureCoords(FormBuilderInterface $builder): void
-    {
-        $builder->addEventListener(FormEvents::POST_SUBMIT, function(PostSubmitEvent $postSubmitEvent){
-            /* @var Category $category */
-            $category = $postSubmitEvent->getData();
-            $picture = $category->getPicture();
-
-            if($picture instanceof Picture) {
-                if ($picture->getCropCoords() === null) {
-                    if ($picture->getUploadedFile() instanceof UploadedFile && $picture->getCropCoords() === null) {
-                        $sizes = getimagesize($picture->getUploadedFile());
-                        $size = min($sizes[0], $sizes[1]);
-                        $x = ($sizes[0] - $size) / 2;
-                        $y = ($sizes[1] - $size) / 2;
-                        $defaultCropCoords = [
-                            'width' => $size,
-                            'height' => $size,
-                            'x' => $x,
-                            'y' => $y
-                        ];
-                        $picture->setCropCoords($defaultCropCoords);
-                    }
-                }
-            }
-
-            $postSubmitEvent->setData($category);
-        });
-    }
 
     public function configureOptions(OptionsResolver $resolver)
     {

@@ -49,16 +49,6 @@ class Category
     private $updatedAt;
 
     /**
-     * @var Picture|null
-     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"}, mappedBy="category")
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     *
-     * @CategoryPicture(groups={"Category:Post", "CategoryPut"})
-     * @Assert\Valid(groups={"Category:Post", "CategoryPut"})
-     */
-    private $picture;
-
-    /**
      * @var Form
      * @ORM\OneToOne(targetEntity="App\Entity\Form", cascade={"persist", "remove"})
      * @ORM\JoinColumn(onDelete="SET NULL")
@@ -148,29 +138,6 @@ class Category
     {
         $this->createdBy = $createdBy;
 
-        return $this;
-    }
-
-    /**
-     * @return Picture|null
-     */
-    public function getPicture(): ?Picture
-    {
-        return $this->picture;
-    }
-
-    /**
-     * @param Picture|null $picture
-     * @return Category
-     */
-    public function setPicture(?Picture $picture): Category
-    {
-        $this->picture = $picture;
-        if ($picture instanceof Picture) {
-            $picture
-                ->setCategory($this)
-            ;
-        }
         return $this;
     }
 

@@ -50,7 +50,6 @@ final class FicheController extends AbstractController
         $data = [
             'title' => $fiche->getTitle(),
             'published' => $fiche->isPublished(),
-            'picture' => $fiche->getPicture()
         ];
         $data = $data + $ficheHandler->mapValueToWidgetId($fiche);
 
@@ -70,6 +69,7 @@ final class FicheController extends AbstractController
                 return $this->redirectToRoute('fiche.show', ['id' => $fiche->getId()]);
             }
             catch (\Exception $e) {
+                dd($e->getMessage());
                 $this->addFlash('editFicheError', '');
                 return $this->redirectToRoute('fiche.edit', ['id' => $fiche->getId()]);
             }

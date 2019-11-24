@@ -22,16 +22,6 @@ class Fiche
     private $id;
 
     /**
-     * @var Picture|null
-     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"}, mappedBy="fiche")
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     *
-     * @FichePicture()
-     * @Assert\Valid()
-     */
-    private $picture;
-
-    /**
      * @var Category
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="fiches")
      * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
@@ -201,28 +191,5 @@ class Fiche
         $this->creator = $creator;
         return $this;
     }
-
-    /**
-     * @return Picture|null
-     */
-    public function getPicture(): ?Picture
-    {
-        return $this->picture;
-    }
-
-    /**
-     * @param Picture|null $picture
-     * @return Fiche
-     */
-    public function setPicture(?Picture $picture): Fiche
-    {
-        $this->picture = $picture;
-        if ($picture instanceof Picture) {
-            $picture
-                ->setFiche($this);
-        }
-        return $this;
-    }
-
 
 }
