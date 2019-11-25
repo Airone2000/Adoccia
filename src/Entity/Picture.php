@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\EntityListeners("App\EntityListener\PictureListener")
  * @ORM\Table(name="picture")
  */
 class Picture

@@ -35,12 +35,16 @@ services:
     category_listener:
         class: App\EntityListener\CategoryListener
         tags: ['doctrine.orm.entity_listener']
-        arguments:
-            $pictureUploadDir: '%pictureUploadDir%'
 
     formArea_listener:
         class: App\EntityListener\FormAreaListener
         tags: ['doctrine.orm.entity_listener']
+
+    picture_listener:
+        class: App\EntityListener\PictureListener
+        tags: ['doctrine.orm.entity_listener']
+        arguments:
+            $pictureUploadDir: '%pictureUploadDir%'
 
     App\Controller\PictureController:
         arguments:

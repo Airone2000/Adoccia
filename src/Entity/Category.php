@@ -30,7 +30,7 @@ class Category
 
     /**
      * @var Picture|null
-     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"})
      * @ORM\JoinColumn(onDelete="SET NULL", nullable=true)
      * @CategoryPicture(groups={"Category:Post", "Category:Put"})
      */
@@ -262,6 +262,9 @@ class Category
     public function setPicture(?Picture $picture): Category
     {
         $this->picture = $picture;
+        if ($picture instanceof Picture) {
+            $picture->setIsTemp(false); # No longer temps
+        }
         return $this;
     }
 

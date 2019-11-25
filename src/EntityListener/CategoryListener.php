@@ -18,16 +18,11 @@ final class CategoryListener
      * @var EntityManagerInterface
      */
     private $entityManager;
-    /**
-     * @var string
-     */
-    private $pictureUploadDir;
 
-    public function __construct(TokenStorageInterface $tokenStorage, EntityManagerInterface $entityManager, string $pictureUploadDir)
+    public function __construct(TokenStorageInterface $tokenStorage, EntityManagerInterface $entityManager)
     {
         $this->tokenStorage = $tokenStorage;
         $this->entityManager = $entityManager;
-        $this->pictureUploadDir = $pictureUploadDir;
     }
 
     function prePersist(Category $category): void
@@ -47,11 +42,7 @@ final class CategoryListener
         if (isset($changeSet['picture'])) {
             [$oldPicture] = $changeSet['picture'];
             if ($oldPicture instanceof Picture) {
-                $fileToDelete = $this->pictureUploadDir . DIRECTORY_SEPARATOR . $oldPicture->getFilename();
                 $entityManager->remove($oldPicture); # Will flush ...
-                if (file_exists($fileToDelete)) {
-                    @unlink($fileToDelete);
-                }
             }
         }
     }
