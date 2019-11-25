@@ -16,7 +16,7 @@ final class PictureListener
         $this->pictureUploadDir = $pictureUploadDir;
     }
 
-    function postRemove(Picture $picture)
+    function preRemove(Picture $picture)
     {
         $fileToDelete = $this->pictureUploadDir . DIRECTORY_SEPARATOR . $picture->getFilename();
         if (file_exists($fileToDelete)) {

@@ -12,6 +12,14 @@
                 {{ form_widget(form.title) }}
                 {{ form_errors(form.title) }}
             </div>
+
+            <div>
+                {{ form_widget(form.picture) }}
+
+                {% set pictureURL = fiche.picture ? app.request.schemeAndHttpHost ~ '/' ~ picturePublicUploadDir ~ '/' ~ fiche.picture.filename : null %}
+                <img id="fiche_picture_preview" style="max-width: 300px;" src="{{ pictureURL }}" />
+                <button id="fiche_picture_remove" class="{{ pictureURL ? '' : 'hidden' }}" type="button">Remove</button>
+            </div>
             <hr>
         {% endif %}
     {% endif %}

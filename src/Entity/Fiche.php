@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FicheRepository")
+ * @ORM\EntityListeners("\App\EntityListener\FicheListener")
  */
 class Fiche
 {
@@ -43,6 +44,13 @@ class Fiche
      * )
      */
     private $title;
+
+    /**
+     * @var Picture|null
+     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    private $picture;
 
     /**
      * @var Collection
@@ -189,6 +197,27 @@ class Fiche
     public function setCreator(?User $creator): Fiche
     {
         $this->creator = $creator;
+        return $this;
+    }
+
+    /**
+     * @return Picture|null
+     */
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param Picture|null $picture
+     * @return Fiche
+     */
+    public function setPicture(?Picture $picture): Fiche
+    {
+        $this->picture = $picture;
+        if ($picture instanceof Picture) {
+            $picture->setIsTemp(false);
+        }
         return $this;
     }
 

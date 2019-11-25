@@ -63,6 +63,9 @@ final class FicheType extends AbstractType
                         new Length(['max' => 255])
                     ]
                 ])
+                ->add('picture', PictureType::class, [
+                    'originalPicture' => $fiche->getPicture()
+                ])
                 ->add('published', CheckboxType::class)
             ;
         }

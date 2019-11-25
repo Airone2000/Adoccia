@@ -36,6 +36,10 @@ services:
         class: App\EntityListener\CategoryListener
         tags: ['doctrine.orm.entity_listener']
 
+    fiche_listener:
+        class: App\EntityListener\FicheListener
+        tags: ['doctrine.orm.entity_listener']
+
     formArea_listener:
         class: App\EntityListener\FormAreaListener
         tags: ['doctrine.orm.entity_listener']
