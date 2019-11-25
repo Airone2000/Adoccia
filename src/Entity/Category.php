@@ -32,6 +32,7 @@ class Category
      * @var Picture|null
      * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"remove"})
      * @ORM\JoinColumn(onDelete="SET NULL", nullable=true)
+     * @CategoryPicture(groups={"Category:Post", "Category:Put"})
      */
     private $picture;
 

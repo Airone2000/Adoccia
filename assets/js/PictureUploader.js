@@ -84,6 +84,7 @@ class PictureUploader
         $formPicture.find('input[type=file]').on('change', (input) => {
 
             let $img = $formPicture.find('.picture-preview img');
+            let $input =  $(input.target);
 
             if (input.target.files && input.target.files[0]) {
                 let reader = new FileReader();
@@ -100,7 +101,7 @@ class PictureUploader
                 reader.readAsDataURL(input.target.files[0]);
             }
 
-            let $uploadCrop = this.uploadCrop = $img.croppie({
+            let $uploadCrop = this.uploadCrop = $input.data('croppie') || $img.croppie({
                 viewport: {
                     width: 250,
                     height: 250,
@@ -109,6 +110,7 @@ class PictureUploader
                 boundary: { width: 300, height: 300 },
                 enableExif: true
             });
+            $input.data('croppie', $uploadCrop);
 
         });
     }

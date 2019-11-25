@@ -41,14 +41,22 @@ class PictureType extends AbstractType
                 function($value){
                     $data = ['pictureId' => null];
                     if ($value instanceof Picture) {
-                        $data['pictureId'] = $value->getId();
+                        $data['pictureId'] = $value->getUniqueId();
                     }
                     return $data;
                 },
-                function($value){
+                function($value) use ($options){
                     $pictureId = $value['pictureId'];
-                    if (is_numeric($pictureId)) {
-                        $picture = $this->entityManager->find(Picture::class, $pictureId);
+                    if (is_scalar($pictureId)) {
+                        $picture = $this->entityManager->getRepository(Picture::class)->findOneBy([
+                            'uniqueId' => $pictureId,
+                            'isTemp' => true
+                        ]);
+
+                        if ($picture === null) {
+                            return $options['originalPicture'];
+                        }
+
                         return $picture;
                     }
                     return null;
@@ -59,5 +67,6 @@ class PictureType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefault('label', 'Browse ...');
+        $resolver->setRequired('originalPicture');
     }
 }

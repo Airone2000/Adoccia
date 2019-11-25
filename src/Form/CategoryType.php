@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Picture;
+use App\Validator\CategoryPicture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -32,13 +33,14 @@ class CategoryType extends AbstractType
 
         $builder
             ->add('name', null)
-            ->add('picture', PictureType::class) # constraint : make sure -> NULL or EXISTING or AVAILABLE for this user
+            ->add('picture', PictureType::class, [
+                'originalPicture' => $category->getPicture()
+            ])
             ->add('description')
             ->add('online')
             ->add('public')
         ;
     }
-
 
     public function configureOptions(OptionsResolver $resolver)
     {

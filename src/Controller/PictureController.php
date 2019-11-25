@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Picture;
 use App\Form\PictureUploaderType;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,11 +45,18 @@ final class PictureController extends AbstractController
                 $extension = $matchings['extension'];
                 $filename = uniqid('picture_') . '.' . $extension;
 
-                if (file_put_contents($this->pictureUploadDir . DIRECTORY_SEPARATOR . $filename, $imageData)) {
+                if (file_put_contents($picturePath = $this->pictureUploadDir . DIRECTORY_SEPARATOR . $filename, $imageData)) {
+
+                    $sizes = getimagesize($picturePath) ?? [-1, -1];
+
                     $picture = new Picture();
                     $picture
                         ->setUser($this->getUser())
                         ->setFilename($filename)
+                        ->setWidth($sizes[0])
+                        ->setHeight($sizes[1])
+                        ->setIsTemp(true)
+                        ->setUniqueId((string)Uuid::uuid4() . uniqid('-'))
                     ;
 
                     $em = $this->getDoctrine()->getManager();
@@ -56,7 +64,7 @@ final class PictureController extends AbstractController
                     $em->flush();
 
                     return new JsonResponse([
-                        'pictureId' => $picture->getId(),
+                        'pictureId' => $picture->getUniqueId(),
                         'pictureURL' => $request->getSchemeAndHttpHost() . DIRECTORY_SEPARATOR . $this->picturePublicUploadDir . DIRECTORY_SEPARATOR . $filename
                     ]);
                 }

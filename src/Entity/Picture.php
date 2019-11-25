@@ -50,6 +50,30 @@ class Picture
     private $filename;
 
     /**
+     * @var int
+     * @ORM\Column(type="integer", options={"default": 0})
+     */
+    private $width;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer", options={"default": 0})
+     */
+    private $height;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default": 1})
+     */
+    private $isTemp = true;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=64, nullable=false)
+     */
+    private $uniqueId;
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -144,6 +168,78 @@ class Picture
     public function setFilename(string $filename): Picture
     {
         $this->filename = $filename;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    /**
+     * @param int $width
+     * @return Picture
+     */
+    public function setWidth(int $width): Picture
+    {
+        $this->width = $width;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
+
+    /**
+     * @param int $height
+     * @return Picture
+     */
+    public function setHeight(int $height): Picture
+    {
+        $this->height = $height;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTemp(): bool
+    {
+        return $this->isTemp;
+    }
+
+    /**
+     * @param bool $isTemp
+     * @return Picture
+     */
+    public function setIsTemp(bool $isTemp): Picture
+    {
+        $this->isTemp = $isTemp;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUniqueId(): string
+    {
+        return $this->uniqueId;
+    }
+
+    /**
+     * @param string $uniqueId
+     * @return Picture
+     */
+    public function setUniqueId(string $uniqueId): Picture
+    {
+        $this->uniqueId = $uniqueId;
         return $this;
     }
 

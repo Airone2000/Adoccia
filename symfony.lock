@@ -163,6 +163,9 @@
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
+    "ramsey/uuid": {
+        "version": "3.8.0"
+    },
     "scienta/doctrine-json-functions": {
         "version": "4.0.2"
     },
