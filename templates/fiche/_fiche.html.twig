@@ -13,9 +13,11 @@
                 {{ form_errors(form.title) }}
             </div>
 
-            <div>
+            <div style="width:200px;">
                 {{ form_row(form.picture) }}
+                {{ form_errors(form.picture) }}
             </div>
+
             <hr>
         {% endif %}
     {% endif %}

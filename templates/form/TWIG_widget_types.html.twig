@@ -232,6 +232,7 @@
             {% endif %}
         {% else %}
             {{ block('custom_picture_row') }}
+            {{ form_errors(form) }}
         {% endif %}
     {{ form_area_end(widget.formArea) }}
 {%- endblock -%}

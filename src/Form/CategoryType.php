@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Picture;
+use App\Enum\PictureShapeEnum;
 use App\Validator\CategoryPicture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
@@ -37,7 +38,9 @@ class CategoryType extends AbstractType
             ])
             ->add('picture', PictureType::class, [
                 'originalPicture' => $category->getPicture(),
-                'uniqueId' => uniqid('uid_')
+                'uniqueId' => uniqid('uid_'),
+                'cropShape' => PictureShapeEnum::SQUARE,
+                'liipImagineFilter' => 'category_picture_thumbnail'
             ])
             ->add('description')
             ->add('online')

@@ -3,7 +3,6 @@
 namespace App\Form\FormBuilder;
 
 use App\Entity\Picture;
-use App\Entity\Value;
 use App\Entity\Widget;
 use App\Form\FormBuilderType\PictureType;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -16,19 +15,17 @@ final class PictureBuilder implements FormBuilderInterface
         /* @var Widget $widget */
         $widget = $options['widget'];
 
-        /* @var Value|null $widgetValue */
-        $widgetValue = $options['widgetValue'];
-
-        /* @var Picture|null */
-        $originalPicture = $widgetValue instanceof Value ? $widgetValue->getValueOfTypePicture() : null;
+        /* @var Picture|null $rawValue */
+        $rawValue = $options['widgetValue'] ?? null;
 
         $builder
             ->add($widget->getId(), PictureType::class, [
                 'widget' => $widget,
                 'mode' => $options['mode'],
-                'originalPicture' => $originalPicture,
+                'originalPicture' => $rawValue,
                 'uniqueId' => uniqid('uid_'),
-                'constraints' => $this->getConstraints($widget)
+                'constraints' => $this->getConstraints($widget),
+                'deletable' => !$widget->isRequired()
             ])
         ;
     }

@@ -54,3 +54,8 @@ services:
         arguments:
             $pictureUploadDir: '%pictureUploadDir%'
             $picturePublicUploadDir : '%picturePublicUploadDir%'
+
+    App\Validator\PictureIsSquareValidator:
+        arguments:
+            $pictureUploadDir: '%pictureUploadDir%'
+

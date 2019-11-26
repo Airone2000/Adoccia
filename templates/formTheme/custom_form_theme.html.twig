@@ -13,10 +13,26 @@
 {%- endblock -%}
 
 {%- block custom_picture_row -%}
-    {% set pictureUniqueId = form.vars.uniqueId %}
-    {% set picture = form.vars.picture %}
-    {% set pictureURL = picture ? app.request.schemeAndHttpHost ~ '/' ~ picturePublicUploadDir ~ '/' ~ picture.filename : null %}
-    {{ form_widget(form) }}
-    <img class="img-preview" data-unique-id="{{ pictureUniqueId }}" style="max-width: 300px;" src="{{ pictureURL }}" />
-    <button class="btn-delete {{ pictureURL ? '' : 'hidden' }}" data-unique-id="{{ pictureUniqueId }}" type="button">Remove</button>
+    <div>
+        {% set pictureUniqueId = form.vars.uniqueId %}
+        {% set picture = form.vars.picture %}
+        {% set pictureURL = picture ? app.request.schemeAndHttpHost ~ '/' ~ picturePublicUploadDir ~ '/' ~ picture.filename : null %}
+        {% if liipImagineFilter is not null %}
+            {% set pictureURL = pictureURL | imagine_filter(liipImagineFilter)  %}
+        {% endif %}
+
+        <div>
+            {{ form_widget(form) }}
+        </div>
+
+        <div>
+            <img class="img-preview" data-unique-id="{{ pictureUniqueId }}" style="max-width: 100%;" src="{{ pictureURL }}" />
+        </div>
+
+        {% if form.vars.deletable %}
+            <div>
+                <button class="btn-delete {{ pictureURL ? '' : 'hidden' }}" data-unique-id="{{ pictureUniqueId }}" type="button">Remove</button>
+            </div>
+        {% endif %}
+    </div>
 {%- endblock -%}

@@ -8,7 +8,9 @@ use App\Entity\FormArea;
 use App\Entity\Value;
 use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
+use App\Enum\PictureShapeEnum;
 use App\Enum\WidgetTypeEnum;
+use App\Validator\PictureIsSquare;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -66,9 +68,17 @@ final class FicheType extends AbstractType
                 ])
                 ->add('picture', PictureType::class, [
                     'originalPicture' => $fiche->getPicture(),
-                    'uniqueId' => uniqid('uid_')
+                    'uniqueId' => uniqid('uid_'),
+                    'cropShape' => PictureShapeEnum::SQUARE,
+                    'error_bubbling' => false,
+                    'constraints' => [
+                        new PictureIsSquare()
+                    ],
+                    'liipImagineFilter' => 'fiche_picture_thumbnail'
                 ])
-                ->add('published', CheckboxType::class)
+                ->add('published', CheckboxType::class, [
+                    'required' => false
+                ])
             ;
         }
     }
@@ -81,7 +91,6 @@ final class FicheType extends AbstractType
     {
         /** @var Category $category */
         $category = $options['category'];
-        $this->loadValuesInOptions($options);
 
         $form = $options['is_form_preview'] === true ? $category->getDraftForm() : $category->getForm();
 
@@ -122,23 +131,8 @@ final class FicheType extends AbstractType
             'mode' => $options['mode'],
             'widget' => $widget,
             'fiche' => $options['fiche'],
-            'widgetValue' => $options['mapValueToWidget'][$widget->getId()] ?? null
+            'widgetValue' => $options['data'][$widget->getId()] ?? null
         ]);
-    }
-
-    private function loadValuesInOptions(array &$options): void
-    {
-        /* @var Fiche $fiche */
-        $fiche = $options['fiche'];
-        $values = $fiche->getValues();
-        $mapValueToWidget = [];
-
-        /* @var Value $value */
-        foreach ($values as $value) {
-            $mapValueToWidget[$value->getWidget()->getId()] = $value;
-        }
-
-        $options['mapValueToWidget'] = $mapValueToWidget;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)

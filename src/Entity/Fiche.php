@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Validator\FichePicture;
+use App\Validator\PictureIsSquare;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -47,7 +48,7 @@ class Fiche
 
     /**
      * @var Picture|null
-     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $picture;

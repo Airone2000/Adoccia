@@ -42,11 +42,11 @@ class PictureUploader
 
     _listenForCloseModal()
     {
-        this.modal.find('.modal').click((e) => {
+        this.modal.find('.modal').mousedown((e) => {
             e.stopPropagation();
         });
 
-        this.modal.click((e) => {
+        this.modal.mousedown((e) => {
             this.modal.find('.modal').empty();
             this.modal.addClass('hidden');
         });
@@ -101,15 +101,25 @@ class PictureUploader
                 reader.readAsDataURL(input.target.files[0]);
             }
 
-            let $uploadCrop = this.uploadCrop = $input.data('croppie') || $img.croppie({
-                viewport: {
-                    width: 250,
-                    height: 250,
-                    type: 'square'
-                },
-                boundary: { width: 300, height: 300 },
+            let cropShape = this.buttonOpener.getAttribute('data-crop-shape');
+            let options = {
+                mouseWheelZoom: false,
                 enableExif: true
-            });
+            };
+            if (cropShape === 'square') {
+                options.viewport = {width: 250, height: 250, type: 'square'};
+                options.boundary = { width: 300, height: 300 };
+            }
+            else if (cropShape === 'circle') {
+                options.viewport = {width: 250, height: 250, type: 'circle'};
+                options.boundary = { width: 300, height: 300 };
+            }
+            else {
+                options.enableResize = true;
+                options.boundary = { width: 300, height: 300 };
+            }
+
+            let $uploadCrop = this.uploadCrop = $input.data('croppie') || $img.croppie(options);
             $input.data('croppie', $uploadCrop);
 
         });
@@ -139,7 +149,7 @@ class PictureUploader
                     })
                     .then(responseJSON => {
                         // Hide modal & trigger special event
-                        this.modal.trigger('click');
+                        this.modal.trigger('mousedown');
                         $(this.buttonOpener).trigger('newPicture', responseJSON);
                     })
                     .catch(() => {
