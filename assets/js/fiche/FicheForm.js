@@ -2,25 +2,37 @@ class CategoryForm
 {
     constructor() {
 
-        let $picturePreview = $('#fiche_picture_preview');
-        let $pictureIdInput = $('#InnerFiche_RowsWrapper_picture_pictureId');
-        let $btnRemovePicture = $('#fiche_picture_remove');
 
         // When new picture is uploaded, display it and store its value id
         $('.openPictureUploader').on('newPicture', (e, {pictureId, pictureURL}) => {
-            $pictureIdInput.val(pictureId);
-            $picturePreview.attr('src', pictureURL);
-            $btnRemovePicture.show();
+
+            let uniqueId = $(e.target).data('unique-id');
+            let {pictureIdInputSelector, picturePreviewSelector, btnDeleteSelector} = this._getSelectorForId(uniqueId);
+
+            $(pictureIdInputSelector).val(pictureId);
+            $(picturePreviewSelector).attr('src', pictureURL);
+            $(btnDeleteSelector).show();
         });
 
         // Remove previously selected picture
-        $btnRemovePicture.click((e) => {
-            $picturePreview.attr('src', null);
-            $pictureIdInput.val('');
-            $btnRemovePicture.hide();
+        $('[data-unique-id].btn-delete').click((e) => {
+            let uniqueId = $(e.target).data('unique-id');
+            let {pictureIdInputSelector, picturePreviewSelector, btnDeleteSelector} = this._getSelectorForId(uniqueId);
+            $(pictureIdInputSelector).val('');
+            $(picturePreviewSelector).attr('src', null);
+            $(btnDeleteSelector).hide();
         });
 
+
     }
+
+    _getSelectorForId(uniqueId) {
+        let pictureIdInputSelector = `[data-unique-id="${uniqueId}"].input-id`;
+        let picturePreviewSelector = `[data-unique-id="${uniqueId}"].img-preview`;
+        let btnDeleteSelector = `[data-unique-id="${uniqueId}"].btn-delete`;
+        return {pictureIdInputSelector, picturePreviewSelector, btnDeleteSelector};
+    }
+
 
 }
 

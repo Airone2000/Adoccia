@@ -32,9 +32,12 @@ class CategoryType extends AbstractType
         $category = $options['data'];
 
         $builder
-            ->add('name', null)
+            ->add('name', null, [
+                'required' => false
+            ])
             ->add('picture', PictureType::class, [
-                'originalPicture' => $category->getPicture()
+                'originalPicture' => $category->getPicture(),
+                'uniqueId' => uniqid('uid_')
             ])
             ->add('description')
             ->add('online')

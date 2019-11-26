@@ -11,3 +11,12 @@
         {{ form_end(form) }}
     </div>
 {%- endblock -%}
+
+{%- block custom_picture_row -%}
+    {% set pictureUniqueId = form.vars.uniqueId %}
+    {% set picture = form.vars.picture %}
+    {% set pictureURL = picture ? app.request.schemeAndHttpHost ~ '/' ~ picturePublicUploadDir ~ '/' ~ picture.filename : null %}
+    {{ form_widget(form) }}
+    <img class="img-preview" data-unique-id="{{ pictureUniqueId }}" style="max-width: 300px;" src="{{ pictureURL }}" />
+    <button class="btn-delete {{ pictureURL ? '' : 'hidden' }}" data-unique-id="{{ pictureUniqueId }}" type="button">Remove</button>
+{%- endblock -%}

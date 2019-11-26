@@ -9,6 +9,8 @@ use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PictureType extends AbstractType
@@ -30,10 +32,16 @@ class PictureType extends AbstractType
                 'label' => $options['label'],
                 'attr' => [
                     'type' => 'button',
-                    'class' => 'openPictureUploader'
+                    'class' => 'openPictureUploader',
+                    'data-unique-id' => $options['uniqueId']
                 ]
             ])
-            ->add('pictureId', HiddenType::class)
+            ->add('pictureId', HiddenType::class, [
+                'attr' => [
+                    'data-unique-id' => $options['uniqueId'],
+                    'class' => 'input-id'
+                ]
+            ])
         ;
 
         $builder
@@ -64,9 +72,21 @@ class PictureType extends AbstractType
             ));
     }
 
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['uniqueId'] = $options['uniqueId'];
+        $view->vars['picture'] = $options['originalPicture'];
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefault('label', 'Browse ...');
         $resolver->setRequired('originalPicture');
+        $resolver->setRequired('uniqueId');
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'custom_picture';
     }
 }

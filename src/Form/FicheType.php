@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\Fiche;
 use App\Entity\FormArea;
+use App\Entity\Value;
 use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
 use App\Enum\WidgetTypeEnum;
@@ -64,7 +65,8 @@ final class FicheType extends AbstractType
                     ]
                 ])
                 ->add('picture', PictureType::class, [
-                    'originalPicture' => $fiche->getPicture()
+                    'originalPicture' => $fiche->getPicture(),
+                    'uniqueId' => uniqid('uid_')
                 ])
                 ->add('published', CheckboxType::class)
             ;
@@ -79,6 +81,7 @@ final class FicheType extends AbstractType
     {
         /** @var Category $category */
         $category = $options['category'];
+        $this->loadValuesInOptions($options);
 
         $form = $options['is_form_preview'] === true ? $category->getDraftForm() : $category->getForm();
 
@@ -118,8 +121,24 @@ final class FicheType extends AbstractType
         self::$loadedDynamicFieldsBuilders[$builderClass]->buildForm($builder, [
             'mode' => $options['mode'],
             'widget' => $widget,
-            'fiche' => $options['fiche']
+            'fiche' => $options['fiche'],
+            'widgetValue' => $options['mapValueToWidget'][$widget->getId()] ?? null
         ]);
+    }
+
+    private function loadValuesInOptions(array &$options): void
+    {
+        /* @var Fiche $fiche */
+        $fiche = $options['fiche'];
+        $values = $fiche->getValues();
+        $mapValueToWidget = [];
+
+        /* @var Value $value */
+        foreach ($values as $value) {
+            $mapValueToWidget[$value->getWidget()->getId()] = $value;
+        }
+
+        $options['mapValueToWidget'] = $mapValueToWidget;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)

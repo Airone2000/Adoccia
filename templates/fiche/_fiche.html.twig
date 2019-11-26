@@ -14,11 +14,7 @@
             </div>
 
             <div>
-                {{ form_widget(form.picture) }}
-
-                {% set pictureURL = fiche.picture ? app.request.schemeAndHttpHost ~ '/' ~ picturePublicUploadDir ~ '/' ~ fiche.picture.filename : null %}
-                <img id="fiche_picture_preview" style="max-width: 300px;" src="{{ pictureURL }}" />
-                <button id="fiche_picture_remove" class="{{ pictureURL ? '' : 'hidden' }}" type="button">Remove</button>
+                {{ form_row(form.picture) }}
             </div>
             <hr>
         {% endif %}
