@@ -11,12 +11,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class FicheVoter extends Voter
 {
     const
-        EDIT_FICHE = 'CAN_EDIT_FICHE'
+        EDIT_FICHE = 'CAN_EDIT_FICHE',
+        DELETE_FICHE = 'CAN_DELETE_FICHE'
     ;
 
     protected function supports($attribute, $subject)
     {
         if ($attribute === self::EDIT_FICHE && $subject instanceof Fiche) return true;
+        if ($attribute === self::DELETE_FICHE && $subject instanceof Fiche) return true;
         return false;
     }
 
@@ -31,8 +33,27 @@ class FicheVoter extends Voter
             case self::EDIT_FICHE:
                 return $this->canEditFiche($user, $subject);
 
+            case self::DELETE_FICHE:
+                return $this->canDeleteFiche($user, $subject);
+
         }
 
+        return false;
+    }
+
+    private function canDeleteFiche(User $user, Fiche $fiche): bool
+    {
+        if (CategoryVoter::canSeeCategory($user, $fiche->getCategory())) {
+            if ($user->isSuperAdmin()) return true;
+
+            # Category creator can delete his own fiche
+            if (($categoryCreator = $fiche->getCategory()->getCreatedBy()) instanceof User) {
+                if ($categoryCreator->getId() === $user->getId()) return true;
+            }
+
+            # Fiche creator can delete his own fiche
+            if ($fiche->getCreator() && $fiche->getCreator() === $user) return true;
+        }
         return false;
     }
 

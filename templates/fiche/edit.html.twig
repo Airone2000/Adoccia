@@ -26,5 +26,11 @@
     <div style="width:600px;">
         {% include 'fiche/_fiche.html.twig' with {'form': form, 'fiche': fiche} %}
     </div>
+
+    <hr />
+
+    {{ include('fiche/_delete_form.html.twig') }}
+
+
 {% endblock %}
 

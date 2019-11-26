@@ -81,4 +81,29 @@ final class FicheController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route(
+     *     path="/{id}/delete",
+     *     methods={"DELETE"},
+     *     name="fiche.delete"
+     * )
+     * @Entity(name="fiche", expr="repository.getOneForUserById(null, id)")
+     * @IsGranted("CAN_DELETE_FICHE", subject="fiche")
+     * @inheritdoc
+     */
+    function deleteFiche(Fiche $fiche, Request $request): Response
+    {
+        $category = $fiche->getCategory();
+        $expected = 'delete'.$fiche->getId();
+        $received = $request->request->get('_token');
+        if ($this->isCsrfTokenValid($expected, $received)) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($fiche);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('category.listFiches', [
+            'id' => $category->getId()
+        ]);
+    }
 }
