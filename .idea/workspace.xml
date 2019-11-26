@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaf149f8-dceb-451f-85ed-21263764c5dc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Enum/PictureShapeEnum.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/SearchType/PictureType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/theme.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/theme.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/PictureUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/PictureUploader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/fiche/FicheForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/fiche/FicheForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/FicheController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FicheController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Fiche.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Fiche.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Value.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Value.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CategoryType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CategoryType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/FicheType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FicheType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/PictureType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PictureType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/fiche/_fiche.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/fiche/_fiche.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig" afterDir="false" />
     </list>
@@ -43,12 +32,12 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Form/CategoryType.php">
+        <entry file="file://$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="41" column="56" lean-forward="true" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+            <state relative-caret-position="285">
+              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -104,7 +93,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/category/index.html.twig" />
         <option value="$PROJECT_DIR$/templates/fiche/show.html.twig" />
         <option value="$PROJECT_DIR$/assets/js/picture.js" />
         <option value="$PROJECT_DIR$/assets/js/PictureHandler.js" />
@@ -143,8 +131,6 @@
         <option value="$PROJECT_DIR$/assets/js/PictureUploader.js" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/src/Validator/PictureIsSquareValidator.php" />
-        <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
-        <option value="$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php" />
         <option value="$PROJECT_DIR$/assets/js/fiche/FicheForm.js" />
         <option value="$PROJECT_DIR$/src/Controller/FicheController.php" />
         <option value="$PROJECT_DIR$/templates/fiche/_fiche.html.twig" />
@@ -153,8 +139,11 @@
         <option value="$PROJECT_DIR$/config/packages/liip_imagine.yaml" />
         <option value="$PROJECT_DIR$/src/Form/FicheType.php" />
         <option value="$PROJECT_DIR$/src/Form/PictureType.php" />
-        <option value="$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/CategoryType.php" />
+        <option value="$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php" />
+        <option value="$PROJECT_DIR$/src/Form/SearchType/PictureType.php" />
+        <option value="$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig" />
+        <option value="$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig" />
       </list>
     </option>
   </component>
@@ -276,7 +265,7 @@
       <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -296,24 +285,20 @@
             <path>
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fichit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
               <item name="fichit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Enum" type="462c0819:PsiDirectoryNode" />
+              <item name="Form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fichit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fichit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Form" type="462c0819:PsiDirectoryNode" />
+              <item name="SearchType" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -332,19 +317,19 @@
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Form/SearchType" />
+      <recent name="$PROJECT_DIR$/src/Form/FormBuilder" />
+      <recent name="$PROJECT_DIR$/templates/form/builder" />
+      <recent name="$PROJECT_DIR$/src/Form/WidgetSettingsType" />
+      <recent name="$PROJECT_DIR$/src/EntityListener" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Form/FormBuilderType" />
       <recent name="$PROJECT_DIR$/src/Form/FormBuilderType/SubType" />
       <recent name="$PROJECT_DIR$/assets/css/category" />
       <recent name="$PROJECT_DIR$/tests/Services" />
       <recent name="$PROJECT_DIR$/templates/user" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/Form/FormBuilder" />
-      <recent name="$PROJECT_DIR$/templates/form/builder" />
-      <recent name="$PROJECT_DIR$/src/Form/WidgetSettingsType" />
-      <recent name="$PROJECT_DIR$/src/EntityListener" />
-      <recent name="$PROJECT_DIR$/src/Form/SearchType" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -398,18 +383,19 @@
       <workItem from="1574236383082" duration="6117000" />
       <workItem from="1574252167721" duration="117806000" />
       <workItem from="1574711187039" duration="10037000" />
-      <workItem from="1574769855882" duration="9221000" />
+      <workItem from="1574769855882" duration="9345000" />
+      <workItem from="1574781768798" duration="214000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="577006000" />
+    <option name="totallyTimeSpent" value="577344000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3352181" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34087238" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -458,13 +444,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/EntityListener/CategoryListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="47" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Picture.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -738,16 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
-          <folding>
-            <element signature="e#40#63#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/FicheController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
@@ -793,16 +762,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="221" column="40" lean-forward="true" selection-start-line="221" selection-start-column="40" selection-end-line="221" selection-end-column="40" />
-          <folding>
-            <element signature="e#12#37#0#Twig" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/fiche/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -834,13 +793,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/liip_imagine.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -850,8 +802,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/CategoryType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="41" column="56" lean-forward="true" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+        <state relative-caret-position="330">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/form/TWIG_widget_types.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="223" selection-start-line="223" selection-end-line="223" />
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/FormBuilder/PictureBuilder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#63#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/SearchType/PictureType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#39#71#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/formTheme/custom_form_theme.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="41" />
         </state>
       </provider>
     </entry>

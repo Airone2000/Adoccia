@@ -230,6 +230,8 @@
             {% if pictureURL %}
                 <img src="{{ pictureURL }}" alt="Picture" style="max-width:100%;">
             {% endif %}
+        {% elseif form.vars.mode is same as('SEARCH') %}
+            {{ form_widget(form.criteria) }}
         {% else %}
             {{ block('custom_picture_row') }}
             {{ form_errors(form) }}

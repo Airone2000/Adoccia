@@ -17,7 +17,7 @@
         {% set pictureUniqueId = form.vars.uniqueId %}
         {% set picture = form.vars.picture %}
         {% set pictureURL = picture ? app.request.schemeAndHttpHost ~ '/' ~ picturePublicUploadDir ~ '/' ~ picture.filename : null %}
-        {% if liipImagineFilter is not null %}
+        {% if pictureURL is not null and liipImagineFilter is not null %}
             {% set pictureURL = pictureURL | imagine_filter(liipImagineFilter)  %}
         {% endif %}
 
