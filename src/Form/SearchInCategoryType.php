@@ -64,13 +64,30 @@ class SearchInCategoryType extends AbstractType
                         ],
                         'choice_label' => function(string $value) {
                             return "trans.{$value}";
+                        },
+                        'attr' => [
+                            'class' => 'searchOnTitleCriteria'
+                        ],
+                        'choice_attr' => function(string $value) {
+                            $attr = [];
+                            switch ($value) {
+                                case SearchCriteriaEnum::CONTAINS:
+                                case SearchCriteriaEnum::EXACT:
+                                case SearchCriteriaEnum::STARTS_WITH:
+                                case SearchCriteriaEnum::ENDS_WITH:
+                                    $attr['data-inputs'] = '.value';
+                                    break;
+                            }
+                            return $attr;
                         }
                     ])
                     ->add('value', TextType::class, [
                         'required' => false,
                         'attr' => [
-                            'placeholder' => 'Rechercher dans le titre'
-                        ]
+                            'placeholder' => 'Rechercher dans le titre',
+                            'class' => 'value hidden'
+                        ],
+                        'label' => false
                     ])
             )
         ;

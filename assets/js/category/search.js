@@ -121,7 +121,7 @@ class Search {
 
     // Display inputs associated to criteria
     _listenForCriteriaPicked() {
-        $(document).on('change', 'select[name$="[criteria]"]', (e) => {
+        $(document).on('change', 'select[name$="[criteria]"], .searchOnTitleCriteria', (e) => {
             let $picker = $(e.target);
             let $itemSelected = $($picker.children(':selected')[0]);
             let inputsToDisplaySelector = $itemSelected.data('inputs');
