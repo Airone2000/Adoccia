@@ -59,3 +59,8 @@ services:
         arguments:
             $pictureUploadDir: '%pictureUploadDir%'
 
+    App\Twig\PictureDisplayerExtension:
+        arguments:
+            $picturePublicUploadDir : '%picturePublicUploadDir%'
+
+
