@@ -4,12 +4,13 @@
 
 {% block body %}
     <h1>Category index</h1>
-
+    
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Picture</th>
                 <th>Description</th>
                 <th>CreatedAt</th>
                 <th>Online</th>
@@ -22,6 +23,7 @@
             <tr>
                 <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
+                <td>{{ showPicture(category.picture, 'category_picture_thumbnail') }}</td>
                 <td>{{ category.description }}</td>
                 <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ category.online ? 'Yes' : 'No' }}</td>

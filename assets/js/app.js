@@ -1,6 +1,5 @@
 require('./../../node_modules/inputmask/dist/jquery.inputmask.bundle');
 
-
 class App
 {
     constructor()

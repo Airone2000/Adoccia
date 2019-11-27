@@ -39,10 +39,10 @@ class PictureDisplayerExtension extends AbstractExtension
         ];
     }
 
-    public function showPicture($value, $filter)
+    public function showPicture($value, $filter = null)
     {
         if ($value instanceof Picture) {
-            
+
             $url = $this->requestStack->getMasterRequest()->getSchemeAndHttpHost();
             $url .= DIRECTORY_SEPARATOR;
             $url .= $this->picturePublicUploadDir;

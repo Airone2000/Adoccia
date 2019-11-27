@@ -225,11 +225,7 @@
 {%- block fichit_picture_row -%}
     {{ form_area_start(widget.formArea) }}
         {% if form.vars.mode is same as('DISPLAY') %}
-            {% set picture = form.vars.picture %}
-            {% set pictureURL = picture ? app.request.schemeAndHttpHost ~ '/' ~ picturePublicUploadDir ~ '/' ~ picture.filename : null %}
-            {% if pictureURL %}
-                <img src="{{ pictureURL }}" alt="Picture" style="max-width:100%;">
-            {% endif %}
+            {{ showPicture(form.vars.picture) }}
         {% elseif form.vars.mode is same as('SEARCH') %}
             {{ form_widget(form.criteria) }}
         {% else %}
