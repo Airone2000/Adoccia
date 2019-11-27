@@ -1,0 +1,25 @@
+@import "../variables";
+
+.listOfCategories_Card {
+  opacity: .85;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+.listOfCategories_Card_Body {
+  padding: 10px;
+}
+.listOfCategories_Card_Title {
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  a {
+    color: $defaultLinkColor;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

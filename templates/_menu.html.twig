@@ -1,20 +1,36 @@
-<nav>
-    <ul>
+<nav class="AppHeader_Nav uk-navbar" uk-navbar>
+    <div class="uk-navbar-left">
+        <a class="AppHeader_Logo uk-navbar-item uk-logo" href="{{ url('app.homepage') }}">
+            ADOCCIA
+        </a>
+        <ul class="uk-navbar-nav">
+            <li>
+                <a class="AppHeader_Nav_Link" href="{{ url('category.index') }}">Collections</a>
+            </li>
+        </ul>
+    </div>
 
-        {% if app.user and app.user.hasPermission('CATEGORY_LIST') %}
-            <li>
-                <a href="{{ url('category.index') }}">Catégories</a>
-            </li>
-        {% endif %}
+    <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+            {% if app.user %}
+                <li>
+                    <a class="AppHeader_Nav_Link" href="#">{{ app.user.username }}</a>
+                    <div class="uk-navbar-dropdown" uk-dropdown="mode: click">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li><a href="#">Mon profil</a></li>
+                            <li class="uk-nav-divider"></li>
+                            <li>
+                                <a href="{{ url('app.logout') }}">Quitter</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
-        {% if app.user %}
-            <li>
-                <a href="{{ url('app.logout') }}">Déconnexion</a>
-            </li>
-        {% else %}
-            <li>
-                <a href="{{ url('app.login') }}">Connexion</a>
-            </li>
-        {% endif %}
-    </ul>
+            {% else %}
+                <li>
+                    <a class="AppHeader_Nav_Link" href="{{ url('app.login') }}">Connexion</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
 </nav>

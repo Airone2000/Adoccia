@@ -35,6 +35,8 @@ Encore
     .addEntry('categoryForm', './assets/js/category/CategoryForm.js')
     .addEntry('ficheForm', './assets/js/fiche/FicheForm.js')
 
+    .addStyleEntry('categoryIndex', './assets/css/category/index.scss')
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 

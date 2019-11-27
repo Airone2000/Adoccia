@@ -1,4 +1,4 @@
-class CategoryForm
+class FicheForm
 {
     constructor() {
 

@@ -2,47 +2,40 @@
 
 {% block title %}Category index{% endblock %}
 
-{% block body %}
-    <h1>Category index</h1>
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Picture</th>
-                <th>Description</th>
-                <th>CreatedAt</th>
-                <th>Online</th>
-                <th>Public</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>{{ showPicture(category.picture, 'category_picture_thumbnail') }}</td>
-                <td>{{ category.description }}</td>
-                <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ category.online ? 'Yes' : 'No' }}</td>
-                <td>{{ category.public ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('category.show', {'id': category.id}) }}">show</a>
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('categoryIndex') }}
+{% endblock %}
 
-                    {% if is_granted('EDIT_CATEGORY', category) %}
-                        <a href="{{ path('category.edit', {'id': category.id}) }}">edit</a>
-                    {% endif %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block body %}
+
+    <div class="listOfCategories uk-padding-large">
+        <div uk-grid>
+            {% for category in categories %}
+
+                {% set showUrl = url('category.show', {id: category.id}) %}
+
+                <div class="uk-width-1-6 link" data-target="{{ showUrl }}">
+                    <div class="listOfCategories_Card">
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-media-top">
+                                {{ showPicture(category.picture, 'category_picture_thumbnail') }}
+                            </div>
+                            <div class="listOfCategories_Card_Body uk-card-body">
+                                <div class="listOfCategories_Card_Title uk-card-title">
+                                    <a href="{{ showUrl }}">
+                                        {{ category.name }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                No records
+            {% endfor %}
+        </div>
+    </div>
 
     <a href="{{ path('category.new') }}">Create new</a>
 {% endblock %}

@@ -4,12 +4,13 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css" />
             {{ encore_entry_link_tags('theme') }}
             {{ load_Leaflet_style() }}
         {% endblock %}
     </head>
-    <body>
+    <body id="AppTopWrapper">
         {% block header %}
             {% include '_header.html.twig' %}
         {% endblock %}
