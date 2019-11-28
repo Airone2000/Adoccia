@@ -9,32 +9,39 @@
 
 {% block body %}
 
+    {{ form_start(searchForm) }}
+        {{ form_row(searchForm) }}
+        <button type="submit">Chercher</button>
+    {{ form_end(searchForm) }}
+
     <div class="listOfCategories uk-padding-large">
-        <div uk-grid>
-            {% for category in categories %}
 
-                {% set showUrl = url('category.show', {id: category.id}) %}
-
-                <div class="uk-width-1-6 link" data-target="{{ showUrl }}">
-                    <div class="listOfCategories_Card">
-                        <div class="uk-card uk-card-default">
-                            <div class="uk-card-media-top">
-                                {{ showPicture(category.picture, 'category_picture_thumbnail') }}
-                            </div>
-                            <div class="listOfCategories_Card_Body uk-card-body">
-                                <div class="listOfCategories_Card_Title uk-card-title">
-                                    <a href="{{ showUrl }}">
-                                        {{ category.name }}
-                                    </a>
+        {% if categories is not empty %}
+            <div uk-grid>
+                {% for category in categories %}
+                    {% set showUrl = url('category.show', {id: category.id}) %}
+                    <div class="uk-width-1-6 link" data-target="{{ showUrl }}">
+                        <div class="listOfCategories_Card">
+                            <div class="uk-card uk-card-default">
+                                <div class="uk-card-media-top">
+                                    {{ showPicture(category.picture, 'category_picture_thumbnail') }}
+                                </div>
+                                <div class="listOfCategories_Card_Body uk-card-body">
+                                    <div class="listOfCategories_Card_Title uk-card-title">
+                                        <a href="{{ showUrl }}">
+                                            {{ category.name }}
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% else %}
-                No records
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+
+            {% include '_paginator.html.twig' with {'paginator': paginator} %}
+        {% endif %}
+
     </div>
 
     <a href="{{ path('category.new') }}">Create new</a>

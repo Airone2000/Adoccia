@@ -1,0 +1,59 @@
+{# array:3 [▼
+  "currentPage" => 1
+  "itemsPerPage" => 2
+  "totalItems" => 7
+] #}
+
+{% set currentPage = paginator.currentPage %}
+{% set firstPage = 1 %}
+{% set lastPage = (paginator.totalItems / paginator.itemsPerPage)|round(0, 'ceil') %}
+{% set rangeStart = (currentPage - 2) .. (currentPage - 1) %}
+{% set rangeEnd = (currentPage + 1) .. (currentPage + 2) %}
+{% set previous = currentPage - 1 %}
+{% set next = currentPage + 1 %}
+
+{% set queryParams = app.request.query %}
+
+{% if lastPage != 1 %}
+    <ul class="uk-pagination" uk-margin>
+
+        {% if previous > 0 %}
+            {% set queryParams = queryParams|merge({'page': previous}) %}
+            <li><a href="{{ url('category.index', queryParams) }}"><span uk-pagination-previous></span></a></li>
+        {% endif %}
+
+        {% if firstPage != currentPage and firstPage not in rangeStart %}
+            {% set queryParams = queryParams|merge({'page': firstPage}) %}
+            <li><a href="{{ url('category.index', queryParams) }}">{{ firstPage }}</a></li>
+            <li class="uk-disabled"><span>...</span></li>
+        {% endif %}
+
+
+        {% for i in rangeStart %}
+            {% if i >= firstPage %}
+                {% set queryParams = queryParams|merge({'page': i}) %}
+                <li><a href="{{ url('category.index', queryParams) }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        <li class="uk-active"><a href="#">{{ currentPage }}</a></li>
+
+        {% for i in rangeEnd %}
+            {% if i <= lastPage  %}
+                {% set queryParams = queryParams|merge({'page': i}) %}
+                <li><a href="{{ url('category.index', queryParams) }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if lastPage != currentPage and lastPage not in rangeEnd %}
+            {% set queryParams = queryParams|merge({'page': lastPage}) %}
+            <li class="uk-disabled"><span>...</span></li>
+            <li><a href="{{ url('category.index', queryParams) }}">{{ lastPage }}</a></li>
+        {% endif %}
+
+        {% if next <= lastPage %}
+            {% set queryParams = queryParams|merge({'page': next}) %}
+            <li><a href="{{ url('category.index', queryParams) }}"><span uk-pagination-next></span></a></li>
+        {% endif %}
+    </ul>
+{% endif %}

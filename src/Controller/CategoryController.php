@@ -7,11 +7,13 @@ use App\Entity\Fiche;
 use App\Entity\Search;
 use App\Entity\User;
 use App\Enum\FicheModeEnum;
+use App\Form\CategorySearchType;
 use App\Form\CategoryType;
 use App\Form\FicheType;
 use App\Form\SaveSearchType;
 use App\Form\SearchInCategoryType;
 use App\Repository\CategoryRepository;
+use App\Repository\CategorySearchRepository;
 use App\Repository\FicheRepository;
 use App\Security\Voter\CategoryVoter;
 use App\Services\CategoryFinder\CategoryFinderInterface;
@@ -35,17 +37,53 @@ class CategoryController extends AbstractController
     /**
      * List all categories : mine (no matter if published or not) + others (published)
      *
-     * @Route("/", name="category.index", methods={"GET"})
+     * @Route("/", name="category.index", methods={"GET", "POST"})
      * @inheritdoc
      */
-    public function index(CategoryRepository $categoryRepository, Request $request): Response
+    public function index(CategoryRepository $categoryRepository, Request $request, CategorySearchRepository $categorySearchRepository): Response
     {
+        # Get previous search for current user, or new search if none exist
+        $categorySearch = $categorySearchRepository->findOneByUserOrGuestUniqueID($this->getUser(), $request->cookies->get('_guid'));
+        $categorySearchForm = $this->createForm(CategorySearchType::class, $categorySearch);
+        $categorySearchForm->handleRequest($request);
+
+        # If the user perform a search, save it then redirect him to the same page
+        if ($categorySearchForm->isSubmitted() && $categorySearchForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->detach($categorySearch);
+            $em->persist($categorySearch);
+            $em->flush();
+
+            $url = $this->generateUrl('category.index');
+            return $this->redirect($url);
+        }
+
+        # Load categories based on pagination
         /* @var User|null */
         $user = $this->getUser();
-        $page = (int)$request->query->get('page', 1);
+        $page = (int)$request->query->get('page', $categorySearch->getPage());
         $items = (int)$request->query->get('items', 30);
+        $categories = $categoryRepository->findAllForUserOrPublic($user, $page, $items, $categorySearch);
+        $totalItems = count($categories);
+        $lastPage = ceil(($totalItems / $items));
+
+        # If wanted page does not exist, redirect to the last one
+        if ($page > $lastPage) {
+            return $this->redirectToRoute('category.index', ['page' => $lastPage]);
+        }
+
+        # If page exists and the user has a search, update the page number
+        # It can be new and non persisted in case where current user is not user
+        # and he has not guestUniqueID
+        if (!$categorySearch->isNew()) {
+            $categorySearch->setPage($page);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
         return $this->render('category/index.html.twig', [
-            'categories' => $categoryRepository->findAllForUserOrPublic($user, $page, $items),
+            'categories' => $categories,
+            'searchForm' => $categorySearchForm->createView(),
+            'paginator' => ['currentPage' => $page, 'itemsPerPage' => $items, 'totalItems' => $totalItems, 'lastPage' => $lastPage]
         ]);
     }
 

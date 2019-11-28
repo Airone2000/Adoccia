@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use App\Entity\CategorySearch;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -45,7 +46,7 @@ class CategoryRepository extends ServiceEntityRepository
         $queryBuilder->andWhere($q);
     }
 
-    public function findAllForUserOrPublic(?User $user, int $page = 1, int $items = 30): Paginator
+    public function findAllForUserOrPublic(?User $user, int $page = 1, int $items = 30, CategorySearch $categorySearch): Paginator
     {
         $qb = $this->createQueryBuilder('c');
         $this->getForUser($user, $qb);
@@ -53,6 +54,15 @@ class CategoryRepository extends ServiceEntityRepository
             ->setFirstResult( ($page - 1) * $items)
             ->setMaxResults($items)
         ;
+
+        # Filter on title / name
+        if ($title = $categorySearch->getTitle()) {
+            $qb
+                ->andWhere('c.name LIKE :title')
+                ->setParameter('title', "%{$title}%")
+            ;
+        }
+
         $paginator = new Paginator($qb, false);
         return $paginator;
     }
