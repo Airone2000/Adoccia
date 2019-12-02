@@ -62,9 +62,15 @@ class User implements UserInterface
      */
     private $isSuperAdmin = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="author")
+     */
+    private $feedback;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -216,6 +222,37 @@ class User implements UserInterface
     public function setSuperAdmin(bool $isSuperAdmin): User
     {
         $this->isSuperAdmin = $isSuperAdmin;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Feedback[]
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback[] = $feedback;
+            $feedback->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedback->contains($feedback)) {
+            $this->feedback->removeElement($feedback);
+            // set the owning side to null (unless already changed)
+            if ($feedback->getAuthor() === $this) {
+                $feedback->setAuthor(null);
+            }
+        }
+
         return $this;
     }
 

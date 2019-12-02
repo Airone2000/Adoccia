@@ -50,6 +50,10 @@ services:
         arguments:
             $pictureUploadDir: '%pictureUploadDir%'
 
+    feedback_listener:
+        class: App\EntityListener\FeedbackListener
+        tags: ['doctrine.orm.entity_listener']
+
     App\Controller\PictureController:
         arguments:
             $pictureUploadDir: '%pictureUploadDir%'
