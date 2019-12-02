@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class CategoryVoter extends Voter
 {
     const
+        ACCESS_ALL_CATEGORIES = 'ACCESS_ALL_CATEGORIES',
         ADD_FICHE_TO_CATEGORY = 'ADD_FICHE_TO_CATEGORY',
         EDIT_CATEGORY = 'EDIT_CATEGORY',
         EDIT_CATEGORY_FORM = 'EDIT_CATEGORY_FORM',
@@ -19,6 +20,7 @@ class CategoryVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
+        if ($attribute === self::ACCESS_ALL_CATEGORIES) return true;
         if ($attribute === self::ADD_FICHE_TO_CATEGORY && $subject instanceof Category) return true;
         if ($attribute === self::EDIT_CATEGORY && $subject instanceof Category) return true;
         if ($attribute === self::EDIT_CATEGORY_FORM && $subject instanceof Category) return true;
@@ -47,9 +49,21 @@ class CategoryVoter extends Voter
             case self::DELETE_CATEGORY:
                 return $this->canDeleteCategory($user, $subject);
 
+            case self::ACCESS_ALL_CATEGORIES:
+                return self::canAccessAllCategories($user);
+
             default:
                 return false;
         }
+    }
+
+    public static function canAccessAllCategories(?User $user): bool
+    {
+        if ($user instanceof User && $user->isSuperAdmin()) {
+            return true;
+        }
+
+        return false;
     }
 
     public static function canSearchInCategory(?User $user, Category $category): bool

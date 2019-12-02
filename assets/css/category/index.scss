@@ -1,11 +1,9 @@
 @import "../variables";
 
 .listOfCategories_Card {
-  opacity: .85;
-  &:hover {
-    cursor: pointer;
-    opacity: 1;
-  }
+  max-width: 250px;
+  margin: auto;
+  cursor: pointer;
 }
 .listOfCategories_Card_Body {
   padding: 10px;
@@ -15,7 +13,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-align: center;
   a {
     color: $defaultLinkColor;
     &:hover {

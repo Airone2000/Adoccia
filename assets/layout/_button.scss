@@ -1,0 +1,35 @@
+.btn
+{
+  display: block;
+  padding: 10px;
+  border-bottom: 3px solid rgba(0,0,0,.5);
+  font-size: 13px;
+
+  text-decoration: none;
+  text-transform: uppercase;
+
+  opacity: .8;
+  font-weight: bold;
+  text-align: center;
+
+  background-color: $adocciaMainColor;
+  color: #fff;
+}
+
+.btn-outline
+{
+  color: $adocciaMainColor;
+  background-color: #F1F1F1;
+  border-bottom-color: $adocciaMainColor;
+}
+
+.btn:hover
+{
+  opacity: 1;
+}
+
+.btn:active
+{
+  position: relative;
+  top: 2px;
+}

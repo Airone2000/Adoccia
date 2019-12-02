@@ -1,0 +1,66 @@
+@mixin font-size-list {
+  @for $i from 1 through 50 {
+    .font-size-#{$i}px
+    {
+      font-size: #{$i}px;
+    }
+  }
+}
+
+@mixin padding-list {
+  @for $i from 1 through 50 {
+    .padding-#{$i}px
+    {
+      padding: #{$i}px;
+    }
+
+    .padding-top-#{$i}px
+    {
+      padding-top: #{$i}px;
+    }
+
+    .padding-bottom-#{$i}px
+    {
+      padding-bottom: #{$i}px;
+    }
+
+    .padding-left-#{$i}px
+    {
+      padding-left: #{$i}px;
+    }
+
+    .padding-right-#{$i}px
+    {
+      padding-right: #{$i}px;
+    }
+  }
+}
+
+@mixin margin-list {
+  @for $i from 1 through 50 {
+    .margin-#{$i}px
+    {
+      margin: #{$i}px;
+    }
+
+    .margin-top-#{$i}px
+    {
+      margin-top: #{$i}px;
+    }
+
+    .margin-bottom-#{$i}px
+    {
+      margin-bottom: #{$i}px;
+    }
+
+    .margin-left-#{$i}px
+    {
+      margin-left: #{$i}px;
+    }
+
+    .margin-right-#{$i}px
+    {
+      margin-right: #{$i}px;
+    }
+  }
+}

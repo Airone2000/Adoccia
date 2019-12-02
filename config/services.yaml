@@ -63,4 +63,8 @@ services:
         arguments:
             $picturePublicUploadDir : '%picturePublicUploadDir%'
 
+    App\DataFixtures\CategoriesFixtures:
+        arguments:
+            $pictureUploadDir: '%pictureUploadDir%'
+
 

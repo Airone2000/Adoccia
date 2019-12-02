@@ -1,0 +1,22 @@
+.paginator_item_far > a, .paginator_item_close > a, .paginator_item_current > a{
+  background-color: #fff;
+  color: $primaryColor;
+  padding: .5em;
+  min-width: 35px;
+  text-align: center;
+}
+
+.paginator_item_arrow > a {
+  padding: .5em;
+  color: $primaryColor;
+}
+
+.paginator_dots > span {
+  padding: .5em;
+}
+
+.paginator_item_current > a {
+  font-weight: bold;
+  background-color: $primaryColor;
+  color: #fff;
+}

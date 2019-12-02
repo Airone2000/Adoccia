@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800&display=swap" rel="stylesheet">
     {% block stylesheets %}
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800&display=swap" rel="stylesheet">
         {{ encore_entry_link_tags('layout') }}
     {% endblock %}
 </head>
@@ -13,20 +13,21 @@
 
     <div id="Adoccia">
         <div id="Adoccia_Header">
-            <h1 id="Adoccia_Header_Title">
-                <a id="Adoccia_Header_Title_Link" href="{{ url('app.homepage') }}">ADOCCIA</a>
-            </h1>
-            {{ include('_menu.html.twig') }}
+            <h1 id="Adoccia_Header_Title">ADOCCIA</h1>
+            <nav id="Adoccia_Header_Nav">
+                <a class="Adoccia_Header_NavLink active" href="{{ url('category.index') }}">
+                    COLLECTIONS
+                </a>
+                <a class="Adoccia_Header_NavLink" href="{{ url('app.about') }}">
+                    A PROPOS
+                </a>
+            </nav>
         </div>
         <div id="Adoccia_Body">
             {%- block body -%}
             {%- endblock -%}
         </div>
     </div>
-
-    {% if app.user %}
-        {{ include('_account.modal.html.twig') }}
-    {% endif %}
 
     {%- block javascripts -%}
         {{ load_Leaflet_script() }}

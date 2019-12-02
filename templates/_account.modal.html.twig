@@ -1,0 +1,19 @@
+<div id="modalAccount" class="modal-wrapper hidden">
+    <div class="modal">
+        <i class="fas fa-times BtnCloseModal"></i>
+
+
+        <h1 class="text-center no-padding no-margin">{{ app.user.username }}</h1>
+        <div class="text-center padding-10px">
+            <i class="fas fa-user-circle font-size-50px color-light-gray"></i>
+        </div>
+
+        <nav id="modalAccount_Nav">
+            <a class="btn modalAccount_Nav_Link background-primary color-white" href="{{ url('app.logout') }}">
+                Se déconnecter
+            </a>
+        </nav>
+
+
+    </div>
+</div>

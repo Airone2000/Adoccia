@@ -30,7 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/categories")
+ * @Route("/categories", defaults={"menu":"category"})
  */
 class CategoryController extends AbstractController
 {
@@ -62,14 +62,14 @@ class CategoryController extends AbstractController
         /* @var User|null */
         $user = $this->getUser();
         $page = (int)$request->query->get('page', $categorySearch->getPage());
-        $items = (int)$request->query->get('items', 30);
+        $items = (int)$request->query->get('items', 100);
         $categories = $categoryRepository->findAllForUserOrPublic($user, $page, $items, $categorySearch);
         $totalItems = count($categories);
-        $lastPage = ceil(($totalItems / $items));
+        $lastPage = (int)ceil(($totalItems / $items));
 
         # If wanted page does not exist, redirect to the last one
-        if ($page > $lastPage) {
-            return $this->redirectToRoute('category.index', ['page' => $lastPage]);
+        if (($page > $lastPage or $page <= 0) && $lastPage > 0) {
+            return $this->redirectToRoute('category.index', ['page' => $lastPage > 0 ? $lastPage : 1]);
         }
 
         # If page exists and the user has a search, update the page number

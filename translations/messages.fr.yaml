@@ -19,3 +19,11 @@ WidgetType.ficheCreator: "Créateur de la fiche"
 WidgetType.video: "Vidéo"
 WidgetType.picture: "Image"
 
+CategorySearchType.filter.all: Toutes
+CategorySearchType.filter.mine: 'Mes collections'
+
+CategorySearchType.orderBy.created_at_desc: 'Récentes d''abord'
+CategorySearchType.orderBy.created_at_asc: 'Anciennes d''abord'
+CategorySearchType.orderBy.name_asc: 'A-Z'
+CategorySearchType.orderBy.name_desc: 'Z-A'
+

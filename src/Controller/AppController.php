@@ -15,4 +15,22 @@ final class AppController extends AbstractController
     {
         return $this->render('homepage.html.twig');
     }
+
+    /**
+     * @Route(path="/a-propos", methods={"get"}, name="app.about", defaults={"menu": "about"})
+     * @inheritdoc
+     */
+    function about(): Response
+    {
+        return $this->render('about.html.twig');
+    }
+
+    /**
+     * @Route(path="/test")
+     * @inheritdoc
+     */
+    function test(): Response
+    {
+        return $this->render('test.html.twig');
+    }
 }

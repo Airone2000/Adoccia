@@ -2,41 +2,38 @@
 
 {% block title %}Category{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('categoryShow') }}
+{% endblock %}
+
 {% block body %}
-    <h1>Category</h1>
+
+    <div class="ShowCategory">
+        <div>
+            <div>
+                <div class="ShowCategory_GlobalIntro">
+                    {{ showPicture(category.picture) }}
+                    <h1 class="ShowCategory_GlobalIntro_Title">{{ category.name }}</h1>
+                    {% if category.description %}
+                        <p>
+                            {{ category.description }}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                Droite
+            </div>
+        </div>
+    </div>
+
+
 
     <a href="{{ url('category.listFiches', {'id': category.id}) }}">
         Liste des fiches
     </a>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ category.description }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Online</th>
-                <td>{{ category.online ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Public</th>
-                <td>{{ category.public ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
 
     <a href="{{ path('category.index') }}">back to list</a>
 

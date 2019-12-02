@@ -1,13 +1,15 @@
+@import "variables";
+
 html, body {
-  background-color: #f4f8fb;
+  background-color: $siteBackgroundColor;
   height: 100%;
 }
 
 #AppTopWrapper {
 
-  @import "variables";
   // Modal is needed everywhere on the site
   @import "modal";
+  @import "paginator";
 
   * {
     box-sizing: border-box;
@@ -29,6 +31,17 @@ html, body {
     background: $primaryColor;
     .AppHeader_Nav_Link {
       color: $navItemTextColor;
+      font-weight: bold;
+      text-transform: initial;
+      &.selected {
+        background-color: $siteBackgroundColor;
+        color: $primaryColor;
+      }
+
+      .icon {
+        font-size: 30px;
+        margin-right: 10px;
+      }
     }
     .AppHeader_Logo {
       color: #fff;

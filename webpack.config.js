@@ -20,7 +20,12 @@ Encore
     .addEntry('pictureUploader', './assets/js/PictureUploader.js')
     .addEntry('categoryForm', './assets/js/category/CategoryForm.js')
     .addEntry('ficheForm', './assets/js/fiche/FicheForm.js')
-    .addStyleEntry('categoryIndex', './assets/css/category/index.scss')
+    .addStyleEntry('categoryIndex', './assets/layout/category/index.scss')
+    .addStyleEntry('categoryShow', './assets/css/category/show.scss')
+
+    // New layout
+    .addStyleEntry('layout', './assets/layout/main.scss')
+
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
     .cleanupOutputBeforeBuild()

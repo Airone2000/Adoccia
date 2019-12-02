@@ -7,6 +7,7 @@ final class PictureShapeEnum extends AbstractEnum
     const
         SQUARE  = 'square',
         CIRCLE  = 'circle',
-        FREE    = 'free'
+        FREE    = 'free',
+        CATEGORY = 'category'
     ;
 }

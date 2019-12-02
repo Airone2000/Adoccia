@@ -27,7 +27,9 @@ final class CategoryListener
 
     function prePersist(Category $category): void
     {
-        $category->setCreatedBy($this->tokenStorage->getToken()->getUser());
+        if ($_SERVER['PHP_SELF'] !== 'bin/console') {
+            $category->setCreatedBy($this->tokenStorage->getToken()->getUser());
+        }
     }
 
     function preUpdate(Category $category, PreUpdateEventArgs $preUpdateEventArgs): void

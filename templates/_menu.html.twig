@@ -1,36 +1,21 @@
-<nav class="AppHeader_Nav uk-navbar" uk-navbar>
-    <div class="uk-navbar-left">
-        <a class="AppHeader_Logo uk-navbar-item uk-logo" href="{{ url('app.homepage') }}">
-            ADOCCIA
+{% set selectedMenuItem = app.request.attributes.get('menu') %}
+
+<nav id="Adoccia_Header_Nav">
+    <a class="Adoccia_Header_NavLink {{ selectedMenuItem == 'category' ? 'active' : '' }}" href="{{ url('category.index') }}">
+        <i class="fab fa-pagelines font-size-25px margin-right-7px"></i> Les collections
+    </a>
+    <a class="Adoccia_Header_NavLink {{ selectedMenuItem == 'about' ? 'active' : '' }}" href="{{ url('app.about') }}">
+        <i class="fas fa-question-circle font-size-25px margin-right-7px"></i> Aide
+    </a>
+
+    {% if app.user %}
+        <a class="Adoccia_Header_NavLink xl-at-end openModal" data-target-selector="#modalAccount" href="#">
+            <i class="fas fa-user-circle font-size-25px margin-right-7px"></i>&nbsp;{{ app.user.username }}
         </a>
-        <ul class="uk-navbar-nav">
-            <li>
-                <a class="AppHeader_Nav_Link" href="{{ url('category.index') }}">Collections</a>
-            </li>
-        </ul>
-    </div>
+    {% else %}
+        <a class="Adoccia_Header_NavLink xl-at-end {{ selectedMenuItem == 'user' ? 'active' : '' }}" href="{{ url('app.login') }}">
+            <i class="fas fa-sign-in-alt font-size-25px margin-right-7px"></i> Accès membre
+        </a>
+    {% endif %}
 
-    <div class="uk-navbar-right">
-        <ul class="uk-navbar-nav">
-            {% if app.user %}
-                <li>
-                    <a class="AppHeader_Nav_Link" href="#">{{ app.user.username }}</a>
-                    <div class="uk-navbar-dropdown" uk-dropdown="mode: click">
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li><a href="#">Mon profil</a></li>
-                            <li class="uk-nav-divider"></li>
-                            <li>
-                                <a href="{{ url('app.logout') }}">Quitter</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-            {% else %}
-                <li>
-                    <a class="AppHeader_Nav_Link" href="{{ url('app.login') }}">Connexion</a>
-                </li>
-            {% endif %}
-        </ul>
-    </div>
 </nav>

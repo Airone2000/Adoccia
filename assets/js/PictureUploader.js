@@ -106,6 +106,7 @@ class PictureUploader
                 mouseWheelZoom: false,
                 enableExif: true
             };
+
             if (cropShape === 'square') {
                 options.viewport = {width: 250, height: 250, type: 'square'};
                 options.boundary = { width: 300, height: 300 };

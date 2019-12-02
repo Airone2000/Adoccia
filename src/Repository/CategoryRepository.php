@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Category;
 use App\Entity\CategorySearch;
 use App\Entity\User;
+use App\Security\Voter\CategoryVoter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
@@ -38,6 +39,9 @@ class CategoryRepository extends ServiceEntityRepository
 
     private function getForUser(?User $user, QueryBuilder $queryBuilder)
     {
+        # No filtering when user can access all categories
+        if (CategoryVoter::canAccessAllCategories($user)) return;
+
         $q = '(c.public = 1 AND c.online = 1)';
         if ($user instanceof User) {
             $q = "({$q} OR (c.createdBy = :user))";
@@ -55,6 +59,18 @@ class CategoryRepository extends ServiceEntityRepository
             ->setMaxResults($items)
         ;
 
+        $this->applyCategorySearch($qb, $categorySearch, [
+            'user' => $user
+        ]);
+
+        $paginator = new Paginator($qb, false);
+        return $paginator;
+    }
+
+    private function applyCategorySearch(QueryBuilder $qb, ?CategorySearch $categorySearch, array $options = []): void
+    {
+        if($categorySearch === null) return;
+
         # Filter on title / name
         if ($title = $categorySearch->getTitle()) {
             $qb
@@ -63,8 +79,27 @@ class CategoryRepository extends ServiceEntityRepository
             ;
         }
 
-        $paginator = new Paginator($qb, false);
-        return $paginator;
+        # Order by
+        if ($orderBy = $categorySearch->getOrderBy()) {
+            switch($orderBy) {
+                case 'created_at_desc': $qb->orderBy('c.createdAt', 'DESC'); break;
+                case 'created_at_asc': $qb->orderBy('c.createdAt', 'ASC'); break;
+                case 'name_desc': $qb->orderBy('c.name', 'DESC'); break;
+                case 'name_asc': $qb->orderBy('c.name', 'ASC');break;
+            }
+        }
+
+        # Filter
+        if ($filter = $categorySearch->getFilter()) {
+            switch ($filter) {
+                case 'mine':
+                    $user = ($options['user'] ?? null);
+                    if ($user instanceof User) {
+                        $qb->andWhere('c.createdBy = :user')->setParameter('user', $user);
+                    }
+                    break;
+            }
+        }
     }
 
     private function getUser(): ?User

@@ -1,0 +1,40 @@
+.modal-wrapper
+{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: $adocciaMainColor;
+}
+
+.modal
+{
+  margin: auto;
+  position: relative;
+  padding: 15px;
+  padding-top: 30px;
+  background-color: #fff;
+}
+
+.BtnCloseModal
+{
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  top: 7px;
+  right: 9px;
+  color: #999;
+}
+
+.BtnCloseModal:hover
+{
+  color: #000;
+}

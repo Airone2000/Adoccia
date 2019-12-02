@@ -29,6 +29,8 @@
         "voku/stringy": "^6.0"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "fzaninotto/faker": "^1.9",
         "symfony/debug-pack": "^1.0",
         "symfony/maker-bundle": "^1.13",
         "symfony/phpunit-bridge": "^4.3",

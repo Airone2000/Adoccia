@@ -39,4 +39,4 @@ class FicheForm
 
 }
 
-new CategoryForm();
+new FicheForm();

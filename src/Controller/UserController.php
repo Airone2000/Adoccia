@@ -31,7 +31,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/register", methods={"get", "post"}, name="app.register")
+     * @Route("/register", methods={"get", "post"}, name="app.register", defaults={"menu":"user"})
      * @inheritdoc
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, FormAuthenticator $authenticator): Response
@@ -69,7 +69,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/login", name="app.login")
+     * @Route("/login", name="app.login", defaults={"menu":"user"})
      * @inheritdoc
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
