@@ -13,7 +13,7 @@ class PictureUploader
     _listenForOpenModalPictureUpload()
     {
         // Give the modal a unique id
-        this.modal = $('.modal-wrapper');
+        this.modal = $('#pictureUploaderModal');
         this.modalUid = uniqid();
         this.modal.attr('id', this.modalUid);
 
@@ -35,19 +35,19 @@ class PictureUploader
 
     _openLoadingModal()
     {
-        this.modal.find('.modal').html('loading ...');
+        this.modal.find('.body').html('loading ...');
         this.modal.removeClass('hidden');
         this._listenForCloseModal();
     }
 
     _listenForCloseModal()
     {
-        this.modal.find('.modal').mousedown((e) => {
+        this.modal.find('.body').mousedown((e) => {
             e.stopPropagation();
         });
 
         this.modal.mousedown((e) => {
-            this.modal.find('.modal').empty();
+            this.modal.find('.body').empty();
             this.modal.addClass('hidden');
         });
     }
@@ -68,7 +68,7 @@ class PictureUploader
                     throw new Error('ERROR');
                 })
                 .then(responseJSON => {
-                    this.modal.find('.modal').html(responseJSON.view);
+                    this.modal.find('.body').html(responseJSON.view);
                     resolve(responseJSON);
                 })
                 .catch(() => {

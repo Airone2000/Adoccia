@@ -26,9 +26,12 @@
 
     {% if app.user %}
         {{ include('_account.modal.html.twig') }}
+        {{ include('_picture_uploader.modal.html.twig') }}
     {% endif %}
 
-    {{ include('_modal.html.twig') }}
+
+
+
 
     {%- block javascripts -%}
         {{ load_Leaflet_script() }}
