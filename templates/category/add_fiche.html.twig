@@ -5,10 +5,12 @@
     {{ encore_entry_link_tags('fiche') }}
     {{ encore_entry_link_tags('add_fiche') }}
     {{ encore_entry_link_tags('mapsBuilder') }}
+    {{ load_Leaflet_style() }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    {{ load_Leaflet_script() }}
     {{ encore_entry_script_tags('mapsBuilder') }}
     {{ encore_entry_script_tags('ficheForm') }}
     {{ encore_entry_script_tags('pictureUploader') }}

@@ -1,58 +1,55 @@
-#AppTopWrapper {
+ul.photon-autocomplete {
+    position: absolute;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 0 4px 9px #999999;
+    padding: 0;
+    margin: 0;
+}
 
-    ul.photon-autocomplete {
-        position: absolute;
-        background-color: white;
-        z-index: 1000;
-        box-shadow: 0 4px 9px #999999;
-        padding: 0;
-        margin: 0;
-    }
+.photon-autocomplete li {
+    min-height: 40px;
+    line-height: 1em;
+    padding: 5px 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 1em;
+}
 
-    .photon-autocomplete li {
-        min-height: 40px;
-        line-height: 1em;
-        padding: 5px 10px;
-        overflow: hidden;
-        white-space: nowrap;
-        font-size: 1em;
-    }
+.photon-autocomplete li strong {
+    display: block;
+}
 
-    .photon-autocomplete li strong {
-        display: block;
-    }
+.photon-autocomplete li.on {
+    background-color: #2980b9;
+    cursor: pointer;
+}
 
-    .photon-autocomplete li.on {
-        background-color: #2980b9;
-        cursor: pointer;
-    }
+.photon-autocomplete li.photon-no-result {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+    line-height: 40px;
+}
 
-    .photon-autocomplete li.photon-no-result {
-        text-align: center;
-        color: #666;
-        font-size: 0.9em;
-        line-height: 40px;
-    }
+.photon-autocomplete .photon-feedback {
+    display: block;
+    text-align: right;
+    font-size: 0.8em;
+    padding: 3px;
+    color: #999;
+    border-top: 1px solid #eee;
+}
 
-    .photon-autocomplete .photon-feedback {
-        display: block;
-        text-align: right;
-        font-size: 0.8em;
-        padding: 3px;
-        color: #999;
-        border-top: 1px solid #eee;
-    }
+.photon-input:focus {
+    width: 200px !important;
+}
 
-    .photon-input:focus {
-        width: 200px !important;
-    }
+.leaflet-control-add-marker {
+    background-image: url('https://cdn3.iconfinder.com/data/icons/glypho-travel/64/map-pin-marker-plus-512.png');
+    background-size: contain;
+}
 
-    .leaflet-control-add-marker {
-        background-image: url('https://cdn3.iconfinder.com/data/icons/glypho-travel/64/map-pin-marker-plus-512.png');
-        background-size: contain;
-    }
-
-    .SearchLocationForm {
-        width: 220px;
-    }
+.SearchLocationForm {
+    width: 220px;
 }

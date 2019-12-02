@@ -412,8 +412,6 @@ class MapsBuilder
         this._buildMaps();
     }
 
-
-
     registerJSONMap(mapElement) {
         let mapId = mapElement.id;
         let $element = $(mapElement);

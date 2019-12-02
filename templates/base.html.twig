@@ -29,12 +29,7 @@
         {{ include('_picture_uploader.modal.html.twig') }}
     {% endif %}
 
-
-
-
-
     {%- block javascripts -%}
-        {{ load_Leaflet_script() }}
         {{ encore_entry_script_tags('app') }}
         {% include '_endpoints.html.twig' %}
         <script src="https://kit.fontawesome.com/c6268521db.js" crossorigin="anonymous"></script>
