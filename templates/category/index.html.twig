@@ -10,7 +10,22 @@
 {% block body %}
 
 
+    <h1>Collections</h1>
 
+    {% if categories is not empty %}
+        <table>
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <a href="{{ url('category.show', {'id': category.id}) }}">Ouvrir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 
 
 

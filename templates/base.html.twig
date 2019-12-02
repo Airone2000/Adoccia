@@ -28,6 +28,8 @@
         {{ include('_account.modal.html.twig') }}
     {% endif %}
 
+    {{ include('_modal.html.twig') }}
+
     {%- block javascripts -%}
         {{ load_Leaflet_script() }}
         {{ encore_entry_script_tags('app') }}

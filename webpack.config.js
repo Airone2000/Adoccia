@@ -22,6 +22,7 @@ Encore
     .addEntry('ficheForm', './assets/js/fiche/FicheForm.js')
     .addStyleEntry('categoryIndex', './assets/layout/category/index.scss')
     .addStyleEntry('categoryShow', './assets/css/category/show.scss')
+    .addStyleEntry('categoryFormBuilder', './assets/layout/category/form_builder.scss')
 
     // New layout
     .addStyleEntry('layout', './assets/layout/main.scss')

@@ -1,0 +1,228 @@
+#formWrapper {
+  width: 1000px;
+  margin: auto;
+  position: relative;
+  padding: 15px;
+
+  &.loading {
+    .autoSaveIndicator {
+      display: flex;
+      color: #555;
+      align-items: center;
+
+      .icon {
+        font-size: 30px;
+      }
+    }
+  }
+
+  .autoSaveIndicator {
+    display: none;
+  }
+
+  #form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: #F1F1F1;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+
+    > .area {
+      display: flex;
+      position: relative;
+      padding: 8px;
+      background-color: #fff;
+      margin: 10px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+
+      .area-grip.handle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: move;
+        line-height: 0em;
+        color: rgba(0,0,0,.1);
+        flex-shrink: 0;
+        flex-grow: 0;
+
+        > i:not(:first-child) {
+          margin-top: -1px;
+        }
+      }
+
+      .area-footer, .area-header {
+        display: flex;
+        justify-content: flex-end;
+
+        &.area-header {
+          align-items: center;
+        }
+      }
+
+      .area-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+
+        .widgetTypePicker {
+          width:130px;
+          max-width: 50%;
+          border: 1px solid #999;
+          background: #fff;
+        }
+      }
+
+      .area-inner {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex-shrink: 1;
+        width: calc(100% - 10px);
+      }
+
+      input.resizer {
+        width: 25px;
+        text-align: center;
+        border: 1px solid #ccc;
+        color: #999;
+        font-size: 10px;
+
+        &:focus {
+          color: #555;
+          outline: 0;
+        }
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
+    .sortable-chosen {
+      border-style: dashed !important;
+    }
+
+    .sortable-drag {
+      border-style: solid !important;
+    }
+
+    .delete-formArea, .configure-formArea {
+      color: rgba(0,0,0,.2);
+      cursor: pointer;
+      font-size: 14px;
+
+      &.configure-formArea {
+        margin-left: 5px;
+        &:hover {
+          color: #000;
+        }
+      }
+
+      &.delete-formArea:hover {
+        color: #c60800;
+      }
+    }
+
+    .widget {
+      margin-top: 15px;
+    }
+
+    .modalSetWidgetOptions {
+      display: none;
+    }
+
+    /* Styling widgetLabel (formBuilder) */
+    .widgetLabel {
+      width: 65%;
+      textarea {
+        width: 100%;
+        resize: vertical;
+        padding: 5px;
+        border: 1px solid #ccc;
+        outline: 0;
+      }
+    }
+  }
+
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    text-align: right;
+
+    button {
+      margin-left: 5px;
+    }
+  }
+}
+
+#wrapperModal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,.5);
+  overflow: auto;
+
+  > .content {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px;
+    background: #fff;
+    box-shadow: #555 0px 0px 15px;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+#formErrorDisplay {
+  display: none;
+
+  &.visible {
+    display: block;
+  }
+}
+
+#AreaSettings_Margins_Row, #AreaSettings_Paddings_Row, #AreaSettings_Borders_Row {
+  display: flex;
+  align-items: center;
+  > div {
+    flex: 1;
+  }
+}
+#AreaSettings_Margins_Widget, #AreaSettings_Paddings_Widget, #AreaSettings_Borders_Widget {
+  > div {
+    margin: auto;
+    padding: 3px;
+  }
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+
+

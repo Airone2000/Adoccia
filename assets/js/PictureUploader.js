@@ -13,7 +13,7 @@ class PictureUploader
     _listenForOpenModalPictureUpload()
     {
         // Give the modal a unique id
-        this.modal = $('.modal-background');
+        this.modal = $('.modal-wrapper');
         this.modalUid = uniqid();
         this.modal.attr('id', this.modalUid);
 
