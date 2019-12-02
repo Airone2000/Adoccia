@@ -10,6 +10,7 @@
         "liip/imagine-bundle": "^2.2",
         "mailjet/mailjet-apiv3-php": "^1.4",
         "ramsey/uuid": "^3.8",
+        "ramsey/uuid-doctrine": "^1.5",
         "scienta/doctrine-json-functions": "^4.0",
         "sensio/framework-extra-bundle": "^5.4",
         "symfony/console": "4.3.*",
@@ -77,7 +78,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "4.3.*"
         }
     }
