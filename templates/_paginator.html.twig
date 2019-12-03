@@ -20,7 +20,9 @@
         {% if previous > 0 %}
             {% set queryParams = queryParams|merge({'page': previous}) %}
             <li class="paginator_item_arrow">
-                <a href="{{ url('category.index', queryParams) }}"><span uk-pagination-previous></span></a>
+                <a href="{{ url('category.index', queryParams) }}">
+                    Prev
+                </a>
             </li>
         {% endif %}
 
@@ -66,7 +68,9 @@
         {% if next <= lastPage %}
             {% set queryParams = queryParams|merge({'page': next}) %}
             <li class="paginator_item_arrow">
-                <a href="{{ url('category.index', queryParams) }}"><span uk-pagination-next></span></a>
+                <a href="{{ url('category.index', queryParams) }}">
+                    Next
+                </a>
             </li>
         {% endif %}
     </ul>

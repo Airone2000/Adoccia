@@ -8,27 +8,24 @@
 {% endblock %}
 
 {% block body %}
-
-
-    <h1>Collections</h1>
-
-    {% if categories is not empty %}
-        <table>
-            <tbody>
-                {% for category in categories %}
-                    <tr>
-                        <td>{{ category.name }}</td>
-                        <td>
-                            <a href="{{ url('category.show', {'id': category.id}) }}">Ouvrir</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        {{ include('_paginator.html.twig') }}
-    {% endif %}
-
-
-
+    <div id="CategoriesIndex">
+        <div id="CategoriesIndex_Header">
+            <a class="btn" href="{{ url('category.new') }}">+ Nouvelle collection</a>
+        </div>
+        <div id="CategoriesIndex_List">
+            {% if categories is not empty %}
+                <ul>
+                    {% for category in categories %}
+                        <li class="CategoriesIndex_List_Item">
+                            {{ showPicture(category.picture) }}
+                            <h2 class="CategoriesIndex_List_Item_Name">{{ category.name }}</h2>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div id="CategoriesIndex_Footer">
+            {{ include('_paginator.html.twig') }}
+        </div>
+    </div>
 {% endblock %}
