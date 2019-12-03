@@ -29,10 +29,7 @@ final class CategorySearchType extends AbstractType
                 ],
                 'choice_label' => function($value) {
                     return "CategorySearchType.orderBy.{$value}";
-                },
-                'attr' => [
-                    'onchange' => 'this.form.submit()'
-                ]
+                }
             ])
             ->add('filter', ChoiceType::class, [
                 'choices' => [
@@ -43,9 +40,14 @@ final class CategorySearchType extends AbstractType
                     return "CategorySearchType.filter.{$value}";
                 },
                 'attr' => [
-                    'class' => 'uk-select uk-form-small',
-                    'onchange' => 'this.form.submit()'
+                    'class' => 'uk-select uk-form-small'
                 ]
+            ])
+            ->add('itemsPerPage', ChoiceType::class, [
+                'choices' => [30 => 30, 90 => 90, 200 => 200, 700 => 700],
+                'choice_label' => function($value) {
+                    return "{$value} collections par page";
+                }
             ])
         ;
     }

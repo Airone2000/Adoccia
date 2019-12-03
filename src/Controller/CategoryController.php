@@ -62,7 +62,7 @@ class CategoryController extends AbstractController
         /* @var User|null */
         $user = $this->getUser();
         $page = (int)$request->query->get('page', $categorySearch->getPage());
-        $items = (int)$request->query->get('items', 100);
+        $items = (int)$categorySearch->getItemsPerPage();
         $categories = $categoryRepository->findAllForUserOrPublic($user, $page, $items, $categorySearch);
         $totalItems = count($categories);
         $lastPage = (int)ceil(($totalItems / $items));

@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block body %}
-
     <div id="categoriesIndex">
 
         <div id="categoriesIndex_TitleAndButtonNew">
@@ -19,16 +18,15 @@
         <div id="categoriesIndex_Search">
             {{ form_start(searchForm) }}
             {{ form_widget(searchForm.title) }}
-            {% do searchForm.orderBy.setRendered() %}
-            {% do searchForm.filter.setRendered() %}
+            {% include '/category/_search.modal.html.twig' with {'form': searchForm} %}
             {{ form_end(searchForm) }}
-            <a id="categoriesIndex_Search_BtnMore" class="btn" href="#">
+            <a id="categoriesIndex_Search_BtnMore" class="btn openModal" data-target-selector="#categoriesSearchModal" href="#">
                 <i class="fas fa-sliders-h"></i>
             </a>
         </div>
 
         {% if categories is not empty %}
-            <div id="CategoriesList">
+            <div id="CategoriesList" class="{{ paginator.lastPage == 1 ? 'single-page' : '' }}">
                 {% for category in categories %}
                     {% set target = url('category.show', {'id': category.id}) %}
                     <div class="CategoriesList_Item link" data-target="{{ target }}">
@@ -46,11 +44,12 @@
             </div>
         {% endif %}
 
-        <div id="categoriesIndex_Footer">
-            {% if categories is not empty %}
+        {% if categories is not empty %}
+            <div id="categoriesIndex_Footer">
                 {{ include('_paginator.html.twig') }}
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
+
     </div>
 
 {% endblock %}

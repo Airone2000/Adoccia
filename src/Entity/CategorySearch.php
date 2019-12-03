@@ -56,6 +56,12 @@ class CategorySearch
     private $page = 1;
 
     /**
+     * @var int
+     * @ORM\Column(type="integer", nullable=false, options={"default":30})
+     */
+    private $itemsPerPage = 30;
+
+    /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
      */
@@ -217,6 +223,24 @@ class CategorySearch
     public function setPage(int $page): CategorySearch
     {
         $this->page = $page;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getItemsPerPage(): int
+    {
+        return $this->itemsPerPage;
+    }
+
+    /**
+     * @param int $itemsPerPage
+     * @return CategorySearch
+     */
+    public function setItemsPerPage(int $itemsPerPage): CategorySearch
+    {
+        $this->itemsPerPage = $itemsPerPage;
         return $this;
     }
 

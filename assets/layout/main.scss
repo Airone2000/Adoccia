@@ -63,6 +63,11 @@ html, body
   color: #ccc;
 }
 
+.w100
+{
+  width: 100%;
+}
+
 @include font-size-list;
 @include padding-list;
 @include margin-list;

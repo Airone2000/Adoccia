@@ -77,6 +77,9 @@
   overflow: auto;
 
   align-self: center;
+
+  // If only one page, no pagination
+  &.single-page { grid-row: 2 / 4; }
 }
 
 .CategoriesList_Item
@@ -125,4 +128,11 @@
   align-items: center;
   justify-content: center;
   grid-column: 1 / 3;
+}
+
+#categoriesSearchModal
+{
+  select {
+    width: 100%;
+  }
 }
