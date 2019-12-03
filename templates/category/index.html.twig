@@ -8,24 +8,50 @@
 {% endblock %}
 
 {% block body %}
-    <div id="CategoriesIndex">
-        <div id="CategoriesIndex_Header">
-            <a class="btn" href="{{ url('category.new') }}">+ Nouvelle collection</a>
+
+    <div id="categoriesIndex">
+
+        <div id="categoriesIndex_TitleAndButtonNew">
+            <h1 id="categoriesIndex_Title" class="no-padding no-margin">Les collections</h1>
+            <a id="categoriesIndex_ButtonNew" class="btn" href="{{ url('category.new') }}">+ créer</a>
         </div>
-        <div id="CategoriesIndex_List">
+
+        <div id="categoriesIndex_Search">
+            {{ form_start(searchForm) }}
+            {{ form_widget(searchForm.title) }}
+            {% do searchForm.orderBy.setRendered() %}
+            {% do searchForm.filter.setRendered() %}
+            {{ form_end(searchForm) }}
+            <a id="categoriesIndex_Search_BtnMore" class="btn" href="#">
+                <i class="fas fa-sliders-h"></i>
+            </a>
+        </div>
+
+        {% if categories is not empty %}
+            <div id="CategoriesList">
+                {% for category in categories %}
+                    {% set target = url('category.show', {'id': category.id}) %}
+                    <div class="CategoriesList_Item link" data-target="{{ target }}">
+                        {{ showPicture(category.picture) }}
+                        <div class="CategoriesList_Item_Info">
+                            <h2 class="CategoriesList_Item_Name">{{ category.name }}</h2>
+                            <div class="CategoriesList_Item_Author">{{ category.createdBy.username }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div>
+                Aucun résultat
+            </div>
+        {% endif %}
+
+        <div id="categoriesIndex_Footer">
             {% if categories is not empty %}
-                <ul>
-                    {% for category in categories %}
-                        <li class="CategoriesIndex_List_Item">
-                            {{ showPicture(category.picture) }}
-                            <h2 class="CategoriesIndex_List_Item_Name">{{ category.name }}</h2>
-                        </li>
-                    {% endfor %}
-                </ul>
+                {{ include('_paginator.html.twig') }}
             {% endif %}
         </div>
-        <div id="CategoriesIndex_Footer">
-            {{ include('_paginator.html.twig') }}
-        </div>
     </div>
+
 {% endblock %}
+
