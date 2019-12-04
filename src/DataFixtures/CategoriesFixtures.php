@@ -28,7 +28,7 @@ class CategoriesFixtures extends Fixture
 
 
         $faker = Factory::create('fr_FR');
-        $nbCategories = 500;
+        $nbCategories = 200;
         $user = $manager->find(User::class, 1);
 
         for($i = 0; $i < $nbCategories; $i++) {

@@ -16,10 +16,9 @@
         </div>
 
         <div id="categoriesIndex_Search">
-            {{ form_start(searchForm) }}
-            {{ form_widget(searchForm.title) }}
-            {% include '/category/_search.modal.html.twig' with {'form': searchForm} %}
-            {{ form_end(searchForm) }}
+            {{ form_start(categorySearchByTitleForm) }}
+            {{ form_widget(categorySearchByTitleForm.title) }}
+            {{ form_end(categorySearchByTitleForm) }}
             <a id="categoriesIndex_Search_BtnMore" class="btn openModal" data-target-selector="#categoriesSearchModal" href="#">
                 <i class="fas fa-sliders-h"></i>
             </a>
@@ -51,6 +50,8 @@
         {% endif %}
 
     </div>
+
+    {% include '/category/_search.modal.html.twig' with {'form': categorySearchByMoreForm} %}
 
 {% endblock %}
 
