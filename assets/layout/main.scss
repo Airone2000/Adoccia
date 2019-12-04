@@ -68,6 +68,11 @@ html, body
   width: 100%;
 }
 
+.link
+{
+  cursor: pointer;
+}
+
 @include font-size-list;
 @include padding-list;
 @include margin-list;

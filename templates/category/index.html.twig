@@ -8,50 +8,54 @@
 {% endblock %}
 
 {% block body %}
-    <div id="categoriesIndex">
-
-        <div id="categoriesIndex_TitleAndButtonNew">
-            <h1 id="categoriesIndex_Title" class="no-padding no-margin">Les collections</h1>
-            <a id="categoriesIndex_ButtonNew" class="btn" href="{{ url('category.new') }}">+ créer</a>
+    <div id="categoryIndex">
+        <div id="categoryIndex_Header">
+            <div id="categoryIndex_Header_TitleAndBtnNew">
+                <h1>Les collections</h1>
+                <a class="btn" href="{{ url('category.new') }}">+ créer</a>
+            </div>
+            <div id="categoryIndex_Header_Search">
+                {{ form_start(categorySearchByTitleForm) }}
+                {{ form_widget(categorySearchByTitleForm.title) }}
+                {{ form_end(categorySearchByTitleForm) }}
+                <a href="#" class="btn openModal" data-target-selector="#categoriesSearchModal">
+                    <i class="fas fa-sliders-h icon"></i>
+                </a>
+            </div>
         </div>
 
-        <div id="categoriesIndex_Search">
-            {{ form_start(categorySearchByTitleForm) }}
-            {{ form_widget(categorySearchByTitleForm.title) }}
-            {{ form_end(categorySearchByTitleForm) }}
-            <a id="categoriesIndex_Search_BtnMore" class="btn openModal" data-target-selector="#categoriesSearchModal" href="#">
-                <i class="fas fa-sliders-h"></i>
-            </a>
+        <div id="categoryIndex_Body" class="{{ paginator.lastPage == 1 ? 'single-page' : '' }}">
+            {% if categories is not empty %}
+                <ul id="CategoriesList">
+                    {% for category in categories %}
+                        {% set target = url('category.show', {'id': category.id}) %}
+                        <li class="CategoriesList_Item link" data-target="{{ target }}">
+                            {{ showPicture(category.picture) }}
+                            <div class="Item_Overview">
+                                <h2 class="Item_Name">{{ category.name }}</h2>
+                            </div>
+                        </li>
+                    {% endfor %}
+
+                    {% for i in 0 .. 100 %}
+                        <li class="CategoriesList_Item placeholder"></li>
+                    {% endfor %}
+
+                </ul>
+            {% endif %}
         </div>
 
-        {% if categories is not empty %}
-            <div id="CategoriesList" class="{{ paginator.lastPage == 1 ? 'single-page' : '' }}">
-                {% for category in categories %}
-                    {% set target = url('category.show', {'id': category.id}) %}
-                    <div class="CategoriesList_Item link" data-target="{{ target }}">
-                        {{ showPicture(category.picture) }}
-                        <div class="CategoriesList_Item_Info">
-                            <h2 class="CategoriesList_Item_Name">{{ category.name }}</h2>
-                            <div class="CategoriesList_Item_Author">{{ category.createdBy.username }}</div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div>
-                Aucun résultat
+        {% if paginator.lastPage > 1 %}
+            <div id="categoryIndex_Footer">
+                {% if categories is not empty %}
+                    {{ include('_paginator.html.twig') }}
+                {% endif %}
             </div>
         {% endif %}
-
-        {% if categories is not empty %}
-            <div id="categoriesIndex_Footer">
-                {{ include('_paginator.html.twig') }}
-            </div>
-        {% endif %}
-
     </div>
 
-    {% include '/category/_search.modal.html.twig' with {'form': categorySearchByMoreForm} %}
+    {# Modal for more filters #}
+    {% include 'category/_search.modal.html.twig' with {'form': categorySearchByMoreForm} %}
 
 {% endblock %}
 
