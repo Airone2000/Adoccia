@@ -21,7 +21,7 @@
             {% set queryParams = queryParams|merge({'page': previous}) %}
             <li class="paginator_item_arrow">
                 <a href="{{ url('category.index', queryParams) }}">
-                    Prev
+                    <i class="fas fa-arrow-circle-left font-size-30px"></i>
                 </a>
             </li>
         {% endif %}
@@ -69,7 +69,7 @@
             {% set queryParams = queryParams|merge({'page': next}) %}
             <li class="paginator_item_arrow">
                 <a href="{{ url('category.index', queryParams) }}">
-                    Next
+                    <i class="fas fa-arrow-circle-right font-size-30px"></i>
                 </a>
             </li>
         {% endif %}

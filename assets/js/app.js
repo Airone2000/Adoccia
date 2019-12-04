@@ -45,7 +45,7 @@ class App
     {
         $('.BtnCloseModal').click((e) => {
             document.querySelector('#Adoccia').classList.remove('blur-10');
-            e.target.closest('.modal-wrapper').classList.add('hidden')
+            e.target.closest('.modal-wrapper').classList.add('hidden');
         });
     }
 }

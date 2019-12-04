@@ -44,25 +44,20 @@ class CategoryController extends AbstractController
     {
         # Get previous search for current user, or new search if none exist
         $categorySearch = $categorySearchRepository->findOneByUserOrGuestUniqueID($this->getUser(), $request->cookies->get('_guid'));
-        $categorySearchForm = $this->createForm(CategorySearchType::class, $categorySearch);
-        $categorySearchForm->handleRequest($request);
-
-        # If the user perform a search, save it then redirect him to the same page
-        if ($categorySearchForm->isSubmitted() && $categorySearchForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->detach($categorySearch);
-            $em->persist($categorySearch);
-            $em->flush();
-
-            $url = $this->generateUrl('category.index');
-            return $this->redirect($url);
-        }
+        $categorySearchByTitleForm = $this->createForm(CategorySearchType::class, clone $categorySearch, [
+            'mode' => CategorySearchType::MODE_TITLE_ONLY,
+            'action' => $this->generateUrl('category.searchByTitle')
+        ]);
+        $categorySearchByMoreForm = $this->createForm(CategorySearchType::class, clone $categorySearch, [
+            'mode' => CategorySearchType::MODE_MORE_ONLY,
+            'action' => $this->generateUrl('category.searchByMore')
+        ]);
 
         # Load categories based on pagination
         /* @var User|null */
         $user = $this->getUser();
         $page = (int)$request->query->get('page', $categorySearch->getPage());
-        $items = (int)$request->query->get('items', 100);
+        $items = (int)$categorySearch->getItemsPerPage();
         $categories = $categoryRepository->findAllForUserOrPublic($user, $page, $items, $categorySearch);
         $totalItems = count($categories);
         $lastPage = (int)ceil(($totalItems / $items));
@@ -72,19 +67,50 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category.index', ['page' => $lastPage > 0 ? $lastPage : 1]);
         }
 
-        # If page exists and the user has a search, update the page number
-        # It can be new and non persisted in case where current user is not user
-        # and he has not guestUniqueID
-        if (!$categorySearch->isNew()) {
-            $categorySearch->setPage($page);
-            $this->getDoctrine()->getManager()->flush();
-        }
-
         return $this->render('category/index.html.twig', [
             'categories' => $categories,
-            'searchForm' => $categorySearchForm->createView(),
+            'categorySearchByTitleForm' => $categorySearchByTitleForm->createView(),
+            'categorySearchByMoreForm' => $categorySearchByMoreForm->createView(),
             'paginator' => ['currentPage' => $page, 'itemsPerPage' => $items, 'totalItems' => $totalItems, 'lastPage' => $lastPage]
         ]);
+    }
+
+    /**
+     * @Route(
+     *     path="/search-by-title",
+     *     methods={"post"},
+     *     name="category.searchByTitle"
+     * )
+     * @inheritdoc
+     */
+    public function searchByTitle(Request $request, CategorySearchRepository $categorySearchRepository)
+    {
+        $categorySearch = $categorySearchRepository->findOneByUserOrGuestUniqueID($this->getUser(), $request->cookies->get('_guid'));
+        $form = $this->createForm(CategorySearchType::class, $categorySearch, ['mode' => CategorySearchType::MODE_TITLE_ONLY]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush($categorySearch);
+        }
+        return $this->redirectToRoute('category.index');
+    }
+
+    /**
+     * @Route(
+     *     path="/search-by-more",
+     *     methods={"post"},
+     *     name="category.searchByMore"
+     * )
+     * @inheritdoc
+     */
+    public function searchByMore(Request $request, CategorySearchRepository $categorySearchRepository)
+    {
+        $categorySearch = $categorySearchRepository->findOneByUserOrGuestUniqueID($this->getUser(), $request->cookies->get('_guid'));
+        $form = $this->createForm(CategorySearchType::class, $categorySearch, ['mode' => CategorySearchType::MODE_MORE_ONLY]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush($categorySearch);
+        }
+        return $this->redirectToRoute('category.index');
     }
 
     /**

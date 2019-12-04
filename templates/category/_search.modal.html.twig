@@ -1,0 +1,25 @@
+<div id="categoriesSearchModal" class="modal-wrapper hidden">
+    <div class="modal">
+        <i class="fas fa-times BtnCloseModal"></i>
+        <div class="body">
+
+            <div class="title font-size-25px margin-bottom-25px">Options de recherche</div>
+
+            {{ form_start(form) }}
+
+                <div>
+                    {{ form_widget(form.itemsPerPage) }}
+                </div>
+                <div class="margin-top-7px">
+                    {{ form_widget(form.filter) }}
+                </div>
+                <div class="margin-top-7px">
+                    {{ form_widget(form.orderBy) }}
+                </div>
+
+                <button class="btn margin-top-15px w100" type="submit">Appliquer et fermer</button>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
