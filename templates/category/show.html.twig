@@ -8,40 +8,30 @@
 {% endblock %}
 
 {% block body %}
+    <div id="categoryShow">
+        <div id="categoryShow_Side">
 
-    <div class="ShowCategory">
-        <div>
-            <div>
-                <div class="ShowCategory_GlobalIntro">
-                    <div style="width: 300px;">
-                    {{ showPicture(category.picture) }}
-                    </div>
-                    <h1 class="ShowCategory_GlobalIntro_Title">{{ category.name }}</h1>
-                    {% if category.description %}
-                        <p>
-                            {{ category.description }}
-                        </p>
-                    {% endif %}
-                </div>
-            </div>
-            <div>
-                Droite
-            </div>
+            <h1>{{ category.name }}</h1>
+            {{ showPicture(category.picture) }}
+
+            {% if category.description %}
+                <p class="description">{{ category.description }}</p>
+            {% endif %}
+
+            <nav id="categoryShow_Side_Menu">
+                <a class="btn menuLink" href="">
+                    <i class="fas fa-leaf font-size-20px icon"></i>
+                    Les feuilles
+                </a>
+                <a class="btn menuLink" href="">
+                    <i class="fas fa-search font-size-20px icon"></i>
+                    Recherche avancée
+                </a>
+                <a class="btn menuLink" href="">
+                    <i class="fas fa-cog font-size-20px icon"></i>
+                    Paramètres & Administration
+                </a>
+            </nav>
         </div>
     </div>
-
-
-
-    <a href="{{ url('category.listFiches', {'id': category.id}) }}">
-        Liste des fiches
-    </a>
-
-
-    <a href="{{ path('category.index') }}">back to list</a>
-
-    {% if is_granted('EDIT_CATEGORY', category) %}
-        <a href="{{ path('category.edit', {'id': category.id}) }}">edit</a>
-    {% endif %}
-
-    {{ include('category/_delete_form.html.twig') }}
 {% endblock %}

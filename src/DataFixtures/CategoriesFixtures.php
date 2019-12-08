@@ -28,12 +28,12 @@ class CategoriesFixtures extends Fixture
 
 
         $faker = Factory::create('fr_FR');
-        $nbCategories = 200;
+        $nbCategories = 100;
         $user = $manager->find(User::class, 1);
 
         for($i = 0; $i < $nbCategories; $i++) {
             try {
-                $pictureURL = "https://picsum.photos/id/{$i}/200/200";
+                $pictureURL = "https://picsum.photos/id/{$i}/250/250";
                 $basename = uniqid('picture_') . '.png';
                 $filename = $this->pictureUploadDir . DIRECTORY_SEPARATOR . $basename;
                 file_put_contents($filename, file_get_contents($pictureURL));
