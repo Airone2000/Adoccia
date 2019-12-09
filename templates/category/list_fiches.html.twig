@@ -1,5 +1,6 @@
-{% extends 'base.html.twig' %}
-{% block body %}
+{% extends 'category/base.html.twig' %}
+
+{% block category_body %}
     <h1>Liste des fiches</h1>
 
     {% if is_granted('ADD_FICHE_TO_CATEGORY', category) %}

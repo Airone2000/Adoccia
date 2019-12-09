@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('categoryShow') }}
+{% endblock %}
+
+{% block body %}
+    <div id="categoryShow">
+        <div id="categoryShow_Side">
+
+            <h1>{{ category.name }}</h1>
+            {{ showPicture(category.picture) }}
+
+            {% if category.description %}
+                <p class="description">{{ category.description }}</p>
+            {% endif %}
+
+            <nav id="categoryShow_Side_Menu">
+                <a class="btn menuLink" href="{{ url('category.listFiches', {'id': category.id}) }}">
+                    <i class="fas fa-leaf font-size-20px icon"></i>
+                    Les feuilles
+                </a>
+                <a class="btn menuLink" href="{{ url('category.searchFiches', {'categoryId': category.id}) }}">
+                    <i class="fas fa-search font-size-20px icon"></i>
+                    Recherche avancée
+                </a>
+                <a class="btn menuLink" href="{{ url('category.edit', {'id': category.id}) }}">
+                    <i class="fas fa-cog font-size-20px icon"></i>
+                    Paramètres & Administration
+                </a>
+            </nav>
+        </div>
+
+        <div id="categoryShow_Body">
+        {% block category_body %}
+        {% endblock %}
+        </div>
+
+    </div>
+{% endblock %}

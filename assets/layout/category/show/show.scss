@@ -4,3 +4,10 @@
 {
   @import "show.xl";
 }
+
+#categoryShow_Body
+{
+  flex-grow: 1;
+  padding: 15px;
+  background-color: red;
+}
