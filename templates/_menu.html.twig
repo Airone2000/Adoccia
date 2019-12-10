@@ -2,10 +2,10 @@
 
 <nav id="Adoccia_Header_Nav">
     <a class="Adoccia_Header_NavLink {{ selectedMenuItem == 'category' ? 'active' : '' }}" href="{{ url('category.index') }}">
-        <i class="fab fa-pagelines font-size-25px margin-right-7px"></i> Les collections
+        <i class="fab fa-pagelines font-size-25px margin-right-7px"></i> {{ 'menu.link.collections'|trans }}
     </a>
     <a class="Adoccia_Header_NavLink {{ selectedMenuItem == 'about' ? 'active' : '' }}" href="{{ url('app.about') }}">
-        <i class="fas fa-question-circle font-size-25px margin-right-7px"></i> Aide
+        <i class="fas fa-question-circle font-size-25px margin-right-7px"></i> {{ 'menu.link.help'|trans }}
     </a>
 
     {% if app.user %}
@@ -14,7 +14,7 @@
         </a>
     {% else %}
         <a class="Adoccia_Header_NavLink xl-at-end {{ selectedMenuItem == 'user' ? 'active' : '' }}" href="{{ url('app.login') }}">
-            <i class="fas fa-sign-in-alt font-size-25px margin-right-7px"></i> Accès membre
+            <i class="fas fa-sign-in-alt font-size-25px margin-right-7px"></i> {{ 'menu.link.sign_in'|trans }}
         </a>
     {% endif %}
 

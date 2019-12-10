@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="menu.link.collections">
+                <source>menu.link.collections</source>
+                <target>Collections</target>
+            </trans-unit>
+
+            <trans-unit id="menu.link.help">
+                <source>menu.link.help</source>
+                <target>Aide</target>
+            </trans-unit>
+
+            <trans-unit id="menu.link.sign_in">
+                <source>menu.link.sign_in</source>
+                <target>Connexion</target>
+            </trans-unit>
+
+            <trans-unit id="app.index.title">
+                <source>app.index.title</source>
+                <target>Les collections</target>
+            </trans-unit>
+
+            <trans-unit id="app.index.btn.create">
+                <source>app.index.btn.create</source>
+                <target>Créer</target>
+            </trans-unit>
+
+            <trans-unit id="category.search.type.title.placeholder">
+                <source>category.search.type.title.placeholder</source>
+                <target>Filtrer par nom</target>
+            </trans-unit>
+
+            <trans-unit id="category.search.type.order_by.created_at.desc">
+                <source>category.search.type.order_by.created_at.desc</source>
+                <target>Date de création : par ordre décroissant</target>
+            </trans-unit>
+
+            <trans-unit id="category.search.type.order_by.created_at.asc">
+                <source>category.search.type.order_by.created_at.asc</source>
+                <target>Date de création : par ordre croissant</target>
+            </trans-unit>
+
+            <trans-unit id="category.search.type.order_by.name.asc">
+                <source>category.search.type.order_by.name.asc</source>
+                <target>Nom : par ordre croissant</target>
+            </trans-unit>
+
+            <trans-unit id="category.search.type.order_by.name.desc">
+                <source>category.search.type.order_by.name.desc</source>
+                <target>Nom : par ordre décroissant</target>
+            </trans-unit>
+
+            <trans-unit id="category.search.type.filter.all">
+                <source>category.search.type.filter.all</source>
+                <target>Toutes les collections</target>
+            </trans-unit>
+
+            <trans-unit id="category.search.type.filter.mine">
+                <source>category.search.type.filter.mine</source>
+                <target>Mes collections</target>
+            </trans-unit>
+
+            <trans-unit id="category.search.modal.title">
+                <source>category.search.modal.title</source>
+                <target>Options de recherche</target>
+            </trans-unit>
+
+            <trans-unit id="category.search.modal.save_btn">
+                <source>category.search.modal.save_btn</source>
+                <target>Appliquer et fermer</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

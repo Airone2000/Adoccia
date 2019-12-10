@@ -43,7 +43,7 @@ final class CategorySearchType extends AbstractType
             ->add('title', null, [
             'required' => false,
             'attr' => [
-                'placeholder' => 'Filtrer par nom ...',
+                'placeholder' => 'category.search.type.title.placeholder',
                 'autocomplete' => 'off'
             ]
         ]);
@@ -54,13 +54,13 @@ final class CategorySearchType extends AbstractType
         $builder
             ->add('orderBy', ChoiceType::class, [
             'choices' => [
-                'created_at_desc' => 'created_at_desc',
-                'created_at_asc' => 'created_at_asc',
-                'name_asc' => 'name_asc',
-                'name_desc' => 'name_desc'
+                'created_at_desc' => 'created_at.desc',
+                'created_at_asc' => 'created_at.asc',
+                'name_asc' => 'name.asc',
+                'name_desc' => 'name.desc'
             ],
             'choice_label' => function($value) {
-                return "CategorySearchType.orderBy.{$value}";
+                return "category.search.type.order_by.{$value}";
             }
         ])
             ->add('filter', ChoiceType::class, [
@@ -69,7 +69,7 @@ final class CategorySearchType extends AbstractType
                     'mine' => 'mine'
                 ],
                 'choice_label' => function($value) {
-                    return "CategorySearchType.filter.{$value}";
+                    return "category.search.type.filter.{$value}";
                 },
                 'attr' => [
                     'class' => 'uk-select uk-form-small'
