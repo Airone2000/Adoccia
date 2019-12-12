@@ -4,11 +4,11 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('categoryShow') }}
+    {{ encore_entry_link_tags('baseCategory') }}
 {% endblock %}
 
 {% block body %}
-    <div id="categoryShow">
+    <div id="category">
         <div id="categoryShow_Side">
 
             <h1>{{ category.name }}</h1>
@@ -19,17 +19,18 @@
             {% endif %}
 
             <nav id="categoryShow_Side_Menu">
-                <a class="btn menuLink" href="{{ url('category.listFiches', {'id': category.id}) }}">
+                <a class="btn btn-secondary menuLink {{ app.request.attributes.get('_route') == 'category.listFiches' ? 'active' : '' }}" href="{{ url('category.listFiches', {'id': category.id}) }}">
                     <i class="fas fa-leaf font-size-20px icon"></i>
-                    Les feuilles
+                    <span>Les feuilles</span>
                 </a>
-                <a class="btn menuLink" href="{{ url('category.searchFiches', {'categoryId': category.id}) }}">
+
+                <a class="btn btn-secondary menuLink {{ app.request.attributes.get('_route') == 'category.searchFiches' ? 'active' : '' }}" href="{{ url('category.searchFiches', {'categoryId': category.id}) }}">
                     <i class="fas fa-search font-size-20px icon"></i>
-                    Recherche avancée
+                    <span>Recherche avancée</span>
                 </a>
-                <a class="btn menuLink" href="{{ url('category.edit', {'id': category.id}) }}">
+                <a class="btn btn-secondary menuLink {{ app.request.attributes.get('_route') == 'category.edit' ? 'active' : '' }}" href="{{ url('category.edit', {'id': category.id}) }}">
                     <i class="fas fa-cog font-size-20px icon"></i>
-                    Paramètres & Administration
+                    <span>Paramètres</span>
                 </a>
             </nav>
         </div>

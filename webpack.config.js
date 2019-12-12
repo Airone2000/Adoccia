@@ -23,6 +23,7 @@ Encore
     .addStyleEntry('categoryIndex', './assets/layout/category/index/index.scss')
     .addStyleEntry('categoryShow', './assets/layout/category/show/show.scss')
     .addStyleEntry('categoryFormBuilder', './assets/layout/category/form_builder.scss')
+    .addStyleEntry('baseCategory', './assets/layout/category/base.scss')
 
     // New layout
     .addStyleEntry('layout', './assets/layout/main.scss')
