@@ -31,6 +31,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "friendsofphp/php-cs-fixer": "3.0.x-dev",
         "fzaninotto/faker": "^1.9",
         "symfony/debug-pack": "^1.0",
         "symfony/maker-bundle": "^1.13",
