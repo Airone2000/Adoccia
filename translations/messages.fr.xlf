@@ -71,6 +71,31 @@
                 <source>category.search.modal.save_btn</source>
                 <target>Appliquer et fermer</target>
             </trans-unit>
+
+            <trans-unit id="account.modal.logout">
+                <source>account.modal.logout</source>
+                <target>Déconnexion</target>
+            </trans-unit>
+
+            <trans-unit id="user.register.page_name">
+                <source>user.register.page_name</source>
+                <target>Inscription</target>
+            </trans-unit>
+
+            <trans-unit id="user.register.title">
+                <source>user.register.title</source>
+                <target>Inscription</target>
+            </trans-unit>
+
+            <trans-unit id="user.register.btn">
+                <source>user.register.btn</source>
+                <target>Je m'inscris</target>
+            </trans-unit>
+
+            <trans-unit id="user.register.already.registered.link">
+                <source>user.register.already.registered.link</source>
+                <target>J'ai déjà un compte</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
