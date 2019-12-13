@@ -86,6 +86,41 @@
                 <source>user.register.already.registered.link</source>
                 <target>Already have an account?</target>
             </trans-unit>
+
+            <trans-unit id="register.form.password.not_blank">
+                <source>register.form.password.not_blank</source>
+                <target>Please enter a password</target>
+            </trans-unit>
+
+            <trans-unit id="register.form.password.min_length">
+                <source>register.form.password.min_length</source>
+                <target>%limit%</target>
+            </trans-unit>
+
+            <trans-unit id="register.form.label.username">
+                <source>register.form.label.username</source>
+                <target>Username</target>
+            </trans-unit>
+
+            <trans-unit id="register.form.label.email">
+                <source>register.form.label.email</source>
+                <target>Email</target>
+            </trans-unit>
+
+            <trans-unit id="register.form.label.plain_password">
+                <source>register.form.label.plain_password</source>
+                <target>Password</target>
+            </trans-unit>
+
+            <trans-unit id="register.form.label.agree_terms">
+                <source>register.form.label.agree_terms</source>
+                <target>I agree to the terms of use.</target>
+            </trans-unit>
+
+            <trans-unit id="register.form.agree_terms.is_true">
+                <source>register.form.agree_terms.is_true</source>
+                <target>You should agree to our terms.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
