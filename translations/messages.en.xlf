@@ -121,6 +121,51 @@
                 <source>register.form.agree_terms.is_true</source>
                 <target>You should agree to our terms.</target>
             </trans-unit>
+
+            <trans-unit id="user.login.title">
+                <source>user.login.title</source>
+                <target>Sign in</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.label.email">
+                <source>login.form.label.email</source>
+                <target>Email</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.placeholder.email">
+                <source>login.form.placeholder.email</source>
+                <target>Email</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.label.password">
+                <source>login.form.label.password</source>
+                <target>Password</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.placeholder.password">
+                <source>login.form.placeholder.password</source>
+                <target>Password</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.label.remember_me">
+                <source>login.form.label.remember_me</source>
+                <target>Remember me</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.login.btn">
+                <source>login.form.login.btn</source>
+                <target>Sign in</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.password.lost">
+                <source>login.form.password.lost</source>
+                <target>Password lost?</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.no_account">
+                <source>login.form.no_account</source>
+                <target>Not registered yet?</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

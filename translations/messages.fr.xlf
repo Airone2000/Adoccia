@@ -131,6 +131,51 @@
                 <source>register.form.agree_terms.is_true</source>
                 <target>Vous devez accepter les conditions d'utilisation.</target>
             </trans-unit>
+
+            <trans-unit id="user.login.title">
+                <source>user.login.title</source>
+                <target>Connexion</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.label.email">
+                <source>login.form.label.email</source>
+                <target>Email</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.placeholder.email">
+                <source>login.form.placeholder.email</source>
+                <target>Email</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.label.password">
+                <source>login.form.label.password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.placeholder.password">
+                <source>login.form.placeholder.password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.label.remember_me">
+                <source>login.form.label.remember_me</source>
+                <target>Se souvenir de moi</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.login.btn">
+                <source>login.form.login.btn</source>
+                <target>Connexion</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.password_lost">
+                <source>login.form.password_lost</source>
+                <target>Mot de passe oublié ?</target>
+            </trans-unit>
+
+            <trans-unit id="login.form.no_account">
+                <source>login.form.no_account</source>
+                <target>Pas encore inscrit ?</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
