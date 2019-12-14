@@ -28,7 +28,7 @@ final class PictureController extends AbstractController
      *     condition="request.isXmlHttpRequest()",
      *     name="picture.uploadPicture"
      * )
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function uploadPicture(Request $request)
     {
@@ -36,17 +36,15 @@ final class PictureController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $data = $form->getData();
             $base64Picture = $data['base64Picture'];
 
             if (preg_match('/^data:image\/(?<extension>(?:png|gif|jpg|jpeg));base64,(?<image>.+)$/', $base64Picture, $matchings)) {
-                $imageData = base64_decode($matchings['image']);
+                $imageData = base64_decode($matchings['image'], true);
                 $extension = $matchings['extension'];
-                $filename = uniqid('picture_') . '.' . $extension;
+                $filename = uniqid('picture_').'.'.$extension;
 
-                if (file_put_contents($picturePath = $this->pictureUploadDir . DIRECTORY_SEPARATOR . $filename, $imageData)) {
-
+                if (file_put_contents($picturePath = $this->pictureUploadDir.\DIRECTORY_SEPARATOR.$filename, $imageData)) {
                     $sizes = getimagesize($picturePath) ?? [-1, -1];
 
                     $picture = new Picture();
@@ -56,7 +54,7 @@ final class PictureController extends AbstractController
                         ->setWidth($sizes[0])
                         ->setHeight($sizes[1])
                         ->setIsTemp(true)
-                        ->setUniqueId((string)Uuid::uuid4() . uniqid('-'))
+                        ->setUniqueId((string) Uuid::uuid4().uniqid('-'))
                     ;
 
                     $em = $this->getDoctrine()->getManager();
@@ -65,7 +63,7 @@ final class PictureController extends AbstractController
 
                     return new JsonResponse([
                         'pictureId' => $picture->getUniqueId(),
-                        'pictureURL' => $request->getSchemeAndHttpHost() . DIRECTORY_SEPARATOR . $this->picturePublicUploadDir . DIRECTORY_SEPARATOR . $filename
+                        'pictureURL' => $request->getSchemeAndHttpHost().\DIRECTORY_SEPARATOR.$this->picturePublicUploadDir.\DIRECTORY_SEPARATOR.$filename,
                     ]);
                 }
             }
@@ -74,7 +72,7 @@ final class PictureController extends AbstractController
         }
 
         return new JsonResponse([
-            'view' => $this->renderView('_picture_uploader.html.twig', ['form' => $form->createView()])
+            'view' => $this->renderView('_picture_uploader.html.twig', ['form' => $form->createView()]),
         ]);
     }
 }

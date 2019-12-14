@@ -24,13 +24,13 @@ class MapType extends HiddenType
 
         $mapShouldDisplay = true;
 
-        if ($view->vars['mode'] === FicheModeEnum::DISPLAY) {
-            # HasMarkers var
-            # Produce this value for displaying or not the map
-            # if no marker, then hide the map, else display it
+        if (FicheModeEnum::DISPLAY === $view->vars['mode']) {
+            // HasMarkers var
+            // Produce this value for displaying or not the map
+            // if no marker, then hide the map, else display it
             $hasMarkers = false;
             $value = json_decode($view->vars['value'], true);
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $hasMarkers = !empty($value['markers']);
             }
             $view->vars['hasMarkers'] = $hasMarkers;
@@ -44,5 +44,4 @@ class MapType extends HiddenType
     {
         $this->unifiedConfigureOptions($resolver);
     }
-
 }

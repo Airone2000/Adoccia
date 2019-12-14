@@ -30,7 +30,6 @@ final class ButtonType extends AbstractType
         $this->unifiedConfigureOptions($resolver);
     }
 
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         /* @var Widget $widget */
@@ -38,23 +37,22 @@ final class ButtonType extends AbstractType
 
         $builder
             ->add('label', TextType::class, [
-                'required' => false, # Never required
+                'required' => false, // Never required
                 'attr' => [
                     'placeholder' => 'Label',
-                    'style' => 'width:inherit;flex:0.5;'
-                ]
+                    'style' => 'width:inherit;flex:0.5;',
+                ],
             ])
             ->add('target', TextType::class, [
                 'required' => $widget->isRequired(),
                 'attr' => [
                     'placeholder' => 'Destination',
-                    'style' => 'width:inherit;flex:1;'
+                    'style' => 'width:inherit;flex:1;',
                 ],
                 'constraints' => [
-                    new Url()
-                ]
+                    new Url(),
+                ],
             ])
         ;
     }
-
 }

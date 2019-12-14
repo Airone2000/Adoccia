@@ -6,7 +6,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class TextWidgetSettingsType extends AbstractWidgetSettingsType
 {
-
     public function buildInModalForm(FormBuilderInterface $builder, array $options)
     {
         $builder

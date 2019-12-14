@@ -15,11 +15,15 @@ class ColorValidator extends ConstraintValidator
             return;
         }
 
-        # Valid pattern (#fff, #000000, ...)
-        if (preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $value)) return;
+        // Valid pattern (#fff, #000000, ...)
+        if (preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $value)) {
+            return;
+        }
 
-        # String (orange, blue, red, ...)
-        if (preg_match('/^[a-z]+$/i', $value)) return;
+        // String (orange, blue, red, ...)
+        if (preg_match('/^[a-z]+$/i', $value)) {
+            return;
+        }
 
         $this->context
             ->buildViolation($constraint->message)

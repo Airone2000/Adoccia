@@ -146,21 +146,15 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @param string $email
-     * @return User
-     */
-    public function setEmail(string $email): User
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -174,54 +168,46 @@ class User implements UserInterface
 
     /**
      * @param $permission
-     * @return bool
      */
     public function hasPermission($permission): bool
     {
-        if ($this->isSuperAdmin()) return true;
-        if (is_string($permission)) {
-            $permission = Permissions::getConstants()[strtoupper($permission)] ?? null;
-            if (is_null($permission)) return false;
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+        if (\is_string($permission)) {
+            $permission = Permissions::getConstants()[mb_strtoupper($permission)] ?? null;
+            if (null === $permission) {
+                return false;
+            }
         }
 
-        $idx = array_search($permission, $this->getPermissions());
-        return $idx !== false;
+        $idx = array_search($permission, $this->getPermissions(), true);
+
+        return false !== $idx;
     }
 
-    /**
-     * @return array
-     */
     public function getPermissions(): array
     {
-        # return (array) $this->permissions;
+        // return (array) $this->permissions;
         return Permissions::getConstants();
     }
 
-    /**
-     * @param array $permissions
-     * @return User
-     */
-    public function setPermissions(array $permissions): User
+    public function setPermissions(array $permissions): self
     {
         $this->permissions = $permissions;
+
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isSuperAdmin(): bool
     {
         return $this->isSuperAdmin;
     }
 
-    /**
-     * @param bool $isSuperAdmin
-     * @return User
-     */
-    public function setSuperAdmin(bool $isSuperAdmin): User
+    public function setSuperAdmin(bool $isSuperAdmin): self
     {
         $this->isSuperAdmin = $isSuperAdmin;
+
         return $this;
     }
 
@@ -255,7 +241,4 @@ class User implements UserInterface
 
         return $this;
     }
-
-
-
 }

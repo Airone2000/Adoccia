@@ -26,16 +26,18 @@ class ResponseSubscriber implements EventSubscriberInterface
     {
         /* @var User|string */
 
-        if (!$this->tokenStorage->getToken()) return;
+        if (!$this->tokenStorage->getToken()) {
+            return;
+        }
 
         $user = $this->tokenStorage->getToken()->getUser();
-        if (is_string($user)) { # anon.
+        if (\is_string($user)) { // anon.
             $request = $event->getRequest();
             $response = $event->getResponse();
 
-            $cookieKey = '_guid'; # Guest Unique ID
+            $cookieKey = '_guid'; // Guest Unique ID
             if (!$request->cookies->has($cookieKey)) {
-                $expire = time() + (3600 * 24 * 7); # 7 days
+                $expire = time() + (3600 * 24 * 7); // 7 days
                 $cookie = Cookie::create($cookieKey, Uuid::uuid4()->toString(), $expire);
                 $response->headers->setCookie($cookie);
             }

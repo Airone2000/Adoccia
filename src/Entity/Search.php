@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * This entity is a saved instance of a search
+ * This entity is a saved instance of a search.
  *
  * @ORM\Entity(repositoryClass="App\Repository\SearchRepository")
  */
@@ -43,7 +43,6 @@ class Search
      */
     private $createdAt;
 
-
     public function __construct()
     {
         $this->setCreatedAt(new \DateTime());
@@ -54,76 +53,51 @@ class Search
         return $this->id;
     }
 
-    /**
-     * @return array
-     */
     public function getCriterias(): array
     {
         return (array) $this->criterias;
     }
 
-    /**
-     * @param array $criterias
-     * @return Search
-     */
-    public function setCriterias(array $criterias): Search
+    public function setCriterias(array $criterias): self
     {
         $this->criterias = $criterias;
+
         return $this;
     }
 
-    /**
-     * @return Category
-     */
     public function getCategory(): Category
     {
         return $this->category;
     }
 
-    /**
-     * @param Category $category
-     * @return Search
-     */
-    public function setCategory(Category $category): Search
+    public function setCategory(Category $category): self
     {
         $this->category = $category;
+
         return $this;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @param User $user
-     * @return Search
-     */
-    public function setUser(User $user): Search
+    public function setUser(User $user): self
     {
         $this->user = $user;
+
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param \DateTime $createdAt
-     * @return Search
-     */
-    public function setCreatedAt(\DateTime $createdAt): Search
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
-
 }

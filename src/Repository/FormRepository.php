@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Form;
-use App\Entity\FormArea;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 

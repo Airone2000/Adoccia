@@ -11,7 +11,6 @@ use Symfony\Component\Form\CallbackTransformer;
 
 final class FichecreatorBuilder implements FormBuilderInterface
 {
-
     public function buildForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)
     {
         /* @var Widget $widget */
@@ -23,16 +22,17 @@ final class FichecreatorBuilder implements FormBuilderInterface
         $builder
             ->add($widget->getId(), FichecreatorType::class, [
                 'mode' => $options['mode'],
-                'widget' => $widget
+                'widget' => $widget,
             ])
             ->get($widget->getId())->addModelTransformer(new CallbackTransformer(
-                function() use($fiche) {
+                function () use ($fiche) {
                     if (($creator = $fiche->getCreator()) instanceof User) {
                         return $creator->getUsername();
                     }
+
                     return null;
                 },
-                function(){}
+                function () {}
             ))
         ;
     }
@@ -46,7 +46,7 @@ final class FichecreatorBuilder implements FormBuilderInterface
         $widget = $options['widget'];
         $builder->add($widget->getImmutableId(), \App\Form\SearchType\FichecreatorType::class, [
             'widget' => $widget,
-            'category' => $category
+            'category' => $category,
         ]);
     }
 }

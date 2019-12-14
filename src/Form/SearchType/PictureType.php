@@ -21,7 +21,7 @@ final class PictureType extends AbstractSearchType
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function($value){ return "trans.{$value}"; }
+                'choice_label' => function ($value) { return "trans.{$value}"; },
             ])
         ;
     }
@@ -31,7 +31,7 @@ final class PictureType extends AbstractSearchType
         return [
             SearchCriteriaEnum::DISABLED,
             SearchCriteriaEnum::IS_NULL,
-            SearchCriteriaEnum::IS_NOT_NULL
+            SearchCriteriaEnum::IS_NOT_NULL,
         ];
     }
 }

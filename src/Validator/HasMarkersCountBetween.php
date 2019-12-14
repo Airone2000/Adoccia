@@ -14,13 +14,13 @@ class HasMarkersCountBetween extends Constraint
 
     /**
      * @var int|null
-     * The number of min markers required
+     *               The number of min markers required
      */
     public $min;
 
     /**
      * @var int|null
-     * The number of min markers required
+     *               The number of min markers required
      */
     public $max;
 }

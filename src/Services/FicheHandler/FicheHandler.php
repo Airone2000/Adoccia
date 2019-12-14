@@ -57,9 +57,6 @@ final class FicheHandler implements FicheHandlerInterface
     }
 
     /**
-     * @param Fiche $fiche
-     * @param array $data
-     * @return Fiche
      * @throws \Exception
      */
     public function editFicheFromFicheTypeData(Fiche $fiche, array $data): Fiche
@@ -68,9 +65,6 @@ final class FicheHandler implements FicheHandlerInterface
     }
 
     /**
-     * @param array $data
-     * @param Fiche|null $fiche
-     * @return Fiche
      * @throws \Exception
      */
     public function createFicheFromFicheTypeData(array $data, ?Fiche $fiche = null): Fiche
@@ -80,10 +74,9 @@ final class FicheHandler implements FicheHandlerInterface
          * This way, we assume constraints did their job and the incoming array of data
          * is trustable.
          */
-
         $fiche = $fiche ?? new Fiche();
 
-        /**
+        /*
          * Delete all value for this fiche is already existing
          * since dataFromForm gives use all once again
          */
@@ -93,12 +86,12 @@ final class FicheHandler implements FicheHandlerInterface
 
         $fiche
             ->setTitle($data['title'])
-            ->setPublished((bool)($data['published'] ?? null))
+            ->setPublished((bool) ($data['published'] ?? null))
             ->setCreator($this->tokenStorage->getToken()->getUser())
             ->setPicture($data['picture'] ?? null)
         ;
 
-        # Link category
+        // Link category
         if (isset($data['category']) && ($category = $data['category']) instanceof Category) {
             $fiche->setCategory($category);
         }
@@ -112,20 +105,20 @@ final class FicheHandler implements FicheHandlerInterface
 
             $value = new Value();
             if (method_exists(Value::class, $setter)) {
-                call_user_func([$value, $setter], $datum);
+                \call_user_func([$value, $setter], $datum);
             }
 
             $value->setWidget($widget);
             $fiche->addValue($value);
         }
 
-        # Additional check to make sure everything is fine
+        // Additional check to make sure everything is fine
         $errors = $this->validator->validate($fiche);
-        if (count($errors) > 0) {
+        if (\count($errors) > 0) {
             throw new \LogicException("Fiche is not valid according to the validator in \App\Services\FicheHandler\FicheHandler.");
         }
 
-        if ($fiche->getId() === null) {
+        if (null === $fiche->getId()) {
             $this->entityManager->persist($fiche);
         }
         $this->entityManager->flush();
@@ -139,9 +132,9 @@ final class FicheHandler implements FicheHandlerInterface
 
         /** @var Value $value */
         foreach ($fiche->getValues() as $value) {
-            $getter = "getValueOfType" . $value->getWidget()->getType();
+            $getter = 'getValueOfType'.$value->getWidget()->getType();
             if (method_exists($value, $getter)) {
-                $formData[$value->getWidget()->getId()] = call_user_func([$value, $getter]);
+                $formData[$value->getWidget()->getId()] = \call_user_func([$value, $getter]);
             }
         }
 
@@ -154,13 +147,13 @@ final class FicheHandler implements FicheHandlerInterface
 
         $form = $this->formFactory->create(FicheType::class, $formData, [
             'category' => $fiche->getCategory(),
-            'attr' => ['readonly' => 'readonly'], # <- prevent from modifying input
+            'attr' => ['readonly' => 'readonly'], // <- prevent from modifying input
             'mode' => FicheModeEnum::DISPLAY,
-            'fiche' => $fiche
+            'fiche' => $fiche,
         ]);
 
         $template = $this->twig->render('fiche/_fiche.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
 
         return $template;
@@ -171,20 +164,17 @@ final class FicheHandler implements FicheHandlerInterface
      * It's better to run it asynchronously (RabbitMQ).
      *
      * It's role is to check each fiche of the Category and give an unPublish / invalid status.
-     *
-     * @param Category $category
      */
     public function unPublishInvalidFiches(Category $category): void
     {
         /** @var Fiche $fiche */
         foreach ($category->getFiches() as $fiche) {
-
             $ficheData = $this->mapValueToWidgetId($fiche);
             $ficheData['title'] = $fiche->getTitle();
 
             $form = $this->formFactory->create(FicheType::class, null, [
                 'category' => $category,
-                'csrf_protection' => false
+                'csrf_protection' => false,
             ]);
             $form->submit($ficheData);
 

@@ -11,28 +11,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class CategorySearchType extends AbstractType
 {
     const
-        MODE_FULL = 'full',
-        MODE_TITLE_ONLY = 'title_only',
+        MODE_FULL = 'full';
+    const
+        MODE_TITLE_ONLY = 'title_only';
+    const
         MODE_MORE_ONLY = 'more_only'
     ;
 
     const
         MODES = [
-            self::MODE_FULL, self::MODE_TITLE_ONLY, self::MODE_MORE_ONLY
+            self::MODE_FULL, self::MODE_TITLE_ONLY, self::MODE_MORE_ONLY,
         ]
     ;
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $mode = $options['mode'];
-        if ($mode === self::MODE_FULL) {
+        if (self::MODE_FULL === $mode) {
             $this->addTitleField($builder);
             $this->addMoreOnlyFields($builder);
-        }
-        elseif ($mode === self::MODE_TITLE_ONLY) {
+        } elseif (self::MODE_TITLE_ONLY === $mode) {
             $this->addTitleField($builder);
-        }
-        elseif ($mode === self::MODE_MORE_ONLY) {
+        } elseif (self::MODE_MORE_ONLY === $mode) {
             $this->addMoreOnlyFields($builder);
         }
     }
@@ -44,8 +44,8 @@ final class CategorySearchType extends AbstractType
             'required' => false,
             'attr' => [
                 'placeholder' => 'category.search.type.title.placeholder',
-                'autocomplete' => 'off'
-            ]
+                'autocomplete' => 'off',
+            ],
         ]);
     }
 
@@ -57,29 +57,29 @@ final class CategorySearchType extends AbstractType
                 'created_at_desc' => 'created_at.desc',
                 'created_at_asc' => 'created_at.asc',
                 'name_asc' => 'name.asc',
-                'name_desc' => 'name.desc'
+                'name_desc' => 'name.desc',
             ],
-            'choice_label' => function($value) {
+            'choice_label' => function ($value) {
                 return "category.search.type.order_by.{$value}";
-            }
+            },
         ])
             ->add('filter', ChoiceType::class, [
                 'choices' => [
                     'all' => 'all',
-                    'mine' => 'mine'
+                    'mine' => 'mine',
                 ],
-                'choice_label' => function($value) {
+                'choice_label' => function ($value) {
                     return "category.search.type.filter.{$value}";
                 },
                 'attr' => [
-                    'class' => 'uk-select uk-form-small'
-                ]
+                    'class' => 'uk-select uk-form-small',
+                ],
             ])
             ->add('itemsPerPage', ChoiceType::class, [
                 'choices' => [30 => 30, 90 => 90, 200 => 200, 700 => 700],
-                'choice_label' => function($value) {
+                'choice_label' => function ($value) {
                     return "{$value} collections par page";
-                }
+                },
             ])
         ;
     }

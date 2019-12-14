@@ -20,14 +20,14 @@ final class RadioBuilder implements FormBuilderInterface
             'empty_data' => null,
             'multiple' => $widget->hasMultipleValues(),
             'attr' => [
-                'required' => $widget->isRequired()
-            ]
+                'required' => $widget->isRequired(),
+            ],
         ]);
 
         if ($widget->hasMultipleValues()) {
             $builder->get($widget->getId())->addModelTransformer(new CallbackTransformer(
-                function($value){ return explode(',', $value); },
-                function($value){ return $value; }
+                function ($value) { return explode(',', $value); },
+                function ($value) { return $value; }
             ));
         }
     }
@@ -37,7 +37,7 @@ final class RadioBuilder implements FormBuilderInterface
         /* @var \App\Entity\Widget $widget */
         $widget = $options['widget'];
         $builder->add($widget->getImmutableId(), RadioType::class, [
-            'widget' => $widget
+            'widget' => $widget,
         ]);
     }
 }

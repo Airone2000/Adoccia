@@ -28,10 +28,10 @@ final class DateType extends AbstractSearchType
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function(string $label) {
+                'choice_label' => function (string $label) {
                     return 'trans.'.$label;
                 },
-                'choice_attr' => function(string $value) {
+                'choice_attr' => function (string $value) {
                     $attr = [];
                     switch ($value) {
                         case SearchCriteriaEnum::BETWEEN:
@@ -67,72 +67,73 @@ final class DateType extends AbstractSearchType
                             $attr['data-inputs'] = '.valueDayFrom,.valueDayTo';
                             break;
                     }
+
                     return $attr;
-                }
+                },
             ])
             ->add('value', TextType::class, [
                 'attr' => [
                         'class' => 'value hidden',
-                        'placeholder' => DateTypeSingle::getDateTypePlaceholder($widget)
+                        'placeholder' => DateTypeSingle::getDateTypePlaceholder($widget),
                     ] + DateTypeSingle::getHTMLInputAttributes($widget),
-                'required' => false
+                'required' => false,
             ])
             ->add('value2', TextType::class, [
                 'attr' => [
                         'class' => 'value2 hidden',
-                        'placeholder' => DateTypeSingle::getDateTypePlaceholder($widget)
+                        'placeholder' => DateTypeSingle::getDateTypePlaceholder($widget),
                     ] + DateTypeSingle::getHTMLInputAttributes($widget),
-                'required' => false
+                'required' => false,
             ])
             ->add('valueYear', IntegerType::class, [
                 'attr' => ['class' => 'valueYear hidden'],
-                'required' => false
+                'required' => false,
             ])
             ->add('valueYearFrom', IntegerType::class, [
                 'attr' => ['class' => 'valueYearFrom hidden'],
-                'required' => false
+                'required' => false,
             ])
             ->add('valueYearTo', IntegerType::class, [
                 'attr' => ['class' => 'valueYearTo hidden'],
-                'required' => false
+                'required' => false,
             ])
             ->add('valueMonth', IntegerType::class, [
                 'attr' => ['class' => 'valueMonth hidden'],
-                'required' => false
+                'required' => false,
             ])
             ->add('valueMonthFrom', IntegerType::class, [
                 'attr' => ['class' => 'valueMonthFrom hidden'],
-                'required' => false
+                'required' => false,
             ])
             ->add('valueMonthTo', IntegerType::class, [
                 'attr' => ['class' => 'valueMonthTo hidden'],
-                'required' => false
+                'required' => false,
             ])
             ->add('valueDay', IntegerType::class, [
                 'attr' => ['class' => 'valueDay hidden'],
-                'required' => false
+                'required' => false,
             ])
             ->add('valueDayFrom', IntegerType::class, [
                 'attr' => ['class' => 'valueDayFrom hidden'],
-                'required' => false
+                'required' => false,
             ])
             ->add('valueDayTo', IntegerType::class, [
                 'attr' => ['class' => 'valueDayTo hidden'],
-                'required' => false
+                'required' => false,
             ])
         ;
 
-        /**
+        /*
          * Get the value of criteria.
          * If it's equal to BETWEEN, let's display the Value2 input
          */
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $formEvent) use ($widget) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $formEvent) use ($widget) {
             /**
              * Entity Search stores date like Y-m-d.
-             * To render this value back in the form, we must convert it based on the widget->dateFormat()
+             * To render this value back in the form, we must convert it based on the widget->dateFormat().
              */
             $data = $formEvent->getData();
-            if ($data !== null) {
+            if (null !== $data) {
                 $value = !empty($data['value']) ? $data['value'] : null;
                 $data['value'] = DateTypeSingle::transformTo($widget, $value);
                 $value2 = !empty($data['value2']) ? $data['value2'] : null;
@@ -141,23 +142,25 @@ final class DateType extends AbstractSearchType
             }
         });
 
-        # We cannot add modelTransformer in eventListenerHandler
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(PreSubmitEvent $preSubmitEvent) use ($widget){
+        // We cannot add modelTransformer in eventListenerHandler
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (PreSubmitEvent $preSubmitEvent) use ($widget) {
             $data = $preSubmitEvent->getData();
 
             $value = !empty($data['value']) ? $data['value'] : null;
             $value = DateTypeSingle::transformFrom($widget, $value);
             if ($value instanceof \DateTime) {
                 $data['value'] = $value->format('Y-m-d');
+            } else {
+                $data['value'] = null;
             }
-            else $data['value'] = null;
 
             $value2 = !empty($data['value2']) ? $data['value2'] : null;
             $value2 = DateTypeSingle::transformFrom($widget, $value2);
             if ($value2 instanceof \DateTime) {
                 $data['value2'] = $value2->format('Y-m-d');
+            } else {
+                $data['value2'] = null;
             }
-            else $data['value2'] = null;
 
             $preSubmitEvent->setData($data);
         });
@@ -187,7 +190,7 @@ final class DateType extends AbstractSearchType
             SearchCriteriaEnum::DAY_EQUAL_TO,
             SearchCriteriaEnum::DAY_LESS_THAN,
             SearchCriteriaEnum::DAY_GREATER_THAN,
-            SearchCriteriaEnum::DAY_BETWEEN
+            SearchCriteriaEnum::DAY_BETWEEN,
         ];
     }
 }

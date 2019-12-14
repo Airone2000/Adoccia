@@ -19,32 +19,32 @@ class CategorySearch
     private $id;
 
     /**
-     * @var null|User
+     * @var User|null
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     private $user;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(type="string", length=80, nullable=true)
      */
     private $guestUniqueID;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $orderBy;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $filter;
@@ -67,181 +67,122 @@ class CategorySearch
      */
     private $createdAt;
 
-
     public function __construct()
     {
         $this->page = 1;
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * @return bool
-     */
     public function isNew(): bool
     {
-        return $this->id === null;
+        return null === $this->id;
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param null|int $id
-     * @return CategorySearch
-     */
-    public function setId(?int $id): CategorySearch
+    public function setId(?int $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
-    /**
-     * @return User|null
-     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
-    /**
-     * @param User|null $user
-     * @return CategorySearch
-     */
-    public function setUser(?User $user): CategorySearch
+    public function setUser(?User $user): self
     {
         $this->user = $user;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getGuestUniqueID(): ?string
     {
         return $this->guestUniqueID;
     }
 
-    /**
-     * @param string|null $guestUniqueID
-     * @return CategorySearch
-     */
-    public function setGuestUniqueID(?string $guestUniqueID): CategorySearch
+    public function setGuestUniqueID(?string $guestUniqueID): self
     {
         $this->guestUniqueID = $guestUniqueID;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string|null $title
-     * @return CategorySearch
-     */
-    public function setTitle(?string $title): CategorySearch
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOrderBy(): ?string
     {
         return $this->orderBy;
     }
 
-    /**
-     * @param string|null $orderBy
-     * @return CategorySearch
-     */
-    public function setOrderBy(?string $orderBy): CategorySearch
+    public function setOrderBy(?string $orderBy): self
     {
         $this->orderBy = $orderBy;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFilter(): ?string
     {
         return $this->filter;
     }
 
-    /**
-     * @param string|null $filter
-     * @return CategorySearch
-     */
-    public function setFilter(?string $filter): CategorySearch
+    public function setFilter(?string $filter): self
     {
         $this->filter = $filter;
+
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param \DateTime $createdAt
-     * @return CategorySearch
-     */
-    public function setCreatedAt(\DateTime $createdAt): CategorySearch
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getPage(): int
     {
         return $this->page ?? 1;
     }
 
-    /**
-     * @param int $page
-     * @return CategorySearch
-     */
-    public function setPage(int $page): CategorySearch
+    public function setPage(int $page): self
     {
         $this->page = $page;
+
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getItemsPerPage(): int
     {
         return $this->itemsPerPage;
     }
 
-    /**
-     * @param int $itemsPerPage
-     * @return CategorySearch
-     */
-    public function setItemsPerPage(int $itemsPerPage): CategorySearch
+    public function setItemsPerPage(int $itemsPerPage): self
     {
         $this->itemsPerPage = $itemsPerPage;
+
         return $this;
     }
-
 }

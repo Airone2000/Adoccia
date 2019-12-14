@@ -34,7 +34,7 @@ class PictureDisplayerExtension extends AbstractExtension
     {
         return [
             new TwigFunction('showPicture', [$this, 'showPicture'], [
-                'is_safe' => ['html']
+                'is_safe' => ['html'],
             ]),
         ];
     }
@@ -42,16 +42,15 @@ class PictureDisplayerExtension extends AbstractExtension
     public function showPicture($value, $filter = null)
     {
         if ($value instanceof Picture) {
-
             $url = $this->requestStack->getMasterRequest()->getSchemeAndHttpHost();
-            $url .= DIRECTORY_SEPARATOR;
+            $url .= \DIRECTORY_SEPARATOR;
             $url .= $this->picturePublicUploadDir;
-            $url .= DIRECTORY_SEPARATOR;
+            $url .= \DIRECTORY_SEPARATOR;
             $url .= $value->getFilename();
 
             return $this->twig->render('_picture.html.twig', [
                 'url' => $url,
-                'filter' => $filter
+                'filter' => $filter,
             ]);
         }
     }

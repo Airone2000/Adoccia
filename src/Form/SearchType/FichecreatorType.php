@@ -31,8 +31,8 @@ class FichecreatorType extends AbstractSearchType
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function($value) {return "trans.{$value}";},
-                'choice_attr' => function(string $value) {
+                'choice_label' => function ($value) {return "trans.{$value}"; },
+                'choice_attr' => function (string $value) {
                     $attr = [];
                     switch ($value) {
                         case SearchCriteriaEnum::CREATOR_IS:
@@ -40,16 +40,17 @@ class FichecreatorType extends AbstractSearchType
                             $attr['data-inputs'] = '.value';
                             break;
                     }
+
                     return $attr;
-                }
+                },
             ])
             ->add('value', ChoiceType::class, [
                 'required' => false,
                 'choices' => $this->getAllFicheCreatorOfThisCategory($options['category']),
                 'attr' => [
-                    'class' => 'value hidden'
+                    'class' => 'value hidden',
                 ],
-                'multiple' => true
+                'multiple' => true,
             ])
         ;
     }
@@ -59,16 +60,17 @@ class FichecreatorType extends AbstractSearchType
         return [
             SearchCriteriaEnum::DISABLED,
             SearchCriteriaEnum::CREATOR_IS,
-            SearchCriteriaEnum::CREATOR_IS_NOT
+            SearchCriteriaEnum::CREATOR_IS_NOT,
         ];
     }
 
     private function getAllFicheCreatorOfThisCategory(Category $category): array
     {
         $creators = $this->ficheRepository->getCreatorsForCategory($category);
-        $creators = array_map(function($creator){
+        $creators = array_map(function ($creator) {
             return $creator['username'];
         }, $creators);
+
         return array_flip($creators);
     }
 

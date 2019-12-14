@@ -41,24 +41,23 @@ final class SecurityHandler implements SecurityHandlerInterface
     }
 
     /**
-     * @param User $user
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    function doAllTheNecessaryForThisUserWhoHaveLostHisPassword(User $user): void
+    public function doAllTheNecessaryForThisUserWhoHaveLostHisPassword(User $user): void
     {
-        # Create an instance of PasswordReset
+        // Create an instance of PasswordReset
         $passwordReset = new PasswordReset($user);
         $this->entityManager->persist($passwordReset);
         $this->entityManager->flush($passwordReset);
 
-        # Send an email with the recovery link
+        // Send an email with the recovery link
         $envelope = new Envelope(
             $user->getUsername(), $user->getEmail(),
-            "Récupération de votre mot de passe",
+            'Récupération de votre mot de passe',
             $this->twig->render('email/reset-password.html.twig', [
-                'resetPasswordLink' => $this->urlGenerator->generate('app.resetPassword', ['token' => $passwordReset->getToken()], UrlGeneratorInterface::ABSOLUTE_URL)
+                'resetPasswordLink' => $this->urlGenerator->generate('app.resetPassword', ['token' => $passwordReset->getToken()], UrlGeneratorInterface::ABSOLUTE_URL),
             ])
         );
 

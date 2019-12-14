@@ -3,7 +3,6 @@
 namespace App\Form\FormBuilder;
 
 use App\Entity\Widget;
-use App\Enum\FicheModeEnum;
 use App\Form\FormBuilderType\IntType;
 
 final class IntBuilder implements FormBuilderInterface
@@ -20,8 +19,8 @@ final class IntBuilder implements FormBuilderInterface
             'attr' => [
                 'min' => $widget->getMin(),
                 'max' => $widget->getMax(),
-                'required' => $widget->isRequired()
-            ]
+                'required' => $widget->isRequired(),
+            ],
         ]);
     }
 
@@ -30,7 +29,7 @@ final class IntBuilder implements FormBuilderInterface
         /* @var \App\Entity\Widget $widget */
         $widget = $options['widget'];
         $builder->add($widget->getImmutableId(), \App\Form\SearchType\IntType::class, [
-            'widget' => $widget
+            'widget' => $widget,
         ]);
     }
 }

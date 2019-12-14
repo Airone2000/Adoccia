@@ -12,13 +12,13 @@ class Value
 {
     const DEFAULT_VALUE_OF_TYPE_BUTTON = [
         'label' => '', 'ilabel' => '',
-        'target' => '', 'itarget' => ''
+        'target' => '', 'itarget' => '',
     ];
 
     const DEFAULT_VALUE_OF_TYPE_MAP = [
         'center' => null,
         'zoom' => null,
-        'markers' => []
+        'markers' => [],
     ];
 
     /**
@@ -51,25 +51,25 @@ class Value
     private $widgetImmutableId;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(type="text", nullable=true)
      */
     private $valueOfTypeText;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(type="text", nullable=true)
      */
     private $valueOfTypeString;
 
     /**
-     * @var null|int
+     * @var int|null
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $valueOfTypeInt;
 
     /**
-     * @var null|int|float
+     * @var int|float|null
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $valueOfTypeFloat;
@@ -105,23 +105,22 @@ class Value
     private $valueOfTypeMap;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(type="text", nullable=true)
      */
     private $valueOfTypeVideo;
 
     /**
-     * @var null|Picture
+     * @var Picture|null
      * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(onDelete="SET NULL", nullable=true)
      */
     private $valueOfTypePicture;
-    
 
     /**
      * JSON_EXTRACT is case-sensitive.
      * Thus, I created a "ilabel" and "itarget" attributes
-     * to help search CI
+     * to help search CI.
      *
      * Defined as default value here make sure the search always work for any fiche
      *
@@ -135,106 +134,73 @@ class Value
         return $this->id;
     }
 
-    /**
-     * @return Fiche
-     */
     public function getFiche(): Fiche
     {
         return $this->fiche;
     }
 
-    /**
-     * @param Fiche $fiche
-     * @return Value
-     */
-    public function setFiche(Fiche $fiche): Value
+    public function setFiche(Fiche $fiche): self
     {
         $this->fiche = $fiche;
+
         return $this;
     }
 
-    /**
-     * @return Widget
-     */
     public function getWidget(): Widget
     {
         return $this->widget;
     }
 
-    /**
-     * @param Widget $widget
-     * @return Value
-     */
-    public function setWidget(Widget $widget): Value
+    public function setWidget(Widget $widget): self
     {
         $this->widget = $widget;
         $this->widgetImmutableId = $widget->getImmutableId();
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getWidgetImmutableId(): string
     {
         return $this->widgetImmutableId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getValueOfTypeText(): ?string
     {
         return $this->valueOfTypeText;
     }
 
-    /**
-     * @param string|null $valueOfTypeText
-     * @return Value
-     */
-    public function setValueOfTypeText(?string $valueOfTypeText): Value
+    public function setValueOfTypeText(?string $valueOfTypeText): self
     {
         $this->valueOfTypeText = $valueOfTypeText;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getValueOfTypeString(): ?string
     {
         return $this->valueOfTypeString;
     }
 
-    /**
-     * @param string|null $valueOfTypeString
-     * @return Value
-     */
-    public function setValueOfTypeString(?string $valueOfTypeString): Value
+    public function setValueOfTypeString(?string $valueOfTypeString): self
     {
         $this->valueOfTypeString = $valueOfTypeString;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getValueOfTypeInt(): ?int
     {
-        if ($this->valueOfTypeInt !== null) {
-            return (int)$this->valueOfTypeInt;
+        if (null !== $this->valueOfTypeInt) {
+            return (int) $this->valueOfTypeInt;
         }
 
         return null;
     }
 
-    /**
-     * @param int|null $valueOfTypeInt
-     * @return Value
-     */
-    public function setValueOfTypeInt(?int $valueOfTypeInt): Value
+    public function setValueOfTypeInt(?int $valueOfTypeInt): self
     {
         $this->valueOfTypeInt = $valueOfTypeInt;
+
         return $this;
     }
 
@@ -243,8 +209,8 @@ class Value
      */
     public function getValueOfTypeFloat()
     {
-        if ($this->valueOfTypeFloat !== null) {
-            return (float)$this->valueOfTypeFloat;
+        if (null !== $this->valueOfTypeFloat) {
+            return (float) $this->valueOfTypeFloat;
         }
 
         return $this->valueOfTypeFloat;
@@ -252,97 +218,77 @@ class Value
 
     /**
      * @param float|int|null $valueOfTypeFloat
+     *
      * @return Value
      */
     public function setValueOfTypeFloat($valueOfTypeFloat)
     {
-        if ($valueOfTypeFloat !== null) {
-            $valueOfTypeFloat = (float)$valueOfTypeFloat;
+        if (null !== $valueOfTypeFloat) {
+            $valueOfTypeFloat = (float) $valueOfTypeFloat;
         }
 
         $this->valueOfTypeFloat = $valueOfTypeFloat;
+
         return $this;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getValueOfTypeDate(): ?\DateTime
     {
         return $this->valueOfTypeDate;
     }
 
-    /**
-     * @param \DateTime|null $valueOfTypeDate
-     * @return Value
-     */
-    public function setValueOfTypeDate(?\DateTime $valueOfTypeDate): Value
+    public function setValueOfTypeDate(?\DateTime $valueOfTypeDate): self
     {
         $this->valueOfTypeDate = $valueOfTypeDate;
+
         return $this;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getValueOfTypeTime(): ?\DateTime
     {
         return $this->valueOfTypeTime;
     }
 
-    /**
-     * @param \DateTime|null $valueOfTypeTime
-     * @return Value
-     */
-    public function setValueOfTypeTime(?\DateTime $valueOfTypeTime): Value
+    public function setValueOfTypeTime(?\DateTime $valueOfTypeTime): self
     {
         $this->valueOfTypeTime = $valueOfTypeTime;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getValueOfTypeRadio(): ?string
     {
         return $this->valueOfTypeRadio;
     }
 
     /**
-     * @param string|null|array $valueOfTypeRadio
-     * @return Value
+     * @param string|array|null $valueOfTypeRadio
      */
-    public function setValueOfTypeRadio($valueOfTypeRadio): Value
+    public function setValueOfTypeRadio($valueOfTypeRadio): self
     {
-        if (is_array($valueOfTypeRadio)) {
+        if (\is_array($valueOfTypeRadio)) {
             $valueOfTypeRadio = implode(',', $valueOfTypeRadio);
         }
 
         $this->valueOfTypeRadio = $valueOfTypeRadio;
+
         return $this;
     }
 
-    /**
-     * @return array|null
-     */
     public function getValueOfTypeButton(): ?array
     {
         return $this->valueOfTypeButton;
     }
 
-    /**
-     * @param array|null $valueOfTypeButton
-     * @return Value
-     */
-    public function setValueOfTypeButton(?array $valueOfTypeButton): Value
+    public function setValueOfTypeButton(?array $valueOfTypeButton): self
     {
-        if ($valueOfTypeButton === null) {
+        if (null === $valueOfTypeButton) {
             $valueOfTypeButton = self::DEFAULT_VALUE_OF_TYPE_BUTTON;
         }
 
-        if (is_array($valueOfTypeButton)) {
-            $label = (string)$valueOfTypeButton['label'];
-            $target = (string)$valueOfTypeButton['target'];
+        if (\is_array($valueOfTypeButton)) {
+            $label = (string) $valueOfTypeButton['label'];
+            $target = (string) $valueOfTypeButton['target'];
 
             if (empty($target)) {
                 $label = '';
@@ -355,90 +301,65 @@ class Value
             $target = trim(mb_strtolower($target));
 
             $valueOfTypeButton = ['ilabel' => $label, 'itarget' => $target] + $valueOfTypeButton;
-
         }
 
         $this->valueOfTypeButton = $valueOfTypeButton;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getValueOfTypeEmail(): ?string
     {
         return $this->valueOfTypeEmail;
     }
 
-    /**
-     * @param string|null $valueOfTypeEmail
-     * @return Value
-     */
-    public function setValueOfTypeEmail(?string $valueOfTypeEmail): Value
+    public function setValueOfTypeEmail(?string $valueOfTypeEmail): self
     {
         $this->valueOfTypeEmail = $valueOfTypeEmail;
+
         return $this;
     }
 
-    /**
-     * @return array|null
-     */
     public function getValueOfTypeMap(): ?array
     {
         return $this->valueOfTypeMap;
     }
 
-    /**
-     * @param array|null $valueOfTypeMap
-     * @return Value
-     */
-    public function setValueOfTypeMap(?array $valueOfTypeMap): Value
+    public function setValueOfTypeMap(?array $valueOfTypeMap): self
     {
-        if ($valueOfTypeMap === null) {
+        if (null === $valueOfTypeMap) {
             $valueOfTypeMap = self::DEFAULT_VALUE_OF_TYPE_MAP;
         }
 
         $this->valueOfTypeMap = $valueOfTypeMap;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getValueOfTypeVideo(): ?string
     {
         return $this->valueOfTypeVideo;
     }
 
-    /**
-     * @param string|null $valueOfTypeVideo
-     * @return Value
-     */
-    public function setValueOfTypeVideo(?string $valueOfTypeVideo): Value
+    public function setValueOfTypeVideo(?string $valueOfTypeVideo): self
     {
         $this->valueOfTypeVideo = $valueOfTypeVideo;
+
         return $this;
     }
 
-    /**
-     * @return Picture|null
-     */
     public function getValueOfTypePicture(): ?Picture
     {
         return $this->valueOfTypePicture;
     }
 
-    /**
-     * @param Picture|null $valueOfTypePicture
-     * @return Value
-     */
-    public function setValueOfTypePicture(?Picture $valueOfTypePicture): Value
+    public function setValueOfTypePicture(?Picture $valueOfTypePicture): self
     {
         $this->valueOfTypePicture = $valueOfTypePicture;
         if ($valueOfTypePicture instanceof Picture) {
             $valueOfTypePicture->setIsTemp(false);
         }
+
         return $this;
     }
-
 }

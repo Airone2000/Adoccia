@@ -35,12 +35,14 @@ class CategorySearchRepository extends ServiceEntityRepository
     public function findOneByUserOrGuestUniqueID(?User $user, ?string $guid): CategorySearch
     {
         $default = new CategorySearch();
-        if ($user === null && $guid === null) return $default;
+        if (null === $user && null === $guid) {
+            return $default;
+        }
         $qb = $this->createQueryBuilder('cs');
 
         $attribute = $user instanceof User ? 'user' : 'guestUniqueID';
-        $reverseAttribute = $attribute === 'user' ? 'guestUniqueID' : 'user';
-        $value = $attribute === 'user' ? $user : $guid;
+        $reverseAttribute = 'user' === $attribute ? 'guestUniqueID' : 'user';
+        $value = 'user' === $attribute ? $user : $guid;
         $parameterKey = uniqid(':key_');
 
         $categorySearch = $qb
@@ -54,7 +56,7 @@ class CategorySearchRepository extends ServiceEntityRepository
         ;
 
         $categorySearch = $categorySearch[0] ?? new CategorySearch();
-        call_user_func([$categorySearch, "set{$attribute}"], $value);
+        \call_user_func([$categorySearch, "set{$attribute}"], $value);
 
         if ($categorySearch->isNew()) {
             $this->_em->persist($categorySearch);

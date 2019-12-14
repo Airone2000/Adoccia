@@ -7,7 +7,6 @@ use App\Form\FormBuilderType\ButtonType;
 
 final class ButtonBuilder implements FormBuilderInterface
 {
-
     public function buildForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)
     {
         /* @var Widget $widget */
@@ -16,7 +15,7 @@ final class ButtonBuilder implements FormBuilderInterface
         $builder
             ->add($widget->getId(), ButtonType::class, [
                 'widget' => $widget,
-                'mode' => $options['mode']
+                'mode' => $options['mode'],
             ])
         ;
     }
@@ -26,7 +25,7 @@ final class ButtonBuilder implements FormBuilderInterface
         /* @var \App\Entity\Widget $widget */
         $widget = $options['widget'];
         $builder->add($widget->getImmutableId(), \App\Form\SearchType\ButtonType::class, [
-            'widget' => $widget
+            'widget' => $widget,
         ]);
     }
 }

@@ -8,7 +8,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class DateWidgetSettingsType extends AbstractWidgetSettingsType
 {
-
     public function buildInModalForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -16,9 +15,9 @@ final class DateWidgetSettingsType extends AbstractWidgetSettingsType
             ->add('inputPlaceholder')
             ->add('dateFormat', ChoiceType::class, [
                 'choices' => DateFormatEnum::toArray(),
-                'choice_label' => function(string $value) {
+                'choice_label' => function (string $value) {
                     return "trans.{$value}";
-                }
+                },
             ])
         ;
     }

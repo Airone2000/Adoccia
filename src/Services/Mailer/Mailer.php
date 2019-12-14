@@ -25,8 +25,8 @@ final class Mailer implements MailerInterface
             $envelope->message
         );
 
-        if ($sent === false) {
-            # Log in db for sending later
+        if (false === $sent) {
+            // Log in db for sending later
         }
 
         return $sent;
@@ -35,17 +35,17 @@ final class Mailer implements MailerInterface
     private function getEmailSolution(): EmailSolutionInterface
     {
         $emailSolutionClassName = $_SERVER['EMAIL_SOLUTION'];
-        if (!is_string($emailSolutionClassName)) {
+        if (!\is_string($emailSolutionClassName)) {
             throw new \LogicException('Environment variable EMAIL_SOLUTION is not properly set.');
         }
 
-        $emailSolutionClassName = 'App\Services\Mailer\EmailSolutions\\' . ucfirst(strtolower($emailSolutionClassName)) . 'EmailSolution';
+        $emailSolutionClassName = 'App\Services\Mailer\EmailSolutions\\'.ucfirst(mb_strtolower($emailSolutionClassName)).'EmailSolution';
         if (class_exists($emailSolutionClassName)) {
             $this->emailSolution = new $emailSolutionClassName();
+
             return $this->emailSolution;
         }
-        else {
-            throw new \LogicException("Unable to create an instance of {$emailSolutionClassName}");
-        }
+
+        throw new \LogicException("Unable to create an instance of {$emailSolutionClassName}");
     }
 }

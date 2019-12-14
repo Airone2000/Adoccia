@@ -39,6 +39,7 @@ class HasPermissionExtension extends AbstractExtension
         if ($token = $this->tokenStorage->getToken()) {
             /** @var User $user */
             $user = $token->getUser();
+
             return $user->hasPermission($value);
         }
 

@@ -16,13 +16,13 @@ final class PictureUploaderType extends AbstractType
             ->add('file', FileType::class, [
                 'label' => false,
                 'attr' => [
-                    'accept' => 'image/*'
-                ]
+                    'accept' => 'image/*',
+                ],
             ])
             ->add('base64Picture', HiddenType::class, [
                 'constraints' => [
-                    new NotBlank()
-                ]
+                    new NotBlank(),
+                ],
             ])
         ;
     }

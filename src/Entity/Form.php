@@ -25,14 +25,13 @@ class Form
      */
     private $areas;
 
-
     public function __construct()
     {
         $this->areas = new ArrayCollection();
     }
 
     /**
-     * Clone for draftForm generation
+     * Clone for draftForm generation.
      */
     public function __clone()
     {
@@ -50,35 +49,28 @@ class Form
 
     /**
      * @return Collection
-     * By default, it's returned, ordered by position ASC
+     *                    By default, it's returned, ordered by position ASC
      */
     public function getAreas(): Collection
     {
         $criteria = Criteria::create();
         $criteria->orderBy(['position' => 'ASC']);
+
         return $this->areas->matching($criteria);
     }
 
-    /**
-     * @param Collection $areas
-     * @return Form
-     */
-    public function setAreas(Collection $areas): Form
+    public function setAreas(Collection $areas): self
     {
         $this->areas = $areas;
+
         return $this;
     }
 
-    /**
-     * @param FormArea $area
-     * @return Form
-     */
-    public function addArea(FormArea $area): Form
+    public function addArea(FormArea $area): self
     {
         $area->setForm($this);
         $this->areas->add($area);
+
         return $this;
     }
-
-
 }

@@ -35,6 +35,7 @@ final class TimeType extends TextType
         $attr['data-inputmask-inputformat'] = $widget->getTimeFormat();
         $attr['data-inputmask-placeholder'] = self::getTimeTypePlaceholder($widget);
         $attr['inputmode'] = 'numeric';
+
         return $attr;
     }
 
@@ -42,8 +43,7 @@ final class TimeType extends TextType
     {
         if ($widget->getInputPlaceholder()) {
             $placeholder = $widget->getInputPlaceholder();
-        }
-        else {
+        } else {
             $placeholder = preg_replace('/[hms]/i', '_', $widget->getTimeFormat());
         }
 
@@ -52,28 +52,32 @@ final class TimeType extends TextType
 
     public static function transformFrom(Widget $widget, $value)
     {
-        if (is_string($value)) {
+        if (\is_string($value)) {
             $timeFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
             $datetime = \DateTime::createFromFormat($timeFormat, $value);
-            if ($datetime !== false) {
-                $datetime->setDate(0,0,0);
+            if (false !== $datetime) {
+                $datetime->setDate(0, 0, 0);
+
                 return $datetime;
             }
         }
+
         return null;
     }
 
     public static function transformTo(Widget $widget, $value)
     {
-        if (is_string($value)) {
+        if (\is_string($value)) {
             $value = \DateTime::createFromFormat('H:i:s', $value);
-            $value->setDate(0,0,0);
+            $value->setDate(0, 0, 0);
         }
 
         if ($value instanceof \DateTime) {
             $timeFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
+
             return $value->format($timeFormat);
         }
+
         return null;
     }
 }

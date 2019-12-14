@@ -10,7 +10,6 @@ use App\Enum\FicheModeEnum;
 use App\Form\CategorySearchType;
 use App\Form\CategoryType;
 use App\Form\FicheType;
-use App\Form\SaveSearchType;
 use App\Form\SearchInCategoryType;
 use App\Repository\CategoryRepository;
 use App\Repository\CategorySearchRepository;
@@ -24,7 +23,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,34 +33,34 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * List all categories : mine (no matter if published or not) + others (published)
+     * List all categories : mine (no matter if published or not) + others (published).
      *
      * @Route("/", name="category.index", methods={"GET", "POST"})
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function index(CategoryRepository $categoryRepository, Request $request, CategorySearchRepository $categorySearchRepository): Response
     {
-        # Get previous search for current user, or new search if none exist
+        // Get previous search for current user, or new search if none exist
         $categorySearch = $categorySearchRepository->findOneByUserOrGuestUniqueID($this->getUser(), $request->cookies->get('_guid'));
         $categorySearchByTitleForm = $this->createForm(CategorySearchType::class, clone $categorySearch, [
             'mode' => CategorySearchType::MODE_TITLE_ONLY,
-            'action' => $this->generateUrl('category.searchByTitle')
+            'action' => $this->generateUrl('category.searchByTitle'),
         ]);
         $categorySearchByMoreForm = $this->createForm(CategorySearchType::class, clone $categorySearch, [
             'mode' => CategorySearchType::MODE_MORE_ONLY,
-            'action' => $this->generateUrl('category.searchByMore')
+            'action' => $this->generateUrl('category.searchByMore'),
         ]);
 
-        # Load categories based on pagination
+        // Load categories based on pagination
         /* @var User|null */
         $user = $this->getUser();
-        $page = (int)$request->query->get('page', $categorySearch->getPage());
-        $items = (int)$categorySearch->getItemsPerPage();
+        $page = (int) $request->query->get('page', $categorySearch->getPage());
+        $items = (int) $categorySearch->getItemsPerPage();
         $categories = $categoryRepository->findAllForUserOrPublic($user, $page, $items, $categorySearch);
-        $totalItems = count($categories);
-        $lastPage = (int)ceil(($totalItems / $items));
+        $totalItems = \count($categories);
+        $lastPage = (int) ceil(($totalItems / $items));
 
-        # If wanted page does not exist, redirect to the last one
+        // If wanted page does not exist, redirect to the last one
         if (($page > $lastPage or $page <= 0) && $lastPage > 0) {
             return $this->redirectToRoute('category.index', ['page' => $lastPage > 0 ? $lastPage : 1]);
         }
@@ -71,7 +69,7 @@ class CategoryController extends AbstractController
             'categories' => $categories,
             'categorySearchByTitleForm' => $categorySearchByTitleForm->createView(),
             'categorySearchByMoreForm' => $categorySearchByMoreForm->createView(),
-            'paginator' => ['currentPage' => $page, 'itemsPerPage' => $items, 'totalItems' => $totalItems, 'lastPage' => $lastPage]
+            'paginator' => ['currentPage' => $page, 'itemsPerPage' => $items, 'totalItems' => $totalItems, 'lastPage' => $lastPage],
         ]);
     }
 
@@ -81,7 +79,7 @@ class CategoryController extends AbstractController
      *     methods={"post"},
      *     name="category.searchByTitle"
      * )
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function searchByTitle(Request $request, CategorySearchRepository $categorySearchRepository)
     {
@@ -91,6 +89,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush($categorySearch);
         }
+
         return $this->redirectToRoute('category.index');
     }
 
@@ -100,7 +99,7 @@ class CategoryController extends AbstractController
      *     methods={"post"},
      *     name="category.searchByMore"
      * )
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function searchByMore(Request $request, CategorySearchRepository $categorySearchRepository)
     {
@@ -110,26 +109,28 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush($categorySearch);
         }
+
         return $this->redirectToRoute('category.index');
     }
 
     /**
-     * Create a category
+     * Create a category.
      *
      * @Route("/new", name="category.new", methods={"GET","POST"})
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED') and user.hasPermission('CATEGORY_CREATE')")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function new(Request $request, CategoryHandlerInterface $categoryHandler): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category, [
-            'validation_groups' => ['Category:Post', 'Category:Picture:Post']
+            'validation_groups' => ['Category:Post', 'Category:Picture:Post'],
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $categoryHandler->setCreatedBy($category, null, $autoPersist = true);
+
             return $this->redirectToRoute('category.index');
         }
 
@@ -140,11 +141,11 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * Enter a category
+     * Enter a category.
      *
      * @Route("/{id}", name="category.show", methods={"GET"})
      * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function show(Category $category): Response
     {
@@ -154,6 +155,7 @@ class CategoryController extends AbstractController
                 'category' => $category,
             ]);
         }
+
         return $this->redirectToRoute('category.index');
     }
 
@@ -161,12 +163,12 @@ class CategoryController extends AbstractController
      * @Route("/{id}/edit", name="category.edit", methods={"GET","POST"})
      * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
      * @IsGranted("EDIT_CATEGORY", subject="category")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function edit(Category $category, Request $request): Response
     {
         $form = $this->createForm(CategoryType::class, $category, [
-            'validation_groups' => ['Category:Put', 'Category:Picture:Put']
+            'validation_groups' => ['Category:Put', 'Category:Picture:Put'],
         ]);
         $form->handleRequest($request);
 
@@ -186,11 +188,12 @@ class CategoryController extends AbstractController
      * @Route("/{id}/edit-form/{new}", name="category.setAndEditDraftForm", methods={"get"})
      * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
      * @IsGranted("EDIT_CATEGORY_FORM", subject="category")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function editDraftForm(Category $category, FormHandlerInterface $formHandler, bool $new = false): Response
     {
         $formHandler->setDraftForm($category, $new);
+
         return $this->redirectToRoute('draftForm.edit', ['id' => $category->getDraftForm()->getId()]);
     }
 
@@ -198,7 +201,7 @@ class CategoryController extends AbstractController
      * @Route("/{id}", name="category.delete", methods={"DELETE"})
      * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
      * @IsGranted("DELETE_CATEGORY", subject="category")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function delete(Request $request, Category $category): Response
     {
@@ -215,7 +218,7 @@ class CategoryController extends AbstractController
      * @Route("/{id}/fiches/add-single", methods={"get", "post"}, name="category.addFiche")
      * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
      * @IsGranted("ADD_FICHE_TO_CATEGORY", subject="category")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function addFiche(Category $category, Request $request, FicheHandlerInterface $ficheHandler): Response
     {
@@ -225,7 +228,7 @@ class CategoryController extends AbstractController
         $form = $this->createForm(FicheType::class, null, [
             'category' => $category,
             'mode' => FicheModeEnum::EDITION,
-            'fiche' => $fiche
+            'fiche' => $fiche,
         ]);
 
         $form->handleRequest($request);
@@ -234,9 +237,9 @@ class CategoryController extends AbstractController
                 $data = $form->getData();
                 $data['category'] = $category;
                 $fiche = $ficheHandler->createFicheFromFicheTypeData($data);
+
                 return $this->redirectToRoute('fiche.show', ['id' => $fiche->getId()]);
-            }
-            catch (\Exception $e) {
+            } catch (\Exception $e) {
                 $this->addFlash('addFicheError', '');
             }
         }
@@ -244,7 +247,7 @@ class CategoryController extends AbstractController
         return $this->render('category/add_fiche.html.twig', [
             'form' => $form->createView(),
             'category' => $category,
-            'fiche' => new Fiche()
+            'fiche' => new Fiche(),
         ]);
     }
 
@@ -255,17 +258,18 @@ class CategoryController extends AbstractController
      *     name="category.listFiches"
      * )
      * @Entity(name="category", expr="repository.getOneForUserById(null, id)")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function listFiches(Category $category, FicheRepository $ficheRepository, Request $request): Response
     {
         if (CategoryVoter::canListCategoryFiches($this->getUser(), $category)) {
-            $page = (int)$request->query->get('page', 1);
-            $items = (int)$request->query->get('items', 30);
+            $page = (int) $request->query->get('page', 1);
+            $items = (int) $request->query->get('items', 30);
             $fiches = $ficheRepository->findAllForCategoryAndUser($category, $this->getUser(), $page, $items);
+
             return $this->render('category/list_fiches.html.twig', [
                 'category' => $category,
-                'fiches' => $fiches
+                'fiches' => $fiches,
             ]);
         }
 
@@ -281,23 +285,21 @@ class CategoryController extends AbstractController
      * )
      * @Entity(name="category", expr="repository.getOneForUserById(null, categoryId)")
      * @Entity(name="search", expr="repository.findOneByIdAndCategory(searchId, categoryId)")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function advancedSearch(Category $category, Search $search = null, Request $request, CategoryFinderInterface $categoryFinder): Response
     {
         if (CategoryVoter::canSearchInCategory($this->getUser(), $category)) {
-
-            # Fill the form with existing data from Search
+            // Fill the form with existing data from Search
             $search = $search ?? new Search();
 
             $form = $this->createForm(SearchInCategoryType::class, $search->getCriterias(), [
-                'category' => $category
+                'category' => $category,
             ]);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-
-                # AutoSave the search
+                // AutoSave the search
                 $search = new Search();
                 $search
                     ->setCriterias($form->getData())
@@ -307,19 +309,20 @@ class CategoryController extends AbstractController
                 $em->persist($search);
                 $em->flush();
 
-                # And then, redirect to results
+                // And then, redirect to results
                 return $this->redirectToRoute('category.searchResults', [
                     'categoryId' => $category->getId(),
-                    'searchId' => $search->getId()
+                    'searchId' => $search->getId(),
                 ]);
             }
 
             return $this->render('category/search.html.twig', [
                 'category' => $category,
                 'form' => $form->createView(),
-                'search' => $search
+                'search' => $search,
             ]);
         }
+
         return $this->redirectToRoute('category.index');
     }
 
@@ -331,19 +334,20 @@ class CategoryController extends AbstractController
      * )
      * @Entity(name="category", expr="repository.getOneForUserById(null, categoryId)")
      * @Entity(name="search", expr="repository.findOneByIdAndCategory(searchId, categoryId)")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function searchResults(Category $category, Search $search, CategoryFinderInterface $categoryFinder): Response
     {
         if (CategoryVoter::canSearchInCategory($this->getUser(), $category)) {
             $results = $categoryFinder->search($category, $search->getCriterias());
+
             return $this->render('category/search_results.html.twig', [
                 'results' => $results,
                 'category' => $category,
-                'search' => $search
+                'search' => $search,
             ]);
         }
+
         return $this->redirectToRoute('category.index');
     }
-
 }

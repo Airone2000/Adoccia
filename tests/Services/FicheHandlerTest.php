@@ -2,7 +2,6 @@
 
 namespace App\Tests\Services;
 
-
 use App\Entity\Category;
 use App\Services\FicheHandler\FicheHandlerInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +20,6 @@ class FicheHandlerTest extends KernelTestCase
         $entityManager = self::$container->get(EntityManagerInterface::class);
         /** @var FicheHandlerInterface $ficheHandler */
         $ficheHandler = self::$container->get(FicheHandlerInterface::class);
-
 
         /** @var Category|null $category */
         $category = $entityManager->getRepository(Category::class)->find(1);

@@ -23,19 +23,20 @@ final class FicheController extends AbstractController
     /**
      * @Route("/{id}", methods={"get"}, name="fiche.show")
      * @Entity(name="fiche", expr="repository.getOneForUserById(null, id)")
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function showFiche(Fiche $fiche, FicheHandlerInterface $ficheHandler): Response
+    public function showFiche(Fiche $fiche, FicheHandlerInterface $ficheHandler): Response
     {
         if (FicheVoter::canSeeFiche($this->getUser(), $fiche)) {
             return $this->render('fiche/show.html.twig', [
                 'category' => $fiche->getCategory(),
                 'fiche' => $fiche,
-                'ficheView' => $ficheHandler->getFicheView($fiche)
+                'ficheView' => $ficheHandler->getFicheView($fiche),
             ]);
         }
+
         return $this->redirectToRoute('category.show', [
-            'id' => $fiche->getCategory()->getId()
+            'id' => $fiche->getCategory()->getId(),
         ]);
     }
 
@@ -43,14 +44,14 @@ final class FicheController extends AbstractController
      * @Route("/{id}/edit", methods={"get", "put"}, name="fiche.edit")
      * @Entity(name="fiche", expr="repository.getOneForUserById(null, id)")
      * @IsGranted("CAN_EDIT_FICHE", subject="fiche")
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function editFiche(Fiche $fiche, Request $request, FicheHandlerInterface $ficheHandler): Response
+    public function editFiche(Fiche $fiche, Request $request, FicheHandlerInterface $ficheHandler): Response
     {
         $data = [
             'title' => $fiche->getTitle(),
             'published' => $fiche->isPublished(),
-            'picture' => $fiche->getPicture()
+            'picture' => $fiche->getPicture(),
         ];
         $data = $data + $ficheHandler->mapValueToWidgetId($fiche);
 
@@ -58,7 +59,7 @@ final class FicheController extends AbstractController
             'category' => $fiche->getCategory(),
             'mode' => FicheModeEnum::EDITION,
             'method' => 'PUT',
-            'fiche' => $fiche
+            'fiche' => $fiche,
         ]);
 
         $category = $fiche->getCategory();
@@ -67,10 +68,11 @@ final class FicheController extends AbstractController
             try {
                 $ficheHandler->editFicheFromFicheTypeData($fiche, $form->getData());
                 $this->addFlash('editFicheSuccess', '');
+
                 return $this->redirectToRoute('fiche.show', ['id' => $fiche->getId()]);
-            }
-            catch (\Exception $e) {
+            } catch (\Exception $e) {
                 $this->addFlash('editFicheError', '');
+
                 return $this->redirectToRoute('fiche.edit', ['id' => $fiche->getId()]);
             }
         }
@@ -78,7 +80,7 @@ final class FicheController extends AbstractController
         return $this->render('fiche/edit.html.twig', [
             'category' => $category,
             'fiche' => $fiche,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -90,9 +92,9 @@ final class FicheController extends AbstractController
      * )
      * @Entity(name="fiche", expr="repository.getOneForUserById(null, id)")
      * @IsGranted("CAN_DELETE_FICHE", subject="fiche")
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function deleteFiche(Fiche $fiche, Request $request): Response
+    public function deleteFiche(Fiche $fiche, Request $request): Response
     {
         $category = $fiche->getCategory();
         $expected = 'delete'.$fiche->getId();
@@ -102,8 +104,9 @@ final class FicheController extends AbstractController
             $entityManager->remove($fiche);
             $entityManager->flush();
         }
+
         return $this->redirectToRoute('category.listFiches', [
-            'id' => $category->getId()
+            'id' => $category->getId(),
         ]);
     }
 }

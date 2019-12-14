@@ -26,7 +26,6 @@ class FormAreaSettingsType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $marginConstraintsAttr = ['attr' => ['min' => 0, 'max' => FormArea::MAX_MARGIN]];
         $paddingConstraintsAttr = ['attr' => ['min' => 0, 'max' => FormArea::MAX_PADDING]];
         $borderConstraintsAttr = ['attr' => ['min' => 0, 'max' => FormArea::MAX_BORDER]];
@@ -51,9 +50,9 @@ class FormAreaSettingsType extends AbstractType
             ->add('backgroundColor')
             ->add('widgetVerticalAlignment', ChoiceType::class, [
                 'choices' => WidgetVerticalAlignmentEnum::toArray(),
-                'choice_label' => function(string $label){
+                'choice_label' => function (string $label) {
                     return $this->translator->trans("key.{$label}");
-                }
+                },
             ])
         ;
     }
@@ -67,7 +66,7 @@ class FormAreaSettingsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => FormArea::class,
-            'validation_groups' => ['FormArea:SetSettings']
+            'validation_groups' => ['FormArea:SetSettings'],
         ]);
     }
 }

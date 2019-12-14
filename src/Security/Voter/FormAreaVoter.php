@@ -11,11 +11,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class FormAreaVoter extends Voter
 {
-    const
-        DELETE_FORM_AREA = 'DELETE_FORM_AREA',
-        SET_FORM_AREA_WIDTH = 'SET_FORM_AREA_WIDTH',
-        SET_FORM_AREA_SETTINGS = 'SET_FORM_AREA_SETTINGS'
-    ;
+    const DELETE_FORM_AREA = 'DELETE_FORM_AREA';
+    const SET_FORM_AREA_WIDTH = 'SET_FORM_AREA_WIDTH';
+    const SET_FORM_AREA_SETTINGS = 'SET_FORM_AREA_SETTINGS';
 
     /**
      * @var AuthorizationCheckerInterface
@@ -29,15 +27,22 @@ class FormAreaVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if ($attribute === self::DELETE_FORM_AREA && $subject instanceof FormArea) return true;
-        if ($attribute === self::SET_FORM_AREA_WIDTH && $subject instanceof FormArea) return true;
-        if ($attribute === self::SET_FORM_AREA_SETTINGS && $subject instanceof FormArea) return true;
+        if (self::DELETE_FORM_AREA === $attribute && $subject instanceof FormArea) {
+            return true;
+        }
+        if (self::SET_FORM_AREA_WIDTH === $attribute && $subject instanceof FormArea) {
+            return true;
+        }
+        if (self::SET_FORM_AREA_SETTINGS === $attribute && $subject instanceof FormArea) {
+            return true;
+        }
+
         return false;
     }
 
     /**
-     * @var FormArea $subject
-     * @inheritdoc
+     * @var FormArea
+     *               {@inheritdoc}
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {

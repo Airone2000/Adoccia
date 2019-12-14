@@ -23,8 +23,8 @@ final class ButtonType extends AbstractSearchType
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function($value){ return "trans.{$value}"; },
-                'choice_attr' => function(string $value) {
+                'choice_label' => function ($value) { return "trans.{$value}"; },
+                'choice_attr' => function (string $value) {
                     $attr = [];
                     switch ($value) {
                         case SearchCriteriaEnum::BUTTON_LABEL_EQUAL_TO:
@@ -38,16 +38,17 @@ final class ButtonType extends AbstractSearchType
                             $attr['data-inputs'] = '.value';
                             break;
                     }
+
                     return $attr;
-                }
+                },
             ])
             ->add('value', TextType::class, [
                 'required' => false,
                 'constraints' => [new Length(['max' => 250])],
                 'attr' => [
                     'placeholder' => $widget->getInputPlaceholder(),
-                    'class' => 'value hidden'
-                ]
+                    'class' => 'value hidden',
+                ],
             ])
         ;
     }
@@ -67,7 +68,7 @@ final class ButtonType extends AbstractSearchType
             SearchCriteriaEnum::BUTTON_TARGET_EQUAL_TO,
             SearchCriteriaEnum::BUTTON_TARGET_NOT_EQUAL_TO,
             SearchCriteriaEnum::BUTTON_TARGET_CONTAINS,
-            SearchCriteriaEnum::BUTTON_TARGET_NOT_CONTAINS
+            SearchCriteriaEnum::BUTTON_TARGET_NOT_CONTAINS,
         ];
     }
 }

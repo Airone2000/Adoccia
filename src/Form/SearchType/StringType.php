@@ -23,8 +23,8 @@ class StringType extends AbstractSearchType
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function($value){ return "trans.{$value}"; },
-                'choice_attr' => function(string $value) {
+                'choice_label' => function ($value) { return "trans.{$value}"; },
+                'choice_attr' => function (string $value) {
                     $attr = [];
                     switch ($value) {
                         case SearchCriteriaEnum::EXACT:
@@ -34,16 +34,17 @@ class StringType extends AbstractSearchType
                             $attr['data-inputs'] = '.value';
                             break;
                     }
+
                     return $attr;
-                }
+                },
             ])
             ->add('value', TextType::class, [
                 'required' => false,
                 'constraints' => [new Length(['max' => 250])],
                 'attr' => [
                     'placeholder' => $widget->getInputPlaceholder(),
-                    'class' => 'value hidden'
-                ]
+                    'class' => 'value hidden',
+                ],
             ])
         ;
     }
@@ -57,7 +58,7 @@ class StringType extends AbstractSearchType
             SearchCriteriaEnum::EXACT,
             SearchCriteriaEnum::CONTAINS,
             SearchCriteriaEnum::STARTS_WITH,
-            SearchCriteriaEnum::ENDS_WITH
+            SearchCriteriaEnum::ENDS_WITH,
         ];
     }
 }

@@ -29,14 +29,16 @@ class ValueRepository extends ServiceEntityRepository
         $mapImmutableIdToId = $widgetRepository->getArrayOfWidgetsIdForForm($form);
 
         if (!empty($mapImmutableIdToId)) {
-            $sets = ''; $ids = '';
+            $sets = '';
+            $ids = '';
             foreach ($mapImmutableIdToId as $item) {
                 $sets .= " WHEN v.widget_immutable_id = \"{$item['immutableId']}\" THEN {$item['id']}";
-                $ids .= ',"' . $item['immutableId'] . '"';
+                $ids .= ',"'.$item['immutableId'].'"';
             }
 
-            $ids = ltrim($ids, ','); $sets = trim($sets);
-            $sql = 'UPDATE `value` v SET v.widget_id = (CASE ' . $sets . ' ELSE v.widget_id END) WHERE v.widget_immutable_id IN (' . $ids . ')';
+            $ids = ltrim($ids, ',');
+            $sets = trim($sets);
+            $sql = 'UPDATE `value` v SET v.widget_id = (CASE '.$sets.' ELSE v.widget_id END) WHERE v.widget_immutable_id IN ('.$ids.')';
             $this->getEntityManager()->getConnection()->exec($sql);
         }
     }
@@ -55,14 +57,12 @@ class ValueRepository extends ServiceEntityRepository
 
     public function addWidgetValueToCategoryFiches(Category $category, Widget $widget)
     {
-
         $q = <<<SQL
                       INSERT INTO `value` (fiche_id, widget_id, widget_immutable_id)
                       SELECT id, {$widget->getId()}, "{$widget->getImmutableId()}"
                       FROM fiche
                       WHERE category_id = {$category->getId()}
 SQL;
-
 
         /** @var \PDO $pdo */
         $pdo = $this->getEntityManager()->getConnection();
@@ -72,6 +72,7 @@ SQL;
     public function findValueOfTypeMapWhereImmutableIdIsIn(array $ids): array
     {
         $qb = $this->createQueryBuilder('v');
+
         return $qb
             ->select('v.id, v.widgetImmutableId, v.valueOfTypeMap, IDENTITY(v.fiche) AS fiche')
             ->where('v.widgetImmutableId IN (:ids)')

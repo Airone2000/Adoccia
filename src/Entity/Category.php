@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use App\Validator\CategoryPicture;
-use App\Validator\Is169;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -88,7 +86,6 @@ class Category
      */
     private $public = false;
 
-
     public function __construct()
     {
         $this->fiches = new ArrayCollection();
@@ -149,123 +146,86 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Form
-     */
     public function getForm(): Form
     {
         return $this->form;
     }
 
-    /**
-     * @param Form $form
-     * @return Category
-     */
-    public function setForm(Form $form): Category
+    public function setForm(Form $form): self
     {
         $this->form = $form;
+
         return $this;
     }
 
-    /**
-     * @return Form|null
-     */
     public function getDraftForm(): ?Form
     {
         return $this->draftForm;
     }
 
-    /**
-     * @param Form|null $draftForm
-     * @return Category
-     */
-    public function setDraftForm(?Form $draftForm): Category
+    public function setDraftForm(?Form $draftForm): self
     {
         $this->draftForm = $draftForm;
+
         return $this;
     }
 
-    /**
-     * @return Collection
-     */
     public function getFiches(): Collection
     {
         return $this->fiches;
     }
 
-    /**
-     * @return bool
-     */
     public function isOnline(): bool
     {
         return $this->online;
     }
 
-    /**
-     * @param bool $online
-     * @return Category
-     */
-    public function setOnline(bool $online): Category
+    public function setOnline(bool $online): self
     {
         $this->online = $online;
+
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isPublic(): bool
     {
         return $this->public;
     }
 
-    /**
-     * @param bool $public
-     * @return Category
-     */
-    public function setPublic(bool $public): Category
+    public function setPublic(bool $public): self
     {
         $this->public = $public;
+
         return $this;
     }
 
-    /**
-     * @return null|\DateTime
-     */
     public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param \DateTime $updatedAt
      * @return Category
      */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
-    /**
-     * @return Picture|null
-     */
     public function getPicture(): ?Picture
     {
         return $this->picture;
     }
 
-    /**
-     * @param Picture|null $picture
-     * @return Category
-     */
-    public function setPicture(?Picture $picture): Category
+    public function setPicture(?Picture $picture): self
     {
         $this->picture = $picture;
         if ($picture instanceof Picture) {
-            $picture->setIsTemp(false); # No longer temps
+            $picture->setIsTemp(false); // No longer temps
         }
+
         return $this;
     }
-
 }

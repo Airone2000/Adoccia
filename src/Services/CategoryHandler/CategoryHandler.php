@@ -27,14 +27,14 @@ final class CategoryHandler implements CategoryHandlerInterface
 
     public function setCreatedBy(Category $category, ?User $user = null, bool $autoPersist = false): CategoryHandlerInterface
     {
-        if ($user === null) {
+        if (null === $user) {
             $user = $this->tokenStorage->getToken()->getUser();
         }
 
         $category->setCreatedBy($user);
 
         if ($autoPersist) {
-            if ($category->getId() === null) {
+            if (null === $category->getId()) {
                 $this->entityManager->persist($category);
             }
             $this->entityManager->flush($category);

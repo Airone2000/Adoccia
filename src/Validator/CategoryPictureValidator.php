@@ -20,7 +20,7 @@ class CategoryPictureValidator extends ConstraintValidator
     }
 
     /**
-     * @param Picture $value
+     * @param Picture                    $value
      * @param Constraint|CategoryPicture $constraint
      */
     public function validate($value, Constraint $constraint)
@@ -30,6 +30,5 @@ class CategoryPictureValidator extends ConstraintValidator
         if (null === $value || '' === $value) {
             return;
         }
-
     }
 }

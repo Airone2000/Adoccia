@@ -5,14 +5,17 @@ namespace App\Services\VideoHandler;
 final class VideoHandler implements VideoHandlerInterface
 {
     const SUPPORTED = [
-        'Youtube' => '#^https:\/\/youtu\.be\/[a-z0-9\-]+$#i'
+        'Youtube' => '#^https:\/\/youtu\.be\/[a-z0-9\-]+$#i',
     ];
 
     public static function isSupported(string $url, &$provider = null): bool
     {
         foreach (self::SUPPORTED as $provider => $pattern) {
-            if (preg_match($pattern, $url)) return true;
+            if (preg_match($pattern, $url)) {
+                return true;
+            }
         }
+
         return false;
     }
 
@@ -33,7 +36,7 @@ final class VideoHandler implements VideoHandlerInterface
     {
         $urlParts = explode('/', $url);
         $videoID = array_pop($urlParts);
+
         return "https://www.youtube.com/embed/{$videoID}";
     }
-
 }

@@ -22,6 +22,7 @@ class SearchRepository extends ServiceEntityRepository
     public function findOneByIdAndCategory(int $id, int $categoryId): ?Search
     {
         $qb = $this->createQueryBuilder('s');
+
         return $qb
             ->where('s.id = :id')
             ->setParameter('id', $id)

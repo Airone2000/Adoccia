@@ -12,11 +12,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class WidgetVoter extends Voter
 {
-    const
-        CHANGE_WIDGET_TYPE = 'CHANGE_WIDGET_TYPE',
-        GET_WIDGET_SETTING_VIEW = 'GET_WIDGET_SETTING_VIEW',
-        SET_WIDGET_SETTING = 'SET_WIDGET_SETTING'
-    ;
+    const CHANGE_WIDGET_TYPE = 'CHANGE_WIDGET_TYPE';
+    const GET_WIDGET_SETTING_VIEW = 'GET_WIDGET_SETTING_VIEW';
+    const SET_WIDGET_SETTING = 'SET_WIDGET_SETTING';
+
     /**
      * @var AuthorizationCheckerInterface
      */
@@ -29,15 +28,22 @@ class WidgetVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if ($attribute === self::CHANGE_WIDGET_TYPE && $subject instanceof Widget) return true;
-        if ($attribute === self::GET_WIDGET_SETTING_VIEW && $subject instanceof Widget) return true;
-        if ($attribute === self::SET_WIDGET_SETTING && $subject instanceof Widget) return true;
+        if (self::CHANGE_WIDGET_TYPE === $attribute && $subject instanceof Widget) {
+            return true;
+        }
+        if (self::GET_WIDGET_SETTING_VIEW === $attribute && $subject instanceof Widget) {
+            return true;
+        }
+        if (self::SET_WIDGET_SETTING === $attribute && $subject instanceof Widget) {
+            return true;
+        }
+
         return false;
     }
 
     /**
-     * @var Widget $subject
-     * @inheritdoc
+     * @var Widget
+     *             {@inheritdoc}
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
@@ -54,8 +60,8 @@ class WidgetVoter extends Voter
             case self::SET_WIDGET_SETTING:
                 /** @var Form $form */
                 $form = $subject->getFormArea()->getForm();
-                return $this->authorizationChecker->isGranted(FormVoter::EDIT_DRAFT_FORM, $form);
 
+                return $this->authorizationChecker->isGranted(FormVoter::EDIT_DRAFT_FORM, $form);
         }
 
         return false;

@@ -16,7 +16,7 @@ class SetWidgetTypeType extends AbstractType
         $builder
             ->add('type', ChoiceType::class, [
                 'choices' => WidgetTypeEnum::toArray(),
-                'label' => null
+                'label' => null,
             ])
         ;
     }

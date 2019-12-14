@@ -5,28 +5,29 @@ namespace App\Enum;
 final class TimeFormatEnum extends AbstractEnum
 {
     const
-        HHMM = 'HH:MM',
+        HHMM = 'HH:MM';
+    const
         HHMMSS = 'HH:MM:ss'
     ;
 
     const DEFAULT_TIME_FORMAT = self::HHMM;
 
     public static $mapJsDateFormatToOtherDateFormat = [
-        self::HHMM  => [
+        self::HHMM => [
             'php' => 'H:i',
-            'sql' => '%H:%i'
+            'sql' => '%H:%i',
         ],
         self::HHMMSS => [
             'php' => 'H:i:s',
-            'sql' => '%H:%i:%s'
-        ]
+            'sql' => '%H:%i:%s',
+        ],
     ];
-
 
     public static function toArray(): array
     {
         $data = parent::toArray();
         unset($data['DEFAULT_TIME_FORMAT']);
+
         return $data;
     }
 }

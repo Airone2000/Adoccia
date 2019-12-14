@@ -12,15 +12,15 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20191203212238 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, picture_id INT DEFAULT NULL, created_by_id INT DEFAULT NULL, form_id INT DEFAULT NULL, draft_form_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, description LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, online TINYINT(1) DEFAULT \'0\' NOT NULL, public TINYINT(1) DEFAULT \'0\' NOT NULL, UNIQUE INDEX UNIQ_64C19C1EE45BDBF (picture_id), INDEX IDX_64C19C1B03A8386 (created_by_id), UNIQUE INDEX UNIQ_64C19C15FF69B7D (form_id), UNIQUE INDEX UNIQ_64C19C1A73FE35E (draft_form_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE password_reset (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, cached_email VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, expires_at DATETIME NOT NULL, password_changed_at DATETIME DEFAULT NULL, token VARCHAR(70) NOT NULL, UNIQUE INDEX UNIQ_B10172525F37A13B (token), INDEX IDX_B1017252A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
@@ -55,10 +55,10 @@ final class Version20191203212238 extends AbstractMigration
         $this->addSql('ALTER TABLE form_area ADD CONSTRAINT FK_43B5397FFBE885E2 FOREIGN KEY (widget_id) REFERENCES widget (id) ON DELETE CASCADE');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE search DROP FOREIGN KEY FK_B4F0DBA712469DE2');
         $this->addSql('ALTER TABLE fiche DROP FOREIGN KEY FK_4C13CC7812469DE2');

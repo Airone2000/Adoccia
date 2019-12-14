@@ -9,11 +9,10 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 final class FicheListener
 {
-    function preUpdate(Fiche $fiche, PreUpdateEventArgs $preUpdateEventArgs): void
+    public function preUpdate(Fiche $fiche, PreUpdateEventArgs $preUpdateEventArgs): void
     {
         $changeSet = $preUpdateEventArgs->getEntityChangeSet();
         $this->deleteOldPicture($changeSet, $preUpdateEventArgs->getEntityManager());
-
     }
 
     private function deleteOldPicture(array $changeSet, EntityManagerInterface $entityManager): void
@@ -21,7 +20,7 @@ final class FicheListener
         if (isset($changeSet['picture'])) {
             [$oldPicture] = $changeSet['picture'];
             if ($oldPicture instanceof Picture) {
-                $entityManager->remove($oldPicture); # Will flush ...
+                $entityManager->remove($oldPicture); // Will flush ...
             }
         }
     }

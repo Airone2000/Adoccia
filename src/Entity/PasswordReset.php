@@ -54,133 +54,93 @@ class PasswordReset
      */
     private $token;
 
-
     public function __construct(User $user)
     {
         $this->setUser($user);
         $this->setCreatedAt(new \DateTime());
         $this->setCachedEmail($user->getEmail());
-        $this->setToken(sha1($user->getPassword() . uniqid()));
+        $this->setToken(sha1($user->getPassword().uniqid()));
     }
 
-    /**
-     * @return mixed
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @param User $user
-     * @return PasswordReset
-     */
-    public function setUser(User $user): PasswordReset
+    public function setUser(User $user): self
     {
         $this->user = $user;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getCachedEmail(): string
     {
         return (string) $this->cachedEmail;
     }
 
-    /**
-     * @param string $cachedEmail
-     * @return PasswordReset
-     */
-    public function setCachedEmail(string $cachedEmail): PasswordReset
+    public function setCachedEmail(string $cachedEmail): self
     {
         $this->cachedEmail = $cachedEmail;
+
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
-     * @return PasswordReset
      * @throws \Exception
      */
-    public function setCreatedAt(\DateTime $createdAt): PasswordReset
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
         $expiresAt = $createdAt->add(new \DateInterval('PT1H'));
         $this->setExpiresAt($expiresAt);
+
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getExpiresAt(): \DateTime
     {
         return $this->expiresAt;
     }
 
-    /**
-     * @param \DateTime $expiresAt
-     * @return PasswordReset
-     */
-    public function setExpiresAt(\DateTime $expiresAt): PasswordReset
+    public function setExpiresAt(\DateTime $expiresAt): self
     {
         $this->expiresAt = $expiresAt;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getToken(): string
     {
         return (string) $this->token;
     }
 
-    /**
-     * @param string $token
-     * @return PasswordReset
-     */
-    public function setToken(string $token): PasswordReset
+    public function setToken(string $token): self
     {
         $this->token = $token;
+
         return $this;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getPasswordChangedAt(): ?\DateTime
     {
         return $this->passwordChangedAt;
     }
 
-    /**
-     * @param \DateTime $passwordChangedAt
-     * @return PasswordReset
-     */
-    public function setPasswordChangedAt(\DateTime $passwordChangedAt): PasswordReset
+    public function setPasswordChangedAt(\DateTime $passwordChangedAt): self
     {
         $this->passwordChangedAt = $passwordChangedAt;
+
         return $this;
     }
-
-
 }
