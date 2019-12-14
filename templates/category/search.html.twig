@@ -1,4 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends 'category/base.html.twig' %}
+
 {% form_theme form 'form/TWIG_widget_types.html.twig' %}
 
 {% block stylesheets %}
@@ -12,7 +13,7 @@
     {{ encore_entry_script_tags('category/search') }}
 {% endblock %}
 
-{% block body %}
+{% block category_body %}
         <h2>Rechercher dans {{ category.name }}</h2>
 
         <div style="width:600px;">

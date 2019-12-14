@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('baseCategory') }}
+{% endblock %}
+
+{% block body %}
+    <div id="category">
+        <div id="categoryShow_Side">
+
+            <h1>{{ category.name }}</h1>
+            {{ showPicture(category.picture) }}
+
+            {% if category.description %}
+                <p class="description">{{ category.description }}</p>
+            {% endif %}
+
+            <nav id="categoryShow_Side_Menu">
+                <a class="btn btn-secondary menuLink {{ app.request.attributes.get('_route') == 'category.listFiches' ? 'active' : '' }}" href="{{ url('category.listFiches', {'id': category.id}) }}">
+                    <i class="fas fa-leaf font-size-20px icon"></i>
+                    <span>Les feuilles</span>
+                </a>
+
+                <a class="btn btn-secondary menuLink {{ app.request.attributes.get('_route') == 'category.searchFiches' ? 'active' : '' }}" href="{{ url('category.searchFiches', {'categoryId': category.id}) }}">
+                    <i class="fas fa-search font-size-20px icon"></i>
+                    <span>Recherche avancée</span>
+                </a>
+                <a class="btn btn-secondary menuLink {{ app.request.attributes.get('_route') == 'category.edit' ? 'active' : '' }}" href="{{ url('category.edit', {'id': category.id}) }}">
+                    <i class="fas fa-cog font-size-20px icon"></i>
+                    <span>Paramètres</span>
+                </a>
+            </nav>
+        </div>
+
+        <div id="categoryShow_Body">
+        {% block category_body %}
+        {% endblock %}
+        </div>
+
+    </div>
+{% endblock %}

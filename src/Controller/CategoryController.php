@@ -65,6 +65,9 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category.index', ['page' => $lastPage > 0 ? $lastPage : 1]);
         }
 
+        $categorySearch->setPage($page);
+        $this->getDoctrine()->getManager()->flush($categorySearch);
+
         return $this->render('category/index.html.twig', [
             'categories' => $categories,
             'categorySearchByTitleForm' => $categorySearchByTitleForm->createView(),
