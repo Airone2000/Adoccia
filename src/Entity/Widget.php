@@ -527,7 +527,7 @@ class Widget
      */
     public function setMultipleValues(?bool $multipleValues): Widget
     {
-        $this->multipleValues = $multipleValues;
+        $this->multipleValues = $multipleValues ?? false;
         return $this;
     }
 
