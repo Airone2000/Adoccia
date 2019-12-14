@@ -3,16 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Category;
-use App\Entity\Picture;
 use App\Enum\PictureShapeEnum;
-use App\Validator\CategoryPicture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CategoryType extends AbstractType
@@ -34,13 +28,13 @@ class CategoryType extends AbstractType
 
         $builder
             ->add('name', null, [
-                'required' => false
+                'required' => false,
             ])
             ->add('picture', PictureType::class, [
                 'originalPicture' => $category->getPicture(),
                 'uniqueId' => uniqid('uid_'),
                 'cropShape' => PictureShapeEnum::SQUARE,
-                'liipImagineFilter' => 'category_picture_thumbnail'
+                'liipImagineFilter' => 'category_picture_thumbnail',
             ])
             ->add('description')
             ->add('online')

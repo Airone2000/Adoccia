@@ -25,19 +25,18 @@ final class WidgetController extends AbstractController
      *     condition="request.isXmlHttpRequest() and request.headers.get('Content-Type') == 'application/json'"
      * )
      * @IsGranted("CHANGE_WIDGET_TYPE", subject="widget")
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function changeType(Widget $widget, Request $request, FormHandlerInterface $formHandler): Response
+    public function changeType(Widget $widget, Request $request, FormHandlerInterface $formHandler): Response
     {
         try {
             $newType = json_decode($request->getContent(), true)['type'] ?? null;
             $formHandler->changeFormAreaWidgetType($widget, $newType);
 
             return new JsonResponse([
-                'view' => $this->renderView('form/_area.html.twig', ['area' => $widget->getFormArea()])
+                'view' => $this->renderView('form/_area.html.twig', ['area' => $widget->getFormArea()]),
             ]);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return new Response('', Response::HTTP_BAD_REQUEST);
         }
     }
@@ -50,13 +49,12 @@ final class WidgetController extends AbstractController
      *     name="widget.getSettingsView"
      * )
      * @IsGranted("GET_WIDGET_SETTING_VIEW", subject="widget")
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function putInModalSettingsView(Widget $widget, Request $request): Response
+    public function putInModalSettingsView(Widget $widget, Request $request): Response
     {
         try {
-
-            $type = ucfirst(strtolower($widget->getType()));
+            $type = ucfirst(mb_strtolower($widget->getType()));
             $typeClass = "\App\Form\WidgetSettingsType\\{$type}WidgetSettingsType";
 
             if (class_exists($typeClass)) {
@@ -64,7 +62,7 @@ final class WidgetController extends AbstractController
                     'action' => $this->generateUrl('widget.getSettingsView', ['id' => $widget->getId()]),
                     'method' => 'put',
                     'validation_groups' => ["{$type}Widget:SetSettings"],
-                    'mode' => AbstractWidgetSettingsType::MODE_COMPLETE
+                    'mode' => AbstractWidgetSettingsType::MODE_COMPLETE,
                 ]);
 
                 $form->handleRequest($request);
@@ -72,27 +70,28 @@ final class WidgetController extends AbstractController
                     if ($form->isValid()) {
                         $this->getDoctrine()->getManager()->flush();
 
-                        # Widget is definitely modified
-                        # Returns the complete view so that client can update its display
+                        // Widget is definitely modified
+                        // Returns the complete view so that client can update its display
                         return new JsonResponse([
                             'area' => $widget->getFormArea()->getId(),
-                            'formAreaView' => $this->renderView('form/_area.html.twig', ['area' => $widget->getFormArea()])
+                            'formAreaView' => $this->renderView('form/_area.html.twig', ['area' => $widget->getFormArea()]),
                         ], Response::HTTP_OK);
                     }
-                    else $status = Response::HTTP_BAD_REQUEST;
+                    $status = Response::HTTP_BAD_REQUEST;
+                } else {
+                    $status = Response::HTTP_OK;
                 }
-                else $status = Response::HTTP_OK;
 
                 $view = $this->renderView("form/builder/_settings_{$widget->getType()}.html.twig", [
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
                 ]);
+
                 return new JsonResponse([
-                    'view' => $view
+                    'view' => $view,
                 ], $status);
             }
-            else throw new \LogicException("Class {$typeClass} must exist.");
-        }
-        catch (\Exception $e) {
+            throw new \LogicException("Class {$typeClass} must exist.");
+        } catch (\Exception $e) {
             return new Response('', Response::HTTP_NOT_FOUND);
         }
     }

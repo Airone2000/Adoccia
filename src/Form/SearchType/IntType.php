@@ -27,18 +27,18 @@ final class IntType extends AbstractSearchType
                 'placeholder' => $widget->getInputPlaceholder(),
                 'min' => $widget->getMin() ?? '',
                 'max' => $widget->getMax() ?? '',
-                'step' => 'any'
+                'step' => 'any',
             ],
             'constraints' => [
-                new Type(['type' => 'numeric'])
-            ]
+                new Type(['type' => 'numeric']),
+            ],
         ];
 
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function($value){ return "trans.{$value}"; },
-                'choice_attr' => function(string $value) {
+                'choice_label' => function ($value) { return "trans.{$value}"; },
+                'choice_attr' => function (string $value) {
                     $attr = [];
                     switch ($value) {
                         case SearchCriteriaEnum::EQUAL_TO:
@@ -50,15 +50,16 @@ final class IntType extends AbstractSearchType
                             $attr['data-inputs'] = '.value,.value2';
                             break;
                     }
+
                     return $attr;
-                }
+                },
             ])
             ->add('value', IntegerType::class, [
-                    'attr' => ['class' => 'value hidden'] + $valueOptions['attr']
+                    'attr' => ['class' => 'value hidden'] + $valueOptions['attr'],
                 ] + $valueOptions
             )
             ->add('value2', IntegerType::class, [
-                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
+                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr'],
                 ] + $valueOptions)
         ;
     }
@@ -72,7 +73,7 @@ final class IntType extends AbstractSearchType
             SearchCriteriaEnum::EQUAL_TO,
             SearchCriteriaEnum::GREATER_THAN,
             SearchCriteriaEnum::LOWER_THAN,
-            SearchCriteriaEnum::BETWEEN
+            SearchCriteriaEnum::BETWEEN,
         ];
     }
 }

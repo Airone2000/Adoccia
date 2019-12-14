@@ -28,10 +28,10 @@ final class TimeType extends AbstractSearchType
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function(string $label) {
+                'choice_label' => function (string $label) {
                     return 'trans.'.$label;
                 },
-                'choice_attr' => function(string $value) {
+                'choice_attr' => function (string $value) {
                     $attr = [];
                     switch ($value) {
                         case SearchCriteriaEnum::TIME_EQUAL_TO:
@@ -63,23 +63,24 @@ final class TimeType extends AbstractSearchType
                             $attr['data-inputs'] = '.minOrSec,.minOrSec2';
                             break;
                     }
+
                     return $attr;
-                }
+                },
             ])
             ->add('value', TextType::class, [
                     'required' => false,
                     'attr' => [
                             'class' => 'value hidden',
-                            'placeholder' => TimeTypeSingle::getTimeTypePlaceholder($widget)
-                        ] + TimeTypeSingle::getHTMLInputAttributes($widget)
+                            'placeholder' => TimeTypeSingle::getTimeTypePlaceholder($widget),
+                        ] + TimeTypeSingle::getHTMLInputAttributes($widget),
                 ]
             )
             ->add('value2', TextType::class, [
                     'required' => false,
                     'attr' => [
                             'class' => 'value2 hidden',
-                            'placeholder' => TimeTypeSingle::getTimeTypePlaceholder($widget)
-                        ] + TimeTypeSingle::getHTMLInputAttributes($widget)
+                            'placeholder' => TimeTypeSingle::getTimeTypePlaceholder($widget),
+                        ] + TimeTypeSingle::getHTMLInputAttributes($widget),
                 ]
             )
             ->add('hour', IntegerType::class, [
@@ -87,8 +88,8 @@ final class TimeType extends AbstractSearchType
                     'attr' => [
                         'class' => 'hour hidden',
                         'min' => 0,
-                        'max' => 24
-                    ]
+                        'max' => 24,
+                    ],
                 ]
             )
             ->add('hour2', IntegerType::class, [
@@ -96,8 +97,8 @@ final class TimeType extends AbstractSearchType
                     'attr' => [
                         'class' => 'hour2 hidden',
                         'min' => 0,
-                        'max' => 24
-                    ]
+                        'max' => 24,
+                    ],
                 ]
             )
             ->add('minOrSec', IntegerType::class, [
@@ -105,8 +106,8 @@ final class TimeType extends AbstractSearchType
                     'attr' => [
                         'class' => 'minOrSec hidden',
                         'min' => 0,
-                        'max' => 60
-                    ]
+                        'max' => 60,
+                    ],
                 ]
             )
             ->add('minOrSec2', IntegerType::class, [
@@ -114,23 +115,23 @@ final class TimeType extends AbstractSearchType
                     'attr' => [
                         'class' => 'minOrSec2 hidden',
                         'min' => 0,
-                        'max' => 60
-                    ]
+                        'max' => 60,
+                    ],
                 ]
             )
         ;
 
-        /**
+        /*
          * Get the value of criteria.
          * If it's equal to BETWEEN, let's display the Value2 input
          */
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $formEvent) use ($widget) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $formEvent) use ($widget) {
             /**
              * Entity Search stores date like Y-m-d.
-             * To render this value back in the form, we must convert it based on the widget->dateFormat()
+             * To render this value back in the form, we must convert it based on the widget->dateFormat().
              */
             $data = $formEvent->getData();
-            if ($data !== null) {
+            if (null !== $data) {
                 $value = !empty($data['value']) ? $data['value'] : null;
                 $data['value'] = TimeTypeSingle::transformTo($widget, $value);
                 $value2 = !empty($data['value2']) ? $data['value2'] : null;
@@ -139,23 +140,25 @@ final class TimeType extends AbstractSearchType
             }
         });
 
-        # We cannot add modelTransformer in eventListenerHandler
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, function(PreSubmitEvent $preSubmitEvent) use ($widget){
+        // We cannot add modelTransformer in eventListenerHandler
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (PreSubmitEvent $preSubmitEvent) use ($widget) {
             $data = $preSubmitEvent->getData();
 
             $value = !empty($data['value']) ? $data['value'] : null;
             $value = TimeTypeSingle::transformFrom($widget, $value);
             if ($value instanceof \DateTime) {
                 $data['value'] = $value->format('H:i:s');
+            } else {
+                $data['value'] = null;
             }
-            else $data['value'] = null;
 
             $value2 = !empty($data['value2']) ? $data['value2'] : null;
             $value2 = TimeTypeSingle::transformFrom($widget, $value2);
             if ($value2 instanceof \DateTime) {
                 $data['value2'] = $value2->format('H:i:s');
+            } else {
+                $data['value2'] = null;
             }
-            else $data['value2'] = null;
 
             $preSubmitEvent->setData($data);
         });
@@ -185,7 +188,7 @@ final class TimeType extends AbstractSearchType
             SearchCriteriaEnum::SECOND_EQUAL_TO,
             SearchCriteriaEnum::SECOND_LESS_THAN,
             SearchCriteriaEnum::SECOND_GREATER_THAN,
-            SearchCriteriaEnum::SECOND_BETWEEN
+            SearchCriteriaEnum::SECOND_BETWEEN,
         ];
     }
 }

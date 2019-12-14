@@ -8,32 +8,44 @@
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
-    <label for="inputUsername" class="sr-only">Email</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Email" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <h2 class="h3 mb-3 font-weight-normal">{{ 'user.login.title'|trans }}</h2>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+    <label for="inputUsername" class="sr-only">{{ 'login.form.label.email'|trans }}</label>
+    <input type="text"
+           value="{{ last_username }}"
+           name="username"
+           id="inputUsername"
+           class="form-control"
+           placeholder="{{ 'login.form.placeholder.email'|trans }}"
+           required autofocus>
+
+    <label for="inputPassword" class="sr-only">{{ 'login.form.label.password'|trans }}</label>
+    <input type="password"
+           name="password"
+           id="inputPassword"
+           class="form-control"
+           placeholder="{{ 'login.form.placeholder.password'|trans }}"
+           required>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" name="_remember_me"> Remember me
+            <input type="checkbox" name="_remember_me">
+            {{ 'login.form.label.remember_me'|trans }}
         </label>
     </div>
 
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        {{ 'login.form.login.btn'|trans }}
     </button>
 
-    <a href="{{ url('app.resetPassword') }}">Password lost?</a>
+    <a href="{{ url('app.resetPassword') }}">{{ 'login.form.password_lost'|trans }}</a>
 </form>
 
 <hr>
     <p>
-        <a href="{{ url('app.register') }}">No account ?</a>
+        <a href="{{ url('app.register') }}">{{ 'login.form.no_account'|trans }}</a>
     </p>
 
 {% endblock %}

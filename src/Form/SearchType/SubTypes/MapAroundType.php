@@ -20,42 +20,42 @@ class MapAroundType extends AbstractType
         $builder
             ->add('distance', IntegerType::class, [
                 'attr' => [
-                    'min' => 0
+                    'min' => 0,
                 ],
                 'constraints' => [
-                    new GreaterThanOrEqual(['value' => 0])
+                    new GreaterThanOrEqual(['value' => 0]),
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('unit', ChoiceType::class, [
-                'choices' => ['km' => 'km', 'm' => 'm']
+                'choices' => ['km' => 'km', 'm' => 'm'],
             ])
             ->add('location', TextType::class, [
                 'required' => false,
                 'attr' => [
                     'class' => "location_{$uniqidId} mapSearchLocationInput",
-                    'placeholder' => 'Find a place...'
+                    'placeholder' => 'Find a place...',
                 ],
-                'data' => null
+                'data' => null,
             ])
             ->add('selectedLocation', TextType::class, [
                 'attr' => [
                     'readonly' => true,
                     'class' => "selectedLocation_{$uniqidId} mapSearchSelectedLocation",
-                    'style' => 'border:0;outline:0;'
+                    'style' => 'border:0;outline:0;',
                 ],
-                'label' => 'Votre choix : '
+                'label' => 'Votre choix : ',
             ])
             ->add('findMe', ButtonType::class, [
                 'attr' => [
                     'class' => 'findMe',
-                    'data-uniqid' => $uniqidId
-                ]
+                    'data-uniqid' => $uniqidId,
+                ],
             ])
             ->add('latlng', HiddenType::class, [
                 'attr' => [
-                    'class' => "latlng_{$uniqidId} mapSearchLatLngInput"
-                ]
+                    'class' => "latlng_{$uniqidId} mapSearchLatLngInput",
+                ],
             ])
         ;
     }

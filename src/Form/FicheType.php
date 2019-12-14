@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\Fiche;
 use App\Entity\FormArea;
-use App\Entity\Value;
 use App\Entity\Widget;
 use App\Enum\FicheModeEnum;
 use App\Enum\PictureShapeEnum;
@@ -36,7 +35,8 @@ final class FicheType extends AbstractType
 
     /**
      * Caches references to builders to prevent
-     * recreate instance for each dynamic field
+     * recreate instance for each dynamic field.
+     *
      * @var array
      */
     private static $loadedDynamicFieldsBuilders = [];
@@ -49,22 +49,24 @@ final class FicheType extends AbstractType
 
     /**
      * This method adds fields that are the same independently the fiche we are on.
-     * @inheritdoc
+     * {@inheritdoc}
      */
     private function addImmutableFields(FormBuilderInterface $builder, array $options)
     {
-        if ($options['is_form_preview'] === true) return;
+        if (true === $options['is_form_preview']) {
+            return;
+        }
 
         /* @var Fiche $fiche */
         $fiche = $options['fiche'];
 
-        if ($options['mode'] === FicheModeEnum::EDITION) {
+        if (FicheModeEnum::EDITION === $options['mode']) {
             $builder
                 ->add('title', TextType::class, [
                     'constraints' => [
                         new NotBlank(),
-                        new Length(['max' => 255])
-                    ]
+                        new Length(['max' => 255]),
+                    ],
                 ])
                 ->add('picture', PictureType::class, [
                     'originalPicture' => $fiche->getPicture(),
@@ -72,12 +74,12 @@ final class FicheType extends AbstractType
                     'cropShape' => PictureShapeEnum::SQUARE,
                     'error_bubbling' => false,
                     'constraints' => [
-                        new PictureIsSquare()
+                        new PictureIsSquare(),
                     ],
-                    'liipImagineFilter' => 'fiche_picture_thumbnail'
+                    'liipImagineFilter' => 'fiche_picture_thumbnail',
                 ])
                 ->add('published', CheckboxType::class, [
-                    'required' => false
+                    'required' => false,
                 ])
             ;
         }
@@ -85,26 +87,24 @@ final class FicheType extends AbstractType
 
     /**
      * This method adds fields defined through the category's form builder.
-     * @inheritdoc
+     * {@inheritdoc}
      */
     private function addDynamicFields(FormBuilderInterface $builder, array $options)
     {
         /** @var Category $category */
         $category = $options['category'];
 
-        $form = $options['is_form_preview'] === true ? $category->getDraftForm() : $category->getForm();
+        $form = true === $options['is_form_preview'] ? $category->getDraftForm() : $category->getForm();
 
         /** @var FormArea $formArea */
-        foreach ($form->getAreas() as $formArea)
-        {
+        foreach ($form->getAreas() as $formArea) {
             /** @var Widget $widget */
             $widget = $formArea->getWidget();
             $widgetType = $widget->getType();
 
             if (WidgetTypeEnum::isset($widgetType)) {
                 $this->addDynamicField($builder, $widget, $options);
-            }
-            else {
+            } else {
                 throw new \LogicException("Unhandled widget of type \"{$widgetType}\".");
             }
         }
@@ -112,17 +112,16 @@ final class FicheType extends AbstractType
 
     private function addDynamicField(FormBuilderInterface $builder, Widget $widget, array $options)
     {
-        $type = ucfirst(strtolower($widget->getType()));
+        $type = ucfirst(mb_strtolower($widget->getType()));
         $builderClass = "App\Form\FormBuilder\\{$type}Builder";
 
         /* @var \App\Form\FormBuilder\FormBuilderInterface[] $loadedBuilders */
         if (!isset(self::$loadedDynamicFieldsBuilders[$builderClass])) {
             if (class_exists($builderClass)) {
                 self::$loadedDynamicFieldsBuilders[$builderClass] = new $builderClass([
-                    'em' => $this->entityManager
+                    'em' => $this->entityManager,
                 ]);
-            }
-            else {
+            } else {
                 throw new \LogicException("Builder class {$builderClass} does not exist.");
             }
         }
@@ -131,7 +130,7 @@ final class FicheType extends AbstractType
             'mode' => $options['mode'],
             'widget' => $widget,
             'fiche' => $options['fiche'],
-            'widgetValue' => $options['data'][$widget->getId()] ?? null
+            'widgetValue' => $options['data'][$widget->getId()] ?? null,
         ]);
     }
 

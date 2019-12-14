@@ -19,16 +19,16 @@ final class DateBuilder implements FormBuilderInterface
             'widget' => $widget,
             'mode' => $options['mode'],
             'attr' => DateType::getHTMLInputAttributes($widget) + [
-                'required' => $widget->isRequired()
+                'required' => $widget->isRequired(),
             ],
-            'empty_data' => null
+            'empty_data' => null,
         ]);
 
         $builder->get($widget->getId())->addModelTransformer(new CallbackTransformer(
-            function($value) use ($widget){
+            function ($value) use ($widget) {
                 return DateType::transformTo($widget, $value);
             },
-            function($value) use ($widget){
+            function ($value) use ($widget) {
                 return DateType::transformFrom($widget, $value);
             }
         ));
@@ -39,7 +39,7 @@ final class DateBuilder implements FormBuilderInterface
         /* @var \App\Entity\Widget $widget */
         $widget = $options['widget'];
         $builder->add($widget->getImmutableId(), DateTypeSearch::class, [
-            'widget' => $widget
+            'widget' => $widget,
         ]);
     }
 }

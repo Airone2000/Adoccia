@@ -5,7 +5,6 @@ namespace App\Form\SearchType;
 use App\Entity\Widget;
 use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Type;
@@ -28,19 +27,19 @@ final class FloatType extends AbstractSearchType
                 'placeholder' => $widget->getInputPlaceholder(),
                 'min' => $widget->getMin() ?? '',
                 'max' => $widget->getMax() ?? '',
-                'step' => 'any'
+                'step' => 'any',
             ],
             'constraints' => [
-                new Type(['type' => 'numeric'])
+                new Type(['type' => 'numeric']),
             ],
-            'html5' => true
+            'html5' => true,
         ];
 
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function($value){ return "trans.{$value}"; },
-                'choice_attr' => function(string $value) {
+                'choice_label' => function ($value) { return "trans.{$value}"; },
+                'choice_attr' => function (string $value) {
                     $attr = [];
                     switch ($value) {
                         case SearchCriteriaEnum::EQUAL_TO:
@@ -52,15 +51,16 @@ final class FloatType extends AbstractSearchType
                             $attr['data-inputs'] = '.value,.value2';
                             break;
                     }
+
                     return $attr;
-                }
+                },
             ])
             ->add('value', NumberType::class, [
-                    'attr' => ['class' => 'value hidden'] + $valueOptions['attr']
+                    'attr' => ['class' => 'value hidden'] + $valueOptions['attr'],
                 ] + $valueOptions
             )
             ->add('value2', NumberType::class, [
-                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr']
+                    'attr' => ['class' => 'value2 hidden'] + $valueOptions['attr'],
                 ] + $valueOptions)
         ;
     }
@@ -74,7 +74,7 @@ final class FloatType extends AbstractSearchType
             SearchCriteriaEnum::EQUAL_TO,
             SearchCriteriaEnum::GREATER_THAN,
             SearchCriteriaEnum::LOWER_THAN,
-            SearchCriteriaEnum::BETWEEN
+            SearchCriteriaEnum::BETWEEN,
         ];
     }
 }

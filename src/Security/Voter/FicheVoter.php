@@ -10,15 +10,18 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class FicheVoter extends Voter
 {
-    const
-        EDIT_FICHE = 'CAN_EDIT_FICHE',
-        DELETE_FICHE = 'CAN_DELETE_FICHE'
-    ;
+    const EDIT_FICHE = 'CAN_EDIT_FICHE';
+    const DELETE_FICHE = 'CAN_DELETE_FICHE';
 
     protected function supports($attribute, $subject)
     {
-        if ($attribute === self::EDIT_FICHE && $subject instanceof Fiche) return true;
-        if ($attribute === self::DELETE_FICHE && $subject instanceof Fiche) return true;
+        if (self::EDIT_FICHE === $attribute && $subject instanceof Fiche) {
+            return true;
+        }
+        if (self::DELETE_FICHE === $attribute && $subject instanceof Fiche) {
+            return true;
+        }
+
         return false;
     }
 
@@ -35,7 +38,6 @@ class FicheVoter extends Voter
 
             case self::DELETE_FICHE:
                 return $this->canDeleteFiche($user, $subject);
-
         }
 
         return false;
@@ -44,33 +46,47 @@ class FicheVoter extends Voter
     private function canDeleteFiche(User $user, Fiche $fiche): bool
     {
         if (CategoryVoter::canSeeCategory($user, $fiche->getCategory())) {
-            if ($user->isSuperAdmin()) return true;
-
-            # Category creator can delete his own fiche
-            if (($categoryCreator = $fiche->getCategory()->getCreatedBy()) instanceof User) {
-                if ($categoryCreator->getId() === $user->getId()) return true;
+            if ($user->isSuperAdmin()) {
+                return true;
             }
 
-            # Fiche creator can delete his own fiche
-            if ($fiche->getCreator() && $fiche->getCreator() === $user) return true;
+            // Category creator can delete his own fiche
+            if (($categoryCreator = $fiche->getCategory()->getCreatedBy()) instanceof User) {
+                if ($categoryCreator->getId() === $user->getId()) {
+                    return true;
+                }
+            }
+
+            // Fiche creator can delete his own fiche
+            if ($fiche->getCreator() && $fiche->getCreator() === $user) {
+                return true;
+            }
         }
+
         return false;
     }
 
     private function canEditFiche(User $user, Fiche $fiche): bool
     {
         if (CategoryVoter::canSeeCategory($user, $fiche->getCategory())) {
-            # SuperAdmin
-            if ($user->isSuperAdmin()) return true;
-
-            # Category creator
-            if (($categoryCreator = $fiche->getCategory()->getCreatedBy()) instanceof User) {
-                if ($categoryCreator->getId() === $user->getId()) return true;
+            // SuperAdmin
+            if ($user->isSuperAdmin()) {
+                return true;
             }
 
-            # Fiche creator
-            if ($fiche->getCreator() && $fiche->getCreator() === $user) return true;
+            // Category creator
+            if (($categoryCreator = $fiche->getCategory()->getCreatedBy()) instanceof User) {
+                if ($categoryCreator->getId() === $user->getId()) {
+                    return true;
+                }
+            }
+
+            // Fiche creator
+            if ($fiche->getCreator() && $fiche->getCreator() === $user) {
+                return true;
+            }
         }
+
         return false;
     }
 
@@ -82,8 +98,12 @@ class FicheVoter extends Voter
             }
 
             if ($user instanceof User) {
-                if ($user->isSuperAdmin()) return true;
-                if ($fiche->getCreator() && $fiche->getCreator() === $user) return true;
+                if ($user->isSuperAdmin()) {
+                    return true;
+                }
+                if ($fiche->getCreator() && $fiche->getCreator() === $user) {
+                    return true;
+                }
             }
         }
 

@@ -18,6 +18,7 @@ class FormAreaRepository extends ServiceEntityRepository
     {
         try {
             $q = $this->createQueryBuilder('fa');
+
             return $q
                 ->where('fa.form = :form')
                 ->setParameter('form', $form)
@@ -25,8 +26,7 @@ class FormAreaRepository extends ServiceEntityRepository
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getOneOrNullResult();
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             return null;
         }
     }

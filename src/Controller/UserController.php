@@ -3,20 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\PasswordReset;
+use App\Entity\User;
 use App\Form\PasswordResetPromptEmailType;
 use App\Form\PasswordResetType;
+use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use App\Security\FormAuthenticator;
 use App\Services\SecurityHandler\SecurityHandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use App\Entity\User;
-use App\Form\RegistrationFormType;
-use App\Security\FormAuthenticator;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
@@ -32,7 +32,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/register", methods={"get", "post"}, name="app.register", defaults={"menu":"user"})
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, FormAuthenticator $authenticator): Response
     {
@@ -70,7 +70,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/login", name="app.login", defaults={"menu":"user"})
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -97,7 +97,7 @@ class UserController extends AbstractController
     /**
      * @Route(path="/reset-password/{token}", methods={"get", "post"}, name="app.resetPassword", defaults={"token":null})
      * @Entity(name="passwordReset", expr="repository.findOneNonUsedAndExpiredByToken(token)")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resetPassword(
         Request $request,
@@ -106,14 +106,12 @@ class UserController extends AbstractController
         FormAuthenticator $authenticator,
         UserPasswordEncoderInterface $passwordEncoder,
         ?PasswordReset $passwordReset = null
-    )
-    {
-        if ($passwordReset !== null) {
+    ) {
+        if (null !== $passwordReset) {
             $action = 'smile';
             $form = $this->createForm(PasswordResetType::class);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-
                 /** @var User $happyUser */
                 $happyUser = $passwordReset->getUser();
 
@@ -137,8 +135,7 @@ class UserController extends AbstractController
                     'main' // firewall name in security.yaml
                 );
             }
-        }
-        else {
+        } else {
             $action = 'cry';
             $form = $this->createForm(PasswordResetPromptEmailType::class);
             $form->handleRequest($request);
@@ -148,27 +145,30 @@ class UserController extends AbstractController
                 $this->securityHandler->doAllTheNecessaryForThisUserWhoHaveLostHisPassword($user);
 
                 $this->addFlash('resetPasswordSuccess', $user->getEmail());
+
                 return $this->redirectToRoute('app.resetPasswordSuccess');
             }
         }
 
         return $this->render('user/reset-password.html.twig', [
             'form' => $form->createView(),
-            'action' => $action
+            'action' => $action,
         ]);
     }
 
     /**
      * @Route(path="/reset-password-success", methods={"get"}, name="app.resetPasswordSuccess")
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resetPasswordSuccess(): Response
     {
         $flashBag = $this->get('session')->getFlashBag();
         if ($flashBag->has('resetPasswordSuccess')) {
             $flashBag->get('resetPasswordSuccess');
+
             return $this->render('user/reset-password-success.html.twig');
         }
+
         return $this->redirectToRoute('app.login');
     }
 }

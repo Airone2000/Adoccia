@@ -23,15 +23,11 @@ class CategoriesFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
-
-
         $faker = Factory::create('fr_FR');
         $nbCategories = 100;
         $user = $manager->find(User::class, 1);
 
-        for($i = 0; $i < $nbCategories; $i++) {
+        for ($i = 0; $i < $nbCategories; ++$i) {
             try {
                 $pictureURL = "https://picsum.photos/id/{$i}/250/250";
                 $basename = uniqid('picture_') . '.png';
@@ -57,9 +53,10 @@ class CategoriesFixtures extends Fixture
                 $manager->persist($category);
                 $manager->flush();
 
-                echo "#{$i} saved" . PHP_EOL;
+                echo "#{$i} saved".PHP_EOL;
+            } catch (\Exception $e) {
+                continue;
             }
-            catch (\Exception $e) { continue; }
         }
     }
 }

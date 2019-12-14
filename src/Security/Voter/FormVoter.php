@@ -12,15 +12,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class FormVoter extends Voter
 {
-    const
-        SEE_DRAFT_FORM = 'SEE_DRAFT_FORM',
-        EDIT_DRAFT_FORM = 'EDIT_DRAFT_FORM',
-        ADD_FORM_AREA_TO_DRAFT_FORM = 'ADD_FORM_AREA_TO_DRAFT_FORM',
-        SORT_DRAFT_FORM_AREAS = 'SORT_DRAFT_FORM_AREAS',
-        PUBLISH_DRAFT_FORM = 'PUBLISH_DRAFT_FORM',
-        DELETE_DRAFT_FORM = 'DELETE_DRAFT_FORM',
-        PREVIEW_DRAFT_FORM = 'PREVIEW_DRAFT_FORM'
-    ;
+    const SEE_DRAFT_FORM = 'SEE_DRAFT_FORM';
+    const EDIT_DRAFT_FORM = 'EDIT_DRAFT_FORM';
+    const ADD_FORM_AREA_TO_DRAFT_FORM = 'ADD_FORM_AREA_TO_DRAFT_FORM';
+    const SORT_DRAFT_FORM_AREAS = 'SORT_DRAFT_FORM_AREAS';
+    const PUBLISH_DRAFT_FORM = 'PUBLISH_DRAFT_FORM';
+    const DELETE_DRAFT_FORM = 'DELETE_DRAFT_FORM';
+    const PREVIEW_DRAFT_FORM = 'PREVIEW_DRAFT_FORM';
+
     /**
      * @var CategoryRepository
      */
@@ -33,13 +32,28 @@ class FormVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if ($attribute === self::SEE_DRAFT_FORM && $subject instanceof Form) return true;
-        if ($attribute === self::EDIT_DRAFT_FORM && $subject instanceof Form) return true;
-        if ($attribute === self::ADD_FORM_AREA_TO_DRAFT_FORM && $subject instanceof Form) return true;
-        if ($attribute === self::SORT_DRAFT_FORM_AREAS && $subject instanceof Form) return true;
-        if ($attribute === self::PUBLISH_DRAFT_FORM && $subject instanceof Form) return true;
-        if ($attribute === self::DELETE_DRAFT_FORM && $subject instanceof Form) return true;
-        if ($attribute === self::PREVIEW_DRAFT_FORM && $subject instanceof Form) return true;
+        if (self::SEE_DRAFT_FORM === $attribute && $subject instanceof Form) {
+            return true;
+        }
+        if (self::EDIT_DRAFT_FORM === $attribute && $subject instanceof Form) {
+            return true;
+        }
+        if (self::ADD_FORM_AREA_TO_DRAFT_FORM === $attribute && $subject instanceof Form) {
+            return true;
+        }
+        if (self::SORT_DRAFT_FORM_AREAS === $attribute && $subject instanceof Form) {
+            return true;
+        }
+        if (self::PUBLISH_DRAFT_FORM === $attribute && $subject instanceof Form) {
+            return true;
+        }
+        if (self::DELETE_DRAFT_FORM === $attribute && $subject instanceof Form) {
+            return true;
+        }
+        if (self::PREVIEW_DRAFT_FORM === $attribute && $subject instanceof Form) {
+            return true;
+        }
+
         return false;
     }
 
@@ -77,10 +91,14 @@ class FormVoter extends Voter
         $category = $this->categoryRepository->findOneBy(['draftForm' => $form]);
 
         if (($category instanceof Category) && ($category->getCreatedBy() instanceof User)) {
-            # SuperAdmin can edit everything
-            if ($user->isSuperAdmin()) return true;
-            # Creator of category can edit his form
-            if ($category->getCreatedBy()->getId() === $user->getId()) return true;
+            // SuperAdmin can edit everything
+            if ($user->isSuperAdmin()) {
+                return true;
+            }
+            // Creator of category can edit his form
+            if ($category->getCreatedBy()->getId() === $user->getId()) {
+                return true;
+            }
         }
 
         return false;

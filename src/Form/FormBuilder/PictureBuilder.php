@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraints\NotNull;
 
 final class PictureBuilder implements FormBuilderInterface
 {
-
     public function buildForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)
     {
         /* @var Widget $widget */
@@ -25,7 +24,7 @@ final class PictureBuilder implements FormBuilderInterface
                 'originalPicture' => $rawValue,
                 'uniqueId' => uniqid('uid_'),
                 'constraints' => $this->getConstraints($widget),
-                'deletable' => !$widget->isRequired()
+                'deletable' => !$widget->isRequired(),
             ])
         ;
     }
@@ -46,7 +45,7 @@ final class PictureBuilder implements FormBuilderInterface
         /* @var \App\Entity\Widget $widget */
         $widget = $options['widget'];
         $builder->add($widget->getImmutableId(), \App\Form\SearchType\PictureType::class, [
-            'widget' => $widget
+            'widget' => $widget,
         ]);
     }
 }

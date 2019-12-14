@@ -24,26 +24,26 @@ class VideoBuilder implements FormBuilderInterface
             'mode' => $mode,
             'empty_data' => null,
             'attr' => [
-                'placeholder' => $widget->getInputPlaceholder()
+                'placeholder' => $widget->getInputPlaceholder(),
             ],
             'constraints' => $this->getConstraints($widget),
             'required' => $widget->isRequired(),
-            'compound' => false
+            'compound' => false,
         ]);
 
-        if ($mode === FicheModeEnum::DISPLAY) {
+        if (FicheModeEnum::DISPLAY === $mode) {
             $builder->addEventListener(FormEvents::PRE_SET_DATA, function (PreSetDataEvent $preSetDataEvent) use ($widget) {
                 $data = $preSetDataEvent->getData();
-                $videoURL = (string)$data[$widget->getId()];
+                $videoURL = (string) $data[$widget->getId()];
                 $transformedURL = VideoHandler::transformToReadableVideoURL($videoURL);
                 $data[$widget->getId()] = $transformedURL;
                 $preSetDataEvent->setData($data);
             });
         }
-
     }
 
-    protected function getConstraints(Widget $widget): array {
+    protected function getConstraints(Widget $widget): array
+    {
         $constraints = [];
 
         if ($widget->isRequired()) {
@@ -60,7 +60,7 @@ class VideoBuilder implements FormBuilderInterface
         /* @var \App\Entity\Widget $widget */
         $widget = $options['widget'];
         $builder->add($widget->getImmutableId(), \App\Form\SearchType\VideoType::class, [
-            'widget' => $widget
+            'widget' => $widget,
         ]);
     }
 }

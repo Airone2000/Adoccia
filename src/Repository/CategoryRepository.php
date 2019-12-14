@@ -39,8 +39,10 @@ class CategoryRepository extends ServiceEntityRepository
 
     private function getForUser(?User $user, QueryBuilder $queryBuilder)
     {
-        # No filtering when user can access all categories
-        if (CategoryVoter::canAccessAllCategories($user)) return;
+        // No filtering when user can access all categories
+        if (CategoryVoter::canAccessAllCategories($user)) {
+            return;
+        }
 
         $q = '(c.public = 1 AND c.online = 1)';
         if ($user instanceof User) {
@@ -50,28 +52,31 @@ class CategoryRepository extends ServiceEntityRepository
         $queryBuilder->andWhere($q);
     }
 
-    public function findAllForUserOrPublic(?User $user, int $page = 1, int $items = 30, CategorySearch $categorySearch): Paginator
+    public function findAllForUserOrPublic(?User $user, int $page, int $items, CategorySearch $categorySearch): Paginator
     {
         $qb = $this->createQueryBuilder('c');
         $this->getForUser($user, $qb);
         $qb
-            ->setFirstResult( ($page - 1) * $items)
+            ->setFirstResult(($page - 1) * $items)
             ->setMaxResults($items)
         ;
 
         $this->applyCategorySearch($qb, $categorySearch, [
-            'user' => $user
+            'user' => $user,
         ]);
 
         $paginator = new Paginator($qb, false);
+
         return $paginator;
     }
 
     private function applyCategorySearch(QueryBuilder $qb, ?CategorySearch $categorySearch, array $options = []): void
     {
-        if($categorySearch === null) return;
+        if (null === $categorySearch) {
+            return;
+        }
 
-        # Filter on title / name
+        // Filter on title / name
         if ($title = $categorySearch->getTitle()) {
             $qb
                 ->andWhere('c.name LIKE :title')
@@ -79,17 +84,17 @@ class CategoryRepository extends ServiceEntityRepository
             ;
         }
 
-        # Order by
+        // Order by
         if ($orderBy = $categorySearch->getOrderBy()) {
-            switch($orderBy) {
+            switch ($orderBy) {
                 case 'created_at_desc': $qb->orderBy('c.createdAt', 'DESC'); break;
                 case 'created_at_asc': $qb->orderBy('c.createdAt', 'ASC'); break;
                 case 'name_desc': $qb->orderBy('c.name', 'DESC'); break;
-                case 'name_asc': $qb->orderBy('c.name', 'ASC');break;
+                case 'name_asc': $qb->orderBy('c.name', 'ASC'); break;
             }
         }
 
-        # Filter
+        // Filter
         if ($filter = $categorySearch->getFilter()) {
             switch ($filter) {
                 case 'mine':
@@ -109,6 +114,7 @@ class CategoryRepository extends ServiceEntityRepository
         }
         /* @var User|null $user */
         $user = $this->tokenStorage->getToken()->getUser();
+
         return $user;
     }
 
@@ -121,6 +127,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
         ;
         $this->getForUser($user, $qb);
+
         return $qb->getQuery()->getOneOrNullResult();
     }
 }

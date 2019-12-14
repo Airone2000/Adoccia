@@ -25,18 +25,17 @@ final class CategoryListener
         $this->entityManager = $entityManager;
     }
 
-    function prePersist(Category $category): void
+    public function prePersist(Category $category): void
     {
-        if ($_SERVER['PHP_SELF'] !== 'bin/console') {
+        if ('bin/console' !== $_SERVER['PHP_SELF']) {
             $category->setCreatedBy($this->tokenStorage->getToken()->getUser());
         }
     }
 
-    function preUpdate(Category $category, PreUpdateEventArgs $preUpdateEventArgs): void
+    public function preUpdate(Category $category, PreUpdateEventArgs $preUpdateEventArgs): void
     {
         $changeSet = $preUpdateEventArgs->getEntityChangeSet();
         $this->deleteOldPicture($changeSet, $preUpdateEventArgs->getEntityManager());
-
     }
 
     private function deleteOldPicture(array $changeSet, EntityManagerInterface $entityManager): void
@@ -44,7 +43,7 @@ final class CategoryListener
         if (isset($changeSet['picture'])) {
             [$oldPicture] = $changeSet['picture'];
             if ($oldPicture instanceof Picture) {
-                $entityManager->remove($oldPicture); # Will flush ...
+                $entityManager->remove($oldPicture); // Will flush ...
             }
         }
     }

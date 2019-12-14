@@ -16,9 +16,9 @@ final class PictureListener
         $this->pictureUploadDir = $pictureUploadDir;
     }
 
-    function preRemove(Picture $picture)
+    public function preRemove(Picture $picture)
     {
-        $fileToDelete = $this->pictureUploadDir . DIRECTORY_SEPARATOR . $picture->getFilename();
+        $fileToDelete = $this->pictureUploadDir.\DIRECTORY_SEPARATOR.$picture->getFilename();
         if (file_exists($fileToDelete)) {
             @unlink($fileToDelete);
         }

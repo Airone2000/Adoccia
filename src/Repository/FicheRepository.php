@@ -44,15 +44,12 @@ class FicheRepository extends ServiceEntityRepository
         }
         /* @var User|null $user */
         $user = $this->tokenStorage->getToken()->getUser();
+
         return $user;
     }
 
     /**
-     * Used by the CategoryFinder to retrieve fiches having values that match user criterias
-     * @param QueryBuilder $queryBuilder
-     * @param array $values
-     * @param int $havingCount
-     * @return QueryBuilder
+     * Used by the CategoryFinder to retrieve fiches having values that match user criterias.
      */
     public function getFicheByValues(QueryBuilder $queryBuilder, array $values, int $havingCount): QueryBuilder
     {
@@ -68,8 +65,12 @@ class FicheRepository extends ServiceEntityRepository
 
     public function filterByTitle(QueryBuilder $queryBuilder, string $criteria, ?string $value)
     {
-        if (is_null($value)) return;
-        if (!SearchCriteriaEnum::isset($criteria)) return;
+        if (null === $value) {
+            return;
+        }
+        if (!SearchCriteriaEnum::isset($criteria)) {
+            return;
+        }
 
         switch ($criteria) {
             case SearchCriteriaEnum::DISABLED:
@@ -82,6 +83,7 @@ class FicheRepository extends ServiceEntityRepository
                     ->andWhere('REGEXP(f.title, :title) = 1')
                     ->setParameter('title', implode('|', $value))
                 ;
+
                 return;
             case SearchCriteriaEnum::EXACT:
                 $value = explode(',', $value);
@@ -90,6 +92,7 @@ class FicheRepository extends ServiceEntityRepository
                     ->andWhere('f.title IN (:titles)')
                     ->setParameter('titles', $value)
                 ;
+
                 return;
             case SearchCriteriaEnum::STARTS_WITH:
                 $value = explode(',', $value);
@@ -98,6 +101,7 @@ class FicheRepository extends ServiceEntityRepository
                     ->andWhere('REGEXP(f.title, :title) = 1')
                     ->setParameter('title', '^('.implode('|', $value).')')
                 ;
+
                 return;
             case SearchCriteriaEnum::ENDS_WITH:
                 $value = explode(',', $value);
@@ -106,6 +110,7 @@ class FicheRepository extends ServiceEntityRepository
                     ->andWhere('REGEXP(f.title, :title) = 1')
                     ->setParameter('title', '('.implode('|', $value).')$')
                 ;
+
                 return;
         }
     }
@@ -113,6 +118,7 @@ class FicheRepository extends ServiceEntityRepository
     public function findFicheByCategoryAndId($categoryId, $ficheId)
     {
         $qb = $this->createQueryBuilder('f');
+
         return $qb
             ->where('f.category = :category')
             ->setParameter('category', $categoryId)
@@ -126,28 +132,29 @@ class FicheRepository extends ServiceEntityRepository
     private function removeNullOrBlankValuesFromArray(array $tab)
     {
         $tab = array_map('trim', $tab);
-        $tab = array_filter($tab, function($val){
-            return !($val === '' || $val === null);
+        $tab = array_filter($tab, function ($val) {
+            return !('' === $val || null === $val);
         });
+
         return $tab;
     }
 
     public function getCreatorsForCategory(Category $category): array
     {
-        # SubQuery
+        // SubQuery
         $qDistinctUser = $this->createQueryBuilder('f');
         $qDistinctUser
             ->select('DISTINCT(f.creator)')
             ->where('f.category = :category')
         ;
 
-        # Main query with subQuery appended
+        // Main query with subQuery appended
         $qUsers = $this->getEntityManager()->createQueryBuilder();
         $users = $qUsers
             ->select('u.id, u.username')
             ->from(User::class, 'u', 'u.id')
-            ->where('u IN ('. $qDistinctUser->getDQL() .')')
-            # /!\ SubQuery parameter must be set on the parent query
+            ->where('u IN ('.$qDistinctUser->getDQL().')')
+            // /!\ SubQuery parameter must be set on the parent query
             ->setParameter('category', $category)
             ->getQuery()
             ->getResult()
@@ -178,6 +185,7 @@ class FicheRepository extends ServiceEntityRepository
             ->setMaxResults($items)
         ;
         $paginator = new Paginator($qb, false);
+
         return $paginator;
     }
 
@@ -186,6 +194,7 @@ class FicheRepository extends ServiceEntityRepository
         $user = $user ?? $this->getUser();
         $qb = $this->createQueryBuilder('f');
         $this->getForUser($user, $qb);
+
         return $qb
             ->andWhere('f.id = :fid')
             ->setParameter('fid', $ficheId)

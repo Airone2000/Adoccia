@@ -9,27 +9,27 @@ final class AppController extends AbstractController
 {
     /**
      * @Route(path="/", methods={"get"}, name="app.homepage")
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function AppHomePage(): Response
+    public function AppHomePage(): Response
     {
         return $this->render('homepage.html.twig');
     }
 
     /**
      * @Route(path="/a-propos", methods={"get"}, name="app.about", defaults={"menu": "about"})
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function about(): Response
+    public function about(): Response
     {
         return $this->render('about.html.twig');
     }
 
     /**
      * @Route(path="/test")
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function test(): Response
+    public function test(): Response
     {
         return $this->render('test.html.twig');
     }

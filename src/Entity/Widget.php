@@ -14,11 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Widget
 {
-
-    const
-        DEFAULT_TEXT_COLOR = "#000000",
-        DEFAULT_DECIMAL_COUNT = 2
-    ;
+    const DEFAULT_TEXT_COLOR = '#000000';
+    const DEFAULT_DECIMAL_COUNT = 2;
 
     /**
      * @ORM\Id()
@@ -41,14 +38,14 @@ class Widget
 
     /**
      * @var FormArea
-     * Fetch EAGER for performance in TWIG_widget_types::form_area_start(widget.formArea)
+     *               Fetch EAGER for performance in TWIG_widget_types::form_area_start(widget.formArea)
      * @ORM\OneToOne(targetEntity="App\Entity\FormArea", inversedBy="widget", fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
      */
     private $formArea;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(name="inner_text", type="text", nullable=true)
      */
     private $innerText;
@@ -104,7 +101,7 @@ class Widget
     private $textColor;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Length(
      *     max="250",
@@ -114,7 +111,7 @@ class Widget
     private $inputPlaceholder;
 
     /**
-     * @var null|int
+     * @var int|null
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\Length(
      *     max="100",
@@ -124,7 +121,7 @@ class Widget
     private $min;
 
     /**
-     * @var null|int
+     * @var int|null
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\Length(
      *     max="100",
@@ -134,7 +131,7 @@ class Widget
     private $max;
 
     /**
-     * @var null|int
+     * @var int|null
      * @ORM\Column(type="string", length=100, nullable=true)
      * @Assert\Length(
      *     max="100",
@@ -150,7 +147,7 @@ class Widget
     private $decimalCount;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(type="string", length=20, nullable=true)
      * @Enum(
      *     enumClass="App\Enum\DateFormatEnum",
@@ -160,7 +157,7 @@ class Widget
     private $dateFormat;
 
     /**
-     * @var null|string
+     * @var string|null
      * @ORM\Column(type="string", length=20, nullable=true)
      * @Enum(
      *     enumClass="App\Enum\TimeFormatEnum",
@@ -198,14 +195,13 @@ class Widget
      */
     private $maxMarkers;
 
-
     public function __construct()
     {
         $this->immutableId = uniqid('e');
     }
 
     /**
-     * Clone for draftForm generation
+     * Clone for draftForm generation.
      */
     public function __clone()
     {
@@ -219,15 +215,15 @@ class Widget
             $reflection = new \ReflectionClass($this);
             foreach ($reflection->getProperties(\ReflectionProperty::IS_PRIVATE) as $property) {
                 $propertyName = $property->getName();
-                if (!in_array($propertyName, $omittedProperties)) {
+                if (!\in_array($propertyName, $omittedProperties, true)) {
                     $setter = "set{$propertyName}";
                     if (method_exists($this, $setter)) {
-                        call_user_func([$this, $setter], null); // falsy -> cast internally based on type hint
+                        \call_user_func([$this, $setter], null); // falsy -> cast internally based on type hint
                     }
                 }
             }
+        } catch (\ReflectionException $e) { /* The class exists because we are in ! */
         }
-        catch (\ReflectionException $e) { /* The class exists because we are in ! */ }
     }
 
     public function getId(): ?int
@@ -235,299 +231,200 @@ class Widget
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getImmutableId(): string
     {
         return $this->immutableId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     * @return Widget
-     */
-    public function setType(string $type): Widget
+    public function setType(string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
 
-    /**
-     * @return FormArea
-     */
     public function getFormArea(): FormArea
     {
         return $this->formArea;
     }
 
-    /**
-     * @param FormArea $formArea
-     * @return Widget
-     */
-    public function setFormArea(FormArea $formArea): Widget
+    public function setFormArea(FormArea $formArea): self
     {
         $this->formArea = $formArea;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getInnerText(): ?string
     {
         return $this->innerText;
     }
 
-    /**
-     * @param string|null $innerText
-     * @return Widget
-     */
-    public function setInnerText(?string $innerText): Widget
+    public function setInnerText(?string $innerText): self
     {
         $this->innerText = $innerText;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMinLength(): ?int
     {
         return $this->minLength;
     }
 
-    /**
-     * @param int|null $minLength
-     * @return Widget
-     */
-    public function setMinLength(?int $minLength): Widget
+    public function setMinLength(?int $minLength): self
     {
         $this->minLength = $minLength;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMaxLength(): ?int
     {
         return $this->maxLength;
     }
 
-    /**
-     * @param int|null $maxLength
-     * @return Widget
-     */
-    public function setMaxLength(?int $maxLength): Widget
+    public function setMaxLength(?int $maxLength): self
     {
         $this->maxLength = $maxLength;
+
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isRequired(): bool
     {
-        return (bool)$this->required;
+        return (bool) $this->required;
     }
 
-    /**
-     * @param bool|null $required
-     * @return Widget
-     */
-    public function setRequired(?bool $required): Widget
+    public function setRequired(?bool $required): self
     {
-        $this->required = (bool)$required;
+        $this->required = (bool) $required;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTextAlign(): ?string
     {
         return $this->textAlign;
     }
 
-    /**
-     * @param string|null $textAlign
-     * @return Widget
-     */
-    public function setTextAlign(?string $textAlign): Widget
+    public function setTextAlign(?string $textAlign): self
     {
         $this->textAlign = $textAlign;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTextColor(): ?string
     {
         return $this->textColor ?? self::DEFAULT_TEXT_COLOR;
     }
 
-    /**
-     * @param string|null $textColor
-     * @return Widget
-     */
-    public function setTextColor(?string $textColor): Widget
+    public function setTextColor(?string $textColor): self
     {
         $this->textColor = $textColor;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getInputPlaceholder(): ?string
     {
         return $this->inputPlaceholder;
     }
 
-    /**
-     * @param string|null $inputPlaceholder
-     * @return Widget
-     */
-    public function setInputPlaceholder(?string $inputPlaceholder): Widget
+    public function setInputPlaceholder(?string $inputPlaceholder): self
     {
         $this->inputPlaceholder = $inputPlaceholder;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMin(): ?int
     {
         return $this->min;
     }
 
-    /**
-     * @param int|null $min
-     * @return Widget
-     */
-    public function setMin(?int $min): Widget
+    public function setMin(?int $min): self
     {
         $this->min = $min;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMax(): ?int
     {
         return $this->max;
     }
 
-    /**
-     * @param int|null $max
-     * @return Widget
-     */
-    public function setMax(?int $max): Widget
+    public function setMax(?int $max): self
     {
         $this->max = $max;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getDecimalCount(): ?int
     {
         return $this->decimalCount;
     }
 
-    /**
-     * @param int|null $decimalCount
-     * @return Widget
-     */
-    public function setDecimalCount(?int $decimalCount): Widget
+    public function setDecimalCount(?int $decimalCount): self
     {
         $this->decimalCount = $decimalCount;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDateFormat(): ?string
     {
         return $this->dateFormat ?? DateFormatEnum::DEFAULT_DATE_FORMAT;
     }
 
-    /**
-     * @param string|null $dateFormat
-     * @return Widget
-     */
-    public function setDateFormat(?string $dateFormat): Widget
+    public function setDateFormat(?string $dateFormat): self
     {
         $this->dateFormat = $dateFormat;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTimeFormat(): ?string
     {
         return $this->timeFormat ?? TimeFormatEnum::DEFAULT_TIME_FORMAT;
     }
 
-    /**
-     * @param string|null $timeFormat
-     * @return Widget
-     */
-    public function setTimeFormat(?string $timeFormat): Widget
+    public function setTimeFormat(?string $timeFormat): self
     {
         $this->timeFormat = $timeFormat;
+
         return $this;
     }
 
-    /**
-     * @return array|null
-     */
     public function getChoices(): ?array
     {
-        return (array)$this->choices;
+        return (array) $this->choices;
     }
 
-    /**
-     * @param array|null $choices
-     * @return Widget
-     */
-    public function setChoices(?array $choices): Widget
+    public function setChoices(?array $choices): self
     {
         $this->choices = $choices;
+
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function getMultipleValues(): bool
     {
         return (bool) $this->multipleValues;
     }
 
-    /**
-     * @param bool|null $multipleValues
-     * @return Widget
-     */
-    public function setMultipleValues(?bool $multipleValues): Widget
+    public function setMultipleValues(?bool $multipleValues): self
     {
         $this->multipleValues = $multipleValues ?? false;
+      
         return $this;
     }
 
@@ -536,40 +433,27 @@ class Widget
         return $this->getMultipleValues();
     }
 
-    /**
-     * @return int|null
-     */
     public function getMinMarkers(): ?int
     {
         return $this->minMarkers;
     }
 
-    /**
-     * @param int|null $minMarkers
-     * @return Widget
-     */
-    public function setMinMarkers(?int $minMarkers): Widget
+    public function setMinMarkers(?int $minMarkers): self
     {
         $this->minMarkers = $minMarkers;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMaxMarkers(): ?int
     {
         return $this->maxMarkers;
     }
 
-    /**
-     * @param int|null $maxMarkers
-     * @return Widget
-     */
-    public function setMaxMarkers(?int $maxMarkers): Widget
+    public function setMaxMarkers(?int $maxMarkers): self
     {
         $this->maxMarkers = $maxMarkers;
+
         return $this;
     }
-
 }

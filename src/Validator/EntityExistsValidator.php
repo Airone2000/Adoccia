@@ -19,8 +19,8 @@ class EntityExistsValidator extends ConstraintValidator
     }
 
     /**
-     * @var EntityExists $constraint
-     * @inheritdoc
+     * @var EntityExists
+     *                   {@inheritdoc}
      */
     public function validate($value, Constraint $constraint)
     {
@@ -30,19 +30,19 @@ class EntityExistsValidator extends ConstraintValidator
             return;
         }
 
-        if ($constraint->class === null || $constraint->field === null) {
+        if (null === $constraint->class || null === $constraint->field) {
             throw new \LogicException("Both option 'class' and 'field' are required in EntityExistsValidator.");
         }
 
         try {
-            $criteria = []; $criteria[$constraint->field] = $value;
+            $criteria = [];
+            $criteria[$constraint->field] = $value;
             $entity = $this->entityManager->getRepository($constraint->class)->findOneBy($criteria);
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             $entity = null;
         }
 
-        if ($entity === null) {
+        if (null === $entity) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ field }}', $constraint->field)
                 ->setParameter('{{ class }}', $constraint->class)

@@ -4,9 +4,7 @@ namespace App\Form\SearchType;
 
 use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Length;
 
 class VideoType extends AbstractSearchType
 {
@@ -23,7 +21,7 @@ class VideoType extends AbstractSearchType
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias(),
-                'choice_label' => function($value){ return "trans.{$value}"; }
+                'choice_label' => function ($value) { return "trans.{$value}"; },
             ])
         ;
     }
@@ -33,7 +31,7 @@ class VideoType extends AbstractSearchType
         return [
             SearchCriteriaEnum::DISABLED,
             SearchCriteriaEnum::IS_NULL,
-            SearchCriteriaEnum::IS_NOT_NULL
+            SearchCriteriaEnum::IS_NOT_NULL,
         ];
     }
 }

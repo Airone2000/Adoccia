@@ -8,7 +8,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 class HasMarkersCountBetweenValidator extends ConstraintValidator
 {
     /**
-     * @param mixed $value
      * @param Constraint|HasMarkersCountBetween $constraint
      */
     public function validate($value, Constraint $constraint)
@@ -16,7 +15,7 @@ class HasMarkersCountBetweenValidator extends ConstraintValidator
         $minMarkers = $constraint->min;
         $maxMarkers = $constraint->max;
 
-        if (!is_array($value)) {
+        if (!\is_array($value)) {
             return;
         }
 
@@ -24,13 +23,13 @@ class HasMarkersCountBetweenValidator extends ConstraintValidator
             return;
         }
 
-        if ($minMarkers === null && $maxMarkers === null) {
+        if (null === $minMarkers && null === $maxMarkers) {
             return;
         }
 
-        $markersCount = count((array)$value['markers']);
+        $markersCount = \count((array) $value['markers']);
 
-        if (is_int($minMarkers)) {
+        if (\is_int($minMarkers)) {
             if ($markersCount < $minMarkers) {
                 $this->context->buildViolation(
                     $constraint->minMessage, ['{{ value }}' => $minMarkers]
@@ -38,7 +37,7 @@ class HasMarkersCountBetweenValidator extends ConstraintValidator
             }
         }
 
-        if (is_int($maxMarkers)) {
+        if (\is_int($maxMarkers)) {
             if ($markersCount > $maxMarkers) {
                 $this->context->buildViolation(
                     $constraint->maxMessage, ['{{ value }}' => $maxMarkers]

@@ -15,7 +15,7 @@ final class EmptyBuilder implements FormBuilderInterface
         $builder->add($widget->getId(), EmptyType::class, [
             'widget' => $widget,
             'mode' => $options['mode'],
-            'empty_data' => null
+            'empty_data' => null,
         ]);
     }
 

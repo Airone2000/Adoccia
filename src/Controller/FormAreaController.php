@@ -20,9 +20,9 @@ final class FormAreaController extends AbstractController
     /**
      * @Route("/{id}", methods={"delete"}, condition="request.isXmlHttpRequest()", name="formArea.delete")
      * @IsGranted("DELETE_FORM_AREA", subject="formArea")
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function deleteFormArea(FormArea $formArea): Response
+    public function deleteFormArea(FormArea $formArea): Response
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($formArea);
@@ -39,17 +39,17 @@ final class FormAreaController extends AbstractController
      *     name="formArea.setWidth"
      * )
      * @IsGranted("SET_FORM_AREA_WIDTH", subject="formArea")
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function setWidth(FormArea $formArea, Request $request, FormHandlerInterface $formHandler): Response
+    public function setWidth(FormArea $formArea, Request $request, FormHandlerInterface $formHandler): Response
     {
         try {
             $body = json_decode($request->getContent(), true);
             $size = +($body['size'] ?? null);
             $formHandler->setFormAreaSize($formArea, $size);
+
             return new Response('', Response::HTTP_NO_CONTENT);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return new Response('', Response::HTTP_BAD_REQUEST);
         }
     }
@@ -62,30 +62,31 @@ final class FormAreaController extends AbstractController
      *     name="formArea.getSettingsView"
      * )
      * @IsGranted("SET_FORM_AREA_SETTINGS", subject="formArea")
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function getSettingsView(FormArea $formArea, Request $request): Response
+    public function getSettingsView(FormArea $formArea, Request $request): Response
     {
         $form = $this->createForm(FormAreaSettingsType::class, $formArea, [
             'method' => 'put',
-            'action' => $this->generateUrl('formArea.getSettingsView', ['id' => $formArea->getId()])
+            'action' => $this->generateUrl('formArea.getSettingsView', ['id' => $formArea->getId()]),
         ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
+
                 return new Response('', Response::HTTP_NO_CONTENT);
             }
-            else {
-                $status = Response::HTTP_BAD_REQUEST;
-            }
+
+            $status = Response::HTTP_BAD_REQUEST;
+        } else {
+            $status = Response::HTTP_OK;
         }
-        else $status = Response::HTTP_OK;
 
         $view = $this->renderView('form/_area_settings.html.twig', [
             'area' => $formArea,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
 
         return new JsonResponse(['view' => $view], $status);

@@ -12,11 +12,11 @@ final class LabelBuilder implements FormBuilderInterface
     {
         /* @var Widget $widget */
         $widget = $options['widget'];
-        $name = $options['mode'] === FicheModeEnum::SEARCH ? $widget->getImmutableId() : $widget->getId();
+        $name = FicheModeEnum::SEARCH === $options['mode'] ? $widget->getImmutableId() : $widget->getId();
         $builder->add($name, LabelType::class, [
             'widget' => $widget,
             'mode' => $options['mode'],
-            'empty_data' => null
+            'empty_data' => null,
         ]);
     }
 

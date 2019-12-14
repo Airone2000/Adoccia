@@ -3,7 +3,7 @@
         <i class="fas fa-times BtnCloseModal"></i>
         <div class="body">
 
-            <div class="title font-size-25px margin-bottom-25px">Options de recherche</div>
+            <div class="title font-size-25px margin-bottom-25px">{{ 'category.search.modal.title'|trans }}</div>
 
             {{ form_start(form) }}
 
@@ -17,7 +17,7 @@
                     {{ form_widget(form.orderBy) }}
                 </div>
 
-                <button class="btn margin-top-15px w100" type="submit">Appliquer et fermer</button>
+                <button class="btn margin-top-15px w100" type="submit">{{ 'category.search.modal.save_btn'|trans }}</button>
 
             {{ form_end(form) }}
         </div>

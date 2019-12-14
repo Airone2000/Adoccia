@@ -2,7 +2,6 @@
 
 namespace App\Form\SearchType;
 
-
 use App\Entity\Widget;
 use App\Enum\SearchCriteriaEnum;
 use Symfony\Component\Form\CallbackTransformer;
@@ -23,8 +22,8 @@ class RadioType extends AbstractSearchType
         $builder
             ->add('criteria', ChoiceType::class, [
                 'choices' => $this->getSearchCriterias($widget),
-                'choice_label' => function($value){return "trans.{$value}";},
-                'choice_attr' => function($value){
+                'choice_label' => function ($value) {return "trans.{$value}"; },
+                'choice_attr' => function ($value) {
                     $attr = [];
                     switch ($value) {
                         case SearchCriteriaEnum::IN_ARRAY:
@@ -33,29 +32,32 @@ class RadioType extends AbstractSearchType
                             $attr['data-inputs'] = '.value';
                             break;
                     }
+
                     return $attr;
-                }
+                },
             ])
             ->add('value', ChoiceType::class, [
                 'required' => false,
                 'choices' => \App\Form\FormBuilderType\RadioType::getChoices($widget),
-                'choice_label' => function($value, $label){ return $label; },
+                'choice_label' => function ($value, $label) { return $label; },
                 'multiple' => true,
                 'attr' => [
-                    'class' => 'value hidden'
-                ]
+                    'class' => 'value hidden',
+                ],
             ])
             ->get('value')->addModelTransformer(new CallbackTransformer(
-                function($value){
-                    if ($value !== null) {
+                function ($value) {
+                    if (null !== $value) {
                         $value = json_decode($value, true);
                     }
+
                     return $value;
                 },
-                function($value){
-                    if ($value !== null) {
+                function ($value) {
+                    if (null !== $value) {
                         $value = json_encode($value);
                     }
+
                     return $value;
                 }
             ))
@@ -69,11 +71,11 @@ class RadioType extends AbstractSearchType
             SearchCriteriaEnum::IS_NULL,
             SearchCriteriaEnum::IS_NOT_NULL,
             SearchCriteriaEnum::IN_ARRAY,
-            SearchCriteriaEnum::NOT_IN_ARRAY
+            SearchCriteriaEnum::NOT_IN_ARRAY,
         ];
 
         if ($widget->hasMultipleValues()) {
-            # Just after IN_ARRAY
+            // Just after IN_ARRAY
             array_splice($criterias, 4, 0, SearchCriteriaEnum::IN_ARRAY_EXACT);
         }
 

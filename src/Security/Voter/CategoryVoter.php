@@ -10,21 +10,30 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class CategoryVoter extends Voter
 {
-    const
-        ACCESS_ALL_CATEGORIES = 'ACCESS_ALL_CATEGORIES',
-        ADD_FICHE_TO_CATEGORY = 'ADD_FICHE_TO_CATEGORY',
-        EDIT_CATEGORY = 'EDIT_CATEGORY',
-        EDIT_CATEGORY_FORM = 'EDIT_CATEGORY_FORM',
-        DELETE_CATEGORY = 'DELETE_CATEGORY'
-    ;
+    const ACCESS_ALL_CATEGORIES = 'ACCESS_ALL_CATEGORIES';
+    const ADD_FICHE_TO_CATEGORY = 'ADD_FICHE_TO_CATEGORY';
+    const EDIT_CATEGORY = 'EDIT_CATEGORY';
+    const EDIT_CATEGORY_FORM = 'EDIT_CATEGORY_FORM';
+    const DELETE_CATEGORY = 'DELETE_CATEGORY';
 
     protected function supports($attribute, $subject)
     {
-        if ($attribute === self::ACCESS_ALL_CATEGORIES) return true;
-        if ($attribute === self::ADD_FICHE_TO_CATEGORY && $subject instanceof Category) return true;
-        if ($attribute === self::EDIT_CATEGORY && $subject instanceof Category) return true;
-        if ($attribute === self::EDIT_CATEGORY_FORM && $subject instanceof Category) return true;
-        if ($attribute === self::DELETE_CATEGORY && $subject instanceof Category) return true;
+        if (self::ACCESS_ALL_CATEGORIES === $attribute) {
+            return true;
+        }
+        if (self::ADD_FICHE_TO_CATEGORY === $attribute && $subject instanceof Category) {
+            return true;
+        }
+        if (self::EDIT_CATEGORY === $attribute && $subject instanceof Category) {
+            return true;
+        }
+        if (self::EDIT_CATEGORY_FORM === $attribute && $subject instanceof Category) {
+            return true;
+        }
+        if (self::DELETE_CATEGORY === $attribute && $subject instanceof Category) {
+            return true;
+        }
+
         return false;
     }
 
@@ -82,37 +91,62 @@ class CategoryVoter extends Voter
             return true;
         }
         if ($user instanceof User) {
-            if ($user->isSuperAdmin()) return true;
-            if ($category->getCreatedBy() && $category->getCreatedBy() === $user) return true;
+            if ($user->isSuperAdmin()) {
+                return true;
+            }
+            if ($category->getCreatedBy() && $category->getCreatedBy() === $user) {
+                return true;
+            }
         }
+
         return false;
     }
 
     private function canDeleteCategory(User $user, Category $category): bool
     {
-        if ($user->isSuperAdmin()) return true;
-        if ($category->getCreatedBy() && $category->getCreatedBy()->getId() === $user->getId()) return true;
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
+        if ($category->getCreatedBy() && $category->getCreatedBy()->getId() === $user->getId()) {
+            return true;
+        }
+
         return false;
     }
 
     private function canEditCategoryForm(User $user, Category $category): bool
     {
-        if ($user->isSuperAdmin()) return true;
-        if ($category->getCreatedBy() && $category->getCreatedBy()->getId() === $user->getId()) return true;
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
+        if ($category->getCreatedBy() && $category->getCreatedBy()->getId() === $user->getId()) {
+            return true;
+        }
+
         return false;
     }
 
     private function canEditCategory(User $user, Category $category): bool
     {
-        if ($user->isSuperAdmin()) return true;
-        if ($category->getCreatedBy() &&  $category->getCreatedBy()->getId() === $user->getId()) return true;
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
+        if ($category->getCreatedBy() && $category->getCreatedBy()->getId() === $user->getId()) {
+            return true;
+        }
+
         return false;
     }
 
     private function canAddFicheToCategory(User $user, Category $category): bool
     {
-        if ($user->isSuperAdmin()) return true;
-        if ($category->getCreatedBy() && $category->getCreatedBy()->getId() === $user->getId()) return true;
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
+        if ($category->getCreatedBy() && $category->getCreatedBy()->getId() === $user->getId()) {
+            return true;
+        }
+
         return false;
     }
 }

@@ -14,7 +14,6 @@ final class MailjetEmailSolution extends AbstractEmailSolution
 
     public function __construct()
     {
-
         $this->client = new Client(
             $_SERVER['MAILJET_API_KEY'],
             $_SERVER['MAILJET_SECRET_KEY'],
@@ -29,22 +28,23 @@ final class MailjetEmailSolution extends AbstractEmailSolution
                 [
                     'From' => [
                         'Email' => $fromEmail,
-                        'Name' => $fromName
+                        'Name' => $fromName,
                     ],
                     'To' => [
                         [
                             'Email' => $toEmail,
-                            'Name' => $toName
-                        ]
+                            'Name' => $toName,
+                        ],
                     ],
                     'Subject' => $subject,
                     'TextPart' => $this->getPlainTextMessage($message),
-                    'HTMLPart' => $message
-                ]
-            ]
+                    'HTMLPart' => $message,
+                ],
+            ],
         ];
 
         $response = $this->client->post(Resources::$Email, ['body' => $body]);
+
         return $response->success();
     }
 }

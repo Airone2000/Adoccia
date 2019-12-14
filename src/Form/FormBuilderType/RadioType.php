@@ -30,9 +30,9 @@ final class RadioType extends AbstractType
         /* @var Widget $widget */
         $widget = $options['widget'];
 
-        # Build the list of values
+        // Build the list of values
         $choices = array_flip(self::getChoices($widget));
-        $selectedChoices = array_flip((array)$view->vars['value']);
+        $selectedChoices = array_flip((array) $view->vars['value']);
         $selectedValues = array_values(array_intersect_key($choices, $selectedChoices));
         $view->vars['transformed_value_to_display'] = implode(', ', $selectedValues);
     }
@@ -44,11 +44,12 @@ final class RadioType extends AbstractType
 
     public static function getChoices(Widget $widget): array
     {
-        $choicesKey = array_map(function($value){
-            return hash('sha256', (string)$value);
+        $choicesKey = array_map(function ($value) {
+            return hash('sha256', (string) $value);
         }, $widget->getChoices());
 
         $choices = array_combine($widget->getChoices(), $choicesKey) ?? [];
+
         return $choices;
     }
 }

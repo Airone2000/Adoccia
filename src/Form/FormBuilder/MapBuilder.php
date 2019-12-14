@@ -18,33 +18,35 @@ final class MapBuilder implements FormBuilderInterface
 
         $builder
             ->add($widget->getId(), MapType::class, [
-                'mode' =>$options['mode'],
+                'mode' => $options['mode'],
                 'widget' => $widget,
                 'constraints' => [
                     new HasMapShape(),
                     new HasMarkersCountBetween([
                         'min' => $widget->getMinMarkers(),
-                        'max' => $widget->getMaxMarkers()
-                    ])
-                ]
+                        'max' => $widget->getMaxMarkers(),
+                    ]),
+                ],
             ])
             ->get($widget->getId())->addModelTransformer(new CallbackTransformer(
-                function($value){
-                    if (is_array($value)) {
+                function ($value) {
+                    if (\is_array($value)) {
                         return json_encode($value);
                     }
+
                     return json_encode(Value::DEFAULT_VALUE_OF_TYPE_MAP);
                 },
-                function($value){
-                    if (is_string($value)) {
+                function ($value) {
+                    if (\is_string($value)) {
                         $value = json_decode($value, true) ?? null;
+
                         return $value;
                     }
+
                     return null;
                 }
             ))
         ;
-
     }
 
     public function buildSearchForm(\Symfony\Component\Form\FormBuilderInterface $builder, array $options)
@@ -53,7 +55,7 @@ final class MapBuilder implements FormBuilderInterface
         $widget = $options['widget'];
         $builder
             ->add($widget->getImmutableId(), \App\Form\SearchType\MapType::class, [
-                'widget' => $widget
+                'widget' => $widget,
             ])
         ;
     }

@@ -11,24 +11,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AbstractWidgetSettingsType extends AbstractType
 {
-    const
-        # When we click the button "Configure this widget", a modal is opened
-        MODE_IN_MODAL = 'in_modal',
-
-        # Accessible directly from the area view in the form builder
-        MODE_OFF_MODAL = 'off_modal',
-
-        # Both in and off (see above)
-        MODE_COMPLETE = 'complete'
-    ;
+    // When we click the button "Configure this widget", a modal is opened
+    const MODE_IN_MODAL = 'in_modal';
+    // Accessible directly from the area view in the form builder
+    const MODE_OFF_MODAL = 'off_modal';
+    // Both in and off (see above)
+    const MODE_COMPLETE = 'complete';
 
     final public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (in_array($options['mode'], [self::MODE_IN_MODAL, self::MODE_COMPLETE])) {
+        if (\in_array($options['mode'], [self::MODE_IN_MODAL, self::MODE_COMPLETE], true)) {
             $this->buildInModalForm($builder, $options);
         }
 
-        if (in_array($options['mode'], [self::MODE_OFF_MODAL, self::MODE_COMPLETE])) {
+        if (\in_array($options['mode'], [self::MODE_OFF_MODAL, self::MODE_COMPLETE], true)) {
             $this->buildOffModalForm($builder, $options);
         }
     }

@@ -21,9 +21,9 @@ class StringBuilder implements FormBuilderInterface
             'attr' => [
                 'minLength' => $widget->getMinLength(),
                 'maxLength' => $widget->getMaxLength(),
-                'required' => $widget->isRequired()
+                'required' => $widget->isRequired(),
             ],
-            'constraints' => $this->getConstraints($widget)
+            'constraints' => $this->getConstraints($widget),
         ]);
     }
 
@@ -32,14 +32,15 @@ class StringBuilder implements FormBuilderInterface
         return StringType::class;
     }
 
-    protected function getConstraints(Widget $widget): array {
+    protected function getConstraints(Widget $widget): array
+    {
         $constraints = [];
 
-        if ($widget->getMinLength() !== null) {
+        if (null !== $widget->getMinLength()) {
             $constraints[] = new Length(['min' => $widget->getMinLength()]);
         }
 
-        if ($widget->getMaxLength() !== null) {
+        if (null !== $widget->getMaxLength()) {
             $constraints[] = new Length(['max' => $widget->getMaxLength()]);
         }
 
@@ -55,7 +56,7 @@ class StringBuilder implements FormBuilderInterface
         /* @var \App\Entity\Widget $widget */
         $widget = $options['widget'];
         $builder->add($widget->getImmutableId(), \App\Form\SearchType\StringType::class, [
-            'widget' => $widget
+            'widget' => $widget,
         ]);
     }
 }

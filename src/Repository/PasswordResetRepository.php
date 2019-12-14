@@ -15,7 +15,7 @@ class PasswordResetRepository extends ServiceEntityRepository
 
     public function findOneNonUsedAndExpiredByToken(?string $token): ?PasswordReset
     {
-        if ($token === null) {
+        if (null === $token) {
             return null;
         }
 
@@ -32,5 +32,4 @@ class PasswordResetRepository extends ServiceEntityRepository
 
         return $passwordReset;
     }
-
 }

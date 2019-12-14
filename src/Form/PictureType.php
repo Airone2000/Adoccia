@@ -35,42 +35,44 @@ class PictureType extends AbstractType
                     'type' => 'button',
                     'class' => 'openPictureUploader',
                     'data-unique-id' => $options['uniqueId'],
-                    'data-crop-shape' => $options['cropShape']
-                ]
+                    'data-crop-shape' => $options['cropShape'],
+                ],
             ])
             ->add('pictureId', HiddenType::class, [
                 'attr' => [
                     'data-unique-id' => $options['uniqueId'],
-                    'class' => 'input-id'
-                ]
+                    'class' => 'input-id',
+                ],
             ])
             ->add('pictureURL', HiddenType::class, [
                 'attr' => [
                     'data-unique-id' => $options['uniqueId'],
-                    'class' => 'picture-url'
-                ]
+                    'class' => 'picture-url',
+                ],
             ])
         ;
 
         $builder
             ->addModelTransformer(new CallbackTransformer(
-                function($value){
+                function ($value) {
                     $data = ['pictureId' => null];
                     if ($value instanceof Picture) {
                         $data['pictureId'] = $value->getUniqueId();
                     }
+
                     return $data;
                 },
-                function($value) use ($options){
+                function ($value) use ($options) {
                     $pictureId = $value['pictureId'];
                     if (is_scalar($pictureId)) {
                         $picture = $this->getPicture($pictureId);
-                        if ($picture === null) {
+                        if (null === $picture) {
                             return $options['originalPicture'];
                         }
 
                         return $picture;
                     }
+
                     return null;
                 }
             ));
@@ -80,8 +82,9 @@ class PictureType extends AbstractType
     {
         $picture = $this->entityManager->getRepository(Picture::class)->findOneBy([
             'uniqueId' => $pictureId,
-            'isTemp' => true
+            'isTemp' => true,
         ]);
+
         return $picture;
     }
 
@@ -92,8 +95,8 @@ class PictureType extends AbstractType
         $view->vars['deletable'] = $options['deletable'];
         $view->vars['liipImagineFilter'] = $options['liipImagineFilter'];
 
-        # When I submit a wrong form, I want the previously selected picture
-        # to be displayed again (only visual)
+        // When I submit a wrong form, I want the previously selected picture
+        // to be displayed again (only visual)
         if (isset($view->vars['value']['pictureURL'])) {
             $pictureURL = $view->vars['value']['pictureURL'] ?? null;
             $picture = new Picture();

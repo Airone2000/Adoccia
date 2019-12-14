@@ -2,12 +2,9 @@
 
 namespace App\Entity;
 
-use App\Validator\FichePicture;
-use App\Validator\PictureIsSquare;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -82,144 +79,98 @@ class Fiche
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string|null $title
-     * @return Fiche
-     */
-    public function setTitle(?string $title): Fiche
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
-    /**
-     * @return Collection
-     */
     public function getValues(): Collection
     {
         return $this->values;
     }
 
-    /**
-     * @param Collection $values
-     * @return Fiche
-     */
-    public function setValues(Collection $values): Fiche
+    public function setValues(Collection $values): self
     {
         $this->values = $values;
+
         return $this;
     }
 
-    /**
-     * @param Value $value
-     * @return Fiche
-     */
-    public function addValue(Value $value): Fiche
+    public function addValue(Value $value): self
     {
         $value->setFiche($this);
         $this->values->add($value);
+
         return $this;
     }
 
-    /**
-     * @return Category
-     */
     public function getCategory(): Category
     {
         return $this->category;
     }
 
-    /**
-     * @param Category $category
-     * @return Fiche
-     */
-    public function setCategory(Category $category): Fiche
+    public function setCategory(Category $category): self
     {
         $this->category = $category;
+
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isPublished(): bool
     {
         return $this->published;
     }
 
-    /**
-     * @param bool $published
-     * @return Fiche
-     */
-    public function setPublished(bool $published): Fiche
+    public function setPublished(bool $published): self
     {
         $this->published = $published;
+
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isValid(): bool
     {
         return $this->valid;
     }
 
-    /**
-     * @param bool $valid
-     * @return Fiche
-     */
-    public function setValid(bool $valid): Fiche
+    public function setValid(bool $valid): self
     {
         $this->valid = $valid;
+
         return $this;
     }
 
-    /**
-     * @return User|null
-     */
     public function getCreator(): ?User
     {
         return $this->creator;
     }
 
-    /**
-     * @param User|null $creator
-     * @return Fiche
-     */
-    public function setCreator(?User $creator): Fiche
+    public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
+
         return $this;
     }
 
-    /**
-     * @return Picture|null
-     */
     public function getPicture(): ?Picture
     {
         return $this->picture;
     }
 
-    /**
-     * @param Picture|null $picture
-     * @return Fiche
-     */
-    public function setPicture(?Picture $picture): Fiche
+    public function setPicture(?Picture $picture): self
     {
         $this->picture = $picture;
         if ($picture instanceof Picture) {
             $picture->setIsTemp(false);
         }
+
         return $this;
     }
-
 }

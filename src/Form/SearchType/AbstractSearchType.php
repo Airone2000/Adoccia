@@ -2,7 +2,6 @@
 
 namespace App\Form\SearchType;
 
-use App\Entity\Category;
 use App\Enum\FicheModeEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;

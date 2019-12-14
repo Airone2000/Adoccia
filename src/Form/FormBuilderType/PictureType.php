@@ -24,5 +24,4 @@ final class PictureType extends \App\Form\PictureType
     {
         $this->unifiedConfigureOptions($resolver);
     }
-
 }

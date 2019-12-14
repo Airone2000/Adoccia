@@ -56,8 +56,6 @@ final class FormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param Form $form
-     * @param array $mapPositionToAreaId
      * @throws \Exception
      */
     public function sortForm(Form $form, array $mapPositionToAreaId): void
@@ -67,13 +65,12 @@ final class FormHandler implements FormHandlerInterface
 
         /** @var FormArea $area */
         foreach ($form->getAreas() as $area) {
-            # Position is given for this area is this position is not already used
+            // Position is given for this area is this position is not already used
             if (isset($mapPositionToAreaId[$area->getId()]) && isset($sizesToConsume[$mapPositionToAreaId[$area->getId()]])) {
                 $position = $mapPositionToAreaId[$area->getId()];
                 $area->setPosition($position);
                 unset($sizesToConsume[$position]);
-            }
-            else {
+            } else {
                 throw new \Exception('Unexpected error when sorting due to foreign area or already used position.');
             }
         }
@@ -81,15 +78,12 @@ final class FormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param Widget $widget
-     * @param string|null $newType
      * @throws \Exception
      */
     public function changeFormAreaWidgetType(Widget $widget, ?string $newType): void
     {
         if (WidgetTypeEnum::isset($newType)) {
-
-            # Reset all settings for this widget
+            // Reset all settings for this widget
             $widget->resetSettings();
 
             $widget->setType($newType);
@@ -102,9 +96,8 @@ final class FormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param Widget $widget
-     * @param string|null $attribute
      * @param $value
+     *
      * @throws \Exception
      */
     public function setWidgetSetting(Widget $widget, ?string $attribute, $value): void
@@ -115,30 +108,25 @@ final class FormHandler implements FormHandlerInterface
                 $this->propertyAccess->setValue($widget, $attribute, $value);
 
                 $violations = $this->validator->validate($widget, null, ['Widget:SetSetting']);
-                if (count($violations) > 0) {
-                    throw new \Exception('Wrong value for setting ' . $attribute);
+                if (\count($violations) > 0) {
+                    throw new \Exception('Wrong value for setting '.$attribute);
                 }
 
                 $this->entityManager->flush();
+            } catch (\Exception $e) {
+                throw new \Exception('Error while setting value for '.$attribute);
             }
-            catch (\Exception $e) {
-                throw new \Exception('Error while setting value for ' . $attribute);
-            }
-        }
-        else {
+        } else {
             throw new \Exception('Non settable setting');
         }
-
     }
 
-    /**
-     * @param Category $category
-     * @param bool $overwrite
-     */
     public function setDraftForm(Category $category, bool $overwrite = false): void
     {
-        if ($category->getDraftForm() !== null) {
-            if (!$overwrite) return;
+        if (null !== $category->getDraftForm()) {
+            if (!$overwrite) {
+                return;
+            }
         }
 
         $draftForm = clone $category->getForm();
@@ -147,40 +135,33 @@ final class FormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param Category $category
      * @throws \Exception
      */
     public function publishDraftForm(Category $category): void
     {
         try {
             if (($draftForm = $category->getDraftForm()) instanceof Form) {
-
-                # First, reAffect value to the good widget
+                // First, reAffect value to the good widget
                 $valueRepository = $this->entityManager->getRepository(Value::class);
                 $valueRepository->reAffectValueToWidget($draftForm);
 
-                # Remove the old form
+                // Remove the old form
                 if ($form = $category->getForm()) {
                     $this->entityManager->remove($form);
                 }
 
-                # Replace the old by the new and set draft as null
+                // Replace the old by the new and set draft as null
                 $category
                     ->setForm($draftForm)
                     ->setDraftForm(null);
 
                 $this->entityManager->flush();
             }
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             throw new \Exception('An error occurred when trying to publish the draft form.');
         }
     }
 
-    /**
-     * @param Form $form
-     * @return FormArea
-     */
     public function addFormAreaToDraftForm(Form $form): FormArea
     {
         $form->addArea($formArea = new FormArea());
@@ -194,7 +175,6 @@ final class FormHandler implements FormHandlerInterface
          *
          * De cette manière, la recherche avancée permet de les retrouver.
          */
-
         $widget = $formArea->getWidget();
         $category = $this->entityManager->getRepository(Category::class)->findOneBy(['draftForm' => $form]);
         $valueRepository = $this->entityManager->getRepository(Value::class);
@@ -202,5 +182,4 @@ final class FormHandler implements FormHandlerInterface
 
         return $formArea;
     }
-
 }

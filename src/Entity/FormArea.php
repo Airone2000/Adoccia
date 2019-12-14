@@ -16,14 +16,20 @@ use Symfony\Component\Validator\Constraints as Assert;
 class FormArea
 {
     const
-        DEFAULT_BORDER_COLOR = "#000000",
-        DEFAULT_BORDER_WIDTH = 0,
-        DEFAULT_MARGIN = 0,
-        DEFAULT_PADDING = 0,
-        DEFAULT_BACKGROUND_COLOR = "#FFFFFF",
-
-        MAX_MARGIN = 50,
-        MAX_PADDING = 50,
+        DEFAULT_BORDER_COLOR = '#000000';
+    const
+        DEFAULT_BORDER_WIDTH = 0;
+    const
+        DEFAULT_MARGIN = 0;
+    const
+        DEFAULT_PADDING = 0;
+    const
+        DEFAULT_BACKGROUND_COLOR = '#FFFFFF';
+    const
+        MAX_MARGIN = 50;
+    const
+        MAX_PADDING = 50;
+    const
         MAX_BORDER = 15
     ;
 
@@ -201,7 +207,6 @@ class FormArea
      */
     private $widgetVerticalAlignment;
 
-
     public function __construct()
     {
         $this->setWidget(new Widget());
@@ -209,7 +214,7 @@ class FormArea
     }
 
     /**
-     * Clone for draftForm generation
+     * Clone for draftForm generation.
      */
     public function __clone()
     {
@@ -222,84 +227,57 @@ class FormArea
         return $this->id;
     }
 
-    /**
-     * @return Form
-     */
     public function getForm(): Form
     {
         return $this->form;
     }
 
-    /**
-     * @param Form $form
-     * @return FormArea
-     */
-    public function setForm(Form $form): FormArea
+    public function setForm(Form $form): self
     {
         $this->form = $form;
+
         return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getWidth(): float
     {
         return $this->width;
     }
 
-    /**
-     * @param float $width
-     * @return FormArea
-     */
-    public function setWidth(float $width): FormArea
+    public function setWidth(float $width): self
     {
         $this->width = round($width, 3);
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * @param int $position
-     * @return FormArea
-     */
-    public function setPosition(int $position): FormArea
+    public function setPosition(int $position): self
     {
         $this->position = $position;
+
         return $this;
     }
 
-    /**
-     * @return Widget
-     */
     public function getWidget(): Widget
     {
         return $this->widget;
     }
 
-    /**
-     * @param Widget $widget
-     * @return FormArea
-     */
-    public function setWidget(Widget $widget): FormArea
+    public function setWidget(Widget $widget): self
     {
         $this->widget = $widget;
         $widget
             ->setFormArea($this)
         ;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMarginTop(): ?int
     {
         return $this->marginTop ?? self::DEFAULT_MARGIN;
@@ -307,17 +285,14 @@ class FormArea
 
     /**
      * @param int|null $marginTop
-     * @return FormArea
      */
-    public function setMarginTop($marginTop): FormArea
+    public function setMarginTop($marginTop): self
     {
         $this->marginTop = $marginTop;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMarginBottom(): ?int
     {
         return $this->marginBottom ?? self::DEFAULT_MARGIN;
@@ -325,17 +300,14 @@ class FormArea
 
     /**
      * @param int|null $marginBottom
-     * @return FormArea
      */
-    public function setMarginBottom($marginBottom): FormArea
+    public function setMarginBottom($marginBottom): self
     {
         $this->marginBottom = $marginBottom;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMarginLeft(): ?int
     {
         return $this->marginLeft ?? self::DEFAULT_MARGIN;
@@ -343,17 +315,14 @@ class FormArea
 
     /**
      * @param int|null $marginLeft
-     * @return FormArea
      */
-    public function setMarginLeft($marginLeft): FormArea
+    public function setMarginLeft($marginLeft): self
     {
         $this->marginLeft = $marginLeft;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMarginRight(): ?int
     {
         return $this->marginRight ?? self::DEFAULT_MARGIN;
@@ -361,17 +330,14 @@ class FormArea
 
     /**
      * @param int|null $marginRight
-     * @return FormArea
      */
-    public function setMarginRight($marginRight): FormArea
+    public function setMarginRight($marginRight): self
     {
         $this->marginRight = $marginRight;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getBorderTopWidth(): ?int
     {
         return $this->borderTopWidth ?? self::DEFAULT_BORDER_WIDTH;
@@ -379,35 +345,26 @@ class FormArea
 
     /**
      * @param int|null $borderTopWidth
-     * @return FormArea
      */
-    public function setBorderTopWidth($borderTopWidth): FormArea
+    public function setBorderTopWidth($borderTopWidth): self
     {
         $this->borderTopWidth = $borderTopWidth;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBorderTopColor(): ?string
     {
         return $this->borderTopColor ?? self::DEFAULT_BORDER_COLOR;
     }
 
-    /**
-     * @param string|null $borderTopColor
-     * @return FormArea
-     */
-    public function setBorderTopColor(?string $borderTopColor): FormArea
+    public function setBorderTopColor(?string $borderTopColor): self
     {
         $this->borderTopColor = $borderTopColor;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getBorderBottomWidth(): ?int
     {
         return $this->borderBottomWidth ?? self::DEFAULT_BORDER_WIDTH;
@@ -415,35 +372,26 @@ class FormArea
 
     /**
      * @param int|null $borderBottomWidth
-     * @return FormArea
      */
-    public function setBorderBottomWidth($borderBottomWidth): FormArea
+    public function setBorderBottomWidth($borderBottomWidth): self
     {
         $this->borderBottomWidth = $borderBottomWidth;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBorderBottomColor(): ?string
     {
         return $this->borderBottomColor ?? self::DEFAULT_BORDER_COLOR;
     }
 
-    /**
-     * @param string|null $borderBottomColor
-     * @return FormArea
-     */
-    public function setBorderBottomColor(?string $borderBottomColor): FormArea
+    public function setBorderBottomColor(?string $borderBottomColor): self
     {
         $this->borderBottomColor = $borderBottomColor;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getBorderLeftWidth(): ?int
     {
         return $this->borderLeftWidth ?? self::DEFAULT_BORDER_WIDTH;
@@ -451,35 +399,26 @@ class FormArea
 
     /**
      * @param int|null $borderLeftWidth
-     * @return FormArea
      */
-    public function setBorderLeftWidth($borderLeftWidth): FormArea
+    public function setBorderLeftWidth($borderLeftWidth): self
     {
         $this->borderLeftWidth = $borderLeftWidth;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBorderLeftColor(): ?string
     {
         return $this->borderLeftColor ?? self::DEFAULT_BORDER_COLOR;
     }
 
-    /**
-     * @param string|null $borderLeftColor
-     * @return FormArea
-     */
-    public function setBorderLeftColor(?string $borderLeftColor): FormArea
+    public function setBorderLeftColor(?string $borderLeftColor): self
     {
         $this->borderLeftColor = $borderLeftColor;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getBorderRightWidth(): ?int
     {
         return $this->borderRightWidth ?? self::DEFAULT_BORDER_WIDTH;
@@ -487,53 +426,38 @@ class FormArea
 
     /**
      * @param int|null $borderRightWidth
-     * @return FormArea
      */
-    public function setBorderRightWidth($borderRightWidth): FormArea
+    public function setBorderRightWidth($borderRightWidth): self
     {
         $this->borderRightWidth = $borderRightWidth;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBorderRightColor(): ?string
     {
         return $this->borderRightColor ?? self::DEFAULT_BORDER_COLOR;
     }
 
-    /**
-     * @param string|null $borderRightColor
-     * @return FormArea
-     */
-    public function setBorderRightColor(?string $borderRightColor): FormArea
+    public function setBorderRightColor(?string $borderRightColor): self
     {
         $this->borderRightColor = $borderRightColor;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBackgroundColor(): ?string
     {
         return $this->backgroundColor ?? self::DEFAULT_BACKGROUND_COLOR;
     }
 
-    /**
-     * @param string|null $backgroundColor
-     * @return FormArea
-     */
-    public function setBackgroundColor(?string $backgroundColor): FormArea
+    public function setBackgroundColor(?string $backgroundColor): self
     {
         $this->backgroundColor = $backgroundColor;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPaddingTop(): ?int
     {
         return $this->paddingTop ?? self::DEFAULT_PADDING;
@@ -541,17 +465,14 @@ class FormArea
 
     /**
      * @param int|null $paddingTop
-     * @return FormArea
      */
-    public function setPaddingTop($paddingTop): FormArea
+    public function setPaddingTop($paddingTop): self
     {
         $this->paddingTop = $paddingTop;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPaddingBottom(): ?int
     {
         return $this->paddingBottom ?? self::DEFAULT_PADDING;
@@ -559,17 +480,14 @@ class FormArea
 
     /**
      * @param int|null $paddingBottom
-     * @return FormArea
      */
-    public function setPaddingBottom($paddingBottom): FormArea
+    public function setPaddingBottom($paddingBottom): self
     {
         $this->paddingBottom = $paddingBottom;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPaddingLeft(): ?int
     {
         return $this->paddingLeft ?? self::DEFAULT_PADDING;
@@ -577,17 +495,14 @@ class FormArea
 
     /**
      * @param int|null $paddingLeft
-     * @return FormArea
      */
-    public function setPaddingLeft($paddingLeft): FormArea
+    public function setPaddingLeft($paddingLeft): self
     {
         $this->paddingLeft = $paddingLeft;
+
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPaddingRight(): ?int
     {
         return $this->paddingRight ?? self::DEFAULT_PADDING;
@@ -595,31 +510,23 @@ class FormArea
 
     /**
      * @param int|null $paddingRight
-     * @return FormArea
      */
-    public function setPaddingRight($paddingRight): FormArea
+    public function setPaddingRight($paddingRight): self
     {
         $this->paddingRight = $paddingRight;
+
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getWidgetVerticalAlignment(): ?string
     {
         return $this->widgetVerticalAlignment ?? WidgetVerticalAlignmentEnum::START;
     }
 
-    /**
-     * @param string|null $widgetVerticalAlignment
-     * @return FormArea
-     */
-    public function setWidgetVerticalAlignment(?string $widgetVerticalAlignment): FormArea
+    public function setWidgetVerticalAlignment(?string $widgetVerticalAlignment): self
     {
         $this->widgetVerticalAlignment = $widgetVerticalAlignment;
+
         return $this;
     }
-
-
 }

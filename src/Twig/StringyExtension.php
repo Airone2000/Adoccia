@@ -2,9 +2,9 @@
 
 namespace App\Twig;
 
+use Stringy\Stringy as S;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Stringy\Stringy as S;
 
 class StringyExtension extends AbstractExtension
 {
@@ -22,6 +22,7 @@ class StringyExtension extends AbstractExtension
     {
         $stringy = S::create($value);
         $newValue = $stringy->slugify('-');
+
         return $newValue;
     }
 }

@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-trait  FormBuilderTypeTrait
+trait FormBuilderTypeTrait
 {
     public function unifiedBuildView(FormView $view, FormInterface $form, array $options)
     {

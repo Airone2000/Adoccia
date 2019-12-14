@@ -3,7 +3,6 @@
 namespace App\Services\CategoryFinder;
 
 use App\Entity\Category;
-use App\Entity\Value;
 use App\Entity\Widget;
 use App\Enum\SearchCriteriaEnum;
 use App\Enum\TimeFormatEnum;
@@ -15,7 +14,6 @@ use Doctrine\ORM\QueryBuilder;
 
 final class CategoryFinder implements CategoryFinderInterface
 {
-
     /**
      * @var EntityManagerInterface
      */
@@ -37,8 +35,7 @@ final class CategoryFinder implements CategoryFinderInterface
      */
     private $widgetRepository;
     /**
-     * @var int
-     * The number of criteria filled by the user to filter
+     * @var int The number of criteria filled by the user to filter
      */
     private $searchCriteriaCount;
     /**
@@ -54,8 +51,6 @@ final class CategoryFinder implements CategoryFinderInterface
      * @var array
      */
     private $mapAroundCriterias = [];
-
-
 
     public function __construct(EntityManagerInterface $entityManager,
                                 ValueRepository $valueRepository,
@@ -75,40 +70,40 @@ final class CategoryFinder implements CategoryFinderInterface
 
         $this->qb = $this->valueRepository->createQueryBuilder('v');
 
-        # Filter on category
+        // Filter on category
         $this->setWhereCategory($category);
 
-        # Apply criterias
+        // Apply criterias
         $this->applyCriterias($category, $criterias);
 
-        # Apply criterias for map (need to compute some things right in the code)
+        // Apply criterias for map (need to compute some things right in the code)
         $this->applyMapAroundCriterias();
 
-        # Matching widgets
+        // Matching widgets
         $matchingValues = $this->qb->getQuery()->getArrayResult();
 
-        # Query for fiches in this category
+        // Query for fiches in this category
         $fichesQ = $this->ficheRepository->createQueryBuilder('f');
         $this->ficheRepository->getForUser(null, $fichesQ);
         $fichesQ->andWhere('f.category = :category')->setParameter('category', $category);
 
-        # Search fiches by matching widgets
+        // Search fiches by matching widgets
         if ($this->searchCriteriaCount > 0) {
             $this->ficheRepository->getFicheByValues($fichesQ, $matchingValues, $this->searchCriteriaCount);
         }
 
-        # Filter on title
-        if (array_key_exists('title', $criterias)) {
+        // Filter on title
+        if (\array_key_exists('title', $criterias)) {
             $criteriaTitle = $criterias['title'];
-            if ($criteriaTitle['criteria'] !== SearchCriteriaEnum::DISABLED && !empty($criteriaTitle['value'])) {
-                $this->searchCriteriaCount++;
+            if (SearchCriteriaEnum::DISABLED !== $criteriaTitle['criteria'] && !empty($criteriaTitle['value'])) {
+                ++$this->searchCriteriaCount;
                 $this->ficheRepository->filterByTitle($fichesQ, $criteriaTitle['criteria'], $criteriaTitle['value']);
             }
         }
 
-        # Filter on authors / direction = (IN|NOT IN)
-        if ($this->fichesWhereAuthors['direction'] !== null && !empty($this->fichesWhereAuthors['authors'])) {
-            $this->searchCriteriaCount++;
+        // Filter on authors / direction = (IN|NOT IN)
+        if (null !== $this->fichesWhereAuthors['direction'] && !empty($this->fichesWhereAuthors['authors'])) {
+            ++$this->searchCriteriaCount;
             $fichesQ
                 ->andWhere("f.creator {$this->fichesWhereAuthors['direction']} (:authors)")
                 ->setParameter('authors', $this->fichesWhereAuthors['authors'])
@@ -118,14 +113,14 @@ final class CategoryFinder implements CategoryFinderInterface
         if ($this->searchCriteriaCount > 0) {
             $alias = $fichesQ->getRootAliases()[0];
             $fichesQ
-                ->andWhere($alias.'.valid = 1') # Fiche not valid are not trustable for research
+                ->andWhere($alias.'.valid = 1') // Fiche not valid are not trustable for research
             ;
 
             return $fichesQ->getQuery()->getResult();
         }
 
-        # No filtering -> empty
-        # That avoids to have too many data in the output
+        // No filtering -> empty
+        // That avoids to have too many data in the output
         return [];
     }
 
@@ -133,18 +128,15 @@ final class CategoryFinder implements CategoryFinderInterface
     {
         /** @var Widget[] $widgets */
         $widgets = $this->widgetRepository->findByForm($category->getForm());
-        # Get Widget by category->frm (bypass area)
+        // Get Widget by category->frm (bypass area)
 
         $subOrWheres = [];
         $subOrWhereParameters = [];
 
         foreach ($widgets as $widget) {
-
             if (
                 !empty($criteria[$widget->getImmutableId()]) &&
-                ($criteria[$widget->getImmutableId()]['criteria'] ?? SearchCriteriaEnum::DISABLED) !== SearchCriteriaEnum::DISABLED)
-            {
-
+                SearchCriteriaEnum::DISABLED !== ($criteria[$widget->getImmutableId()]['criteria'] ?? SearchCriteriaEnum::DISABLED)) {
                 $type = ucfirst($widget->getType());
                 $valueColumn = "valueOfType{$type}";
                 $parameterKey = "value{$widget->getImmutableId()}";
@@ -159,7 +151,7 @@ final class CategoryFinder implements CategoryFinderInterface
                         $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} IS NOT NULL)";
                         break;
                     case SearchCriteriaEnum::EXACT:
-                        if ($searchValue !== null) {
+                        if (null !== $searchValue) {
                             $searchValue = explode(',', $searchValue);
                             $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} IN (:{$parameterKey}))";
@@ -167,7 +159,7 @@ final class CategoryFinder implements CategoryFinderInterface
                         }
                         break;
                     case SearchCriteriaEnum::CONTAINS:
-                        if ($searchValue !== null) {
+                        if (null !== $searchValue) {
                             $searchValue = explode(',', $searchValue);
                             $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
                             if (!empty($searchValue)) {
@@ -177,49 +169,49 @@ final class CategoryFinder implements CategoryFinderInterface
                         }
                         break;
                     case SearchCriteriaEnum::STARTS_WITH:
-                        if ($searchValue !== null) {
+                        if (null !== $searchValue) {
                             $searchValue = explode(',', $searchValue);
                             $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
                             if (!empty($searchValue)) {
-                                $regexp = '^(' . implode('|', $searchValue) . ')';
+                                $regexp = '^('.implode('|', $searchValue).')';
                                 $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND REGEXP(v.{$valueColumn}, :{$parameterKey}) = 1)";
                                 $subOrWhereParameters[$parameterKey] = $regexp;
                             }
                         }
                         break;
                     case SearchCriteriaEnum::ENDS_WITH:
-                        if ($searchValue !== null) {
+                        if (null !== $searchValue) {
                             $searchValue = explode(',', $searchValue);
                             $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
                             if (!empty($searchValue)) {
-                                $regexp = '(' . implode('|', $searchValue) . ')$';
+                                $regexp = '('.implode('|', $searchValue).')$';
                                 $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND REGEXP(v.{$valueColumn}, :{$parameterKey}) = 1)";
                                 $subOrWhereParameters[$parameterKey] = $regexp;
                             }
                         }
                         break;
                     case SearchCriteriaEnum::GREATER_THAN:
-                        if ($searchValue !== null) {
+                        if (null !== $searchValue) {
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} > :{$parameterKey})";
                             $subOrWhereParameters[$parameterKey] = $searchValue;
                         }
                         break;
                     case SearchCriteriaEnum::LOWER_THAN:
-                        if ($searchValue !== null) {
+                        if (null !== $searchValue) {
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} < :{$parameterKey})";
                             $subOrWhereParameters[$parameterKey] = $searchValue;
                         }
                         break;
                     case SearchCriteriaEnum::EQUAL_TO:
-                        if ($searchValue !== null) {
+                        if (null !== $searchValue) {
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} = :{$parameterKey})";
                             $subOrWhereParameters[$parameterKey] = $searchValue;
                         }
                         break;
                     case SearchCriteriaEnum::BETWEEN:
                         $searchValue2 = isset($criteria[$widget->getImmutableId()]['value2']) ? $criteria[$widget->getImmutableId()]['value2'] : null;
-                        if ($searchValue !== null && $searchValue2 !== null) {
-                            # Cannot bind as parameter because doctrine casts it to string and then filtering is wrong
+                        if (null !== $searchValue && null !== $searchValue2) {
+                            // Cannot bind as parameter because doctrine casts it to string and then filtering is wrong
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND v.{$valueColumn} BETWEEN '{$searchValue}' AND '{$searchValue2}')";
                         }
                         break;
@@ -227,10 +219,10 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::MONTH_EQUAL_TO:
                     case SearchCriteriaEnum::DAY_EQUAL_TO:
                         $criteriaParts = explode('_', $searchCriteria);
-                        $datePart = strtolower($criteriaParts[0]);
-                        $searchValue = $criteria[$widget->getImmutableId()]['value'. ucfirst($datePart)];
-                        if ($searchValue !== null) {
-                            $searchValue = (int)$searchValue;
+                        $datePart = mb_strtolower($criteriaParts[0]);
+                        $searchValue = $criteria[$widget->getImmutableId()]['value'.ucfirst($datePart)];
+                        if (null !== $searchValue) {
+                            $searchValue = (int) $searchValue;
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$datePart}(v.{$valueColumn}) = :{$parameterKey})";
                             $subOrWhereParameters[$parameterKey] = $searchValue;
                         }
@@ -239,10 +231,10 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::MONTH_LESS_THAN:
                     case SearchCriteriaEnum::DAY_LESS_THAN:
                         $criteriaParts = explode('_', $searchCriteria);
-                        $datePart = strtolower($criteriaParts[0]);
-                        $searchValue = $criteria[$widget->getImmutableId()]['value'. ucfirst($datePart)];
-                        if ($searchValue !== null) {
-                            $searchValue = (int)$searchValue;
+                        $datePart = mb_strtolower($criteriaParts[0]);
+                        $searchValue = $criteria[$widget->getImmutableId()]['value'.ucfirst($datePart)];
+                        if (null !== $searchValue) {
+                            $searchValue = (int) $searchValue;
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$datePart}(v.{$valueColumn}) < :{$parameterKey})";
                             $subOrWhereParameters[$parameterKey] = $searchValue;
                         }
@@ -251,10 +243,10 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::MONTH_GREATER_THAN:
                     case SearchCriteriaEnum::DAY_GREATER_THAN:
                         $criteriaParts = explode('_', $searchCriteria);
-                        $datePart = strtolower($criteriaParts[0]);
-                        $searchValue = $criteria[$widget->getImmutableId()]['value'. ucfirst($datePart)];
-                        if ($searchValue !== null) {
-                            $searchValue = (int)$searchValue;
+                        $datePart = mb_strtolower($criteriaParts[0]);
+                        $searchValue = $criteria[$widget->getImmutableId()]['value'.ucfirst($datePart)];
+                        if (null !== $searchValue) {
+                            $searchValue = (int) $searchValue;
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$datePart}(v.{$valueColumn}) > :{$parameterKey})";
                             $subOrWhereParameters[$parameterKey] = $searchValue;
                         }
@@ -263,16 +255,17 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::MONTH_BETWEEN:
                     case SearchCriteriaEnum::DAY_BETWEEN:
                         $criteriaParts = explode('_', $searchCriteria);
-                        $datePart = strtolower($criteriaParts[0]);
+                        $datePart = mb_strtolower($criteriaParts[0]);
                         $from = $criteria[$widget->getImmutableId()]['value'.ucfirst($datePart).'From'];
                         $to = $criteria[$widget->getImmutableId()]['value'.ucfirst($datePart).'To'];
-                        if ($from !== null && $to !== null) {
-                            $from = (int)$from; $to = (int)$to;
+                        if (null !== $from && null !== $to) {
+                            $from = (int) $from;
+                            $to = (int) $to;
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$datePart}(v.{$valueColumn}) BETWEEN '{$from}' AND '{$to}')";
                         }
                         break;
                     case SearchCriteriaEnum::TIME_EQUAL_TO:
-                        if ($searchValue != null) {
+                        if (null !== $searchValue) {
                             $phpFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
                             $date = \DateTime::createFromFormat('H:i:s', $searchValue);
                             if ($date instanceof \DateTime) {
@@ -283,7 +276,7 @@ final class CategoryFinder implements CategoryFinderInterface
                         }
                         break;
                     case SearchCriteriaEnum::TIME_LOWER_THAN:
-                        if ($searchValue != null) {
+                        if (null !== $searchValue) {
                             $phpFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
                             $date = \DateTime::createFromFormat('H:i:s', $searchValue);
                             if ($date instanceof \DateTime) {
@@ -294,7 +287,7 @@ final class CategoryFinder implements CategoryFinderInterface
                         }
                         break;
                     case SearchCriteriaEnum::TIME_GREATER_THAN:
-                        if ($searchValue != null) {
+                        if (null !== $searchValue) {
                             $phpFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
                             $date = \DateTime::createFromFormat('H:i:s', $searchValue);
                             if ($date instanceof \DateTime) {
@@ -307,7 +300,7 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::TIME_BETWEEN:
                         $start = $criteria[$widget->getImmutableId()]['value'];
                         $end = $criteria[$widget->getImmutableId()]['value2'];
-                        if ($start !== null && $end !== null) {
+                        if (null !== $start && null !== $end) {
                             $phpFormat = TimeFormatEnum::$mapJsDateFormatToOtherDateFormat[$widget->getTimeFormat()]['php'];
                             $dateStart = \DateTime::createFromFormat('H:i:s', $start);
                             $dateEnd = \DateTime::createFromFormat('H:i:s', $end);
@@ -323,11 +316,11 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::MINUTE_EQUAL_TO:
                     case SearchCriteriaEnum::SECOND_EQUAL_TO:
                         $criteriaParts = explode('_', $searchCriteria);
-                        $timePart = strtolower($criteriaParts[0]);
-                        $selector = $timePart === 'hour' ? 'hour' : 'minOrSec';
+                        $timePart = mb_strtolower($criteriaParts[0]);
+                        $selector = 'hour' === $timePart ? 'hour' : 'minOrSec';
                         $searchValue = $criteria[$widget->getImmutableId()][$selector];
-                        if ($searchValue !== null) {
-                            $searchValue = (int)$searchValue;
+                        if (null !== $searchValue) {
+                            $searchValue = (int) $searchValue;
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$timePart}(v.{$valueColumn}) = '{$searchValue}')";
                         }
                         break;
@@ -335,11 +328,11 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::MINUTE_LESS_THAN:
                     case SearchCriteriaEnum::SECOND_LESS_THAN:
                         $criteriaParts = explode('_', $searchCriteria);
-                        $timePart = strtolower($criteriaParts[0]);
-                        $selector = $timePart === 'hour' ? 'hour' : 'minOrSec';
+                        $timePart = mb_strtolower($criteriaParts[0]);
+                        $selector = 'hour' === $timePart ? 'hour' : 'minOrSec';
                         $searchValue = $criteria[$widget->getImmutableId()][$selector];
-                        if ($searchValue !== null) {
-                            $searchValue = (int)$searchValue;
+                        if (null !== $searchValue) {
+                            $searchValue = (int) $searchValue;
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$timePart}(v.{$valueColumn}) < '{$searchValue}')";
                         }
                         break;
@@ -347,11 +340,11 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::MINUTE_GREATER_THAN:
                     case SearchCriteriaEnum::SECOND_GREATER_THAN:
                         $criteriaParts = explode('_', $searchCriteria);
-                        $timePart = strtolower($criteriaParts[0]);
-                        $selector = $timePart === 'hour' ? 'hour' : 'minOrSec';
+                        $timePart = mb_strtolower($criteriaParts[0]);
+                        $selector = 'hour' === $timePart ? 'hour' : 'minOrSec';
                         $searchValue = $criteria[$widget->getImmutableId()][$selector];
-                        if ($searchValue !== null) {
-                            $searchValue = (int)$searchValue;
+                        if (null !== $searchValue) {
+                            $searchValue = (int) $searchValue;
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$timePart}(v.{$valueColumn}) > '{$searchValue}')";
                         }
                         break;
@@ -359,23 +352,24 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::MINUTE_BETWEEN:
                     case SearchCriteriaEnum::SECOND_BETWEEN:
                         $criteriaParts = explode('_', $searchCriteria);
-                        $timePart = strtolower($criteriaParts[0]);
-                        $selector = $timePart === 'hour' ? 'hour' : 'minOrSec';
+                        $timePart = mb_strtolower($criteriaParts[0]);
+                        $selector = 'hour' === $timePart ? 'hour' : 'minOrSec';
                         $start = $criteria[$widget->getImmutableId()][$selector];
                         $end = $criteria[$widget->getImmutableId()]["{$selector}2"];
-                        if ($start !== null && $end !== null) {
-                            $start = (int) $start; $end = (int) $end;
+                        if (null !== $start && null !== $end) {
+                            $start = (int) $start;
+                            $end = (int) $end;
                             $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND {$timePart}(v.{$valueColumn}) BETWEEN '{$start}' AND '{$end}')";
                         }
                         break;
                     case SearchCriteriaEnum::IN_ARRAY:
-                        if ($searchValue !== null) {
+                        if (null !== $searchValue) {
                             $searchValue = json_decode($searchValue, true);
-                            if (is_array($searchValue)) {
+                            if (\is_array($searchValue)) {
                                 $subAndWheres = [];
                                 $i = 0;
                                 foreach ($searchValue as $value) {
-                                    $subParameterKey = ($parameterKey . $i++);
+                                    $subParameterKey = ($parameterKey.$i++);
                                     $subAndWheres[] = "(REGEXP(v.{$valueColumn}, :{$subParameterKey}) = 1)";
                                     $subOrWhereParameters[$subParameterKey] = $value;
                                 }
@@ -388,13 +382,13 @@ final class CategoryFinder implements CategoryFinderInterface
                         }
                         break;
                     case SearchCriteriaEnum::NOT_IN_ARRAY:
-                        if ($searchValue !== null) {
+                        if (null !== $searchValue) {
                             $searchValue = json_decode($searchValue, true);
-                            if (is_array($searchValue)) {
+                            if (\is_array($searchValue)) {
                                 $subAndWheres = [];
                                 $i = 0;
                                 foreach ($searchValue as $value) {
-                                    $subParameterKey = ($parameterKey . $i++);
+                                    $subParameterKey = ($parameterKey.$i++);
                                     $subAndWheres[] = "(REGEXP(v.{$valueColumn}, :{$subParameterKey}) = 0)";
                                     $subOrWhereParameters[$subParameterKey] = $value;
                                 }
@@ -407,18 +401,17 @@ final class CategoryFinder implements CategoryFinderInterface
                         }
                         break;
                     case SearchCriteriaEnum::IN_ARRAY_EXACT:
-                        if ($searchValue !== null) {
+                        if (null !== $searchValue) {
                             $searchValue = json_decode($searchValue, true);
-                            if (is_array($searchValue)) {
-
-                                $length = array_reduce($searchValue, function($acc, $value){
+                            if (\is_array($searchValue)) {
+                                $length = array_reduce($searchValue, function ($acc, $value) {
                                     return $acc + mb_strlen($value);
-                                }, count($searchValue) - 1);
+                                }, \count($searchValue) - 1);
 
                                 $subAndWheres = [];
                                 $i = 0;
                                 foreach ($searchValue as $value) {
-                                    $subParameterKey = ($parameterKey . $i++);
+                                    $subParameterKey = ($parameterKey.$i++);
                                     $subAndWheres[] = "(REGEXP(v.{$valueColumn}, :{$subParameterKey}) = 1)";
                                     $subOrWhereParameters[$subParameterKey] = $value;
                                 }
@@ -433,9 +426,9 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::BUTTON_LABEL_NOT_EQUAL_TO:
                     case SearchCriteriaEnum::BUTTON_TARGET_EQUAL_TO:
                     case SearchCriteriaEnum::BUTTON_TARGET_NOT_EQUAL_TO:
-                        if ($searchValue !== null) {
-                            $attribute = strpos($searchCriteria, 'LABEL') !== false ? 'ilabel' : 'itarget';
-                            $not = strpos($searchCriteria, 'NOT') !== false ? 'NOT' : '';
+                        if (null !== $searchValue) {
+                            $attribute = false !== mb_strpos($searchCriteria, 'LABEL') ? 'ilabel' : 'itarget';
+                            $not = false !== mb_strpos($searchCriteria, 'NOT') ? 'NOT' : '';
                             $searchValue = mb_strtolower($searchValue);
                             $searchValue = explode(',', $searchValue);
                             $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
@@ -449,9 +442,9 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::BUTTON_LABEL_NOT_CONTAINS:
                     case SearchCriteriaEnum::BUTTON_TARGET_CONTAINS:
                     case SearchCriteriaEnum::BUTTON_TARGET_NOT_CONTAINS:
-                        if ($searchValue !== null) {
-                            $attribute = strpos($searchCriteria, 'LABEL') !== false ? 'ilabel' : 'itarget';
-                            $not = strpos($searchCriteria, 'NOT') !== false ? '0' : '1';
+                        if (null !== $searchValue) {
+                            $attribute = false !== mb_strpos($searchCriteria, 'LABEL') ? 'ilabel' : 'itarget';
+                            $not = false !== mb_strpos($searchCriteria, 'NOT') ? '0' : '1';
                             $searchValue = mb_strtolower($searchValue);
                             $searchValue = explode(',', $searchValue);
                             $searchValue = $this->removeNullOrBlankValuesFromArray($searchValue);
@@ -465,14 +458,14 @@ final class CategoryFinder implements CategoryFinderInterface
                     case SearchCriteriaEnum::BUTTON_LABEL_IS_NOT_NULL:
                     case SearchCriteriaEnum::BUTTON_TARGET_IS_NULL:
                     case SearchCriteriaEnum::BUTTON_TARGET_IS_NOT_NULL:
-                        $attribute = strpos($searchCriteria, 'LABEL') !== false ? 'ilabel' : 'itarget';
-                        $operator = strpos($searchCriteria, 'NOT') !== false ? '<>' : '=';
+                        $attribute = false !== mb_strpos($searchCriteria, 'LABEL') ? 'ilabel' : 'itarget';
+                        $operator = false !== mb_strpos($searchCriteria, 'NOT') ? '<>' : '=';
                         $subOrWheres[] = "(v.widgetImmutableId = '{$widget->getImmutableId()}' AND JSON_EXTRACT(v.valueOfTypeButton, '$.{$attribute}') {$operator} '')";
                         break;
                     case SearchCriteriaEnum::CREATOR_IS:
                     case SearchCriteriaEnum::CREATOR_IS_NOT:
-                        if (!empty($searchValue) && is_array($searchValue)) {
-                            $direction = strpos($searchCriteria, 'NOT') !== false ? 'NOT IN' : 'IN';
+                        if (!empty($searchValue) && \is_array($searchValue)) {
+                            $direction = false !== mb_strpos($searchCriteria, 'NOT') ? 'NOT IN' : 'IN';
                             $this->fichesWhereAuthors['direction'] = $direction;
                             $this->fichesWhereAuthors['authors'] = $searchValue;
                         }
@@ -490,11 +483,11 @@ final class CategoryFinder implements CategoryFinderInterface
                             $latLng = null;
                         }
 
-                        if ($distance !== null && is_int($distance) && $distance > -1 && $latLng) {
+                        if (null !== $distance && \is_int($distance) && $distance > -1 && $latLng) {
                             $this->mapAroundCriterias[$widget->getImmutableId()] = [
                                 'boundary' => $distance,
                                 'unit' => $unit,
-                                'latLng' => $latLng
+                                'latLng' => $latLng,
                             ];
                         }
                         break;
@@ -502,18 +495,16 @@ final class CategoryFinder implements CategoryFinderInterface
             }
         }
 
-        # Apply subOrWhere and parameters
+        // Apply subOrWhere and parameters
         if (!empty($subOrWheres)) {
-
-            $this->searchCriteriaCount = count($subOrWheres);
+            $this->searchCriteriaCount = \count($subOrWheres);
 
             $this->qb
-                ->andWhere( implode(' OR ', $subOrWheres) )
+                ->andWhere(implode(' OR ', $subOrWheres))
             ;
 
-            # setParameters erase previously defined parameters
-            foreach ($subOrWhereParameters as $parameterKey => $value)
-            {
+            // setParameters erase previously defined parameters
+            foreach ($subOrWhereParameters as $parameterKey => $value) {
                 $this->qb->setParameter($parameterKey, $value);
             }
         }
@@ -529,27 +520,34 @@ final class CategoryFinder implements CategoryFinderInterface
         foreach ($valuesToTest as $valueToTest) {
             $fiche = $valueToTest['fiche'];
 
-            if (in_array($fiche, $eliminatedFiches)) continue;
+            if (\in_array($fiche, $eliminatedFiches, true)) {
+                continue;
+            }
 
             $mapMatchingValuesToFicheId[$fiche] = $mapMatchingValuesToFicheId[$fiche] ?? [];
             $boundary = &$this->mapAroundCriterias[$valueToTest['widgetImmutableId']]['boundary'];
             $unit = &$this->mapAroundCriterias[$valueToTest['widgetImmutableId']]['unit'];
             $latLng = &$this->mapAroundCriterias[$valueToTest['widgetImmutableId']]['latLng'];
-            $myLat = $latLng['lat']; $myLng = $latLng['lng'];
+            $myLat = $latLng['lat'];
+            $myLng = $latLng['lng'];
             $markers = &$valueToTest['valueOfTypeMap']['markers'];
             $oneMarkersMatch = false;
             foreach ($markers as $marker) {
-                if ($oneMarkersMatch === true) continue;
+                if (true === $oneMarkersMatch) {
+                    continue;
+                }
                 $markerPosition = &$marker['position'];
-                $latitude1 = &$myLat; $latitude2 = &$markerPosition['lat'];
-                $longitude1 = &$myLng; $longitude2 = &$markerPosition['lng'];
+                $latitude1 = &$myLat;
+                $latitude2 = &$markerPosition['lat'];
+                $longitude1 = &$myLng;
+                $longitude2 = &$markerPosition['lng'];
                 $dLat = deg2rad($latitude2 - $latitude1);
                 $dLon = deg2rad($longitude2 - $longitude1);
-                $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * sin($dLon/2) * sin($dLon/2);
+                $a = sin($dLat / 2) * sin($dLat / 2) + cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * sin($dLon / 2) * sin($dLon / 2);
                 $c = 2 * asin(sqrt($a));
                 $d = $earth_radius * $c;
 
-                if ($unit === 'm') {
+                if ('m' === $unit) {
                     $d = $d * 1000;
                 }
 
@@ -559,7 +557,7 @@ final class CategoryFinder implements CategoryFinderInterface
                 }
             }
 
-            if ($oneMarkersMatch === false) {
+            if (false === $oneMarkersMatch) {
                 $eliminatedFiches[] = $fiche;
                 unset($mapMatchingValuesToFicheId[$fiche]);
             }
@@ -570,8 +568,8 @@ final class CategoryFinder implements CategoryFinderInterface
             $valueIds = array_merge($valueIds, $ids);
         }
 
-        if (count($valueIds) > 0) {
-            $this->searchCriteriaCount += count($this->mapAroundCriterias);
+        if (\count($valueIds) > 0) {
+            $this->searchCriteriaCount += \count($this->mapAroundCriterias);
             $this->qb
                 ->andWhere('v.id IN (:ids)')
                 ->setParameter('ids', $valueIds)
@@ -596,9 +594,10 @@ final class CategoryFinder implements CategoryFinderInterface
     private function removeNullOrBlankValuesFromArray(array $tab)
     {
         $tab = array_map('trim', $tab);
-        $tab = array_filter($tab, function($val){
-            return !($val === '' || $val === null);
+        $tab = array_filter($tab, function ($val) {
+            return !('' === $val || null === $val);
         });
+
         return $tab;
     }
 }

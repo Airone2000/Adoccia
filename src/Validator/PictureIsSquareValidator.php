@@ -19,7 +19,6 @@ class PictureIsSquareValidator extends ConstraintValidator
     }
 
     /**
-     * @param mixed $value
      * @param Constraint|PictureIsSquare $constraint
      */
     public function validate($value, Constraint $constraint)
@@ -27,8 +26,7 @@ class PictureIsSquareValidator extends ConstraintValidator
         /* @var $constraint \App\Validator\PictureIsSquare */
 
         if ($value instanceof Picture) {
-
-            $pathToFile = $this->pictureUploadDir . DIRECTORY_SEPARATOR . $value->getFilename();
+            $pathToFile = $this->pictureUploadDir.\DIRECTORY_SEPARATOR.$value->getFilename();
             if (file_exists($pathToFile)) {
                 [$width, $height] = getimagesize($pathToFile);
                 if ($width !== $height) {
@@ -38,7 +36,6 @@ class PictureIsSquareValidator extends ConstraintValidator
                     ;
                 }
             }
-
         }
     }
 }

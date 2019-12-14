@@ -35,6 +35,7 @@ final class DateType extends TextType
         $attr['data-inputmask-inputformat'] = $widget->getDateFormat();
         $attr['data-inputmask-placeholder'] = self::getDateTypePlaceholder($widget);
         $attr['inputmode'] = 'numeric';
+
         return $attr;
     }
 
@@ -42,37 +43,41 @@ final class DateType extends TextType
     {
         if ($widget->getInputPlaceholder()) {
             $placeholder = $widget->getInputPlaceholder();
-        }
-        else {
+        } else {
             $placeholder = preg_replace('/[dmy]/i', '_', $widget->getDateFormat());
         }
+
         return $placeholder;
     }
 
     public static function transformFrom(Widget $widget, $value)
     {
-        if (is_string($value)) {
+        if (\is_string($value)) {
             $dateFormat = DateFormatEnum::getPHPFormatForJsFormat($widget->getDateFormat());
             $datetime = \DateTime::createFromFormat($dateFormat, $value);
-            if ($datetime !== false) {
+            if (false !== $datetime) {
                 $datetime->setTime(0, 0, 0, 0);
+
                 return $datetime;
             }
         }
+
         return null;
     }
 
     public static function transformTo(Widget $widget, $value)
     {
-        if (is_string($value) && preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $value)) {
+        if (\is_string($value) && preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $value)) {
             // Let's assume it can be a value like Y-m-d (default value)
             $value = \DateTime::createFromFormat('Y-m-d', $value);
         }
 
         if ($value instanceof \DateTime) {
             $dateFormat = DateFormatEnum::getPHPFormatForJsFormat($widget->getDateFormat());
+
             return $value->format($dateFormat);
         }
+
         return null;
     }
 }

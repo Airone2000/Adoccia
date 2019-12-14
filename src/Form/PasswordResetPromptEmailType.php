@@ -19,8 +19,8 @@ final class PasswordResetPromptEmailType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                     new Email(),
-                    new EntityExists(['class' => User::class, 'field' => 'email', 'message' => 'There is no user with this email.'])
-                ]
+                    new EntityExists(['class' => User::class, 'field' => 'email', 'message' => 'There is no user with this email.']),
+                ],
             ])
         ;
     }

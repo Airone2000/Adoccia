@@ -6,5 +6,5 @@ use App\Entity\User;
 
 interface SecurityHandlerInterface
 {
-    function doAllTheNecessaryForThisUserWhoHaveLostHisPassword(User $user): void;
+    public function doAllTheNecessaryForThisUserWhoHaveLostHisPassword(User $user): void;
 }

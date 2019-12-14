@@ -34,8 +34,7 @@ class Envelope
         string $subject,
         string $message,
         ?string $fromName = null, ?string $fromEmail = null
-    )
-    {
+    ) {
         $this->fromName = $fromName ?? $_SERVER['EMAIL_SENDER_NAME'];
         $this->fromEmail = $fromEmail ?? $_SERVER['EMAIL_SENDER_EMAIL'];
         $this->toName = $toName;
