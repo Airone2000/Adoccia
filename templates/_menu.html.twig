@@ -9,6 +9,10 @@
     </a>
 
     {% if app.user %}
+        <a class="Adoccia_Header_NavLink {{ selectedMenuItem == 'feedback' ? 'active' : '' }}" href="{{ url('app.feedback') }}">
+            <i class="fas fa-comment-dots font-size-25px margin-right-7px"></i> {{ 'menu.link.feedback'|trans }}
+        </a>
+
         <a class="Adoccia_Header_NavLink xl-at-end openModal" data-target-selector="#modalAccount" href="#">
             <i class="fas fa-user-circle font-size-25px margin-right-7px"></i>&nbsp;{{ app.user.username }}
         </a>

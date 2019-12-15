@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'feedback.page.title'|trans }}{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        {{ message|trans }}
+    {% endfor %}
+
+    <h1>{{ 'feedback.title'|trans }}</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">{{ 'feedback.submit.btn'|trans }}</button>
+    {{ form_end(form) }}
+{% endblock %}

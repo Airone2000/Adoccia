@@ -16,17 +16,18 @@ class FeedbackType extends AbstractType
     {
         $builder
             ->add('type', ChoiceType::class, [
+                'label' => 'feedback.form.type.label',
                 'choices' => [
-                    FeedbackTypeEnum::FEEDBACK_TYPE_BUG,
-                    FeedbackTypeEnum::FEEDBACK_TYPE_FEATURE,
-                    FeedbackTypeEnum::FEEDBACK_TYPE_ELSE,
+                    'feedback.form.choice.bug' => FeedbackTypeEnum::FEEDBACK_TYPE_BUG,
+                    'feedback.form.choice.feature' => FeedbackTypeEnum::FEEDBACK_TYPE_FEATURE,
+                    'feedback.form.choice.else' => FeedbackTypeEnum::FEEDBACK_TYPE_ELSE,
                 ],
-                'help' => 'What kind of feedback is it?',
+                'help' => 'feedback.form.type.help',
             ])
             ->add('description', TextareaType::class, [
-                'label' => '',
+                'label' => 'feedback.form.description.label',
                 'attr' => [
-                    'placeholder' => "Please explain what you're suggesting.",
+                    'placeholder' => "feedback.form.description.placeholder",
                 ],
             ])
         ;

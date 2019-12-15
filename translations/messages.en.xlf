@@ -12,6 +12,11 @@
                 <target>Help</target>
             </trans-unit>
 
+            <trans-unit id="menu.link.feedback">
+                <source>menu.link.feedback</source>
+                <target>Feedback</target>
+            </trans-unit>
+
             <trans-unit id="menu.link.sign_in">
                 <source>menu.link.sign_in</source>
                 <target>Sign in</target>
@@ -310,6 +315,61 @@
             <trans-unit id="search.in.collection.search.btn">
                 <source>search.in.collection.search.btn</source>
                 <target>Search</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.type.label">
+                <source>feedback.form.type.label</source>
+                <target>Type</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.type.help">
+                <source>feedback.form.type.help</source>
+                <target>What kind of feedback is it?</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.choice.bug">
+                <source>feedback.form.choice.bug</source>
+                <target>Bug</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.choice.feature">
+                <source>feedback.form.choice.feature</source>
+                <target>Feature</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.choice.else">
+                <source>feedback.form.choice.else</source>
+                <target>Else</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.description.label">
+                <source>feedback.form.description.label</source>
+                <target>Description</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.description.placeholder">
+                <source>feedback.form.description.placeholder</source>
+                <target>Please explain what it is about</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.page.title">
+                <source>feedback.page.title</source>
+                <target>Feedback</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.title">
+                <source>feedback.title</source>
+                <target>You want to give a feedback?</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.submit.btn">
+                <source>feedback.submit.btn</source>
+                <target>Send</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.success">
+                <source>feedback.success</source>
+                <target>The feedback has been sent.</target>
             </trans-unit>
         </body>
     </file>

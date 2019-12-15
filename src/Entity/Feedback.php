@@ -27,6 +27,8 @@ class Feedback
     private $id;
 
     /**
+     * @var string The type of feedback.
+     *
      * @ORM\Column(type="string", length=255)
      *
      * @Enum(
@@ -37,7 +39,7 @@ class Feedback
     private $type;
 
     /**
-     * @var string
+     * @var string What a user is reporting or suggesting.
      *
      * @ORM\Column(type="text")
      *
@@ -48,14 +50,15 @@ class Feedback
     private $description;
 
     /**
-     * @var User
+     * @var User The user associated to the feedback.
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="feedback")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
-     * @var DateTimeImmutable
+     * @var DateTimeImmutable When the feedback has been given.
      *
      * @ORM\Column(type="datetime_immutable")
      */

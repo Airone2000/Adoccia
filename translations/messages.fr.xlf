@@ -12,6 +12,11 @@
                 <target>Aide</target>
             </trans-unit>
 
+            <trans-unit id="menu.link.feedback">
+                <source>menu.link.feedback</source>
+                <target>Faire un retour</target>
+            </trans-unit>
+
             <trans-unit id="menu.link.sign_in">
                 <source>menu.link.sign_in</source>
                 <target>Connexion</target>
@@ -320,6 +325,61 @@
             <trans-unit id="search.in.collection.search.btn">
                 <source>search.in.collection.search.btn</source>
                 <target>Rechercher</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.type.label">
+                <source>feedback.form.type.label</source>
+                <target>Type</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.type.help">
+                <source>feedback.form.type.help</source>
+                <target>De quel type de retour s'agit-il ?</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.choice.bug">
+                <source>feedback.form.choice.bug</source>
+                <target>Bogue</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.choice.feature">
+                <source>feedback.form.choice.feature</source>
+                <target>Fonctionnalité</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.choice.else">
+                <source>feedback.form.choice.else</source>
+                <target>Autre</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.description.label">
+                <source>feedback.form.description.label</source>
+                <target>Description</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.form.description.placeholder">
+                <source>feedback.form.description.placeholder</source>
+                <target>Expliquez-nous ce dont il s'agit</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.page.title">
+                <source>feedback.page.title</source>
+                <target>Remarques et Suggestions</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.title">
+                <source>feedback.title</source>
+                <target>Une remarque ? Une suggestion ?</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.submit.btn">
+                <source>feedback.submit.btn</source>
+                <target>Envoyer</target>
+            </trans-unit>
+
+            <trans-unit id="feedback.success">
+                <source>feedback.success</source>
+                <target>Votre retour a bien été envoyé.</target>
             </trans-unit>
         </body>
     </file>

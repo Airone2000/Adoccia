@@ -2,7 +2,7 @@
 
 namespace App\Enum;
 
-class FeedbackTypeEnum
+class FeedbackTypeEnum extends AbstractEnum
 {
     const FEEDBACK_TYPE_BUG = 'bug';
     const FEEDBACK_TYPE_FEATURE = 'feature';
