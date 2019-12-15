@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'category/base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -16,7 +16,7 @@
     {{ encore_entry_script_tags('form/edit') }}
 {% endblock %}
 
-{% block body %}
+{% block category_body %}
     <h1>
         Edit form (draft)
         <a href="{{ url('category.edit', {'id': category.id}) }}">
