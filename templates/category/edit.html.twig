@@ -6,10 +6,11 @@
     {{ encore_entry_script_tags('categoryForm') }}
 {% endblock %}
 
-{% block title %}Edit Category{% endblock %}
+{% block title %}{{ 'edit.category.page.title'|trans }}{% endblock %}
 
-{% block category_body %}
-    <h1>Edit Category {{ category.name }}</h1>
+
+{% block body %}
+    <h1>{{ 'edit.category.page.title'|trans }} {{ category.name }}</h1>
 
     {% for label, messages in app.flashes(['draftFormPublished', 'draftFormDeleted']) %}
         <div>
@@ -22,19 +23,19 @@
     <p>
         {% if category.draftForm is not null %}
             <a href="{{ url('category.setAndEditDraftForm', {'id': category.id}) }}">
-                Modify the form (existing draft)
+                {{ 'edit.category.modify.form.existing.draft'|trans }}
             </a>
             <br>
         {% endif %}
 
         <a href="{{ url('category.setAndEditDraftForm', {'id': category.id, 'new': true}) }}">
-            Modify the form (new draft)
+            {{ 'edit.category.modify.form.new.draft'|trans }}
         </a>
     </p>
 
-    {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('category/_form.html.twig', {'button_label': 'edit.category.update.btn'|trans }) }}
 
-    <a href="{{ path('category.index') }}">back to list</a>
+    <a href="{{ path('category.index') }}">{{ 'edit.category.back.link'|trans }}</a>
 
     {{ include('category/_delete_form.html.twig') }}
 

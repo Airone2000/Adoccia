@@ -13,8 +13,8 @@
     {{ encore_entry_script_tags('category/search') }}
 {% endblock %}
 
-{% block category_body %}
-        <h2>Rechercher dans {{ category.name }}</h2>
+{% block body %}
+        <h2>{{ 'search.in.collection.title'|trans }} {{ category.name }}</h2>
 
         <div style="width:600px;">
                 {{ form_start(form) }}
@@ -31,13 +31,13 @@
 
                     {% if search.id %}
                         <a href="{{ url('category.searchFiches', {'categoryId': category.id}) }}">
-                            <button type="button">Reset</button>
+                            <button type="button">{{ 'search.in.collection.reset.btn'|trans }}</button>
                         </a>
                     {% else %}
-                        <button type="reset">Reset</button>
+                        <button type="reset">{{ 'search.in.collection.reset.btn'|trans }}</button>
                     {% endif %}
 
-                    <button>Rechercher</button>
+                    <button>{{ 'search.in.collection.search.btn'|trans }}</button>
                 {{ form_end(form) }}
         </div>
 {% endblock %}

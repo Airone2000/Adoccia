@@ -4,39 +4,22 @@ namespace App\Enum;
 
 final class WidgetTypeEnum extends AbstractEnum
 {
-    const
-        DEFAULT_TYPE = 'empty';
-    const
-        EMPTY = 'empty';
-    const
-        LABEL = 'label';
-    const
-        STRING = 'string';
-    const
-        TEXT = 'text';
-    const
-        INT = 'int';
-    const
-        FLOAT = 'float';
-    const
-        DATE = 'date';
-    const
-        TIME = 'time';
-    const
-        RADIO = 'radio';
-    const
-        BUTTON = 'button';
-    const
-        EMAIL = 'email';
-    const
-        MAP = 'map';
-    const
-        FICHE_CREATOR = 'ficheCreator';
-    const
-        VIDEO = 'video';
-    const
-        PICTURE = 'picture'
-    ;
+    const DEFAULT_TYPE = 'empty';
+    const EMPTY = 'empty';
+    const LABEL = 'label';
+    const STRING = 'string';
+    const TEXT = 'text';
+    const INT = 'int';
+    const FLOAT = 'float';
+    const DATE = 'date';
+    const TIME = 'time';
+    const RADIO = 'radio';
+    const BUTTON = 'button';
+    const EMAIL = 'email';
+    const MAP = 'map';
+    const FICHE_CREATOR = 'ficheCreator';
+    const VIDEO = 'video';
+    const PICTURE = 'picture';
 
     public static function getGroupedWidgetTypes(): array
     {
