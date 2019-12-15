@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}{{ 'fiches.list.page.title'|trans }}{% endblock %}
+
 {% block body %}
-    <h1>Liste des fiches</h1>
+    <h1>{{ 'fiches.list.title'|trans }}</h1>
 
     {% if is_granted('ADD_FICHE_TO_CATEGORY', category) %}
-        <a href="{{ url('category.addFiche', {'id': category.id}) }}">+ Fiche</a> |
+        <a href="{{ url('category.addFiche', {'id': category.id}) }}">{{ 'fiches.list.new.link'|trans }}</a> |
     {% endif %}
-    <a href="{{ url('category.searchFiches', {'categoryId': category.id}) }}">Rechercher</a>
+    <a href="{{ url('category.searchFiches', {'categoryId': category.id}) }}">{{ 'fiches.list.search.link'|trans }}</a>
 
     <hr>
 
@@ -13,8 +16,8 @@
         <table border="1">
             <thead>
             <tr>
-                <th>Titre</th>
-                <th>Picture</th>
+                <th>{{ 'fiches.list.display.title'|trans }}</th>
+                <th>{{ 'fiches.list.display.picture'|trans }}</th>
                 <th></th>
             </tr>
             </thead>
@@ -26,14 +29,13 @@
                         {{ showPicture(fiche.picture, 'fiche_picture_thumbnail') }}
                     </td>
                     <td>
-                        <a href="{{ url('fiche.show', {'id': fiche.id}) }}">Voir</a>
+                        <a href="{{ url('fiche.show', {'id': fiche.id}) }}">{{ 'fiches.list.look.fiche'|trans }}</a>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     {% else %}
-        <p>Pas de fiches</p>
+        <p>{{ 'fiches.list.no.fiche'|trans }}</p>
     {% endif %}
-
 {% endblock %}

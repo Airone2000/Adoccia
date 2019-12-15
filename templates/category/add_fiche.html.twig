@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Add fiche to {{ category.name }}</h1>
+    <h1>{{ 'add.fiche.to'|trans }} {{ category.name }}</h1>
 
     {% for label, messages in app.flashes(['addFicheError']) %}
         {% for message in messages %}

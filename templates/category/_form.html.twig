@@ -28,7 +28,7 @@
     {{ form_widget(form.public) }}
 </div>
 
-<button type="submit" class="btn">{{ button_label|default('Save') }}</button>
+<button type="submit" class="btn">{{ button_label|default('collection.new.save.btn'|trans) }}</button>
 {{ form_end(form) }}
 
 {{ include('_picture_uploader.modal.html.twig') }}

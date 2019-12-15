@@ -17,6 +17,11 @@
                 <target>Sign in</target>
             </trans-unit>
 
+            <trans-unit id="app.index.page.title">
+                <source>app.index.page.title</source>
+                <target>Collections index</target>
+            </trans-unit>
+
             <trans-unit id="app.index.title">
                 <source>app.index.title</source>
                 <target>Collections</target>
@@ -165,6 +170,146 @@
             <trans-unit id="login.form.no_account">
                 <source>login.form.no_account</source>
                 <target>Not registered yet?</target>
+            </trans-unit>
+
+            <trans-unit id="category.delete.confirmation">
+                <source>category.delete.confirmation</source>
+                <target>Are you sure you want to delete this item?</target>
+            </trans-unit>
+
+            <trans-unit id="category.delete.btn">
+                <source>category.delete.btn</source>
+                <target>Delete</target>
+            </trans-unit>
+
+            <trans-unit id="add.fiche.to">
+                <source>add.fiche.to</source>
+                <target>Add fiche to</target>
+            </trans-unit>
+
+            <trans-unit id="edit.category.page.title">
+                <source>edit.category.page.title</source>
+                <target>Edit category</target>
+            </trans-unit>
+
+            <trans-unit id="edit.category.modify.form.existing.draft">
+                <source>edit.category.modify.form.existing.draft</source>
+                <target>Modify the form (existing draft)</target>
+            </trans-unit>
+
+            <trans-unit id="edit.category.modify.form.new.draft">
+                <source>edit.category.modify.form.new.draft</source>
+                <target>Modify the form (new draft)</target>
+            </trans-unit>
+
+            <trans-unit id="edit.category.update.btn">
+                <source>edit.category.update.btn</source>
+                <target>Update</target>
+            </trans-unit>
+
+            <trans-unit id="edit.category.back.link">
+                <source>edit.category.back.link</source>
+                <target>Back to the list</target>
+            </trans-unit>
+
+            <trans-unit id="category.type.name.label">
+                <source>category.type.name.label</source>
+                <target>Name</target>
+            </trans-unit>
+
+            <trans-unit id="category.type.browse.label">
+                <source>category.type.browse.label</source>
+                <target>Browse</target>
+            </trans-unit>
+
+            <trans-unit id="category.type.description.label">
+                <source>category.type.description.label</source>
+                <target>Description</target>
+            </trans-unit>
+
+            <trans-unit id="category.type.online.label">
+                <source>category.type.online.label</source>
+                <target>Online</target>
+            </trans-unit>
+
+            <trans-unit id="category.type.public.label">
+                <source>category.type.public.label</source>
+                <target>Public</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.page.title">
+                <source>fiches.list.page.title</source>
+                <target>List of fiches</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.title">
+                <source>fiches.list.title</source>
+                <target>List of fiches</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.new.link">
+                <source>fiches.list.new.link</source>
+                <target>New fiche</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.search.link">
+                <source>fiches.list.search.link</source>
+                <target>Search</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.no.fiche">
+                <source>fiches.list.no.fiche</source>
+                <target>No fiche</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.display.title">
+                <source>fiches.list.display.title</source>
+                <target>Title</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.display.picture">
+                <source>fiches.list.display.picture</source>
+                <target>Picture</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.look.fiche">
+                <source>fiches.list.look.fiche</source>
+                <target>Look</target>
+            </trans-unit>
+
+            <trans-unit id="collection.new.page.title">
+                <source>collection.new.page.title</source>
+                <target>New Collection</target>
+            </trans-unit>
+
+            <trans-unit id="collection.new.title">
+                <source>collection.new.title</source>
+                <target>Create a new collection</target>
+            </trans-unit>
+
+            <trans-unit id="collection.new.back.link">
+                <source>collection.new.back.link</source>
+                <target>Back to the list</target>
+            </trans-unit>
+
+            <trans-unit id="collection.new.save.btn">
+                <source>collection.new.save.btn</source>
+                <target>Save</target>
+            </trans-unit>
+
+             <trans-unit id="search.in.collection.title">
+                <source>search.in.collection.title</source>
+                <target>Search in</target>
+            </trans-unit>
+
+            <trans-unit id="search.in.collection.reset.btn">
+                <source>search.in.collection.reset.btn</source>
+                <target>Reset</target>
+            </trans-unit>
+
+            <trans-unit id="search.in.collection.search.btn">
+                <source>search.in.collection.search.btn</source>
+                <target>Search</target>
             </trans-unit>
         </body>
     </file>

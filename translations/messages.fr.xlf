@@ -17,6 +17,11 @@
                 <target>Connexion</target>
             </trans-unit>
 
+            <trans-unit id="app.index.page.title">
+                <source>app.index.page.title</source>
+                <target>Index des collections</target>
+            </trans-unit>
+
             <trans-unit id="app.index.title">
                 <source>app.index.title</source>
                 <target>Les collections</target>
@@ -175,6 +180,146 @@
             <trans-unit id="login.form.no_account">
                 <source>login.form.no_account</source>
                 <target>Pas encore inscrit ?</target>
+            </trans-unit>
+
+            <trans-unit id="category.delete.confirmation">
+                <source>category.delete.confirmation</source>
+                <target>Êtes-vous sûr de vouloir supprimer cet élément ?</target>
+            </trans-unit>
+
+            <trans-unit id="category.delete.btn">
+                <source>category.delete.btn</source>
+                <target>Supprimer</target>
+            </trans-unit>
+
+            <trans-unit id="add.fiche.to">
+                <source>add.fiche.to</source>
+                <target>Ajouter une fiche à</target>
+            </trans-unit>
+
+            <trans-unit id="edit.category.page.title">
+                <source>edit.category.page.title</source>
+                <target>Édition de la collection</target>
+            </trans-unit>
+
+            <trans-unit id="edit.category.modify.form.existing.draft">
+                <source>edit.category.modify.form.existing.draft</source>
+                <target>Modifier le formulaire (brouillon existant)</target>
+            </trans-unit>
+
+            <trans-unit id="edit.category.modify.form.new.draft">
+                <source>edit.category.modify.form.new.draft</source>
+                <target>Modifier le formulaire (nouveau brouillon)</target>
+            </trans-unit>
+
+            <trans-unit id="edit.category.update.btn">
+                <source>edit.category.update.btn</source>
+                <target>Mettre à jour</target>
+            </trans-unit>
+
+            <trans-unit id="edit.category.back.link">
+                <source>edit.category.back.link</source>
+                <target>Retour à la liste</target>
+            </trans-unit>
+
+            <trans-unit id="category.type.name.label">
+                <source>category.type.name.label</source>
+                <target>Nom</target>
+            </trans-unit>
+
+            <trans-unit id="category.type.browse.label">
+                <source>category.type.browse.label</source>
+                <target>Ajouter une image</target>
+            </trans-unit>
+
+            <trans-unit id="category.type.description.label">
+                <source>category.type.description.label</source>
+                <target>Description</target>
+            </trans-unit>
+
+            <trans-unit id="category.type.online.label">
+                <source>category.type.online.label</source>
+                <target>En ligne</target>
+            </trans-unit>
+
+            <trans-unit id="category.type.public.label">
+                <source>category.type.public.label</source>
+                <target>Publique</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.page.title">
+                <source>fiches.list.page.title</source>
+                <target>Liste des fiches</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.title">
+                <source>fiches.list.title</source>
+                <target>Liste des fiches</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.new.link">
+                <source>fiches.list.new.link</source>
+                <target>Créer une fiche</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.search.link">
+                <source>fiches.list.search.link</source>
+                <target>Rechercher</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.no.fiche">
+                <source>fiches.list.no.fiche</source>
+                <target>Aucune fiche</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.display.title">
+                <source>fiches.list.display.title</source>
+                <target>Titre</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.display.picture">
+                <source>fiches.list.display.picture</source>
+                <target>Image</target>
+            </trans-unit>
+
+            <trans-unit id="fiches.list.look.fiche">
+                <source>fiches.list.look.fiche</source>
+                <target>Voir</target>
+            </trans-unit>
+
+            <trans-unit id="collection.new.page.title">
+                <source>collection.new.page.title</source>
+                <target>Nouvelle collection</target>
+            </trans-unit>
+
+            <trans-unit id="collection.new.title">
+                <source>collection.new.title</source>
+                <target>Création d'une nouvelle collection</target>
+            </trans-unit>
+
+            <trans-unit id="collection.new.back.link">
+                <source>collection.new.back.link</source>
+                <target>Retour à la liste</target>
+            </trans-unit>
+
+            <trans-unit id="collection.new.save.btn">
+                <source>collection.new.save.btn</source>
+                <target>Créer</target>
+            </trans-unit>
+
+            <trans-unit id="search.in.collection.title">
+                <source>search.in.collection.title</source>
+                <target>Rechercher dans</target>
+            </trans-unit>
+
+            <trans-unit id="search.in.collection.reset.btn">
+                <source>search.in.collection.reset.btn</source>
+                <target>Réinitialiser</target>
+            </trans-unit>
+
+            <trans-unit id="search.in.collection.search.btn">
+                <source>search.in.collection.search.btn</source>
+                <target>Rechercher</target>
             </trans-unit>
         </body>
     </file>
