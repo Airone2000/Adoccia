@@ -29,7 +29,7 @@ class Feedback
     /**
      * @var string The type of feedback.
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=20)
      *
      * @Enum(
      *     enumClass="App\Enum\FeedbackTypeEnum",
@@ -41,11 +41,10 @@ class Feedback
     /**
      * @var string What a user is reporting or suggesting.
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", length=1000)
      *
-     * @Assert\NotBlank(
-     *     message="This value should not be blank."
-     * )
+     * @Assert\NotBlank()
+     * @Assert\Length(max="1000")
      */
     private $description;
 
