@@ -14,11 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Widget
 {
-    const
-        DEFAULT_TEXT_COLOR = '#000000';
-    const
-        DEFAULT_DECIMAL_COUNT = 2
-    ;
+    const DEFAULT_TEXT_COLOR = '#000000';
+    const DEFAULT_DECIMAL_COUNT = 2;
 
     /**
      * @ORM\Id()
@@ -426,8 +423,8 @@ class Widget
 
     public function setMultipleValues(?bool $multipleValues): self
     {
-        $this->multipleValues = $multipleValues;
-
+        $this->multipleValues = $multipleValues ?? false;
+      
         return $this;
     }
 

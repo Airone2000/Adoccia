@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'category/base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -12,7 +12,7 @@
     {{ encore_entry_script_tags('mapsBuilder') }}
 {% endblock %}
 
-{% block body %}
+{% block category_body %}
     <h1>{{ fiche.title }}</h1>
 
     {% if is_granted('CAN_EDIT_FICHE', fiche) %}

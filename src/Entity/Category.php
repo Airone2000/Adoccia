@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Validator\CategoryPicture;
+use App\Validator\Is169;
+use App\Validator\PictureIsSquare;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -31,6 +34,8 @@ class Category
      * @var Picture|null
      * @ORM\OneToOne(targetEntity="App\Entity\Picture", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(onDelete="SET NULL", nullable=true)
+     *
+     * @PictureIsSquare(groups={"Category:Post", "Category:Put"})
      */
     private $picture;
 
