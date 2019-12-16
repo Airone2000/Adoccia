@@ -27,7 +27,7 @@ class FeedbackType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'feedback.form.description.label',
                 'attr' => [
-                    'placeholder' => "feedback.form.description.placeholder",
+                    'placeholder' => 'feedback.form.description.placeholder',
                 ],
             ])
         ;

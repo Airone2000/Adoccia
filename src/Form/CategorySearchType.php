@@ -10,14 +10,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class CategorySearchType extends AbstractType
 {
-    const
-        MODE_FULL = 'full';
-    const
-        MODE_TITLE_ONLY = 'title_only';
-    const
-        MODE_MORE_ONLY = 'more_only'
-    ;
-
+    const MODE_FULL = 'full';
+    const MODE_TITLE_ONLY = 'title_only';
+    const MODE_MORE_ONLY = 'more_only';
     const
         MODES = [
             self::MODE_FULL, self::MODE_TITLE_ONLY, self::MODE_MORE_ONLY,
@@ -54,12 +49,12 @@ final class CategorySearchType extends AbstractType
         $builder
             ->add('orderBy', ChoiceType::class, [
             'choices' => [
-                'created_at_desc' => 'created_at.desc',
-                'created_at_asc' => 'created_at.asc',
-                'name_asc' => 'name.asc',
-                'name_desc' => 'name.desc',
+                'created_at.desc' => 'created_at_desc',
+                'created_at.asc' => 'created_at_asc',
+                'name.asc' => 'name_asc',
+                'name.desc' => 'name_desc',
             ],
-            'choice_label' => function ($value) {
+            'choice_label' => function ($label, $value) {
                 return "category.search.type.order_by.{$value}";
             },
         ])

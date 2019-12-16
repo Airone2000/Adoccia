@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use App\Validator\CategoryPicture;
-use App\Validator\Is169;
 use App\Validator\PictureIsSquare;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

@@ -41,7 +41,7 @@ class CategoryType extends AbstractType
                 'liipImagineFilter' => 'category_picture_thumbnail',
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'category.type.description.label'
+                'label' => 'category.type.description.label',
             ])
             ->add('online', CheckboxType::class, [
                 'label' => 'category.type.online.label',

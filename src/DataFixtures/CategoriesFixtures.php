@@ -30,8 +30,8 @@ class CategoriesFixtures extends Fixture
         for ($i = 0; $i < $nbCategories; ++$i) {
             try {
                 $pictureURL = "https://picsum.photos/id/{$i}/250/250";
-                $basename = uniqid('picture_') . '.png';
-                $filename = $this->pictureUploadDir . DIRECTORY_SEPARATOR . $basename;
+                $basename = uniqid('picture_').'.png';
+                $filename = $this->pictureUploadDir.\DIRECTORY_SEPARATOR.$basename;
                 file_put_contents($filename, file_get_contents($pictureURL));
 
                 $picture = new Picture();

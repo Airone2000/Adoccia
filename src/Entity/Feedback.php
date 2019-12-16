@@ -27,7 +27,7 @@ class Feedback
     private $id;
 
     /**
-     * @var string The type of feedback.
+     * @var string the type of feedback
      *
      * @ORM\Column(type="string", length=20)
      *
@@ -39,7 +39,7 @@ class Feedback
     private $type;
 
     /**
-     * @var string What a user is reporting or suggesting.
+     * @var string what a user is reporting or suggesting
      *
      * @ORM\Column(type="text", length=1000)
      *
@@ -49,7 +49,7 @@ class Feedback
     private $description;
 
     /**
-     * @var User The user associated to the feedback.
+     * @var User the user associated to the feedback
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="feedback")
      * @ORM\JoinColumn(nullable=false)
@@ -57,7 +57,7 @@ class Feedback
     private $author;
 
     /**
-     * @var DateTimeImmutable When the feedback has been given.
+     * @var DateTimeImmutable when the feedback has been given
      *
      * @ORM\Column(type="datetime_immutable")
      */

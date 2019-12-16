@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Feedback;
-use App\Entity\User;
 use App\Form\FeedbackType;
-use App\Services\Mailer\Mailer;
 use App\Services\Mailer\MailerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
